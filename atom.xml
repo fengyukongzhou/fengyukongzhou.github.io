@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://fengyukongzhou.coding.me</id>
+    <id>https://fengyukongzhou.code.me</id>
     <title>风雨空舟</title>
-    <updated>2020-05-08T16:38:40.426Z</updated>
+    <updated>2020-05-08T16:40:14.166Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://fengyukongzhou.coding.me"/>
-    <link rel="self" href="https://fengyukongzhou.coding.me/atom.xml"/>
+    <link rel="alternate" href="https://fengyukongzhou.code.me"/>
+    <link rel="self" href="https://fengyukongzhou.code.me/atom.xml"/>
     <subtitle>梦里寻梦</subtitle>
-    <logo>https://fengyukongzhou.coding.me/images/avatar.png</logo>
-    <icon>https://fengyukongzhou.coding.me/favicon.ico</icon>
+    <logo>https://fengyukongzhou.code.me/images/avatar.png</logo>
+    <icon>https://fengyukongzhou.code.me/favicon.ico</icon>
     <rights>All rights reserved 2020, 风雨空舟</rights>
     <entry>
         <title type="html"><![CDATA[关于]]></title>
-        <id>https://fengyukongzhou.coding.me/post/about/</id>
-        <link href="https://fengyukongzhou.coding.me/post/about/">
+        <id>https://fengyukongzhou.code.me/post/about/</id>
+        <link href="https://fengyukongzhou.code.me/post/about/">
         </link>
         <updated>2019-01-25T11:09:48.000Z</updated>
         <content type="html"><![CDATA[<blockquote>

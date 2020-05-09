@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-05-09T01:21:29.920Z</updated>
+    <updated>2020-05-09T01:38:01.553Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fengyukongzhou.github.io"/>
     <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
@@ -26,6 +26,26 @@
 <p>地震后的冰窗出现触目的裂璺，没有学过占卜的我，透过这窗子和透明的女孩对话。我们都有严重的疾病，借用幽灵的影子说话，却从未见过彼此的影子，甚至连自己的影子也像滩水洒在地上。</p>
 <p>到了晚上，那是最妙的时候，一串细细的银链把金黄月亮悬起来，月慢慢攀，层云背后有铜盘转动之声，有时候，我觉得黄道面不过是个密码锁，耳畔就会响起这声音来。该睡觉了，我躺在软软的褥子上，看月亮盛一碗汤，端到我面前，我问她，你怎么也小心翼翼的？</p>
 <p>这的确不是造城，我承认。只是面向空空的稿纸，萌发出一种填满它的冲动，就像那些旧的纸页，如烧如焚，还在为我取暖。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://fengyukongzhou.github.io/post/about/</id>
+        <link href="https://fengyukongzhou.github.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>“自有宇宙以来，已有此溪山，还有此佳客否？”🤝</p>
+</blockquote>
+<h2 id="关于本站">🏠 关于本站</h2>
+<p>许多年前我就是到这里告别了我的童年，就像脱掉一件穿旧的衣服。</p>
+<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+<p>在很大程度上，我是自己写下的散文。我用词藻和段落使自己成形，给自己加上标点，而且用一连串意象使自己成为一个国王；就像孩子们做的那样，给自己戴上一顶报纸叠成的王冠。用一连串词语寻找韵律以便让自己华丽夺目；就像疯子们做的那样，把梦中依然盛开的干枯花朵披挂自己全身。</p>
+<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
+<p>也许只要说奥雷利亚诺同上帝谈话，上帝对宗教分歧丝毫不感兴趣，以致把他当成了胡安·德·帕诺尼亚。</p>
+<h2 id="联系我呀">📬 联系我呀</h2>
+<p>如果有人来杀你，请你告诉我，我有一匹马存在保险柜，我可以现在骑着它去救你。</p>
+<p><em>fengyukongzhou@qq.com</em></p>
 ]]></content>
     </entry>
 </feed>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://88aqsk.coding-pages.com</id>
+    <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-05-09T01:16:13.156Z</updated>
+    <updated>2020-05-09T01:18:06.229Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://88aqsk.coding-pages.com"/>
-    <link rel="self" href="https://88aqsk.coding-pages.com/atom.xml"/>
+    <link rel="alternate" href="https://fengyukongzhou.github.io"/>
+    <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
     <subtitle>梦里寻梦</subtitle>
-    <logo>https://88aqsk.coding-pages.com/images/avatar.png</logo>
-    <icon>https://88aqsk.coding-pages.com/favicon.ico</icon>
+    <logo>https://fengyukongzhou.github.io/images/avatar.png</logo>
+    <icon>https://fengyukongzhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 风雨空舟</rights>
     <entry>
         <title type="html"><![CDATA[文字工厂造城记]]></title>
-        <id>https://88aqsk.coding-pages.com/post/wen-zi-gong-han-zao-cheng-ji/</id>
-        <link href="https://88aqsk.coding-pages.com/post/wen-zi-gong-han-zao-cheng-ji/">
+        <id>https://fengyukongzhou.github.io/post/wen-zi-gong-han-zao-cheng-ji/</id>
+        <link href="https://fengyukongzhou.github.io/post/wen-zi-gong-han-zao-cheng-ji/">
         </link>
         <updated>2020-05-09T00:27:49.000Z</updated>
         <content type="html"><![CDATA[<p>面对空空的电子稿纸，我承认，一无所有的确给我安慰。</p>

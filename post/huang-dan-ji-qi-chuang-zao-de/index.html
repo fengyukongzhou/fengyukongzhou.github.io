@@ -3,13 +3,15 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>荒诞及其创造的 | 风雨空舟</title>
-<link rel="shortcut icon" href="https://fengyukongzhou.github.io/favicon.ico?v=1589157450529">
+<link rel="shortcut icon" href="https://fengyukongzhou.github.io/favicon.ico?v=1589162909430">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fengyukongzhou.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="荒诞及其创造的 | 风雨空舟 - Atom Feed" href="https://fengyukongzhou.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 
     <meta name="description" content="诸神判罚西西弗，令他把一块岩石不断推向山顶，而石头因其重量反复滚落，这残酷的惩罚，代表无用又无望的劳动，也是无意义的人生的投射，你想说，这大概就是荒诞吧。可到了最后一句话，加缪讲，“应当想像西西弗是幸福的。”为什么？
 文明人从古典迈入现代，..." />
@@ -22,7 +24,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://fengyukongzhou.github.io">
-  <img class="avatar" src="https://fengyukongzhou.github.io/images/avatar.png?v=1589157450529" alt="">
+  <img class="avatar" src="https://fengyukongzhou.github.io/images/avatar.png?v=1589162909430" alt="">
   </a>
   <h1 class="site-title">
     风雨空舟
@@ -127,32 +129,6 @@
         
 
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: 'e8f68a81f116cdc1e782',
-    clientSecret: '96e468147ee3b35a8636d973819c5ab7a218b93a',
-    repo: 'fengyukongzhou.github.io',
-    owner: 'fengyukongzhou',
-    admin: ['fengyukongzhou'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
-        
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
@@ -206,3 +182,12 @@
     </script>
   </body>
 </html>
+
+<div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'yAhzPP6RJM6RtyySjiy5DxCt-gzGzoHsz',
+            appKey: 'AQhsD7iM2Tkz016TCT3uRQ99'
+        })
+    </script>

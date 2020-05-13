@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-05-11T02:08:32.212Z</updated>
+    <updated>2020-05-13T15:25:12.496Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fengyukongzhou.github.io"/>
     <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
@@ -10,6 +10,31 @@
     <logo>https://fengyukongzhou.github.io/images/avatar.png</logo>
     <icon>https://fengyukongzhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 风雨空舟</rights>
+    <entry>
+        <title type="html"><![CDATA[小说从头学：你书写的声音]]></title>
+        <id>https://fengyukongzhou.github.io/post/xiao-shuo-cong-tou-xue-ni-shu-xie-de-sheng-yin/</id>
+        <link href="https://fengyukongzhou.github.io/post/xiao-shuo-cong-tou-xue-ni-shu-xie-de-sheng-yin/">
+        </link>
+        <updated>2020-05-13T13:13:29.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>来自厄休拉·勒古恩的《写小说最重要的十件事》，第一章：你书写的声音：语言的音乐性</p>
+</blockquote>
+<h1 id="练习一写得悦耳">练习一：写得悦耳</h1>
+<h2 id="第一部分">第一部分</h2>
+<blockquote>
+<p>写一段叙事文，大声读出来。尝试用拟声词、押头韵（Alliteration）、重复、音律效果、虚构的词或名字、方言——任何你喜欢的声音效果——但不能用韵文或格律（Meter）。</p>
+</blockquote>
+<h2 id="第二部分">第二部分</h2>
+<blockquote>
+<p>用一段左右的篇幅，描写一个动作，或者一个有强烈情绪的人——欢乐、恐惧、悲伤。试着让你笔下的物理现实（Physical Reality）包含和体现在句子的韵律和运动之中。</p>
+</blockquote>
+<h1 id="我的练习">我的练习</h1>
+<h2 id="段落一大月亮">段落一：大月亮</h2>
+<p>我听到远处铃铛声悠悠晃晃，寒风扑咻扑咻甩出无数银线摇荡，垂钓我的恐惧吧我牙齿咯咯作响。大月亮悬在头顶，一炮把我的身体轰成碳影，她的月晕幻光如同奶油状的霓虹咕噜咕噜搅入漩涡，再淋满繁星研磨成的闪粉，你醒醒。风像侠客一般在枝头跳动，干枯的叶片扑簌簌颤摇不住，共振，我胸口里有小鸟在衔啄绷紧的琴弦。我疑心颈间挂摇铃的是埋伏着的恶犬，唯恐这漆黑被烟火般的狺吠炸亮。我记起来，我想，我回忆，我问过路又转眼遗忘。</p>
+<h2 id="段落二狂人日记">段落二：狂人日记</h2>
+<p>我说，苏珊娜你别跑了，别跑了你呀苏珊娜，骑进了巷子往深处拐，我骑着马去接你吧！大夫，我夜来晚上梦见死去的牲口，和走丢之前的妹妹，我喊，妹妹啊妹妹你跑慢点行不行哪？唱词，念白，在我头顶摇曳盘旋，水果刀那样沿着我脑袋旋下一层皮肤，滚！疼痛，滚！回声，绕来绕去，转悠转悠，两只轮子是我的黑眼眶滚在石板路上。我流泪，流到巷子融化，苏珊娜你知道吗，你哪儿去了？玩儿去了，去玩儿了，捉迷藏还是丢手绢儿啊，你怎么跟手绢一样丢没了啊。大夫，我最后梦见了一只鸟儿，它在自问自答。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[不谈工作的男人]]></title>
         <id>https://fengyukongzhou.github.io/post/bu-tan-gong-zuo-de-nan-ren/</id>

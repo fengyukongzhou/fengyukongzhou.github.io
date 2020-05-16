@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-05-14T15:42:21.644Z</updated>
+    <updated>2020-05-16T16:09:08.465Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fengyukongzhou.github.io"/>
     <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://fengyukongzhou.github.io/images/avatar.png</logo>
     <icon>https://fengyukongzhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 风雨空舟</rights>
+    <entry>
+        <title type="html"><![CDATA[云游随想]]></title>
+        <id>https://fengyukongzhou.github.io/post/yun-you-sui-xiang/</id>
+        <link href="https://fengyukongzhou.github.io/post/yun-you-sui-xiang/">
+        </link>
+        <updated>2020-05-16T16:08:35.000Z</updated>
+        <content type="html"><![CDATA[<p>《云游》一书的轻盈，是由表及里的。</p>
+<p>形式的轻盈体现在碎片化的体例上，全书由116个片段组成，有些是短篇小说的篇幅，其余不过几段话。还得知，作者托卡尔丘克写作此书时正环球旅行，创作出这样一组散点透视的速写也算意料之中。这种写法，托卡尔丘克称之为“星群小说”。在阅读过程中，读者将逐渐体会到跳跃的片段背后存在着互通密道，如同遥望群星，才知道上帝在夜空中描摹出一幅庞大图案。当然，星座出自观者的想象。</p>
+<p>小说中存在着两条并行的“游踪”，大概是对人体和对世界的探索。你会看到，片段中埋伏着心理学、解剖学的影子，也有真伪莫辨的此刻记录与历史片段。摘取我尚能趁热回忆的几片叶子——裹得层层叠叠的流浪女的喷吐出的疯话、珍奇柜中陈列的连体婴标本、巴掌大的小岛上找不到失踪的妻儿、沿着子午线（虚构出的一条线）旅行的旅人、受幻肢痛折磨而把截肢的小腿拆解成上千零件的解剖学家、要求国王归还父身（此时已成标本）的信件、藏在裙中护送回国的肖邦的心脏……</p>
+<p>描述当代生活并非易事，如同在身处迷宫之中，构思俯瞰图，书中对当代经验的处理是“超现实”的——像是魔术师掏出某样普通物件，立马表演起近景魔术——拥有了这种陌生的观察视角，日常事物的奇特与荒诞便藏不住了，甚至有种难以表述的神性。（塑料袋也是上帝的孩子啊！）</p>
+<p>前些天看宋飞的专场，说“没人想待在任何地方，我们调整烦躁的方法就是一直换地点”，我都想到在读的这本《云游》，大概这种视角就像眼镜，戴上就摘不掉了。我回想起小时候读的《从一到无穷大》，讨论空间时有一段奇异想象，大致复述如下：</p>
+<blockquote>
+<p>想象你的体腔从内向外卷成甜甜圈的形状，此时整个宇宙都被挤压到“甜甜圈”的环状通道之中，而你的内脏、血管铺满了新的空间。</p>
+</blockquote>
+<p>我不知为何联想到这幅画面，就像云游者不知从何而来。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[小说从头学：了解语言游戏的规则]]></title>
         <id>https://fengyukongzhou.github.io/post/xiao-shuo-cong-tou-xue-liao-jie-yu-yan-you-xi-de-gui-ze/</id>

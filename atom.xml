@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-06-06T06:17:53.125Z</updated>
+    <updated>2020-06-06T06:23:27.642Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fengyukongzhou.github.io"/>
     <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
@@ -103,8 +103,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[2020.05 读书记录]]></title>
-        <id>https://fengyukongzhou.github.io/post/Reading Record 202005/</id>
-        <link href="https://fengyukongzhou.github.io/post/Reading Record 202005/">
+        <id>https://fengyukongzhou.github.io/post/Reading-Record-202005/</id>
+        <link href="https://fengyukongzhou.github.io/post/Reading-Record-202005/">
         </link>
         <updated>2020-05-25T08:47:20.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1云游奥尔加托卡尔丘克">1.《云游》奥尔加·托卡尔丘克</h1>
@@ -293,8 +293,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[不谈工作的男人]]></title>
-        <id>https://fengyukongzhou.github.io/post/Not talking about work/</id>
-        <link href="https://fengyukongzhou.github.io/post/Not talking about work/">
+        <id>https://fengyukongzhou.github.io/post/Not-talking-about-work/</id>
+        <link href="https://fengyukongzhou.github.io/post/Not-talking-about-work/">
         </link>
         <updated>2020-05-11T00:25:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1">1</h1>

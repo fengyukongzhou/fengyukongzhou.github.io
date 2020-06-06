@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fengyukongzhou.github.io</id>
     <title>风雨空舟</title>
-    <updated>2020-06-06T06:14:39.656Z</updated>
+    <updated>2020-06-06T06:17:53.125Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fengyukongzhou.github.io"/>
     <link rel="self" href="https://fengyukongzhou.github.io/atom.xml"/>
@@ -42,8 +42,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[大乱中总有小静]]></title>
-        <id>https://fengyukongzhou.github.io/post/Chaos of Fiction/</id>
-        <link href="https://fengyukongzhou.github.io/post/Chaos of Fiction/">
+        <id>https://fengyukongzhou.github.io/post/da-luan-zhong-zong-you-xiao-jing/</id>
+        <link href="https://fengyukongzhou.github.io/post/da-luan-zhong-zong-you-xiao-jing/">
         </link>
         <updated>2020-05-30T14:06:17.000Z</updated>
         <content type="html"><![CDATA[<p>前些日子，朱岳老师发动态，讲打折的事情，这本《说部之乱》五折后12块5，他说买不了吃亏买不了上当，于是我就买来了。先前读过一回，印象不错，但更多是感觉好笑，这回读完，我把上次打的四星改成了五星。</p>
@@ -223,8 +223,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[云游随想]]></title>
-        <id>https://fengyukongzhou.github.io/post/Flight/</id>
-        <link href="https://fengyukongzhou.github.io/post/Flight/">
+        <id>https://fengyukongzhou.github.io/post/yun-you-sui-xiang/</id>
+        <link href="https://fengyukongzhou.github.io/post/yun-you-sui-xiang/">
         </link>
         <updated>2020-05-16T16:08:35.000Z</updated>
         <content type="html"><![CDATA[<p>《云游》一书的轻盈，是由表及里的。</p>

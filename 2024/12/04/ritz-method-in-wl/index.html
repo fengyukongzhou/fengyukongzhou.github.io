@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Wolfram语言在薄板振动方程近似求解中的应用 | THE ADRIFT POST</title>
+  <title>Wolfram语言在薄板振动方程近似求解中的应用 | THE ADRIFT POST | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
 
   
   <meta name="author" content="Fengyukongzhou">
   
 
   
-  <meta name="description" content="The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...">
+  <meta name="description" content="我的研究方向是对微机电压电水听器进行建模，查阅相关文献时往往会遇到这个偏微分方程：
+
+D\nabla^{4}w+\rho_{h}w_{tt}=0先不管参数 $D,\rho_{h}$，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？
+面对偏微分方程难解的问题，里兹法的思路大概是：先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。">
   
 
   
@@ -45,7 +48,7 @@
     <h1 class="site-title">
       <a href="/">THE ADRIFT POST</a>
     </h1>
-    <p class="site-description"></p>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
   </div>
   <nav class="site-navigation">
     <ul>

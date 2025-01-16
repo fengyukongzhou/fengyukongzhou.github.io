@@ -228,39 +228,78 @@
 <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
 <script>
 // 初始化 LeanCloud
-AV.init({
-  appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz", // 需要替换为你的 LeanCloud 应用 ID
-  appKey: "gMFzQ0eRohuOkA8QcewcUjGA", // 需要替换为你的 LeanCloud 应用 Key
-  serverURL: "https://2wngigj8.lc-cn-n1-shared.com" // 如果是国际版可以不填
-});
+try {
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   const likeButton = document.querySelector('.like-button');
   const likeCount = document.querySelector('.like-count');
   const path = likeButton.dataset.path;
   
+  console.log('当前文章路径:', path);
+  
   // 查询当前文章的点赞数
   async function getLikes() {
-    const query = new AV.Query('Likes');
-    query.equalTo('path', path);
-    const result = await query.first();
-    return result ? result : new AV.Object('Likes', { path, count: 0 });
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
   }
   
   // 更新点赞显示
   async function updateLikeCount() {
-    const like = await getLikes();
-    likeCount.textContent = like.get('count') || 0;
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        likeCount.textContent = count;
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
   }
   
   // 处理点赞事件
   async function handleLike() {
+    if (likeButton.disabled) return;
+    
     likeButton.disabled = true;
+    console.log('开始处理点赞');
+    
     try {
       let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
       like.increment('count');
       await like.save();
-      likeCount.textContent = like.get('count');
+      const newCount = like.get('count');
+      console.log('点赞成功，新的点赞数:', newCount);
+      likeCount.textContent = newCount;
       
       // 添加动画效果
       likeButton.classList.add('liked');
@@ -269,12 +308,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 1000);
     } catch (error) {
       console.error('点赞失败:', error);
+    } finally {
+      likeButton.disabled = false;
     }
-    likeButton.disabled = false;
   }
   
   // 绑定点击事件
   likeButton.addEventListener('click', handleLike);
+  console.log('点赞按钮事件绑定成功');
   
   // 初始化显示点赞数
   updateLikeCount();

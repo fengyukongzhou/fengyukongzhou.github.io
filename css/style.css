@@ -1613,21 +1613,20 @@ pre .deletion {
   min-width: 20px;
 }
 .like-message {
-  font-family: MaShanZheng, XingKai, "楷体", "STKaiti", "华文楷体", KaiTi, serif;
-  color: #f03838;
-  font-size: 20px;
-  margin-top: 10px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: -30px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  bottom: -35px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
   pointer-events: none;
+}
+.like-message .luoziwuhui-svg {
+  height: 30px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
 }
 @media (prefers-color-scheme: dark) {
   .like-button {

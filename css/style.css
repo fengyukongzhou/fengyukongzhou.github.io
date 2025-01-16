@@ -1367,3 +1367,13 @@ pre .deletion {
     padding: 2.5rem 0 !important;
   }
 }
+.post-toc.toc-hidden {
+  background-color: transparent;
+}
+.post-toc.toc-hidden .post-toc-content {
+  opacity: 0;
+  visibility: hidden;
+}
+.post-toc-content {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}

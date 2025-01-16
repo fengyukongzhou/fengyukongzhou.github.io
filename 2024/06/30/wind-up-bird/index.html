@@ -394,10 +394,20 @@ document.addEventListener('DOMContentLoaded', function() {
   let activeLink = null;
   let isScrolling = false;
   
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
   // 切换目录显示/隐藏
   tocToggle.addEventListener('click', function() {
     postToc.classList.toggle('toc-hidden');
     tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
   });
 
   // 点击目录项平滑滚动

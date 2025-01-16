@@ -2,6 +2,9 @@
   article {
     padding: 8rem 0;
   }
+  .toc-toggle:hover i {
+    color: #f03838;
+  }
 }
 @media (max-width: 768px) {
   .content {
@@ -9,6 +12,13 @@
   }
   article {
     padding: 2.5rem 0 !important;
+  }
+  .toc-toggle {
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+  .toc-toggle.toc-toggle-hidden i {
+    color: #f03838;
   }
 }
 .post-toc.toc-hidden {
@@ -20,4 +30,11 @@
 }
 .post-toc-content {
   transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.toc-toggle {
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+.toc-toggle i {
+  transition: color 0.3s ease;
 }

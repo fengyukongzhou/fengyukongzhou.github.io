@@ -236,6 +236,7 @@
     <i class="fas fa-heart"></i>
     <span class="like-count">0</span>
   </button>
+  <div class="like-message">落子无悔</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
@@ -251,6 +252,28 @@ try {
 } catch (error) {
   console.error('LeanCloud 初始化失败:', error);
 }
+
+// 清除所有点赞数据
+async function clearAllLikes() {
+  try {
+    // 清除本地存储
+    localStorage.removeItem('likedPosts');
+    
+    // 清除服务器数据
+    const query = new AV.Query('Likes');
+    const results = await query.find();
+    await AV.Object.destroyAll(results);
+    console.log('所有点赞数据已清除');
+    
+    // 刷新页面
+    window.location.reload();
+  } catch (error) {
+    console.error('清除点赞数据失败:', error);
+  }
+}
+
+// 在控制台中可以调用这个函数来清除数据
+window.clearAllLikes = clearAllLikes;
 
 document.addEventListener('DOMContentLoaded', function() {
   const likeButton = document.querySelector('.like-button');

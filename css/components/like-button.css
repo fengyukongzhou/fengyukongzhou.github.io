@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap");
 .like-button-container {
   text-align: center;
   margin: 2em 0;
+  position: relative;
 }
 .like-button {
   background: none;
@@ -12,6 +14,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
+  margin-bottom: 10px;
 }
 .like-button:hover:not(:disabled) {
   background: #f03838;
@@ -34,6 +37,10 @@
   transform: none;
   box-shadow: none;
 }
+.like-button.liked + .like-message {
+  opacity: 1;
+  transform: translateY(0);
+}
 .like-button:disabled {
   cursor: not-allowed;
   opacity: 0.8;
@@ -49,6 +56,19 @@
   display: inline-block;
   min-width: 20px;
 }
+.like-message {
+  font-family: 'Ma Shan Zheng', cursive;
+  color: #f03838;
+  font-size: 20px;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -30px;
+}
 @media (prefers-color-scheme: dark) {
   .like-button {
     background: rgba(240,56,56,0.1);
@@ -58,5 +78,8 @@
   }
   .like-button.liked {
     background: #f03838;
+  }
+  .like-message {
+    color: #f03838;
   }
 }

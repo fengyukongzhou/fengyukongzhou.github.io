@@ -239,7 +239,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const likeCount = document.querySelector('.like-count');
   const path = likeButton.dataset.path;
   
-  console.log('当前文章路径:', path);
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState();
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState() {
+    if (hasLiked()) {
+      likeButton.classList.add('liked');
+      likeButton.disabled = true;
+      likeButton.title = '您已经点过赞了';
+    }
+  }
   
   // 查询当前文章的点赞数
   async function getLikes() {
@@ -278,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 处理点赞事件
   async function handleLike() {
-    if (likeButton.disabled) return;
+    if (likeButton.disabled || hasLiked()) return;
     
     likeButton.disabled = true;
     console.log('开始处理点赞');
@@ -296,14 +317,13 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('点赞成功，新的点赞数:', newCount);
       likeCount.textContent = newCount;
       
+      // 标记为已点赞
+      markAsLiked();
+      
       // 添加动画效果
       likeButton.classList.add('liked');
-      setTimeout(() => {
-        likeButton.classList.remove('liked');
-      }, 1000);
     } catch (error) {
       console.error('点赞失败:', error);
-    } finally {
       likeButton.disabled = false;
     }
   }
@@ -312,8 +332,9 @@ document.addEventListener('DOMContentLoaded', function() {
   likeButton.addEventListener('click', handleLike);
   console.log('点赞按钮事件绑定成功');
   
-  // 初始化显示点赞数
+  // 初始化
   updateLikeCount();
+  updateLikeButtonState();
 });
 </script> 
 

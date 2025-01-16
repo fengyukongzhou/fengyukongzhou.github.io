@@ -168,28 +168,6 @@ try {
   console.error('LeanCloud 初始化失败:', error);
 }
 
-// 清除所有点赞数据
-async function clearAllLikes() {
-  try {
-    // 清除本地存储
-    localStorage.removeItem('likedPosts');
-    
-    // 清除服务器数据
-    const query = new AV.Query('Likes');
-    const results = await query.find();
-    await AV.Object.destroyAll(results);
-    console.log('所有点赞数据已清除');
-    
-    // 刷新页面
-    window.location.reload();
-  } catch (error) {
-    console.error('清除点赞数据失败:', error);
-  }
-}
-
-// 在控制台中可以调用这个函数来清除数据
-window.clearAllLikes = clearAllLikes;
-
 document.addEventListener('DOMContentLoaded', function() {
   const likeButton = document.querySelector('.like-button');
   const likeCount = document.querySelector('.like-count');
@@ -206,16 +184,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
     likedPosts.push(path);
     localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-    updateLikeButtonState();
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
   }
   
   // 更新按钮状态
-  function updateLikeButtonState() {
-    if (hasLiked()) {
-      likeButton.classList.add('liked');
-      likeButton.disabled = true;
-      likeButton.title = '您已经点过赞了';
-    }
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
   }
   
   // 查询当前文章的点赞数
@@ -246,7 +239,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (like) {
         const count = like.get('count') || 0;
         console.log('当前点赞数:', count);
-        likeCount.textContent = count;
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
       }
     } catch (error) {
       console.error('更新点赞显示失败:', error);
@@ -254,11 +249,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // 处理点赞事件
-  async function handleLike() {
-    if (likeButton.disabled || hasLiked()) return;
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
     
-    likeButton.disabled = true;
-    console.log('开始处理点赞');
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
     
     try {
       let like = await getLikes();
@@ -267,30 +264,41 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      like.increment('count');
-      await like.save();
+      if (isLiked) {
+        // 取消点赞
+        like.increment('count', -1);
+        await like.save();
+        unmarkAsLiked();
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
       const newCount = like.get('count');
-      console.log('点赞成功，新的点赞数:', newCount);
-      likeCount.textContent = newCount;
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
       
-      // 标记为已点赞
-      markAsLiked();
-      
-      // 添加动画效果
-      likeButton.classList.add('liked');
     } catch (error) {
-      console.error('点赞失败:', error);
-      likeButton.disabled = false;
+      console.error('操作失败:', error);
     }
   }
   
-  // 绑定点击事件
+  // 绑定点击和触摸事件
   likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
   console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
   
   // 初始化
   updateLikeCount();
-  updateLikeButtonState();
+  updateLikeButtonState(hasLiked());
 });
 </script> 
 

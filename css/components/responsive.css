@@ -10,4 +10,13 @@
   article {
     padding: 2.5rem 0 !important;
   }
+  .toc {
+    display: none !important;
+  }
+  .toc-container {
+    display: none !important;
+  }
+  #table-of-contents {
+    display: none !important;
+  }
 }

@@ -42,9 +42,177 @@ D\nabla^{4}w+\rho_{h}w_{tt}=0
 
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 
 <body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
 <div class="blog">
   <div class="content">
 
@@ -150,7 +318,7 @@ w}{\partial x \partial y}\right)^{2}\right]
 \]</span></p>
 <p>注意式子里的上标代表该边界的边界条件，<span class="math inline">\(0\)</span> 对应于<strong>自由边界条件</strong>，<span class="math inline">\(1\)</span> 对应于<strong>简支边界条件</strong>，<span class="math inline">\(2\)</span> 对应于<strong>固定边界条件</strong>。</p>
 <p>如果是正六边形板，这个边界方程就很难直接写出。可以先写一个函数，能输入各顶点坐标，输出边界方程：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 计算两点之间的线方程 *)</span></span><br><span class="line">  <span class="variable">lineEquation</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="type">p1_</span><span class="operator">,</span> <span class="type">p2_</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> <span class="punctuation">(</span><span class="variable">x</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">-</span> <span class="punctuation">(</span><span class="variable">y</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> </span><br><span class="line"></span><br><span class="line">  <span class="comment">(* 将点列表转换为成对的点 *)</span> </span><br><span class="line">   <span class="variable">pointsPair</span><span class="punctuation">[</span><span class="type">points_List</span><span class="punctuation">]</span> <span class="operator">:=</span> <span class="built_in">Partition</span><span class="punctuation">[</span><span class="built_in">Riffle</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">RotateLeft</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">&amp;@</span><span class="variable">points</span> </span><br><span class="line"></span><br><span class="line">  <span class="comment">(* 计算多边形的边界 *)</span> </span><br><span class="line">   <span class="variable">polygonBorder</span><span class="punctuation">[</span><span class="type">points_List</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> <span class="built_in">Times</span> <span class="operator">@@</span> <span class="punctuation">(</span><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">pointsPair</span><span class="operator">@</span><span class="variable">points</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 计算两点之间的线方程 *)</span></span><br><span class="line"><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="type">p1_</span><span class="operator">,</span> <span class="type">p2_</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="punctuation">(</span><span class="variable">x</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">-</span> <span class="punctuation">(</span><span class="variable">y</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 将点列表转换为成对的点 *)</span></span><br><span class="line"><span class="variable">pointsPair</span><span class="punctuation">[</span><span class="type">points_List</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Partition</span><span class="punctuation">[</span><span class="built_in">Riffle</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">RotateLeft</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">@</span> <span class="variable">points</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 计算多边形的边界 *)</span></span><br><span class="line"><span class="variable">polygonBorder</span><span class="punctuation">[</span><span class="type">points_List</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Times</span> <span class="operator">@@</span> <span class="punctuation">(</span><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">pointsPair</span> <span class="operator">@</span> <span class="variable">points</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>正六边形的六个顶点即为：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CirclePoints</span><span class="punctuation">[</span><span class="number">6</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2024/12/04/ritz-method-in-wl/0qh7xb6uqvihj.png"></p>
@@ -217,9 +385,7 @@ m_{ij}&amp;=\iint_{\bar A}\psi_{i}\cdot\psi_{j}\mathrm{d}x\mathrm{d}y
 <p>第三，为编写更具一般性的程序，应使用数值积分。对于矩阵中存在的大量零元素，需要设定合适的准确度目标：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ParallelTable</span><span class="punctuation">[</span><span class="built_in">NIntegrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">AccuracyGoal</span> <span class="operator">-&gt;</span> <span class="number">5</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">i</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span> <span class="operator">//</span> <span class="built_in">RepeatedTiming</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;1.47974, Null&#125;*)</span></span><br></pre></td></tr></table></figure>
 <p>于是，将优化后的函数整合为一个程序包：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Clear</span><span class="punctuation">[</span><span class="variable">polygonBorder</span><span class="operator">,</span> <span class="variable">lineEquation</span><span class="operator">,</span> <span class="variable">pointsPair</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get</span><span class="punctuation">[</span><span class="built_in">FileNameJoin</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">NotebookDirectory</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="string">&quot;RitzMethod.wl&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">?</span><span class="variable">RitzSolver</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Clear</span><span class="punctuation">[</span><span class="variable">polygonBorder</span><span class="operator">,</span> <span class="variable">lineEquation</span><span class="operator">,</span> <span class="variable">pointsPair</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Get</span><span class="punctuation">[</span><span class="built_in">FileNameJoin</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">NotebookDirectory</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="string">&quot;RitzMethod.wl&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="operator">?</span><span class="variable">RitzSolver</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2024/12/04/ritz-method-in-wl/0aa5e5ntcerlp.png"></p>
 <p>对于上面的<strong>固定边界圆板</strong>，可以这样调用函数：</p>
 <p><img src="/2024/12/04/ritz-method-in-wl/0i436hekcsbps.png"></p>

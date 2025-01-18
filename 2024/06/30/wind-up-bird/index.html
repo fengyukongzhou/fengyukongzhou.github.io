@@ -507,10 +507,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (isLiked) {
-        // 取消点赞
-        like.increment('count', -1);
-        await like.save();
-        unmarkAsLiked();
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
       } else {
         // 添加点赞
         like.increment('count');

@@ -1778,6 +1778,11 @@ body {
   min-height: 100vh;
   padding: 0 20px;
 }
+@media screen and (max-width: 768px) {
+  .blog {
+    padding: 0;
+  }
+}
 .content {
   background-color: var(--main-bg);
   border-radius: 8px;

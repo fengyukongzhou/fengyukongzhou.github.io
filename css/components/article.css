@@ -1,6 +1,6 @@
 article {
   position: relative;
-  padding: 8rem 0;
+  padding: 2rem 0;
 }
 article a {
   color: #f03838;
@@ -9,17 +9,19 @@ article:not(:first-child):before {
   content: '';
   width: 150px;
   height: 1px;
-  background-color: #e0e0e0;
+  background-color: rgba(224,224,224,0.5);
   position: absolute;
   top: 0;
   left: 50%;
   margin-left: -75px;
 }
 article blockquote {
-  margin: 6rem 2rem;
-  padding-left: 15px;
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
   line-height: 2rem;
   border-left: 4px solid #f03838;
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 0 4px 4px 0;
 }
 article .article-title {
   position: relative;

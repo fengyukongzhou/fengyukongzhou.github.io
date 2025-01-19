@@ -413,12 +413,14 @@
 <script>
 // 初始化 LeanCloud
 try {
+  
   AV.init({
     appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
     appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
     serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
   });
   console.log('LeanCloud 初始化成功');
+  
 } catch (error) {
   console.error('LeanCloud 初始化失败:', error);
 }

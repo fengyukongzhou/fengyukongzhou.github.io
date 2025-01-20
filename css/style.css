@@ -1465,6 +1465,9 @@ figure.highlight .copy-tooltip.visible {
 figure.highlight table {
   width: 100%;
   border-spacing: 0;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 figure.highlight .gutter {
   padding: 0.5em 0.8em;
@@ -1486,6 +1489,8 @@ figure.highlight .code pre {
   margin: 0;
   color: #383a42;
   font-size: 0.95em;
+  white-space: pre;
+  overflow: visible;
 }
 figure.highlight .marked {
   background: rgba(0,0,0,0.05);
@@ -1875,6 +1880,46 @@ h6 {
 .katex,
 .MathJax {
   color: var(--math-color);
+}
+.katex-display,
+.MathJax_Display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5em 0;
+  margin: 0.5em 0;
+}
+.katex-display > .katex,
+.MathJax_Display > .MathJax {
+  white-space: nowrap;
+  max-width: none;
+  display: inline-block;
+}
+@media screen and (max-width: 768px) {
+  .katex-display,
+  .MathJax_Display {
+    position: relative;
+  }
+  .katex-display::-webkit-scrollbar,
+  .MathJax_Display::-webkit-scrollbar {
+    height: 2px;
+  }
+  .katex-display::-webkit-scrollbar-track,
+  .MathJax_Display::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+  }
+  .katex-display::-webkit-scrollbar-thumb,
+  .MathJax_Display::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+  }
+  [data-theme="dark"] .katex-display::-webkit-scrollbar-track,
+  [data-theme="dark"] .MathJax_Display::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+  }
+  [data-theme="dark"] .katex-display::-webkit-scrollbar-thumb,
+  [data-theme="dark"] .MathJax_Display::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+  }
 }
 .post-content {
   color: var(--text-color);

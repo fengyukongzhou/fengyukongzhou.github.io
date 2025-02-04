@@ -58,3 +58,109 @@ article .tags-cloud .post-tags a:not(:last-of-type):after {
   content: ",";
   padding-right: 5px;
 }
+.tags {
+  margin-bottom: 30px;
+}
+.tags a {
+  margin-right: 15px;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999em;
+  padding: 0 10px;
+  color: #333;
+  border: 1px solid #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.tags a:hover {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+}
+[data-theme="dark"] .tags a {
+  color: #fff;
+  border-color: #fff;
+  background-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] .tags a:hover {
+  color: #121212;
+  background-color: #fff;
+  border-color: #fff;
+}
+[data-theme="dark"] .tag-cloud-tags a {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999em;
+  padding: 2px 8px;
+  color: #333;
+  background: #f2f2f2;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+[data-theme="dark"] .tag-cloud-tags a:hover {
+  color: #fff;
+  background-color: #333;
+}
+[data-theme="dark"] .tags-cloud a,
+[data-theme="dark"] .archive-tags a {
+  color: #fff;
+}
+[data-theme="dark"] .tags-cloud a:hover,
+[data-theme="dark"] .archive-tags a:hover {
+  color: #f03838;
+}
+.tag-cloud-tags a {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999em;
+  padding: 2px 8px;
+  color: #333;
+  background: #f2f2f2;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+.tag-cloud-tags a:hover {
+  color: #fff;
+  background-color: #333;
+}
+.post-tags {
+  margin: 0 0 20px;
+}
+.post-tags a {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999em;
+  padding: 2px 8px;
+  color: #333;
+  background: #f2f2f2;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin: 0 5px 5px 0;
+}
+.post-tags a:hover {
+  color: #fff;
+  background-color: #333;
+}
+[data-theme="dark"] .tag-cloud-tags a,
+[data-theme="dark"] .post-tags a {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] .tag-cloud-tags a:hover,
+[data-theme="dark"] .post-tags a:hover {
+  color: #121212;
+  background-color: #fff;
+}
+[data-theme="dark"] .tags-cloud a,
+[data-theme="dark"] .archive-tags a {
+  color: #fff;
+}
+[data-theme="dark"] .tags-cloud a:hover,
+[data-theme="dark"] .archive-tags a:hover {
+  color: #f03838;
+}
+[data-theme="dark"] .post-tags a:before {
+  color: #fff;
+}

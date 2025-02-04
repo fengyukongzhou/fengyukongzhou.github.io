@@ -293,3 +293,37 @@ article.archive {
     text-shadow: 0 0 10px rgba(240,56,56,0.5);
   }
 }
+[data-theme="dark"] .archive-post .archive-title {
+  color: #fff !important;
+}
+[data-theme="dark"] .archive-post .archive-title a {
+  color: #fff !important;
+}
+[data-theme="dark"] .archive-post .archive-title a:hover {
+  color: var(--link-color) !important;
+}
+[data-theme="dark"] .archive-post time a {
+  color: rgba(255,255,255,0.7) !important;
+}
+[data-theme="dark"] .archive-post time a:hover {
+  color: var(--link-color) !important;
+}
+[data-theme="dark"] .archive-year .year-title {
+  color: #fff !important;
+  border-bottom-color: #333;
+}
+[data-theme="dark"] .archive-year .year-title:after {
+  background: var(--link-color);
+}
+[data-theme="dark"] .archive-item:before {
+  background: var(--link-color);
+}
+[data-theme="dark"] .archive-item .archive-post time {
+  color: rgba(255,255,255,0.7) !important;
+}
+[data-theme="dark"] .archive-item .archive-post .archive-title a {
+  color: #fff !important;
+}
+[data-theme="dark"] .archive-item .archive-post .archive-title a:hover {
+  color: var(--link-color) !important;
+}

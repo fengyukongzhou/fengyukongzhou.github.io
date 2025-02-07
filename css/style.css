@@ -607,6 +607,20 @@ article .featured-media {
   font-size: 1.6rem;
   color: #424242;
 }
+article .article-excerpt h2,
+article .article-content h2,
+article .featured-media h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+  color: #212121;
+}
+article .article-excerpt h3,
+article .article-content h3,
+article .featured-media h3 {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: #212121;
+}
 article .article-excerpt .excerpt-btn,
 article .article-content .excerpt-btn,
 article .featured-media .excerpt-btn {

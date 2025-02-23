@@ -1,0 +1,771 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>烧写：DeepSeek-R1 模型实现诗的泛化 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="前段时间弃读了一本“无文体”的《裂谷》，但作者独特的写作观却带给我许多启发。他把这种写法称为“烧写”，解释为“以极高的熔点温度去炼化所有信息，所见所感无一不能入文”。">
+  
+
+  
+  
+  <meta name="keywords" content="尝试集,AI,写作方法">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="烧写：DeepSeek-R1 模型实现诗的泛化"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', initTheme);
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>烧写：DeepSeek-R1 模型实现诗的泛化</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/01/22/molten-writing/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-01-21T16:00:00.000Z">
+          2025-01-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2025/01/22/molten-writing/mw-1.png" alt></p>
+<p>前段时间弃读了一本“无文体”的《裂谷》，但作者独特的写作观却带给我许多启发。他把这种写法称为“烧写”，解释为“<strong>以极高的熔点温度去炼化所有信息，所见所感无一不能入文</strong>”。</p>
+<span id="more"></span>  
+<p>他说：</p>
+<blockquote>
+<p>能对我们的人生产生效力的物件，必须由我们自己在机床上，“车”出来。很多时候，我是把“小说写作”当成一种数学工具在用，这个工具肯定不会干烧，而是要去烧相应的一些现实语料。创造，通常意味着，烧制出 AI 理解起来需要更高运算强度的语义网。</p>
+</blockquote>
+<p>这种写法恰逢大模型飞速进化之际，显得“不合时宜”，却又“恰逢其时”。刚刚在即刻上看到 <code>DeepSeek-R1</code> 模型的使用体验，说它讲着讲着就开始蹦出一些让人无法理解的词，像是设置了过高的温度参数。</p>
+<p>我立刻联想到《裂谷》这本书的语言风格。<strong>AI 写作或许才是更极致的“烧写”，而诗句或许是较为适配的燃料</strong>。</p>
+<h2 id="最初那一鞭的惯性"><a href="#最初那一鞭的惯性" class="headerlink" title="最初那一鞭的惯性"></a>最初那一鞭的惯性</h2><p><img src="/2025/01/22/molten-writing/mw-2.png" alt="校对文章的时候戏就很多"></p>
+<p>我点开 DeepSeek 的“深度思考”模式，让它按照下面这句话的“内在风格”（而不是句式相似）进行仿写：</p>
+<blockquote>
+<p>地球上的夜晚如同陀螺锥尖的钢珠，在我们头顶，星空倚着最初那一鞭的惯性在螺旋。——《裂谷》</p>
+</blockquote>
+<p>它分析了一下所谓“内在风格”的特征：</p>
+<blockquote>
+<p>通过机械意象解构自然现象，将抽象时空具象为精密仪器组件，在静默中营造蓄势待发的动力学诗意，同时保持喻体与本体的意外性联结。</p>
+</blockquote>
+<p>好一个后现代评论家！下面是它仿写的几句：</p>
+<ul>
+<li>时间在麦田里碾作金箔，风的折痕将暮色锻打成钟摆的末梢。</li>
+<li>晨光卡进冰川的齿缝，白昼像未上油的齿轮在极圈空转。</li>
+<li>候鸟群掠过电离层时，衔走了大气层边缘几颗松动的铆钉。</li>
+<li>陨石坠落的轨迹锈蚀后，银河便垂下青铜锁链打捞失重的黄昏。</li>
+</ul>
+<p>意象独特，效果出奇，比起之前版本的“景物画”式风格有不小的进步。对比一下，下面是 <code>DeepSeek-V3</code> 的回答：</p>
+<ul>
+<li>时间像一条无声的河流，携带着记忆的碎片，缓缓流向未知的深渊，而我们只是河床上偶尔闪烁的鹅卵石。</li>
+<li>城市的灯火如同无数只疲惫的眼睛，在夜幕下眨动，每一盏灯背后都藏着一个未曾诉说的故事。</li>
+<li>风穿过空旷的街道，像是无形的幽灵，轻轻拂过每一扇紧闭的窗，带来远方的低语和叹息。</li>
+</ul>
+<p>不是说这几句不好，只是不奇。“为人性僻耽佳句，语不惊人死不休”，<code>DeepSeek-R1</code> 的回答更符合杜甫的“性僻”。</p>
+<p>再来看看 <code>V3</code> 对“内在风格”的分析：</p>
+<blockquote>
+<p>一种诗意的抽象与具象交织的表达，注重通过细腻的意象和隐喻传递情感与哲思，而非直接陈述。其特点包括：意象的深度与多重象征、情感的隐晦与含蓄、哲思的渗透与宏大主题的思考、语言的韵律感与流畅性，以及独特的视角赋予平凡事物新的意义。这种风格通过细腻的语言和深刻的意象，唤起读者对世界和内心的共鸣，同时留下广阔的想象空间。</p>
+</blockquote>
+<p><code>R1</code> 关注意象，<code>V3</code> 关注概念。我把握不住“诗意”，只好援引诗人黄梵在《意象的帝国》所写的，“抽象事物或观念事物都是非意象事物，对写诗的人来说，是需要谨慎处理，甚至避之若浼的。”</p>
+<p>由此观之，<code>R1</code> 模型真正借了“最初那一鞭的惯性”，从而“泛化”出更多的诗句。</p>
+<h2 id="梦里见到的波浪其实是他自己的脚步"><a href="#梦里见到的波浪其实是他自己的脚步" class="headerlink" title="梦里见到的波浪其实是他自己的脚步"></a>梦里见到的波浪其实是他自己的脚步</h2><p><img src="/2025/01/22/molten-writing/mw-3.png" alt></p>
+<p>说来也巧，我昨晚刚整理了帕维奇几部小说的书摘，比如：</p>
+<blockquote>
+<p>目睹者曾说，哈扎尔首都屋宇的影子好长一段时期内都萦然不灭，虽则屋宇本身早已被履平，影子居然对着伏尔加河水迎风而立。——《哈扎尔辞典》</p>
+<p>这种情况让他的面孔一会儿显示出他年老之后会变成什么模样，一会儿又显示出他还在任由自己的听觉支配着行走于人世间时的模样。因为人的面孔会呼吸，会不断地将时间吸入和呼出。——《君士坦丁堡最后之恋》</p>
+<p>“北方是什么意思？”阿耳卡契问。<br>“要是你走上一条路之后，太阳先晒热你一只耳朵，后来又晒热你另一只耳朵，那么你去的那个方向就叫北方。”——《鱼鳞帽艳史》</p>
+</blockquote>
+<p><code>R1</code> 模型分析了帕维奇这些句子的“内在风格”：</p>
+<blockquote>
+<p>以超现实意象重构现实逻辑，用物质性隐喻解构抽象情感，在细节褶皱处埋藏玄学密码。帕维奇的语言具有液态金属般的可塑性——既能在具象与抽象之间自由流动，又能凝固成充满悖论的晶体结构。其核心特质在于创造双重镜像：每个比喻都是能自我繁殖的语义胚胎，每个场景都是通向平行世界的虫洞。</p>
+</blockquote>
+<p>我选了下面几则“烧写”结果：</p>
+<ul>
+<li>他清晨咳嗽时，喉咙里飞出几只夜莺，那些在胸腔过夜的鸣叫声终于找到逃离的裂缝。</li>
+<li>记忆像被反向编织的毛衣，越是试图拆解线头，越会把自己缠绕进新的针脚。最终你会发现，所谓遗忘不过是把伤痛织进衣领内侧的装饰花纹。</li>
+<li>用睫毛夹住正在消散的梦境，这样当你眨眼时，那些破碎的光斑就会重新聚合成通往昨日黄昏的棱镜隧道。</li>
+<li>童年藏匿在耳道深处的蝉鸣，会在中年某个无风的午后突然羽化，带着发黄的振翅声撞破耳膜，在头骨穹顶下掀起绿色的声浪海啸。</li>
+<li>嫉妒是种具有磁性的情绪，它会将心脏改造成指南针，永远指向他人幸福所在的纬度，而自己的血液则逐渐变成黑色的铁砂。</li>
+</ul>
+<p>说来也巧，在我还喜欢写点东西的年月里，也写出过“咳嗽咳出禽类”的意象，不过我好像写的是金刚鹦鹉，大红大绿，神秘感自然不比夜莺。</p>
+<h2 id="通常只是退却"><a href="#通常只是退却" class="headerlink" title="通常只是退却"></a>通常只是退却</h2><p><img src="/2025/01/22/molten-writing/mw-4.png" alt></p>
+<p>在写作机器面前，人还能做些什么呢？就这篇文章而言，我只是做了些装模作样的拣选。</p>
+<p>但“拣选”足以构成艺术表达吗？</p>
+<p>约翰·伯格说，“一张照片是它所记录的事件的一条讯息，即：<strong>我已做出决定，我之所见是值得被记录下来的</strong>。”所以，摄影艺术就是在“时空连续体”中“拣选”出一个值得记录的瞬间。</p>
+<p>但问题在于，对 AI 作品的拣选更像是二次筛选，并没有构建出新的表达，原创性都比不过查重百分百的“拼贴诗”。AI 版风格练习更像是提供一种滤镜、一种写作方法，而写作的对象则应该是你所关注、所瞄准的事物。</p>
+<p>以史为鉴，技术能做的事越多，艺术就会变得越“纯”。不过，艺术范式的转移，也许只是一种退却，艺术家们退到没有机器打扰的区域，重新评估自己的价值。AI 似乎暗示了一种退无可退的可能性，但它并无恶意，它所做的只是考验你的“坚定”。</p>
+<p>《裂谷》里有句话，把写作比喻为“心灵的科研”。比喻不能代替说理，却总能带来意料之外的启发，我预感像《裂谷》作者这样“不阅读只写作”的人会变多，而大量的文字资料（包括聊天记录）将揭示更为完整的“心灵结构”。</p>
+<p>那是一段时间以前了，我将几篇博文和少量日记（把我的一天翻译成几行字）喂给 AI，让它推断我的 MBTI，结果和做一两百道题无异。虽然浅尝辄止，也是“心灵科研”的初步尝试。</p>
+<p>真正的写作，是需要在心灵的场域中构建真正的对话的，而一旦找到这种“对话”，我们或许可以得鱼忘筌。</p>
+<p>但好像还不到这一步，<strong>今天的 AI 只是在质疑“金句”的价值，并通过让“金句”自我繁衍来唤起这种质疑</strong>。</p>
+<p align="right">25/01/22</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/#category-%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0">计算笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/#tag-%E5%B0%9D%E8%AF%95%E9%9B%86">尝试集</a><a href="/tags/#tag-AI">AI</a><a href="/tags/#tag-%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95">写作方法</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="molten-writing"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2025/01/22/molten-writing/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%88%9D%E9%82%A3%E4%B8%80%E9%9E%AD%E7%9A%84%E6%83%AF%E6%80%A7"><span class="toc-text">最初那一鞭的惯性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A2%A6%E9%87%8C%E8%A7%81%E5%88%B0%E7%9A%84%E6%B3%A2%E6%B5%AA%E5%85%B6%E5%AE%9E%E6%98%AF%E4%BB%96%E8%87%AA%E5%B7%B1%E7%9A%84%E8%84%9A%E6%AD%A5"><span class="toc-text">梦里见到的波浪其实是他自己的脚步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E5%B8%B8%E5%8F%AA%E6%98%AF%E9%80%80%E5%8D%B4"><span class="toc-text">通常只是退却</span></a></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+  </div>
+</div>
+</body>
+</html>

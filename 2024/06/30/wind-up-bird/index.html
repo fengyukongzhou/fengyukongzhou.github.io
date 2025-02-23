@@ -1,0 +1,766 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>残酷剧场 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="村上春树的短篇小说《拧发条鸟与星期二的女郎们》在卡佛式的氛围中结束。读者很难联想到，这个短篇将几乎原封不动地成为 70 万字（原文字数）长篇小说《奇鸟行状录》（赖明珠译为“发条鸟年代记”）的第一章。持久的铃声过后，是一场有关暴力的大梦。">
+  
+
+  
+  
+  <meta name="keywords" content="读小说,村上春树">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="残酷剧场"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', initTheme);
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>残酷剧场</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/06/30/wind-up-bird/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-06-29T16:00:00.000Z">
+          2024-06-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2024/06/30/wind-up-bird/wub-2.png" alt></p>
+<p>村上春树的短篇小说《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35650427/">拧发条鸟与星期二的女郎们</a>》在卡佛式的氛围中结束。读者很难联想到，这个短篇将几乎原封不动地成为 70 万字（<em>原文字数</em>）长篇小说《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/30145280/">奇鸟行状录</a>》（<em>赖明珠译为“发条鸟年代记”</em>）的第一章。持久的铃声过后，是一场有关暴力的大梦。  </p>
+<span id="more"></span>  
+<blockquote>
+<p>啤酒喝到一半，电话铃响了。  </p>
+<p>“接呀！”我对着客厅的黑暗吼道。  </p>
+<p>“不嘛，你接嘛！”妻说。  </p>
+<p>“懒得动。”我说。  </p>
+<p>没人接，电话铃响个不停。铃声迟滞地搅拌着黑暗中飘浮的尘埃。此间我和妻都一言未发。我喝啤酒，妻无声地啜泣。我数至二十遍，便不再数了，任铃声响去。总不能永远数这玩艺儿。  </p>
+</blockquote>
+<h2 id="感觉剥夺实验"><a href="#感觉剥夺实验" class="headerlink" title="感觉剥夺实验"></a>感觉剥夺实验</h2><p>“井”是这本小说中的重要意象。首先，二战期间间宫中尉在蒙古兵的强迫下跳井，经历过井下持续十几秒钟的阳光洗礼之后，他仿佛被巨大的力量摧毁了，“想不成什么更做不成什么，连自身的存在都感觉不出，仿佛成了干瘪的残骸或一个空壳。”在听过间宫的故事后，主人公冈田亨下到邻居凶宅的一口枯井中，静静思考妻子的失踪，并在其中通往一个类似梦境的世界。  </p>
+<p>小说中的“井”既是连接历史与现实，又是现实与梦境的通道，是村上春树这部小说的引擎，从现代的、无聊的世界，引向了历史中真实的暴力和梦境中虚幻的暴力。对于后者，相当典型的一例是，主人公在梦境世界中闭上眼睛把不知是谁打到断气之后，他的妻子又大声喊叫，“要是你想把我领回，就千万别看！”主人公在呕吐过后，身体回到了现实的井中，而此时枯井重新冒出水来。  </p>
+<p>村上这部小说的意象选取十分成功，我想，许多读者都会对井中的冥想充满向往。前面讲到，“井”是小说的引擎，务实一点说：感觉剥夺是幻觉之门。  </p>
+<p>你可以足不下井，在家完成类似的实验：在光线均匀的房间里，将一颗乒乓球刨成两半罩在眼睛上，并用胶带固定，确保看不见外在事物，只有光感。与此同时，戴耳机收听白噪音，并放松身体，静待花开。这种通过剥夺视听以产生幻觉的实验，就是所谓的“甘兹菲尔德实验”（<em>The ganzfeld experiment</em>）。这个过程不由得让人联想到“小黑屋”式的体罚，或是膜拜团体的精神改造——让你听到“内心的声音”，甚至就是最朴素的做梦。正如《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26970561/">走神的艺术与科学</a>》中所写：“梦本来就是通过感觉剥夺锻造出来的幻觉，虽然它们与夜间眼球运动之间的关系表明它们是自然事件。”</p>
+<p>在《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/6126817/">诺门罕钢铁墓场</a>》这篇游记中，村上记录下他所经历的一场幻象。深夜，村上在蒙古国宾馆的床上醒来，感受到强烈的地震，当他挪到房门前，按下电灯开关后，地震停止了，原来“摇晃的不是房间，不是世界，而是我本身”，这是对战争的恐惧所催生的幻觉。说到这里，我同样经历过夜间地震，床像是驶上铁轨，同车厢连接处一样横向摆动，旁边的书架几欲倾倒，怕是要拍在我身上，于是我十分愤慨，大喝：“非要这时候搬家吗！”</p>
+<p>我上面发挥的这一段，地震是真的，大喝一声是假的，村上的游记或许也是类似手法。</p>
+<p>除此之外，井底的视角本身带来了更多异象，比如间宫在井底的所见：  </p>
+<blockquote>
+<p>蒙古兵一起向井底的我撒尿。一直向上望去，他们站在圆形井口轮流撒尿的身影犹如剪影般小小地浮现出来，在我眼里恍若虚拟物，简直与吸毒产生的幻觉无异。然而那是现实。我位于井底，他们朝我洒射实实在在的尿液。全部洒完之后，一个用手电筒往我身上照。有笑声传来。旋即他们从井口消失了。他们走后，一切都陷入深深的沉默。  </p>
+</blockquote>
+<p>比如听到的井口风声：</p>
+<blockquote>
+<p>时而有风声传来。风掠过地面时在井口发出奇妙的声音，仿佛遥远世界里女人的啜泣。那个遥远世界与这个世界之间有一细孔相通相连，因而啜泣声得以传来这里。但那声音的传来转瞬即逝，过后我还是独自留在深深的沉默与深深的黑暗中。  </p>
+</blockquote>
+<p>比如洒入井中的阳光：</p>
+<blockquote>
+<p>我一动不动地待在井底，此外别无他能，甚至思考什么都无从谈起。我那时的绝望和孤独便是那样地深重。我什么也不做，什么也不想，一味静坐不动。但我在无意识之中期待着那道光束，那道一天之中仅有一瞬间笔直泻入井底、亮得眼前发黑的光束。从物理上说，阳光成直角射于地表是在太阳位于最高空的时候，因此应是正午时分。我一心盼望光的到来，因为此外无任何可期盼的东西。</p>
+<p>那以后又过了很多时间。不觉之间我昏昏沉沉睡了过去。当我意识到什么猛然睁眼时，光已在那里了。我知道自己再次笼罩在压倒一切的光芒中。我几乎下意识地大大张开双手迎接这片阳光。它比第一次强烈得多，也比第一次持续时间长，至少感觉上是这样。阳光中我泪水涟涟而下，仿佛全身液体都化为泪水从眼中倾流一空，甚至觉得身体本身也融为液体就势流干流尽。在这辉煌的祝福中我想死又何妨。实际上我也想死去。此时此刻，似乎这里的一切都浑然融为一体，无可抗拒的一体感。是的，人生真正的意义就在这仅仅持续十几秒的光照中。我应该在此就这样一死了之。  </p>
+</blockquote>
+<p>这一段心理与细节描写十分精彩，令人如入幻境，不禁忽略掉外蒙的纬度。此时的井，像是地球体内的一根刺，而井里的人已被遗忘在历史的缝隙之中。井中着实凶险，回想一下，本书诸多困境都发生在井下，而困境的破局全靠功能人（本田伍长、加纳克里他的幻影、肉桂）和超自然事件。</p>
+<h2 id="陀思妥耶夫斯基式的睡眠"><a href="#陀思妥耶夫斯基式的睡眠" class="headerlink" title="陀思妥耶夫斯基式的睡眠"></a>陀思妥耶夫斯基式的睡眠</h2><p>这不是专有名词，而是作家贾行家在播客“六进制”中提到的，当期标题为《让我夜不能寐的六个故事》。类似于目击者引发的连锁反应，故事中的凶手杀死了一楼和七楼两家的住户，或许是个冷知识，“杀人是相当累的”，在凶手的一刀一刀之下，他自己的生命力也在不断流失，等到杀死七楼的老太太之后，他甚至在楼梯间睡了一觉。这一觉就是所谓“陀思妥耶夫斯基式的睡眠”。</p>
+<p>由于这个播客是会员才能听，我只是试听过两次，上面的复述大概与原文出入很大，原播客是在讲育儿经验也说不定，请读者留意。话说回来，陀氏能量巨大，大到能把尼采变成小说中的一个人物，影响了众多犯罪题材的文艺作品，估计也会直接或间接影响许多真的罪犯。</p>
+<p>言归正传，我想谈的反倒是《奇鸟行状录》中最为“微不足道”的邪恶，或许也是最让人“夜不能寐”的邪恶——</p>
+<p>笠原 May 这个女孩从短篇里出场时就是跛行，还戴着用来遮挡伤疤的墨镜，“弱小的肩头如机器的摇柄一般朝右侧有规则地摇晃”，据她所说，是“坐在摩托车后头甩下去摔的”。她没有说谎。等到村上的梦做到第二部，这里的摩托车事故才终于随着对死亡的讨论徐徐展开：</p>
+<blockquote>
+<p>她衔支烟，一只手灵巧地擦燃火柴，戴上太阳镜。“你不怎么考虑死？”</p>
+<p>“考虑当然也是考虑，但不经常。有时候。和世上一般人一样。”</p>
+<p>“拧发条鸟，”笠原 May 说，“我是这么想的，人这东西肯定一生下来就在自己本体中心有着各自不同的东西，而那一个个不同的东西像能源一样从内里驱动每一个人，当然我也不例外。但我时常对自己不知所措。我很想把那东西在我体内随意一胀一缩摇撼自己时的感觉告诉别人，但没人理解。当然也有我表达方式不够好的问题。总之谁都不肯认真听我说下去，表面上在听，其实什么也没听进去。所以我时常烦躁得不行，也才胡来。”</p>
+<p>“胡来？”</p>
+<p>“如把自己闷在井底，骑摩托时两手从后面捂住开车男孩的眼睛。”说着，她把手按在眼旁的伤疤上。</p>
+<p>“摩托车事故就是那时发生的？”我问。</p>
+<p>笠原 May 露出诧异的神情看着我，问话好像没听到。但我口中说出的理应一字不漏传到她的耳里。她戴着深色太阳镜，看不清她眼神，但其整个面部倏然布满一种麻木的阴影，好比油洒在静静的水面倏然荡漾开来。</p>
+<p>“那男孩怎么样了？”我问。</p>
+<p>笠原 May 兀自叼着烟看我。准确说来，是看我的痣。“拧发条鸟，我非得回答你的问话不成？”</p>
+</blockquote>
+<p>接着，她说：</p>
+<blockquote>
+<p>“我害死了那个男孩。当然不是有意的。我只想逼到最后一步。以前那种事我们也做了好些次，做游戏似的。骑摩托时我从背后捂他的眼睛或搔痒似的捅一下肋部……但那以前什么也没发生，偏偏那时候……”</p>
+<p>笠原 May 抬头看我。</p>
+<p>“嗯，拧发条鸟，我没那么感到自己被玷污什么的。我只是总想接近那片烂泥，想把自己体内那片烂泥灵巧地引出来消灭干净。而为引它出来，我确实需要逼到最后一步，不那样就不可能把那东西很好地诳出来，必须给它好吃的诱饵。”说到这里，她缓缓摇下头。“我想我没被玷污，但也没有获救。眼下谁都救不了我。嗯，拧发条鸟，在我眼里世界整个是个空壳。我周围一切一切都像是骗子，不是骗子的只有我体内那片烂泥。”</p>
+</blockquote>
+<p>这是最小剂量的“邪恶”酿成的灾祸，却能让人反观自己的种种邪念。或许能够容纳这一切的只有梦了，“拥有黑暗的心的人，只做黑暗的梦。更黑暗的心连梦都不做。”（《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/36531288/">听风的歌</a>》）</p>
+<h2 id="“他们将像剥桃子皮一样剥人皮”"><a href="#“他们将像剥桃子皮一样剥人皮”" class="headerlink" title="“他们将像剥桃子皮一样剥人皮”"></a>“他们将像剥桃子皮一样剥人皮”</h2><p>在我看来，《奇鸟行状录》之于村上作品群的独特之处，就是从“间宫中尉的长话”这一节开始的。历史中的残酷事件，在小说中营造出比庸常的现实还要真实的质地，与“苦咖啡式”的、充满疏离感的主人公的生活产生了互动。这段“长话”中最惊人的，正是蒙古兵剥皮的描写。剥皮之前，俄国军官这样说：</p>
+<blockquote>
+<p>“看好了么？好好看看这刀。这是剥皮专用刀，做得好极了，刀刃如剃刀一般薄一般锋利。他们的制作技术极其高超，毕竟剥动物皮剥了数千年之久。<strong>他们将像剥桃子皮一样剥人皮</strong>，熟练，漂亮，完美无缺。我讲得太快吗？”</p>
+</blockquote>
+<p>军官前面的话是在恐吓藏有情报的山本，接下来的场面则一览无余地呈现给观看剥皮的间宫、听间宫讲述的冈田亨和读这本小说的读者……我无意引述血腥的场面，只想记录另一则令人不安的细节：</p>
+<blockquote>
+<p>熊一般的外蒙军官最后把利利索索剥下的山本胴体的皮整张打开，那上面甚至连着乳头，那般惨不忍睹的东西那以前那以后我都没见过。<strong>一个人拿起来像晾床单一样晾在一边</strong>。</p>
+</blockquote>
+<p>类似的细节见于《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26417287/">聊斋志异·画皮</a>》：狞鬼将人皮铺在床上，用彩笔绘制，“已而掷笔，举皮，<strong>如振衣状</strong>，披于身”；等到道士杀鬼后卷那张人皮，“<strong>如卷画轴声</strong>”。作家贾行家评论道：“对敏感的读者来说，以后每次见到画轴，整个人都会有点儿不好了。细节重现，最能刺激情感记忆。”（《贾行家说&lt;聊斋&gt;》）</p>
+<p>对剥皮的描写，我没有想起《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26905339/">红高粱家族</a>》里日本人命令杀猪匠剥掉砍断他掳走的骡子腿的农民的皮的情节，倒是第一时间联想到莫言的另一本“幻觉现实主义”作品《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26905337/">檀香刑</a>》里著名的凌迟：剥皮的“列锦”对应着五百刀凌迟，说起来还是后者更为恐怖残忍。小说家骆以军评论道，“莫言在此写到了一种行刑者、受刑者、围观者都被裹胁于一种琥珀般、求生不得求死不能、晕迷烂醉，既痛苦又甜蜜，既残虐又狂欢的奇幻催眠状态。这种‘技艺的疯狂痴迷’，有另一部关于传统技艺本身之极限妄念，不惜以人类肉身为其浮屠宝塔阶梯、剥夺、抽离、异化、‘去人类化’的魔鬼工匠技艺之典律，即聚斯金德《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/3815125/">香水</a>》。”（《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/36175324/">无限阅读</a>》）</p>
+<p>刀子剥完中国人的皮，再去剥日本人的皮……此处重点应该不是传统价值观下的因果报应，而是皮对应的族群身份和刀子代表的糊涂战争。行刑之后，没有正义与光荣，剩下的是零散的血肉和恐惧。观众（读者）们如同经历了一场漫长的噩梦，然而那确实是历史。</p>
+<p align="right">24/06/30</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/#category-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/#tag-%E8%AF%BB%E5%B0%8F%E8%AF%B4">读小说</a><a href="/tags/#tag-%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A0%91">村上春树</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="wind-up-bird"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2024/06/30/wind-up-bird/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%9F%E8%A7%89%E5%89%A5%E5%A4%BA%E5%AE%9E%E9%AA%8C"><span class="toc-text">感觉剥夺实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%80%E6%80%9D%E5%A6%A5%E8%80%B6%E5%A4%AB%E6%96%AF%E5%9F%BA%E5%BC%8F%E7%9A%84%E7%9D%A1%E7%9C%A0"><span class="toc-text">陀思妥耶夫斯基式的睡眠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E4%BB%96%E4%BB%AC%E5%B0%86%E5%83%8F%E5%89%A5%E6%A1%83%E5%AD%90%E7%9A%AE%E4%B8%80%E6%A0%B7%E5%89%A5%E4%BA%BA%E7%9A%AE%E2%80%9D"><span class="toc-text">“他们将像剥桃子皮一样剥人皮”</span></a></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+  </div>
+</div>
+</body>
+</html>

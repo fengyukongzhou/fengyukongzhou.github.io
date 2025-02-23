@@ -1,0 +1,747 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vol.001 礼花爆炸之后 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="“礼花爆炸之后，发现有几个亮片永远留在空中，那是平时不会抬头看的星星。”">
+  
+
+  
+  
+  <meta name="keywords" content="AI,现代生活,心理">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Vol.001 礼花爆炸之后"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', initTheme);
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>Vol.001 礼花爆炸之后</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/01/04/zhiwen-weekly-vol001/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-01-03T16:00:00.000Z">
+          2025-01-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-1.png" alt></p>
+<p>“礼花爆炸之后，发现有几个亮片永远留在空中，那是平时不会抬头看的星星。”</p>
+<span id="more"></span>  
+<h2 id="👋-发刊词"><a href="#👋-发刊词" class="headerlink" title="👋 发刊词"></a>👋 发刊词</h2><p>网络上遍布的图文内容，让人觉得杂志的“辫子剪了但神还留着”（替你验证过了，不是“鞭子剪了”）。但我挤出“咫闻”二字作为刊名，你就能感觉出来，对于这个“神”，我至少是个“不可知论者”。</p>
+<p>小时候抓阄我就抓的杂志，虽然不喜欢摸这种“油腻”触感的纸张。时尚杂志是那么厚的一本广告，里面的面孔又那么陌生，有时我会想，他们和今天 AI 梦见的那些美丽而哀伤的面孔有什么区别呢？</p>
+<p>除了时尚杂志这种夸张的外骨骼和第二性征之外，许多杂志是文字堆出来的，是喜欢讲笑话的。在火车这种“方外之地”，孩童时期的我会像看电视一样，连续刷完三四本杂志。后来学会上网了，才发现杂志里“E 站”之类的词，无非是注明这里面汇总了一些网络段子。</p>
+<p>我后来上微博（实际就是个小学生），化身网络爬虫，摘录段子无数，定期用 PPT 总结起来，比我开组会做 PPT 要勤快不少。无他，只是因为我小时候认为 PPT 是最像杂志的媒介了。</p>
+<p>这种摘录与我今天选择发布的内容没有本质区别，同样是希望在网上浏览过的碎片能够在局部浮现出一些模式，成为巨幅拼图的一角。不过，哪怕只是产生一种“得到”的错觉也好。</p>
+<p>形式不固定，更新时间也不固定，叫“周刊”只是因为比较好听。作为实验项目，趁着年还新，写起来再说。</p>
+<h2 id="🐎-跑马场"><a href="#🐎-跑马场" class="headerlink" title="🐎 跑马场"></a>🐎 跑马场</h2><blockquote>
+<p>断章而取义者也，很多内容甚至不是摘录而是转述，请谨慎阅读。</p>
+</blockquote>
+<h3 id="📹-片羽之间的艺术"><a href="#📹-片羽之间的艺术" class="headerlink" title="📹 片羽之间的艺术"></a>📹 片羽之间的艺术</h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-5.png" alt="图片选自老安摄影集《稍息》"></p>
+<p>中国的绝句讲究在极其有限的篇幅中塑造一个完整的小宇宙，诗中需有由近而远或由远而近的变化，产生包纳的效果。<strong>日本俳句的内在精神却是高度片段性的，重点在于如何巧妙、有意义地截取一个角落、一个断片，其中充满暗示，让我们拉着这暗示线索去向外想象。</strong></p>
+<p>……川端康成提示了，也示范了另一种看待人的方式。他用文学之笔记录了人与人之间更真实的认识方式，在不同时空中一个片段一个片段地接触互动，留下一个片段一个片段的认知，而且每一个片段都包裹混同了那个特定时空的因素。<strong>他不刻意将这些片段连贯起来，甚至是刻意地彰显其片段性质</strong>，成为他文学笔法的重要特色。他的叙述时态很少是线性往前一贯的，而是反复迂曲、来来去去灵活穿梭。</p>
+<p align="right">——《银河坠入身体》杨照</p>
+
+<p><strong>如果每一个存在之物都被连续不断地拍摄，那么每一张照片也将失去意义</strong>。一张照片是它所记录的事件的一条讯息，即：<strong>我已做出决定，我之所见是值得被记录下来的</strong>（I have decided that seeing this is worth recording.）。</p>
+<p>不考虑“怪里怪气的”（约翰·伯格原话）影棚作品，摄影不像绘画，没有自己的语言，只有事件本身的语言。摄影也不像电影，不能操控时间，只能做出孤立哪一个瞬间的决断。但这种制约给了照片独一无二的力量：<strong>已呈现的会激发出未被呈现的</strong>。故可以如此解码前面的“讯息”：我所相信的这何以值得被观看，要通过所有我不愿去展示的来判断，因为它们也包含在其中。</p>
+<p align="right">——《理解一张照片》约翰·伯格</p>
+
+<h3 id="📛-压抑制造"><a href="#📛-压抑制造" class="headerlink" title="📛 压抑制造"></a>📛 压抑制造</h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-6.png" alt></p>
+<p>压抑不是树上长出来的，你知道——那需要耐心，需要专注力，需要有献身和自我牺牲精神的父母，和勤奋努力、专心致志的小孩，才能在短短几年的时间创造出一个真正拘谨压抑的人。</p>
+<p align="right">——《波特诺伊的怨诉》菲利普·罗斯</p>
+
+<p><strong>常年教育，使得有些读书人看起来都不如动物灵巧，根本不像是经过百万年进化出来的</strong>。现代学校使人在学校的规训下变得脸色苍白，生命活力大为降低，逐渐丧失了凭借直觉使用身体的能力。<strong>艾瑞斯·杨（Iris Young）曾分析过男孩和女孩的活动的差别，男孩扔东西全身使劲儿，女孩就是手使劲儿，文化不允许后者自然地、投入地使用身体</strong>。现代大校对男女一视同仁，无论男女，动胳膊动腿都得深思熟虑，把一切使用身体的珍贵直觉都改造成经过审查的礼仪活动，一切都事关得体与否。</p>
+<p>苏格拉底曾经说过，“未经审视的人生是不值一过的”。我对这句话的感受是消极的，觉得处处审视的人生是令人难过的。</p>
+<p align="right">——《日常的深处》王小伟</p>
+
+<h3 id="🧘‍♂️-“我们这一代人最伟大的发明”"><a href="#🧘‍♂️-“我们这一代人最伟大的发明”" class="headerlink" title="🧘‍♂️ “我们这一代人最伟大的发明”"></a>🧘‍♂️ “我们这一代人最伟大的发明”</h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-7.png" alt="Stik 在伦敦东杜威奇 Blackwater Court 创作的街头艺术作品"></p>
+<p><strong>The greatest discovery of my generation is that a human being can alter his life by altering his attitudes of mind.</strong><br>人可以通过改变心态来改变生活，这是我们这一代人最伟大的发明。——威廉·詹姆斯</p>
+<p>积极的情绪和消极的情绪，都可以提升或者降低创造力。<strong>关键不在于情绪的类型，而是在于情绪的强度</strong>。积极情绪的主要作用是提高认知的开放度和灵活性，消极情绪的主要作用是激发人们的专注力和深入的探究欲。</p>
+<p>从理想状态来说，产生创造力最有效的方式，不是单单有一种情绪，而是<strong>让不同的情绪同时存在于我们的身体，而且我们还要能驾驭住它们，不能让它们挤占认知带宽</strong>。这是对人的自主性的考验。</p>
+<p align="right">——《情绪就是你的创造力》李方圆解读</p>
+
+<h2 id="📰-报刊亭"><a href="#📰-报刊亭" class="headerlink" title="📰 报刊亭"></a>📰 报刊亭</h2><blockquote>
+<p>选择几篇时文，速朽不是问题。</p>
+</blockquote>
+<h3 id="1️⃣-不要轻易地走进-AI-原生"><a href="#1️⃣-不要轻易地走进-AI-原生" class="headerlink" title="1️⃣ 不要轻易地走进 AI 原生"></a>1️⃣ <a target="_blank" rel="noopener" href="https://1q43.blog/post/10736/">不要轻易地走进 AI 原生</a></h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-2.png" alt></p>
+<p>AI 技术在应用中不应被视为独立的产品，而应作为现有成熟产品中的一个功能或补充。<strong>正如 WPS 的成功在于其界面、功能与文件协议与 Microsoft Office 完全一致</strong>，将 AI 融入到成熟的产品中，作为提升效率和用户体验的工具，才是更合理的选择。</p>
+<h3 id="2️⃣-共振式"><a href="#2️⃣-共振式" class="headerlink" title="2️⃣ 共振式"></a>2️⃣ <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkxMzc1NzM1Mw==&amp;mid=2247484324&amp;idx=1&amp;sn=f7c55f5d8593e51759076c9403830272&amp;scene=21#wechat_redirect">共振式</a></h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-3.png" alt></p>
+<p>“共振式”Prompt 写法通过在作者脑海中构建画面、氛围和味道，为 LLM 提供丰富的创作情境，使其在设定的场域空间中自由发挥，产生独特且多样化的创意成果，可谓 <strong>AI 版创意写作</strong>。</p>
+<h3 id="3️⃣-我的-2024-的你"><a href="#3️⃣-我的-2024-的你" class="headerlink" title="3️⃣ 我的 2024 的你"></a>3️⃣ <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/V-WCJfBUkW58GPiLyWqPyg">我的 2024 的你</a></h3><p><img src="/2025/01/04/zhiwen-weekly-vol001/zw001-4.png" alt></p>
+<p>一年过去，值得找时间翻一翻相册。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/#category-%E5%92%AB%E9%97%BB%E5%91%A8%E5%88%8A">咫闻周刊</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/#tag-AI">AI</a><a href="/tags/#tag-%E7%8E%B0%E4%BB%A3%E7%94%9F%E6%B4%BB">现代生活</a><a href="/tags/#tag-%E5%BF%83%E7%90%86">心理</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="zhiwen-weekly-vol001"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2025/01/04/zhiwen-weekly-vol001/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%91%8B-%E5%8F%91%E5%88%8A%E8%AF%8D"><span class="toc-text">👋 发刊词</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%8E-%E8%B7%91%E9%A9%AC%E5%9C%BA"><span class="toc-text">🐎 跑马场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%B9-%E7%89%87%E7%BE%BD%E4%B9%8B%E9%97%B4%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="toc-text">📹 片羽之间的艺术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9B-%E5%8E%8B%E6%8A%91%E5%88%B6%E9%80%A0"><span class="toc-text">📛 压抑制造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%98%E2%80%8D%E2%99%82%EF%B8%8F-%E2%80%9C%E6%88%91%E4%BB%AC%E8%BF%99%E4%B8%80%E4%BB%A3%E4%BA%BA%E6%9C%80%E4%BC%9F%E5%A4%A7%E7%9A%84%E5%8F%91%E6%98%8E%E2%80%9D"><span class="toc-text">🧘‍♂️ “我们这一代人最伟大的发明”</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%B0-%E6%8A%A5%E5%88%8A%E4%BA%AD"><span class="toc-text">📰 报刊亭</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E4%B8%8D%E8%A6%81%E8%BD%BB%E6%98%93%E5%9C%B0%E8%B5%B0%E8%BF%9B-AI-%E5%8E%9F%E7%94%9F"><span class="toc-text">1️⃣ 不要轻易地走进 AI 原生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%85%B1%E6%8C%AF%E5%BC%8F"><span class="toc-text">2️⃣ 共振式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E6%88%91%E7%9A%84-2024-%E7%9A%84%E4%BD%A0"><span class="toc-text">3️⃣ 我的 2024 的你</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+  </div>
+</div>
+</body>
+</html>

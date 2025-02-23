@@ -1,0 +1,743 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>还翻自己的相册吗，还读别人的游记吗？ | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="这是一本关于游记的随笔集。
+在作者看来，书中收录的文章不是书评，而是导览，是以游记的方式介绍游记。书名“漫游的辩证法”有些难懂，其实不是指用户和运营商之间的算计。书中第一部分的题目倒是比较直白：行走与沉思，可以理解为旅行中身体与心灵的互动。
+作者在自序中坦白，自己懒于旅游，却热衷“神游”。相比发呆做梦，阅读“不仅指明了有趣的目的地，还为我指派了高明的导游作陪”。读到这里，我赶紧把这句话抄下来，即便没有人可分享，我也要把它写进书评里，反正这篇书评是一定要写的。">
+  
+
+  
+  
+  <meta name="keywords" content="现代生活,幸福观">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="还翻自己的相册吗，还读别人的游记吗？"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', initTheme);
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>还翻自己的相册吗，还读别人的游记吗？</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/11/05/rediscover-travel/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-11-04T16:00:00.000Z">
+          2024-11-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2024/11/05/rediscover-travel/rt-0.png" alt></p>
+<p>这是一本关于游记的随笔集。</p>
+<p>在作者看来，书中收录的文章不是书评，而是导览，是以游记的方式介绍游记。书名“漫游的辩证法”有些难懂，其实不是指用户和运营商之间的算计。书中第一部分的题目倒是比较直白：行走与沉思，可以理解为旅行中身体与心灵的互动。</p>
+<p>作者在自序中坦白，自己懒于旅游，却热衷“神游”。相比发呆做梦，阅读“<strong>不仅指明了有趣的目的地，还为我指派了高明的导游作陪</strong>”。读到这里，我赶紧把这句话抄下来，即便没有人可分享，我也要把它写进书评里，反正这篇书评是一定要写的。</p>
+<span id="more"></span>  
+<h2 id="文字涉足视线之外"><a href="#文字涉足视线之外" class="headerlink" title="文字涉足视线之外"></a>文字涉足视线之外</h2><p>在看作者谈大作家的游记之前，我会好奇还有谁在读（写）游记，为什么要读（写）游记。</p>
+<p>现在，网上流传较广的旅行记录以视频形式为主，可能是为了让人看完就忘，剪辑节奏越来越快，拍摄方式也向综艺看齐，为了更好的视觉效果，还要用上一些特种设备。小红书的图文内容就更为平民化：比起欣赏风景，旅客更愿意欣赏风景中的自己，那博主就会指点你去哪里拍照；保罗·索鲁在八十年代的观察依旧适用，“中国人的旅游地点如果没有餐厅就是一种残缺”，于是，博主还要领你到哪里去吃。</p>
+<p>游记首先排除了这种导游功能，书中的见闻，你很难亲自打卡，书里的食物，你也不见得能吃到，游记只是时空连续体中的切片。再者说，相比精准的摄影和录像，模糊的文字还降低了游记的“传递效率”，景物描写再细致，读者脑海中构建的场景也远非现实，而是另一种想象。</p>
+<p>如果旅行只为喂饱眼睛和肠胃，我们就犯不上读（写）游记。</p>
+<p>书里引用吉卜林的观点，出行方式的进步，让“人的精神深处不再只能容纳视线所及的可见范围”，世界的阴影区域在减少。但获取信息的渠道增多以后，我却感觉“精神的阴影区域”在扩大。</p>
+<p>学着别人拍照的时候，眼前的屏幕好像隔开了我和真实的自然，而我沉迷的记录，只是把大量图像存储在文件夹里，也许再也不会回看。之后，当我刷到别人拍的更清晰、更美的画面，我会善良地点亮拇指或者红心，然后忘掉一切。</p>
+<p>进入这种“稀缺循环”之后，旅行好像不是在填补自己，而是另一种消耗。对此，或许有必要看看这些在心灵中钻井打出原油的大作家们的书写，借他们眼睛看看世界，在心中构建起独立的时空。</p>
+<p>比如，书中提到爱德华·托马斯的一句话，“<strong>旅游的目的不是追求知识和智慧，而是追求永不占有</strong>。”</p>
+<p>再比如，“旅行者正如同拾贝人，他们情愿放弃观看世界的整体，转而去收集那些美妙的碎片”，而旅行中与美的偶遇，则是“那些外在于人的自然美景，与人的心灵中神秘的一角重合在一起”的那一刻。</p>
+<p>只有书写，能让那一刻延展开。</p>
+<p><img src="/2024/11/05/rediscover-travel/rt-1.png" alt></p>
+<h2 id="千篇一律的首都"><a href="#千篇一律的首都" class="headerlink" title="千篇一律的首都"></a>千篇一律的首都</h2><p>书里引用汤因比的比喻，各个国家的首都彼此相像得“就像豆荚中的两颗豆子”，已经失去了特点。小说《看不见的城市》背景设定为马可·波罗为忽必烈讲述其游历，如果设定在现代，估计只能写一篇“看不出区别的城市”。</p>
+<p>如果把城市比作一本书，那这本书不是长篇小说，也不是诗集，而是辞典。或者是像佩雷克《人生拼图版》这样结构森严的小说，以强迫症似的索引方式（国际象棋马步）遍历出一幢公寓楼里的人间戏剧。辞典还让我联想到医院大楼，病人按照病症各就其位，就像汉字按照部首或者发音在书页间排队。</p>
+<p><img src="/2024/11/05/rediscover-travel/rt-2.png" alt></p>
+<p>其实这本散文集也给我这样的感觉，全书的文章以相近的篇幅与格式示人：正文前有作家语录，其后第一节作为引子，后面三节各有小标题。不知是不是巧合，我在写读后感或读书笔记时，也会选择这样的形式，有种在雁群中飞翔的省力感。但作为读者读完这样一本“匀速”的书，可能会觉得并不尽兴，只是参加了一场作家们的限时见面会。当然，也可能是我读得太快，没让糖分在时间中完全融化，没有领略到藏于细微的妙处。</p>
+<p>回到城市，我想到王小伟在《日常的深处》里提到的：乡间小径延续了田埂的逻辑，将确权标记变成道路，这是人际网络的一种物化，体现出乡村的生存方式。相比之下，现代的城市和高速道路是纯粹工具性的，不反映人与人之间深层次的联系，如果没有运输的需要，就会显得单调空洞。他继续写道，“城市道路不重视行人，归根结底是认为人的双脚不如车轮高级。柏油公路看不起人，背后的逻辑是人看不上自己。”</p>
+<p>这本书里写的斯坦贝克，提供了一份与之类似的参考答案。当他发现自己笔下的美国，是记忆中或者书报里的美国，“<strong>我一直都在写些其实我并不了解的东西，我觉得这对一个作家来说，简直就是罪恶</strong>。”他决定在旅途中与真实的人接触，体会到每一块土地自身的个性。作者对此感慨道，“尽管现代社会一直想将之完全模式化为同一种面貌，但这一企图始终都无法真正得逞。”</p>
+<p>不仅要接触真实的人，还要接触真实的自然。书里说，对环境肆无忌惮的破坏的背后，是对土地依恋的缺失，这“并非世界遗弃了我们，而是我们自己流放了自己”。类似的观点还有，“人类与自然并非二元对立的关系，而人之所以在非人造的自然环境中感到困难重重，归根结底是由于对自身的遗忘。”</p>
+<p>书中的作家们有一种让我陌生的“神圣感”，或许是时代背景下独特的振动频率，或许由于他们以写作为志业，或许受到了自然的感化。他们对真实世界的探索程度是让我惭愧的，我不具备说出“说到底我们不就是欠上帝一条命吗”的胆量。</p>
+<p>书里引用了约翰·缪尔的观点，可以用来安慰像我一样胆怯的人：“<strong>即使再短暂的生命也从未割断过与永恒的联系。只要我们尝试亲近并且融入那些比我们更为恒久的存在，就可能恢复这种联系</strong>。”</p>
+<h2 id="七万匹马和一些螺丝"><a href="#七万匹马和一些螺丝" class="headerlink" title="七万匹马和一些螺丝"></a>七万匹马和一些螺丝</h2><p>本书的第一篇讲的是火车，宣告旅程的正式开始。</p>
+<p>在书中，火车的同龄人——狄更斯在车厢里观察社会。阿加莎·克里斯蒂或许也是因为火车的公共性与封闭性的平衡，把它变成了谋杀发生的场所。谈不上社会观察，总结我有限的乘车经历，只觉得火车明显更安静了，小时候还会眼睁睁看着两个人从发生口角到抄起不锈钢餐盘（还是垃圾盘）互殴，现在安静的基调让孩子尖细的声音都变得难以忍受。</p>
+<p>在我小时候，旅游就意味着坐火车。一家人会在车站附近买好杂志，我会在车上读完里面每一块文章，刻苦地享受这段真正放松的时光。</p>
+<p>皮格利亚说，长篇小说的流行与铁路交通的发展同步，很多故事以火车旅行为背景，“人们喜欢在火车上阅读关于火车的故事。”转身回到现代，火车或者飞机、地铁也仍然是适合读书的场域，当你手中只有一本书（而手机信号微弱）的时候，你会更专注于此。</p>
+<p>书里这样写这个微妙的环境，“<strong>火车旅行表征了一种既在世界之内，又在世界之外的临在状态</strong>。”到现在，那些旅游目的地已经从记忆中滤除了，我却清楚记得自己如何静静观察侧窗里悬浮在夜间灯火中的面孔，如何看电线杆一拳拳捶打束缚自己的电线。</p>
+<p>在以后漫长的阅读旅程中，我在那个虚构的文字世界里，重新遇见了这些明明难以诉诸文字的细节，熟悉又陌生，只能惊叹作家的“造型能力”。</p>
+<p>前者在川端康成的《雪国》里：“映在车窗玻璃上的姑娘轮廓周围不断地流淌着暮色风景，让人觉得她的脸仿佛也是透明的。然而，想看清楚它是否真的透明时，却又产生了一种错觉——脸庞后面不停流动的暮色风景仿佛是从脸庞表面掠过一样，让人无法分辨清楚。”</p>
+<p>后者在纳博科夫的《说吧，记忆》里：“车厢隔间的门开着，我能够看见过道的窗子，在那里，电线——六根细细的黑色电线——在奋力向上倾斜伸展，升向天空，不顾一根接一根的电线杆给予它们的闪电般的打击；但是就在所有六根电线在可怜巴巴的高昂精神下得意地猛扑、即将升到窗顶的时候，特别凶狠的一击会把它们打落下来，落到最低程度，它们便不得不重新开始。”</p>
+<p><img src="/2024/11/05/rediscover-travel/rt-3.png" alt></p>
+<p>这本书中一些写火车的句子，则展现了作者黎幺的诗人风格。比如，他是这样写车窗的：“它将它的窗口朝向世界，<strong>像一阵长着眼睛的风，扫过所到之处的风景</strong>。”</p>
+<p>再比如这些兼具诗意与理性的句子：“﻿从纯粹感知的角度，火车就像一条密封的河流，你在一条铁轨画出的线段上移动，只能从一点到另一点，将自己完全托付给这种按照规划执行的、不可遏止的运动。”“也许，火车第一次给人提供了一种较为精准的、长距离的以时间兑换空间的方式。……火车，便是人类越过神的授权，自行创造的衡量大地的标尺。”</p>
+<p>透过这把“标尺”，我联想到那些科普相对论的作品，也常常会构想出以光速飞驰的列车，而这列车上总有孩子在走廊奔跑。借着相对论效应，这一车乘客看似获得了在时间轴上偷渡的机会，但他们实际享受着更为昂贵的旅途，只是搭了一天火车，就消费掉一整个黄金周。</p>
+<p>就像是旅行文学作家的书写，他们耗费体力与时间，开采旅途的原矿，再动用全部生命经验，溶解、提纯出其中宝贵的金粒。像我这样活在失重环境濒临肌肉萎缩的懒人，能凭借书本一睹金子的色泽，那都是一种莫大的幸福。</p>
+<p align="right">24/11/04</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/#category-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/#tag-%E7%8E%B0%E4%BB%A3%E7%94%9F%E6%B4%BB">现代生活</a><a href="/tags/#tag-%E5%B9%B8%E7%A6%8F%E8%A7%82">幸福观</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="rediscover-travel"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2024/11/05/rediscover-travel/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E6%B6%89%E8%B6%B3%E8%A7%86%E7%BA%BF%E4%B9%8B%E5%A4%96"><span class="toc-text">文字涉足视线之外</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%83%E7%AF%87%E4%B8%80%E5%BE%8B%E7%9A%84%E9%A6%96%E9%83%BD"><span class="toc-text">千篇一律的首都</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E4%B8%87%E5%8C%B9%E9%A9%AC%E5%92%8C%E4%B8%80%E4%BA%9B%E8%9E%BA%E4%B8%9D"><span class="toc-text">七万匹马和一些螺丝</span></a></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+  </div>
+</div>
+</body>
+</html>

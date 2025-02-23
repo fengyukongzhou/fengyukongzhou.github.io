@@ -1,0 +1,833 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>里兹法求解薄板振动方程 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="我的研究方向是对微机电压电水听器进行建模，查阅相关文献时往往会遇到这个偏微分方程：
+
+D\nabla^{4}w+\rho_{h}w_{tt}=0先不管参数 $D,\rho_{h}$，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？
+面对偏微分方程难解的问题，里兹法的思路大概是：先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。">
+  
+
+  
+  
+  <meta name="keywords" content="Wolfram">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="里兹法求解薄板振动方程"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', initTheme);
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #57A);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>里兹法求解薄板振动方程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/12/04/ritz-method-in-wl/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-12-03T16:00:00.000Z">
+          2024-12-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2024/12/04/ritz-method-in-wl/rmwl.png" alt></p>
+<p>我的研究方向是对微机电压电水听器进行建模，查阅相关文献时往往会遇到这个偏微分方程：</p>
+<script type="math/tex; mode=display">
+D\nabla^{4}w+\rho_{h}w_{tt}=0</script><p>先不管参数 $D,\rho_{h}$，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
+<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
+<span id="more"></span>
+<h2 id="最小作用量，最小物理知识"><a href="#最小作用量，最小物理知识" class="headerlink" title="最小作用量，最小物理知识"></a>最小作用量，最小物理知识</h2><p>于我而言，“<strong>最小作用量</strong>”这套方法是在最小化物理知识的基础上，解决所面临的建模问题。</p>
+<p>首先，还是要计算出薄板的动能和势能表达式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+T&=\frac{\omega^{2}}{2}\rho_{h}a^{2}\iint_{\bar A}\bar
+w^{2}(x,y)\mathrm{d}x\mathrm{d}y\\
+U&=\frac{1}{2}Da^{-2}\iint_{\bar A}(\nabla^{2}\bar
+w)^{2}\mathrm{d}x\mathrm{d}y
+\end{align}</script><p>其中 $T$ 就是众所周知的 $m v^2/2$ 这个形式，$U$ 则需要参考基尔霍夫薄板理论的应力、应变表达式，并代入线弹性材料应变能的公式里。</p>
+<p>补充两点：</p>
+<ol>
+<li><p>积分区域经过尺度变换，所以可以将尺度系数 $a$（不妨理解为“半径”）提到积分之外。</p>
+</li>
+<li><p>为了简化过程，选取了 $U$ 的最简形式，这仅对固定边界条件成立，如果是更一般的情况，应该添加一项：</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+-2(1-\nu)\left[\frac{\partial^{2} w}{\partial x^{2}} \
+\frac{\partial^{2} w}{\partial y^{2}}-\left(\frac{\partial^{2} \
+w}{\partial x \partial y}\right)^{2}\right]</script><p>然后，用二者之差代表最小作用量：</p>
+<script type="math/tex; mode=display">
+\Pi=T-U</script><p>“最小”并不意味着“最小”，只是取得极值，或者说对于自变函数 $w(x,y)$ 来说，变分 $\delta\Pi=0$。所以，虽然里兹采用的能量泛函为 $U-T$，但这一点区别无关紧要。</p>
+<p>另外，最小作用量的被积函数部分，就是<strong>拉格朗日量</strong>（或<strong>拉格朗日密度</strong>）。将其代入<strong>欧拉-拉格朗日方程</strong>后，同样可以得到前面给出的偏微分方程。对我来说，这要比从微元体出发的推导容易太多。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Needs</span><span class="punctuation">[</span><span class="string">&quot;VariationalMethods`&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="variable">EulerEquations</span><span class="punctuation">[</span><span class="number">1</span><span class="operator">/</span><span class="number">2</span> <span class="variable">\[Rho]</span><span class="variable">h</span> <span class="built_in">D</span><span class="punctuation">[</span><span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">^</span><span class="number">2</span> <span class="operator">-</span> <span class="number">1</span><span class="operator">/</span><span class="number">2</span> <span class="variable">dd</span> <span class="punctuation">(</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="operator">^</span><span class="number">2</span><span class="operator">,</span> <span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">//</span> <span class="built_in">FullSimplify</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/1942uvogm96hv.png" alt></p>
+<h2 id="用什么基函数来逼近真实解？"><a href="#用什么基函数来逼近真实解？" class="headerlink" title="用什么基函数来逼近真实解？"></a>用什么基函数来逼近真实解？</h2><p>很多文章选取的基函数都很巧妙，既要满足边界条件，又要起到逼近真实解的作用。但我们打算得到比较通用的程序，就不能把基函数形式限制在一种特殊场景中。</p>
+<p>所以，不妨将基函数写作两项相乘的形式<sup><a href="#fn_1" id="reffn_1">1</a></sup>：</p>
+<h3 id="边界方程"><a href="#边界方程" class="headerlink" title="边界方程"></a>边界方程</h3><p>灰色部分为薄板区域，红色部分为薄板边界：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Graphics</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">LightGray</span><span class="operator">,</span> <span class="type">#</span><span class="operator">,</span> <span class="built_in">Red</span><span class="operator">,</span> <span class="built_in">RegionBoundary</span><span class="operator">@</span><span class="type">#</span>  <span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="punctuation">&#123;</span><span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Rectangle</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="operator">-</span><span class="number">1</span><span class="operator">,</span> <span class="operator">-</span><span class="number">1</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">1</span><span class="operator">,</span> <span class="number">1</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">RegularPolygon</span><span class="punctuation">[</span><span class="number">6</span><span class="punctuation">]</span><span class="punctuation">&#125;</span> <span class="operator">//</span> <span class="built_in">GraphicsRow</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/05dvh9wj8znvl.png" alt></p>
+<p>对于圆形薄板来说，其边界方程为：</p>
+<script type="math/tex; mode=display">
+(x^2+y^2-1)^{i}</script><p>对于方形薄板来说，其边界方程为：</p>
+<script type="math/tex; mode=display">
+(x-1)^{i}(x+1)^{j}(y-1)^{k}(y+1)^{l}</script><p>注意式子里的上标代表该边界的边界条件，$0$ 对应于<strong>自由边界条件</strong>，$1$ 对应于<strong>简支边界条件</strong>，$2$ 对应于<strong>固定边界条件</strong>。</p>
+<p>如果是正六边形板，这个边界方程就很难直接写出。可以先写一个函数，能输入各顶点坐标，输出边界方程：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 计算两点之间的线方程 *)</span></span><br><span class="line"><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="type">p1_</span><span class="operator">,</span> <span class="type">p2_</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="punctuation">(</span><span class="variable">x</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">-</span> <span class="punctuation">(</span><span class="variable">y</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 将点列表转换为成对的点 *)</span></span><br><span class="line"><span class="variable">pointsPair</span><span class="punctuation">[</span><span class="type">points_List</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Partition</span><span class="punctuation">[</span><span class="built_in">Riffle</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">RotateLeft</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">@</span> <span class="variable">points</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 计算多边形的边界 *)</span></span><br><span class="line"><span class="variable">polygonBorder</span><span class="punctuation">[</span><span class="type">points_List</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Times</span> <span class="operator">@@</span> <span class="punctuation">(</span><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">pointsPair</span> <span class="operator">@</span> <span class="variable">points</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>正六边形的六个顶点即为：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CirclePoints</span><span class="punctuation">[</span><span class="number">6</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0qh7xb6uqvihj.png" alt></p>
+<p>可计算得到边界方程：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">polygonBorder</span><span class="punctuation">[</span><span class="operator">%,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/07h1rxqs5hlh9.png" alt></p>
+<h3 id="逼近函数"><a href="#逼近函数" class="headerlink" title="逼近函数"></a>逼近函数</h3><p>使用<strong>勒让德多项式</strong>逼近函数：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/0dgspvoj25ge8.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/0scfnyq98cvfo.png" alt></p>
+<p>多项式两两相乘，得到用于函数逼近的二元基函数：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1ujidmwm5kusz.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/0n46qmoe93pwu.png" alt></p>
+<p>以<strong>固定边界圆板</strong>为算例，其基函数形式为：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">basicFunctions</span> <span class="operator">=</span> <span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">LegendreP</span><span class="punctuation">[</span><span class="variable">i</span> <span class="operator">-</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">x</span><span class="punctuation">]</span> <span class="built_in">LegendreP</span><span class="punctuation">[</span><span class="variable">j</span> <span class="operator">-</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">4</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">4</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="punctuation">(</span><span class="variable">x</span><span class="operator">^</span><span class="number">2</span> <span class="operator">+</span> <span class="variable">y</span><span class="operator">^</span><span class="number">2</span> <span class="operator">-</span> <span class="number">1</span><span class="punctuation">)</span><span class="operator">^</span><span class="number">2</span> <span class="operator">//</span> <span class="built_in">Flatten</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/063s5d86yd1ru.png" alt></p>
+<h2 id="终于变成矩阵问题"><a href="#终于变成矩阵问题" class="headerlink" title="终于变成矩阵问题"></a>终于变成矩阵问题</h2><p>为方便计算，先把近似解写成基函数加权求和的形式：</p>
+<script type="math/tex; mode=display">
+\hat w(x,y)=\sum\limits_{k=1}^{K}c_ {k}\psi_{k}(x,y)</script><p>代入动能 $T$、势能 $U$ 的表达式中，积分部分即为系数矩阵的“二次型”：$\boldsymbol{c}^\mathrm{T}\boldsymbol{Mc}$ 和 $\boldsymbol{c}^\mathrm{T}\boldsymbol{Kc}$，其中 $\boldsymbol{M},\boldsymbol{K}$ 分别称为<strong>质量矩阵</strong>和<strong>刚度矩阵</strong>，矩阵元素的表达式为<sup><a href="#fn_2" id="reffn_2">2</a></sup>：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+k_{ij}&=\iint_{\bar A}\nabla^{2}\psi_{i}\cdot\nabla^{2}\psi_{j} \
+\mathrm{d}x\mathrm{d}y\\
+m_{ij}&=\iint_{\bar A}\psi_{i}\cdot\psi_{j}\mathrm{d}x\mathrm{d}y
+\end{align}</script><p>继续前面的例子：Wolfram 语言允许我们在区域上进行积分，可计算出刚度矩阵和质量矩阵：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">kmatrix</span> <span class="operator">=</span> <span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">mmatrix</span> <span class="operator">=</span> <span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
+<p>甚至可以发现，对于圆板来说，两个矩阵的所有元素竟然都有精确解：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">kmatrix</span> <span class="operator">//</span> <span class="built_in">MatrixForm</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0sdihhvg2k6ci.png" alt></p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">mmatrix</span> <span class="operator">//</span> <span class="built_in">MatrixForm</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0wigfciajdpku.png" alt></p>
+<p>用矩阵热图进行可视化，不难发现这两个矩阵都是对称矩阵，利用这一特性可以减少运算量。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">MatrixPlot</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">PlotLabel</span> <span class="operator">-&gt;</span> <span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="punctuation">&#123;</span><span class="punctuation">&#123;</span><span class="variable">kmatrix</span><span class="operator">,</span> <span class="string">&quot;刚度矩阵&quot;</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">mmatrix</span><span class="operator">,</span> <span class="string">&quot;质量矩阵&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span> <span class="operator">//</span> <span class="built_in">GraphicsRow</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0hsfxappxlajl.png" alt></p>
+<p>通过选取合适的系数，取得作用量的极值，即作用量对向量 $\boldsymbol{c}$ 求导为零：</p>
+<script type="math/tex; mode=display">
+\frac{\partial\Pi}{\partial c}=0</script><p>化简得到：</p>
+<script type="math/tex; mode=display">
+(\boldsymbol{K}-\lambda^{4}\boldsymbol{M})\boldsymbol{c}=0</script><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="variable">vals</span><span class="operator">,</span> <span class="variable">coefs</span><span class="punctuation">&#125;</span> <span class="operator">=</span> <span class="built_in">Eigensystem</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">N</span><span class="operator">@</span><span class="variable">kmatrix</span><span class="operator">,</span> <span class="built_in">N</span><span class="operator">@</span><span class="variable">mmatrix</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="operator">-</span><span class="number">4</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
+<p>把优化问题转化为质量矩阵和刚度矩阵的广义特征值求解问题，将特征向量 $\boldsymbol{c}$ 与基函数向量 $\boldsymbol{\psi}$ 点乘，即得近似解表达式。可将前四个模态的密度图绘制如下：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/04p34o1pvxwfl.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1tgqk3t7wtav5.png" alt></p>
+<p>其中的密度图为模态振型，上面的数字为特征值 $\lambda$，与以下微分特征方程中的特征值 $k$ 与半径 $a$ 的乘积近似相等：</p>
+<script type="math/tex; mode=display">
+\nabla^{4}w(r)=k^{4}w(r)</script><h2 id="程序简化并总结为函数"><a href="#程序简化并总结为函数" class="headerlink" title="程序简化并总结为函数"></a>程序简化并总结为函数</h2><p>参考上述分析过程，有以下几点优化空间：</p>
+<p>第一，质量矩阵、刚度矩阵均为对称矩阵，可削减计算量：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">N</span><span class="operator">@</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span> <span class="operator">//</span> <span class="built_in">RepeatedTiming</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;1.52804, Null&#125;*)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">N</span><span class="operator">@</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">i</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span> <span class="operator">//</span> <span class="built_in">RepeatedTiming</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;0.813599, Null&#125;*)</span></span><br></pre></td></tr></table></figure>
+<p>第二，计算积分时可并行计算，以减少程序耗时：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$ProcessorCount</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*4*)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ParallelTable</span><span class="punctuation">[</span><span class="built_in">N</span><span class="operator">@</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">i</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span> <span class="operator">//</span> <span class="built_in">RepeatedTiming</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;0.355318, Null&#125;*)</span></span><br></pre></td></tr></table></figure>
+<p>第三，为编写更具一般性的程序，应使用数值积分。对于矩阵中存在的大量零元素，需要设定合适的准确度目标：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ParallelTable</span><span class="punctuation">[</span><span class="built_in">NIntegrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">AccuracyGoal</span> <span class="operator">-&gt;</span> <span class="number">5</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="variable">i</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span> <span class="operator">//</span> <span class="built_in">RepeatedTiming</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;1.47974, Null&#125;*)</span></span><br></pre></td></tr></table></figure>
+<p>于是，将优化后的函数整合为一个程序包：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Clear</span><span class="punctuation">[</span><span class="variable">polygonBorder</span><span class="operator">,</span> <span class="variable">lineEquation</span><span class="operator">,</span> <span class="variable">pointsPair</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Get</span><span class="punctuation">[</span><span class="built_in">FileNameJoin</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">NotebookDirectory</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="string">&quot;RitzMethod.wl&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="operator">?</span><span class="variable">RitzSolver</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0aa5e5ntcerlp.png" alt></p>
+<p>对于上面的<strong>固定边界圆板</strong>，可以这样调用函数：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/0i436hekcsbps.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1qtwdxjnj5oha.png" alt></p>
+<p>对于<strong>简支边界方板</strong>，需要多设置两个参数，一个是边界方程的指数，另一个是泊松比：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/0li6nghx8tfxm.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/15kiah2vjp02f.png" alt></p>
+<p>实际上，参考此算例的解析解表达式，可知泊松比并不影响结果：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">SSSquare</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="type">m_</span><span class="operator">,</span> <span class="type">n_</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> <span class="punctuation">&#123;</span><span class="built_in">Pi</span> <span class="built_in">Sqrt</span><span class="punctuation">[</span><span class="punctuation">(</span><span class="variable">m</span><span class="operator">/</span><span class="number">2</span><span class="punctuation">)</span><span class="operator">^</span><span class="number">2</span> <span class="operator">+</span> <span class="punctuation">(</span><span class="variable">n</span><span class="operator">/</span><span class="number">2</span><span class="punctuation">)</span><span class="operator">^</span><span class="number">2</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Sin</span><span class="punctuation">[</span><span class="built_in">Pi</span> <span class="variable">m</span> <span class="punctuation">(</span><span class="variable">x</span> <span class="operator">+</span> <span class="number">1</span><span class="punctuation">)</span><span class="operator">/</span><span class="number">2</span><span class="punctuation">]</span> <span class="built_in">Sin</span><span class="punctuation">[</span><span class="built_in">Pi</span> <span class="variable">n</span> <span class="punctuation">(</span><span class="variable">y</span> <span class="operator">+</span> <span class="number">1</span><span class="punctuation">)</span><span class="operator">/</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>绘图，并与里兹解作比较：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">DensityPlot</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="operator">-</span><span class="number">1</span><span class="operator">,</span> <span class="number">1</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">y</span><span class="operator">,</span> <span class="operator">-</span><span class="number">1</span><span class="operator">,</span> <span class="number">1</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">PlotLabel</span> <span class="operator">-&gt;</span> <span class="built_in">N</span><span class="operator">@</span><span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span><span class="built_in">Flatten</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="number">1</span><span class="punctuation">]</span> <span class="operator">&amp;@</span><span class="built_in">Table</span><span class="punctuation">[</span><span class="variable">SSSquare</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="variable">j</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">//</span> <span class="built_in">GraphicsRow</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/04/ritz-method-in-wl/0e0ens6a2btao.png" alt></p>
+<p>最后是<strong>固定边界正六边形板</strong>，也就是我在文章最开始讲的“蜂巢形的水听器单元”：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/158cqdwgpgsi2.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/17jerkh7r19cq.png" alt></p>
+<p>第一个解看上去有些奇怪，可以绘制出立体图形，只是凹陷而已：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1wqletatsbh7v.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/11ihe84nnk93d.png" alt></p>
+<p>本文处理的方程是齐次的，所以不管解的幅值是多少，都能满足该方程，但为了方便后续处理，一般会对幅值作归一化：</p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1u92bm612drai.png" alt></p>
+<p><img src="/2024/12/04/ritz-method-in-wl/1w0egt5fxfswi.png" alt></p>
+<p>为了降低理解难度，文中略去了许多细节。比如一般边界条件的刚度矩阵元素表达式，你可以在<a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/ritz-method-wl">程序文件</a>中找到。至于更详细的推导过程，可以参考下面列出的两篇文献，或者自行搜索“基尔霍夫薄板理论”的相关内容。</p>
+<p align="right">24/12/04</p>
+
+<blockquote id="fn_1">
+<sup>1</sup>. Zhao, J. (2023). Variable stiffness discrete Ritz method for free vibration analysis of plates in arbitrary geometries. Journal of Sound and Vibration, 553, 117662.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Leissa, A. W. (2005). The historical bases of the Rayleigh and Ritz methods. Journal of Sound and Vibration, 287(4–5), 961–978.<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/#category-%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0">计算笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/#tag-Wolfram">Wolfram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="ritz-method-in-wl"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2024/12/04/ritz-method-in-wl/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BD%9C%E7%94%A8%E9%87%8F%EF%BC%8C%E6%9C%80%E5%B0%8F%E7%89%A9%E7%90%86%E7%9F%A5%E8%AF%86"><span class="toc-text">最小作用量，最小物理知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BB%80%E4%B9%88%E5%9F%BA%E5%87%BD%E6%95%B0%E6%9D%A5%E9%80%BC%E8%BF%91%E7%9C%9F%E5%AE%9E%E8%A7%A3%EF%BC%9F"><span class="toc-text">用什么基函数来逼近真实解？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E6%96%B9%E7%A8%8B"><span class="toc-text">边界方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BC%E8%BF%91%E5%87%BD%E6%95%B0"><span class="toc-text">逼近函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E4%BA%8E%E5%8F%98%E6%88%90%E7%9F%A9%E9%98%B5%E9%97%AE%E9%A2%98"><span class="toc-text">终于变成矩阵问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%AE%80%E5%8C%96%E5%B9%B6%E6%80%BB%E7%BB%93%E4%B8%BA%E5%87%BD%E6%95%B0"><span class="toc-text">程序简化并总结为函数</span></a></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+  </div>
+</div>
+</body>
+</html>

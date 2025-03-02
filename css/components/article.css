@@ -162,6 +162,22 @@ article .article-footer .article-meta i {
   color: #9e9e9e;
   margin-right: 0.5rem;
 }
+article .article-footer .post-tags a {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999em;
+  padding: 2px 8px;
+  color: #333;
+  background: #f2f2f2;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin: 0 5px 5px 0;
+}
+article .article-footer .post-tags a:hover {
+  color: #fff !important;
+  background-color: #f03838;
+  border-color: #f03838;
+}
 article .article-footer .post-tags a:before {
   content: "#";
 }
@@ -364,4 +380,55 @@ article table pre {
   height: 14px;
   background: #f03838;
   border-radius: 1px;
+}
+[data-theme="dark"] article .article-title {
+  color: #f6f2f5;
+}
+[data-theme="dark"] article .article-title a {
+  color: #f6f2f5;
+}
+[data-theme="dark"] article .article-excerpt,
+[data-theme="dark"] article .article-content,
+[data-theme="dark"] article .featured-media {
+  color: #fff;
+}
+[data-theme="dark"] article .article-excerpt h2,
+[data-theme="dark"] article .article-content h2,
+[data-theme="dark"] article .featured-media h2,
+[data-theme="dark"] article .article-excerpt h3,
+[data-theme="dark"] article .article-content h3,
+[data-theme="dark"] article .featured-media h3,
+[data-theme="dark"] article .article-excerpt h4,
+[data-theme="dark"] article .article-content h4,
+[data-theme="dark"] article .featured-media h4,
+[data-theme="dark"] article .article-excerpt h5,
+[data-theme="dark"] article .article-content h5,
+[data-theme="dark"] article .featured-media h5,
+[data-theme="dark"] article .article-excerpt h6,
+[data-theme="dark"] article .article-content h6,
+[data-theme="dark"] article .featured-media h6 {
+  color: #f6f2f5;
+}
+[data-theme="dark"] article .article-excerpt code,
+[data-theme="dark"] article .article-content code,
+[data-theme="dark"] article .featured-media code {
+  color: #f45542;
+  background-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] article .article-excerpt blockquote,
+[data-theme="dark"] article .article-content blockquote,
+[data-theme="dark"] article .featured-media blockquote {
+  background-color: rgba(255,255,255,0.05);
+}
+[data-theme="dark"] article .post-tags a {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] article .post-tags a:hover {
+  color: #fff !important;
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+}
+[data-theme="dark"] article .post-tags a:before {
+  color: #fff;
 }

@@ -36,8 +36,19 @@
   }
   .pagination .pagination-prev:hover,
   .pagination .pagination-next:hover {
-    color: #000;
+    color: #fff;
     background-color: #f03838;
     border-color: #f03838;
   }
+}
+[data-theme="dark"] .pagination .pagination-prev,
+[data-theme="dark"] .pagination .pagination-next {
+  color: #f03838;
+  border: 1px solid #636366;
+}
+[data-theme="dark"] .pagination .pagination-prev:hover,
+[data-theme="dark"] .pagination .pagination-next:hover {
+  color: #fff;
+  background-color: #f03838;
+  border-color: #f03838;
 }

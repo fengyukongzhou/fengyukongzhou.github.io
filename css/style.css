@@ -538,15 +538,19 @@ article {
 article a {
   color: #f03838;
 }
-article .article-content em,
-article .article-content .article-excerpt em,
-article .article-content .article-content em {
+article .article-content em:lang(zh),
+article .article-excerpt em:lang(zh),
+article .article-content em:lang(zh-CN),
+article .article-excerpt em:lang(zh-CN),
+article .article-content em:lang(zh-TW),
+article .article-excerpt em:lang(zh-TW) {
   font-style: normal !important;
   font-family: "楷体", "KaiTi", "楷体_GB2312", "STKaiti", "华文楷体", serif !important;
 }
 article .article-content em:lang(en),
-article .article-content .article-excerpt em:lang(en),
-article .article-content .article-content em:lang(en) {
+article .article-excerpt em:lang(en),
+article .article-content em:not([lang]),
+article .article-excerpt em:not([lang]) {
   font-style: italic !important;
   font-family: "Times New Roman", Times, serif !important;
 }

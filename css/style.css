@@ -978,20 +978,29 @@ article table pre {
   color: #fff;
 }
 .footnote-popup {
-  position: absolute;
-  width: 300px;
+  position: fixed;
+  width: 360px;
   background: var(--card-bg);
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  padding: 8px 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.12);
   z-index: 1000;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--text-color);
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
-  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  transform: scale(0.98) translateY(5px);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  will-change: transform, opacity;
+}
+.footnote-popup.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 .footnote-popup::-webkit-scrollbar {
   width: 4px;
@@ -1003,14 +1012,15 @@ article table pre {
   background: var(--border-color);
   border-radius: 2px;
 }
-.footnote-popup::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
-}
 .footnote-popup p {
-  margin: 0.3rem 0;
+  margin: 0.5rem 0;
+  font-size: 15px;
+  line-height: 1.6;
 }
 .footnote-popup a {
   color: var(--link-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 .footnote-popup a:hover {
   color: #f03838;
@@ -1019,72 +1029,99 @@ article table pre {
 .footnote-ref {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-size: 0.85em;
+  padding: 0 1px;
   line-height: 1;
-  margin: 0 1px;
   text-decoration: none;
   color: #f03838;
-  transition: all 0.2s ease;
+  background-color: transparent;
+  transition: all 0.3s ease;
   position: relative;
-  top: -0.4em;
-  font-weight: bold;
+  top: -0.3em;
+  margin: 0 1px;
+  cursor: pointer;
 }
-.footnote-ref::before {
-  content: none;
-}
-.footnote-ref::after {
-  content: none;
+.footnote-ref:hover,
+.footnote-ref.active {
+  color: #ee1c1c;
+  transform: translateY(-1px);
 }
 .footnote-ref a {
   color: inherit;
   text-decoration: none;
 }
-.footnote-ref a:hover {
-  color: #ee1c1c;
-  text-decoration: none;
-}
 .footnotes {
-  margin-top: 40px;
-  padding-top: 20px;
+  position: relative;
+  margin-top: 60px;
+  padding-top: 30px;
   border-top: 1px solid var(--border-color);
-  font-size: 0.9em;
+  font-size: 0.95em;
   color: var(--text-color);
 }
-.footnotes:before,
-.footnotes:after {
-  display: none;
-}
-.footnotes hr {
-  display: none;
+.footnotes:before {
+  content: "注释";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card-bg);
+  padding: 0 15px;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #f03838;
 }
 .footnotes ol {
-  padding-left: 20px;
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-left: 0;
 }
-.footnotes li {
-  margin-bottom: 8px;
+.footnotes ol li {
+  position: relative;
+  margin-bottom: 12px;
+  padding-left: 0;
+  color: var(--text-color);
 }
 .footnotes .footnote-backref {
-  margin-left: 5px;
-  color: #f03838;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  color: var(--link-color);
   text-decoration: none;
+  font-size: 0.9em;
+  opacity: 0.6;
   transition: all 0.2s ease;
 }
+.footnotes .footnote-backref:before {
+  content: "↩";
+  margin-right: 4px;
+  font-size: 1.1em;
+}
 .footnotes .footnote-backref:hover {
-  color: #dc1111;
-  transform: translateX(-2px);
+  opacity: 1;
+  transform: translateX(-3px);
 }
 [data-theme="dark"] .footnote-popup {
-  background: var(--card-bg);
+  background: rgba(28,28,30,0.98);
   border-color: #444;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.3);
 }
 [data-theme="dark"] .footnote-ref {
   color: #f03838;
-  border-color: #f03838;
 }
-[data-theme="dark"] .footnote-ref:hover {
-  color: #fff;
-  background-color: #f03838;
+[data-theme="dark"] .footnote-ref:hover,
+[data-theme="dark"] .footnote-ref.active {
+  color: #f24c4c;
+}
+[data-theme="dark"] .footnotes {
+  border-color: #444;
+}
+[data-theme="dark"] .footnotes:before {
+  background: var(--card-bg);
+  color: #f03838;
+}
+[data-theme="dark"] .footnotes ol li:before {
+  color: #f03838;
 }
 article.archive {
   padding: 0;

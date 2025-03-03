@@ -17,8 +17,6 @@
   
 
   
-  <meta name="description" content="">
-  
 
   
 
@@ -255,71 +253,10 @@
       <article>
   <h2 class="article-title ">标签</h2>
 
-  <div class="tags-cloud">
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-AI" title="AI" rel="14">AI</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-Wolfram" title="Wolfram" rel="2">Wolfram</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-写作方法" title="写作方法" rel="2">写作方法</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-小说" title="小说" rel="2">小说</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-尝试集" title="尝试集" rel="8">尝试集</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-幸福观" title="幸福观" rel="3">幸福观</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-心理" title="心理" rel="2">心理</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-村上春树" title="村上春树" rel="1">村上春树</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-现代生活" title="现代生活" rel="8">现代生活</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-翻译" title="翻译" rel="3">翻译</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-设计" title="设计" rel="2">设计</a>
-      </span>
-    
-      <span class="post-tags">
-        <i class="icon-tags"></i>
-        <a href="#tag-读小说" title="读小说" rel="5">读小说</a>
-      </span>
-    
-  </div>
+  <!-- 标签图表容器 -->
+  <div id="tagsChart" style="width: 100%; height: 400px; overflow-x: auto; overflow-y: hidden; margin-bottom: 3rem;"></div>
 
-  <div class="archive">
+  <div class="archive" style="margin-top: 2rem;">
     
     <div class="archive-group" id="tag-AI">
       <h3 class="group-title">
@@ -1041,6 +978,10 @@
     } )();
 </script>
 
+    
+    
+    
+    
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
@@ -1315,7 +1256,7 @@
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

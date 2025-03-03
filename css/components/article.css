@@ -5,6 +5,18 @@ article {
 article a {
   color: #f03838;
 }
+article .article-content em,
+article .article-content .article-excerpt em,
+article .article-content .article-content em {
+  font-style: normal !important;
+  font-family: "楷体", "KaiTi", "楷体_GB2312", "STKaiti", "华文楷体", serif !important;
+}
+article .article-content em:lang(en),
+article .article-content .article-excerpt em:lang(en),
+article .article-content .article-content em:lang(en) {
+  font-style: italic !important;
+  font-family: "Times New Roman", Times, serif !important;
+}
 article:not(:first-child):before {
   content: '';
   width: 150px;
@@ -431,4 +443,113 @@ article table pre {
 }
 [data-theme="dark"] article .post-tags a:before {
   color: #fff;
+}
+.footnote-popup {
+  position: absolute;
+  width: 300px;
+  background: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 8px 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
+  max-height: 200px;
+  overflow-y: auto;
+  transition: all 0.2s ease-in-out;
+}
+.footnote-popup::-webkit-scrollbar {
+  width: 4px;
+}
+.footnote-popup::-webkit-scrollbar-track {
+  background: transparent;
+}
+.footnote-popup::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+.footnote-popup::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+}
+.footnote-popup p {
+  margin: 0.3rem 0;
+}
+.footnote-popup a {
+  color: var(--link-color);
+}
+.footnote-popup a:hover {
+  color: #f03838;
+  text-decoration: underline;
+}
+.footnote-ref {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85em;
+  line-height: 1;
+  margin: 0 1px;
+  text-decoration: none;
+  color: #f03838;
+  transition: all 0.2s ease;
+  position: relative;
+  top: -0.4em;
+  font-weight: bold;
+}
+.footnote-ref::before {
+  content: none;
+}
+.footnote-ref::after {
+  content: none;
+}
+.footnote-ref a {
+  color: inherit;
+  text-decoration: none;
+}
+.footnote-ref a:hover {
+  color: #ee1c1c;
+  text-decoration: none;
+}
+.footnotes {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+.footnotes:before,
+.footnotes:after {
+  display: none;
+}
+.footnotes hr {
+  display: none;
+}
+.footnotes ol {
+  padding-left: 20px;
+}
+.footnotes li {
+  margin-bottom: 8px;
+}
+.footnotes .footnote-backref {
+  margin-left: 5px;
+  color: #f03838;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.footnotes .footnote-backref:hover {
+  color: #dc1111;
+  transform: translateX(-2px);
+}
+[data-theme="dark"] .footnote-popup {
+  background: var(--card-bg);
+  border-color: #444;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+[data-theme="dark"] .footnote-ref {
+  color: #f03838;
+  border-color: #f03838;
+}
+[data-theme="dark"] .footnote-ref:hover {
+  color: #fff;
+  background-color: #f03838;
 }

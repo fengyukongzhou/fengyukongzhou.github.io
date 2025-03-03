@@ -17,8 +17,6 @@
   
 
   
-  <meta name="description" content="">
-  
 
   
 
@@ -255,31 +253,10 @@
       <article>
   <h2 class="article-title ">分类</h2>
 
-  <div class="categories-cloud">
-    
-      <span class="post-categories">
-        <i class="icon-categories"></i>
-        <a href="#category-咫闻周刊" title="咫闻周刊" rel="6">咫闻周刊</a>
-      </span>
-    
-      <span class="post-categories">
-        <i class="icon-categories"></i>
-        <a href="#category-计算笔记" title="计算笔记" rel="7">计算笔记</a>
-      </span>
-    
-      <span class="post-categories">
-        <i class="icon-categories"></i>
-        <a href="#category-诙谐装置" title="诙谐装置" rel="6">诙谐装置</a>
-      </span>
-    
-      <span class="post-categories">
-        <i class="icon-categories"></i>
-        <a href="#category-读书笔记" title="读书笔记" rel="8">读书笔记</a>
-      </span>
-    
-  </div>
+  <!-- 分类图表容器 -->
+  <div id="categoriesChart" style="width: 100%; height: 350px; overflow-x: auto; overflow-y: hidden; margin-bottom: 3rem;"></div>
 
-  <div class="archive">
+  <div class="archive" style="margin-top: 2rem;">
     
     <div class="archive-group" id="category-咫闻周刊">
       <h3 class="group-title">
@@ -655,6 +632,10 @@
     } )();
 </script>
 
+    
+    
+    
+    
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
@@ -929,7 +910,7 @@
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

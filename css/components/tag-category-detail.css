@@ -7,6 +7,7 @@
   margin-bottom: 2rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
+  background: none;
 }
 .tag-detail header .article-title,
 .category-detail header .article-title {
@@ -14,6 +15,23 @@
   font-size: 2rem;
   font-weight: 600;
   color: #333;
+  background: none;
+  box-shadow: none !important;
+}
+.tag-detail header .article-title.tag,
+.category-detail header .article-title.tag,
+.tag-detail header .article-title.category,
+.category-detail header .article-title.category {
+  background: none;
+  box-shadow: none !important;
+}
+.tag-detail header .article-title.tag span,
+.category-detail header .article-title.tag span,
+.tag-detail header .article-title.category span,
+.category-detail header .article-title.category span {
+  background: none;
+  box-shadow: none !important;
+  padding: 0;
 }
 .tag-detail header .article-title i,
 .category-detail header .article-title i {

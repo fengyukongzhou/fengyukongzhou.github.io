@@ -21,8 +21,11 @@
 \[
 D\nabla^{4}w+\rho_{h}w_{tt}=0
 \]
-先不管参数 \(D,\rho_{h}\)，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？
-面对偏微分方程难解的问题，里兹法的思路大概是：先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。">
+先不管参数 \(D,\rho_{h}\)，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在
+Wolfram
+的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？
+面对偏微分方程难解的问题，里兹法的思路大概是：先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用
+Wolfram 语言的内置函数，还可以把这个程序写得更简单。">
   
 
   
@@ -289,8 +292,11 @@ D\nabla^{4}w+\rho_{h}w_{tt}=0
 <p><span class="math display">\[
 D\nabla^{4}w+\rho_{h}w_{tt}=0
 \]</span></p>
-<p>先不管参数 <span class="math inline">\(D,\rho_{h}\)</span>，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
-<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
+<p>先不管参数 <span class="math inline">\(D,\rho_{h}\)</span>，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在
+Wolfram
+的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
+<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用
+Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
 <span id="more"></span>
 <h2 id="最小作用量最小物理知识">最小作用量，最小物理知识</h2>
 <p>于我而言，“<strong>最小作用量</strong>”这套方法是在最小化物理知识的基础上，解决所面临的建模问题。</p>
@@ -303,11 +309,13 @@ U&amp;=\frac{1}{2}Da^{-2}\iint_{\bar A}(\nabla^{2}\bar
 w)^{2}\mathrm{d}x\mathrm{d}y
 \end{align}
 \]</span></p>
-<p>其中 <span class="math inline">\(T\)</span> 就是众所周知的 <span class="math inline">\(m v^2/2\)</span> 这个形式，<span class="math inline">\(U\)</span> 则需要参考基尔霍夫薄板理论的应力、应变表达式，并代入线弹性材料应变能的公式里。</p>
+<p>其中 <span class="math inline">\(T\)</span> 就是众所周知的 <span class="math inline">\(m v^2/2\)</span> 这个形式，<span class="math inline">\(U\)</span>
+则需要参考基尔霍夫薄板理论的应力、应变表达式，并代入线弹性材料应变能的公式里。</p>
 <p>补充两点：</p>
 <ol type="1">
 <li><p>积分区域经过尺度变换，所以可以将尺度系数 <span class="math inline">\(a\)</span>（不妨理解为“半径”）提到积分之外。</p></li>
-<li><p>为了简化过程，选取了 <span class="math inline">\(U\)</span> 的最简形式，这仅对固定边界条件成立，如果是更一般的情况，应该添加一项：</p></li>
+<li><p>为了简化过程，选取了 <span class="math inline">\(U\)</span>
+的最简形式，这仅对固定边界条件成立，如果是更一般的情况，应该添加一项：</p></li>
 </ol>
 <p><span class="math display">\[
 -2(1-\nu)\left[\frac{\partial^{2} w}{\partial x^{2}} \
@@ -318,7 +326,8 @@ w}{\partial x \partial y}\right)^{2}\right]
 <p><span class="math display">\[
 \Pi=T-U
 \]</span></p>
-<p>“最小”并不意味着“最小”，只是取得极值，或者说对于自变函数 <span class="math inline">\(w(x,y)\)</span> 来说，变分 <span class="math inline">\(\delta\Pi=0\)</span>。所以，虽然里兹采用的能量泛函为 <span class="math inline">\(U-T\)</span>，但这一点区别无关紧要。</p>
+<p>“最小”并不意味着“最小”，只是取得极值，或者说对于自变函数 <span class="math inline">\(w(x,y)\)</span> 来说，变分 <span class="math inline">\(\delta\Pi=0\)</span>。所以，虽然里兹采用的能量泛函为
+<span class="math inline">\(U-T\)</span>，但这一点区别无关紧要。</p>
 <p>另外，最小作用量的被积函数部分，就是<strong>拉格朗日量</strong>（或<strong>拉格朗日密度</strong>）。将其代入<strong>欧拉-拉格朗日方程</strong>后，同样可以得到前面给出的偏微分方程。对我来说，这要比从微元体出发的推导容易太多。</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Needs</span><span class="punctuation">[</span><span class="string">&quot;VariationalMethods`&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="variable">EulerEquations</span><span class="punctuation">[</span><span class="number">1</span><span class="operator">/</span><span class="number">2</span> <span class="variable">\[Rho]</span><span class="variable">h</span> <span class="built_in">D</span><span class="punctuation">[</span><span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">^</span><span class="number">2</span> <span class="operator">-</span> <span class="number">1</span><span class="operator">/</span><span class="number">2</span> <span class="variable">dd</span> <span class="punctuation">(</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="operator">^</span><span class="number">2</span><span class="operator">,</span> <span class="variable">w</span><span class="punctuation">[</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="operator">,</span> <span class="variable">t</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">//</span> <span class="built_in">FullSimplify</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2024/12/04/ritz-method-in-wl/1942uvogm96hv.png"></p>
@@ -337,7 +346,10 @@ w}{\partial x \partial y}\right)^{2}\right]
 <p><span class="math display">\[
 (x-1)^{i}(x+1)^{j}(y-1)^{k}(y+1)^{l}
 \]</span></p>
-<p>注意式子里的上标代表该边界的边界条件，<span class="math inline">\(0\)</span> 对应于<strong>自由边界条件</strong>，<span class="math inline">\(1\)</span> 对应于<strong>简支边界条件</strong>，<span class="math inline">\(2\)</span> 对应于<strong>固定边界条件</strong>。</p>
+<p>注意式子里的上标代表该边界的边界条件，<span class="math inline">\(0\)</span>
+对应于<strong>自由边界条件</strong>，<span class="math inline">\(1\)</span>
+对应于<strong>简支边界条件</strong>，<span class="math inline">\(2\)</span>
+对应于<strong>固定边界条件</strong>。</p>
 <p>如果是正六边形板，这个边界方程就很难直接写出。可以先写一个函数，能输入各顶点坐标，输出边界方程：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 计算两点之间的线方程 *)</span></span><br><span class="line"><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="type">p1_</span><span class="operator">,</span> <span class="type">p2_</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="punctuation">(</span><span class="variable">x</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">-</span> <span class="punctuation">(</span><span class="variable">y</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">(</span><span class="variable">p1</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="variable">p2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 将点列表转换为成对的点 *)</span></span><br><span class="line"><span class="variable">pointsPair</span><span class="punctuation">[</span><span class="type">points_List</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Partition</span><span class="punctuation">[</span><span class="built_in">Riffle</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">RotateLeft</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="number">2</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">@</span> <span class="variable">points</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 计算多边形的边界 *)</span></span><br><span class="line"><span class="variable">polygonBorder</span><span class="punctuation">[</span><span class="type">points_List</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="type">x_</span><span class="operator">,</span> <span class="type">y_</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line">  <span class="built_in">Times</span> <span class="operator">@@</span> <span class="punctuation">(</span><span class="variable">lineEquation</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">pointsPair</span> <span class="operator">@</span> <span class="variable">points</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
 <p>正六边形的六个顶点即为：</p>
@@ -361,7 +373,11 @@ w}{\partial x \partial y}\right)^{2}\right]
 <p><span class="math display">\[
 \hat w(x,y)=\sum\limits_{k=1}^{K}c_ {k}\psi_{k}(x,y)
 \]</span></p>
-<p>代入动能 <span class="math inline">\(T\)</span>、势能 <span class="math inline">\(U\)</span> 的表达式中，积分部分即为系数矩阵的“二次型”：<span class="math inline">\(\boldsymbol{c}^\mathrm{T}\boldsymbol{Mc}\)</span> 和 <span class="math inline">\(\boldsymbol{c}^\mathrm{T}\boldsymbol{Kc}\)</span>，其中 <span class="math inline">\(\boldsymbol{M},\boldsymbol{K}\)</span> 分别称为<strong>质量矩阵</strong>和<strong>刚度矩阵</strong>，矩阵元素的表达式为<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>：</p>
+<p>代入动能 <span class="math inline">\(T\)</span>、势能 <span class="math inline">\(U\)</span>
+的表达式中，积分部分即为系数矩阵的“二次型”：<span class="math inline">\(\boldsymbol{c}^\mathrm{T}\boldsymbol{Mc}\)</span>
+和 <span class="math inline">\(\boldsymbol{c}^\mathrm{T}\boldsymbol{Kc}\)</span>，其中
+<span class="math inline">\(\boldsymbol{M},\boldsymbol{K}\)</span>
+分别称为<strong>质量矩阵</strong>和<strong>刚度矩阵</strong>，矩阵元素的表达式为<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>：</p>
 <p><span class="math display">\[
 \begin{align}
 k_{ij}&amp;=\iint_{\bar A}\nabla^{2}\psi_{i}\cdot\nabla^{2}\psi_{j} \
@@ -369,7 +385,8 @@ k_{ij}&amp;=\iint_{\bar A}\nabla^{2}\psi_{i}\cdot\nabla^{2}\psi_{j} \
 m_{ij}&amp;=\iint_{\bar A}\psi_{i}\cdot\psi_{j}\mathrm{d}x\mathrm{d}y
 \end{align}
 \]</span></p>
-<p>继续前面的例子：Wolfram 语言允许我们在区域上进行积分，可计算出刚度矩阵和质量矩阵：</p>
+<p>继续前面的例子：Wolfram
+语言允许我们在区域上进行积分，可计算出刚度矩阵和质量矩阵：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">kmatrix</span> <span class="operator">=</span> <span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span> <span class="built_in">Laplacian</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">mmatrix</span> <span class="operator">=</span> <span class="built_in">Table</span><span class="punctuation">[</span><span class="built_in">Integrate</span><span class="punctuation">[</span><span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">i</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="variable">basicFunctions</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="variable">j</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Element</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">x</span><span class="operator">,</span> <span class="variable">y</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="built_in">Disk</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">i</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">j</span><span class="operator">,</span> <span class="number">1</span><span class="operator">,</span> <span class="number">16</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
 <p>甚至可以发现，对于圆板来说，两个矩阵的所有元素竟然都有精确解：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">kmatrix</span> <span class="operator">//</span> <span class="built_in">MatrixForm</span></span><br></pre></td></tr></table></figure>
@@ -388,10 +405,13 @@ m_{ij}&amp;=\iint_{\bar A}\psi_{i}\cdot\psi_{j}\mathrm{d}x\mathrm{d}y
 (\boldsymbol{K}-\lambda^{4}\boldsymbol{M})\boldsymbol{c}=0
 \]</span></p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="variable">vals</span><span class="operator">,</span> <span class="variable">coefs</span><span class="punctuation">&#125;</span> <span class="operator">=</span> <span class="built_in">Eigensystem</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">N</span><span class="operator">@</span><span class="variable">kmatrix</span><span class="operator">,</span> <span class="built_in">N</span><span class="operator">@</span><span class="variable">mmatrix</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="operator">-</span><span class="number">4</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
-<p>把优化问题转化为质量矩阵和刚度矩阵的广义特征值求解问题，将特征向量 <span class="math inline">\(\boldsymbol{c}\)</span> 与基函数向量 <span class="math inline">\(\boldsymbol{\psi}\)</span> 点乘，即得近似解表达式。可将前四个模态的密度图绘制如下：</p>
+<p>把优化问题转化为质量矩阵和刚度矩阵的广义特征值求解问题，将特征向量
+<span class="math inline">\(\boldsymbol{c}\)</span> 与基函数向量 <span class="math inline">\(\boldsymbol{\psi}\)</span>
+点乘，即得近似解表达式。可将前四个模态的密度图绘制如下：</p>
 <p><img src="/2024/12/04/ritz-method-in-wl/04p34o1pvxwfl.png"></p>
 <p><img src="/2024/12/04/ritz-method-in-wl/1tgqk3t7wtav5.png"></p>
-<p>其中的密度图为模态振型，上面的数字为特征值 <span class="math inline">\(\lambda\)</span>，与以下微分特征方程中的特征值 <span class="math inline">\(k\)</span> 与半径 <span class="math inline">\(a\)</span> 的乘积近似相等：</p>
+<p>其中的密度图为模态振型，上面的数字为特征值 <span class="math inline">\(\lambda\)</span>，与以下微分特征方程中的特征值
+<span class="math inline">\(k\)</span> 与半径 <span class="math inline">\(a\)</span> 的乘积近似相等：</p>
 <p><span class="math display">\[
 \nabla^{4}w(r)=k^{4}w(r)
 \]</span></p>
@@ -432,11 +452,15 @@ m_{ij}&amp;=\iint_{\bar A}\psi_{i}\cdot\psi_{j}\mathrm{d}x\mathrm{d}y
 <p align="right">
 24/12/04
 </p>
-<section class="footnotes" role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1" role="doc-endnote"><p>Zhao, J. (2023). Variable stiffness discrete Ritz method for free vibration analysis of plates in arbitrary geometries. Journal of Sound and Vibration, 553, 117662.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Leissa, A. W. (2005). The historical bases of the Rayleigh and Ritz methods. Journal of Sound and Vibration, 287(4–5), 961–978.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Zhao, J. (2023). Variable stiffness discrete Ritz method
+for free vibration analysis of plates in arbitrary geometries. Journal
+of Sound and Vibration, 553, 117662.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Leissa, A. W. (2005). The historical bases of the
+Rayleigh and Ritz methods. Journal of Sound and Vibration, 287(4–5),
+961–978.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

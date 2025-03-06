@@ -17,7 +17,11 @@
   
 
   
-  <meta name="description" content="这是我用白板软件 Excalidraw 绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（Gram-Schmidt orthogonalization），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（Wiener filter），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（Galerkin method）了，图中的箭头现在是函数。">
+  <meta name="description" content="这是我用白板软件 Excalidraw
+绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（Gram-Schmidt
+orthogonalization），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（Wiener
+filter），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（Galerkin
+method）了，图中的箭头现在是函数。">
   
 
   
@@ -280,7 +284,11 @@
     <div class="entry">
       
         <p><img src="/2024/12/26/galerkin-method/gm1.png"></p>
-<p>这是我用白板软件 Excalidraw 绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（<em>Gram-Schmidt orthogonalization</em>），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（<em>Wiener filter</em>），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（<em>Galerkin method</em>）了，图中的箭头现在是函数。</p>
+<p>这是我用白板软件 Excalidraw
+绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（<em>Gram-Schmidt
+orthogonalization</em>），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（<em>Wiener
+filter</em>），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（<em>Galerkin
+method</em>）了，图中的箭头现在是函数。</p>
 <span id="more"></span>
 <h2 id="还是处理这个方程">还是处理这个方程</h2>
 <p><span class="math display">\[
@@ -295,7 +303,8 @@ D\nabla^{4}w+\rho_{h}w_{tt}=0
 <p><span class="math display">\[
 \hat w(x,y)=\sum_{j}c_ {j}\psi_{j}(x,y)
 \]</span></p>
-<p>回想文章的题图，伽辽金法找近似解思路是：<strong>当近似解 <span class="math inline">\(\hat w\)</span> 最接近真实解 <span class="math inline">\(w\)</span> 时，每个基函数 <span class="math inline">\(\psi_{i}\)</span> 与根据方程得到的残差 <span class="math inline">\(\nabla^{4}\hat w-k^{4}\hat w\)</span> 正交</strong>。</p>
+<p>回想文章的题图，伽辽金法找近似解思路是：<strong>当近似解 <span class="math inline">\(\hat w\)</span> 最接近真实解 <span class="math inline">\(w\)</span> 时，每个基函数 <span class="math inline">\(\psi_{i}\)</span> 与根据方程得到的残差 <span class="math inline">\(\nabla^{4}\hat w-k^{4}\hat w\)</span>
+正交</strong>。</p>
 <p>先定义一个内积形式：函数相乘后在板区域内积分</p>
 <p><span class="math display">\[
 \langle f,g\rangle=\iint_{A}f(x,y)g(x,y)\mathrm{d}x\mathrm{d}y
@@ -310,17 +319,22 @@ D\nabla^{4}w+\rho_{h}w_{tt}=0
 \]</span></p>
 <p>为了获得与里兹法一致的结果，对这两个积分作尺度变换，得到：</p>
 <p><span class="math display">\[
-\sum\limits_{j}c_{j}\iint_{\bar A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}a^{4}\sum\limits_{j}c_{j}\iint_{\bar A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0
+\sum\limits_{j}c_{j}\iint_{\bar
+A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}a^{4}\sum\limits_{j}c_{j}\iint_{\bar
+A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0
 \]</span></p>
 <p>至此，可以把上式写成<strong>矩阵特征值问题</strong>：</p>
 <p><span class="math display">\[
 (\boldsymbol{K}-\lambda^{4}\boldsymbol{M})\boldsymbol{c}=\boldsymbol{0}
 \]</span></p>
-<p>其中，质量矩阵 <span class="math inline">\(\boldsymbol{M}\)</span> 和刚度矩阵 <span class="math inline">\(\boldsymbol{K}\)</span> 的元素表达式分别为</p>
+<p>其中，质量矩阵 <span class="math inline">\(\boldsymbol{M}\)</span>
+和刚度矩阵 <span class="math inline">\(\boldsymbol{K}\)</span>
+的元素表达式分别为</p>
 <p><span class="math display">\[
 \begin{align*}
 m_{ij}&amp;=\iint_{\bar A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y\\
-k_{ij}&amp;=\iint_{\bar A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y
+k_{ij}&amp;=\iint_{\bar
+A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y
 \end{align*}
 \]</span></p>
 <h2 id="自伴随算子">自伴随算子</h2>
@@ -331,30 +345,53 @@ k_{ij}=\iint_{\bar A}\nabla^{2}\psi_{i}\cdot\nabla^{2}\psi_{j} \
 \]</span></p>
 <p>为了找到关联，先要补充一个条件。利用上面定义的内积形式，根据<strong>格林第二定理</strong>：</p>
 <p><span class="math display">\[
-\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2} g\rangle+\oint_{\partial A} \left(g(x,y) \frac{\partial f(x,y)}{\partial\boldsymbol{n}}- f(x,y)\frac{\partial g(x,y)}{\partial\boldsymbol{n}}\right)\mathrm{d}s
+\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2}
+g\rangle+\oint_{\partial A} \left(g(x,y) \frac{\partial
+f(x,y)}{\partial\boldsymbol{n}}- f(x,y)\frac{\partial
+g(x,y)}{\partial\boldsymbol{n}}\right)\mathrm{d}s
 \]</span></p>
-<p><span class="math inline">\(\partial A\)</span> 为板区域 <span class="math inline">\(A\)</span> 的边界，如果 <span class="math inline">\(f,g\)</span> 是满足固定边界条件或简支边界条件的模态振型函数，那么在边界上就有 <span class="math inline">\(f=g\equiv0\)</span>，于是上式就可以大幅化简为</p>
+<p><span class="math inline">\(\partial A\)</span> 为板区域 <span class="math inline">\(A\)</span> 的边界，如果 <span class="math inline">\(f,g\)</span>
+是满足固定边界条件或简支边界条件的模态振型函数，那么在边界上就有 <span class="math inline">\(f=g\equiv0\)</span>，于是上式就可以大幅化简为</p>
 <p><span class="math display">\[
 \langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2} g\rangle
 \]</span></p>
-<p>对于这个情况，称拉普拉斯算子 <span class="math inline">\(\nabla^{2}\)</span> 为<strong>自伴随算子</strong>。按照上面的规则，可以找到两种 <span class="math inline">\(k_{ij}\)</span> 之间的关系：</p>
+<p>对于这个情况，称拉普拉斯算子 <span class="math inline">\(\nabla^{2}\)</span>
+为<strong>自伴随算子</strong>。按照上面的规则，可以找到两种 <span class="math inline">\(k_{ij}\)</span> 之间的关系：</p>
 <p><span class="math display">\[
 k_{ij}=\langle\psi_{i},\nabla^{2}\nabla^{2}\psi_{j}\rangle=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle
 \]</span></p>
 <h2 id="或许存在悖论">或许存在“悖论”</h2>
-<p>总结一下：对于固定边界条件，里兹法和伽辽金的结果都是 <span class="math inline">\(k_{ij}=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle\)</span>。但对于简支边界条件，里兹法给出的 <span class="math inline">\(k_{ij}\)</span> 显然更为复杂（复杂到上篇文章里都没有直接写出来）：</p>
+<p>总结一下：对于固定边界条件，里兹法和伽辽金的结果都是 <span class="math inline">\(k_{ij}=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle\)</span>。但对于简支边界条件，里兹法给出的
+<span class="math inline">\(k_{ij}\)</span>
+显然更为复杂（复杂到上篇文章里都没有直接写出来）：</p>
 <p><span class="math display">\[
 \begin{align}
-    k_{ij}&amp;=\iint_{\bar A}\left[\nabla^{2}\psi_{i}\nabla^{2}\psi_{j}\right.\\&amp;\quad\left.-(1-\nu)\left(\frac{\partial^{2}\psi_{i}}{\partial x^{2}}\frac{\partial^{2}\psi_{j}}{\partial y^{2}}+\frac{\partial^{2}\psi_{j}}{\partial x^{2}}\frac{\partial^{2}\psi_{i}}{\partial y^{2}}\right)\right.\\&amp;\left.\quad+2(1-\nu)\frac{\partial^{2}\psi_{i}}{\partial x\partial y}\frac{\partial^{2}\psi_{j}}{\partial x\partial y}\right]\mathrm{d}x\mathrm{d}y
+    k_{ij}&amp;=\iint_{\bar
+A}\left[\nabla^{2}\psi_{i}\nabla^{2}\psi_{j}\right.\\&amp;\quad\left.-(1-\nu)\left(\frac{\partial^{2}\psi_{i}}{\partial
+x^{2}}\frac{\partial^{2}\psi_{j}}{\partial
+y^{2}}+\frac{\partial^{2}\psi_{j}}{\partial
+x^{2}}\frac{\partial^{2}\psi_{i}}{\partial
+y^{2}}\right)\right.\\&amp;\left.\quad+2(1-\nu)\frac{\partial^{2}\psi_{i}}{\partial
+x\partial y}\frac{\partial^{2}\psi_{j}}{\partial x\partial
+y}\right]\mathrm{d}x\mathrm{d}y
 \end{align}
 \]</span></p>
-<p>式中 <span class="math inline">\(\nu\)</span> 为泊松比，伽辽金法的推导过程全然没有涉及。</p>
-<p>用 <a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/ritz-method-wl">RitzSolver</a> 试算一下（与上篇文章相比，对程序包作了一点不重要的改动），可见简支方板和正六边形板的第一特征值 <span class="math inline">\(\lambda_{1}\)</span> 随泊松比的变化保持恒定（形状看 <code>PlotMarkers</code>），而简支圆板的 <span class="math inline">\(\lambda_{1}\)</span> 随泊松比的增大而单调递增。</p>
+<p>式中 <span class="math inline">\(\nu\)</span>
+为泊松比，伽辽金法的推导过程全然没有涉及。</p>
+<p>用 <a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/ritz-method-wl">RitzSolver</a>
+试算一下（与上篇文章相比，对程序包作了一点不重要的改动），可见简支方板和正六边形板的第一特征值
+<span class="math inline">\(\lambda_{1}\)</span>
+随泊松比的变化保持恒定（形状看 <code>PlotMarkers</code>），而简支圆板的
+<span class="math inline">\(\lambda_{1}\)</span>
+随泊松比的增大而单调递增。</p>
 <p><img src="/2024/12/26/galerkin-method/gm2.png"></p>
-<p>简支边界的圆板与泊松比有关，而多边形板与泊松比无关。考古之后发现这一现象被称为“<strong>polygon-circle paradox</strong>”，也就是说，你可能会预期随着多边形的边数不断增加，趋近于圆形时，多边形板的解会与圆形板的解趋于一致，但实际上并非如此。</p>
-<p>画一下取泊松比 <span class="math inline">\(\nu=1\)</span> 时简支边界的多边形薄板模态振型，分别是六边形、十边形、十五边形和二十边形：</p>
+<p>简支边界的圆板与泊松比有关，而多边形板与泊松比无关。考古之后发现这一现象被称为“<strong>polygon-circle
+paradox</strong>”，也就是说，你可能会预期随着多边形的边数不断增加，趋近于圆形时，多边形板的解会与圆形板的解趋于一致，但实际上并非如此。</p>
+<p>画一下取泊松比 <span class="math inline">\(\nu=1\)</span>
+时简支边界的多边形薄板模态振型，分别是六边形、十边形、十五边形和二十边形：</p>
 <p><img src="/2024/12/26/galerkin-method/gm3.png"></p>
-<p>可以看出随着多边形边数的增加，边界的“约束”也越来越大。对比 <span class="math inline">\(\nu=1\)</span> 时的简支边界圆板和固定边界圆板，可见简支边界二十边形薄板的“约束”甚至大于固定边界的圆板：</p>
+<p>可以看出随着多边形边数的增加，边界的“约束”也越来越大。对比 <span class="math inline">\(\nu=1\)</span>
+时的简支边界圆板和固定边界圆板，可见简支边界二十边形薄板的“约束”甚至大于固定边界的圆板：</p>
 <p><img src="/2024/12/26/galerkin-method/gm4.png"></p>
 <p>这个悖论的关键好像在于边界的曲直，但我没有真正看穿它。实际上我连“简支边界条件”都不是特别理解。这篇文章只是把我算出来的和查到的东西总结起来，然后放在这里。</p>
 <p align="right">

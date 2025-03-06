@@ -287,9 +287,11 @@
 <p>《一百万亿首诗》由十首十四行诗构成。十首诗除严格遵循经典十四行诗的格律和规范外，各首诗的同一行还押相同的韵。在作品的成书形式上，十首诗都单面排印，各行之间被剪开，左侧装订。以这种押韵方式及其表现形式为基础，翻开书页，每一首诗的任意一行，就不仅可以存在于本首诗之中，还可以与其他九首诗中除本行外的各行组合起来构成一首新诗。这种组合的数量是十的十四次方，即一百万亿。换句话说，这十首十四行诗最终可以组成一百万亿首诗。按照作者在作品使用说明中的计算，一个人一刻不停地阅读，读完这一百万亿首诗需要花费大约一亿九千万年。</p>
 </blockquote>
 <figure>
-<img src="/2024/09/12/stubbornly-love-poetry/slp1-2.png" alt="图片来自豆瓣用户 1+1=6"><figcaption aria-hidden="true">图片来自豆瓣用户 1+1=6</figcaption>
+<img src="/2024/09/12/stubbornly-love-poetry/slp1-2.png" alt="图片来自豆瓣用户 1+1=6">
+<figcaption aria-hidden="true">图片来自豆瓣用户 1+1=6</figcaption>
 </figure>
-<p>但由于书籍装帧的物理限制，还由于我的手指不够灵活，消弭了许多诗的可能性。于是，编写了选诗程序（Wolfram 语言）：</p>
+<p>但由于书籍装帧的物理限制，还由于我的手指不够灵活，消弭了许多诗的可能性。于是，编写了选诗程序（Wolfram
+语言）：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">poemChooser</span><span class="punctuation">[</span><span class="type">seed_Integer</span><span class="punctuation">]</span> <span class="operator">:=</span> </span><br><span class="line"><span class="built_in">Module</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">raw</span><span class="operator">,</span> <span class="variable">segments</span><span class="operator">,</span> <span class="variable">segmentOutput</span><span class="operator">,</span> </span><br><span class="line">  <span class="variable">poem</span> <span class="operator">=</span> <span class="comment">(*保护版权*)</span><span class="operator">,</span></span><br><span class="line"> <span class="built_in">SeedRandom</span><span class="punctuation">[</span><span class="variable">seed</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"> <span class="variable">raw</span> <span class="operator">=</span> <span class="built_in">Transpose</span><span class="punctuation">[</span><span class="variable">poem</span><span class="punctuation">]</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> <span class="type">#</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> </span><br><span class="line">   <span class="built_in">Transpose</span><span class="operator">@</span><span class="punctuation">&#123;</span><span class="built_in">Range</span><span class="punctuation">[</span><span class="number">14</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">RandomInteger</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="number">1</span><span class="operator">,</span> <span class="number">10</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="number">14</span><span class="punctuation">]</span><span class="punctuation">&#125;</span><span class="operator">;</span></span><br><span class="line"> <span class="variable">segments</span> <span class="operator">=</span> <span class="built_in">TakeList</span><span class="punctuation">[</span><span class="variable">raw</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">4</span><span class="operator">,</span> <span class="number">4</span><span class="operator">,</span> <span class="number">3</span><span class="operator">,</span> <span class="number">3</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"> <span class="variable">segmentOutput</span> <span class="operator">=</span> <span class="built_in">StringJoin</span><span class="punctuation">[</span><span class="built_in">Riffle</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="string">&quot;\n&quot;</span><span class="punctuation">]</span> <span class="operator">&lt;&gt;</span> <span class="string">&quot;\n\n&quot;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">segments</span></span><br><span class="line"> <span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
 <p>随机选取其中的一万首</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Export</span><span class="punctuation">[</span><span class="string">&quot;PoemsforMachine.txt&quot;</span><span class="operator">,</span> <span class="variable">poemChooser</span> <span class="operator">/@</span> <span class="built_in">Range</span><span class="punctuation">[</span><span class="number">10</span><span class="operator">^</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
@@ -311,7 +313,8 @@
 <p>即使改朝换代美酒也不能少<br>
 肮脏破烂衣裳堆得乱七八糟<br>
 欧洲若非抵抗便向命运称臣</p>
-<p><strong>Claude 3-Sonnet</strong>：这首诗融合了多种元素，既有生动的画面感，也有哲理性的思辨。开头几句描写了草原、美食、家庭生活等日常景象，中间几句又铺展到异国情调，最后几句哲思味浓。全诗行云流水，意境空灵。</p>
+<p><strong>Claude
+3-Sonnet</strong>：这首诗融合了多种元素，既有生动的画面感，也有哲理性的思辨。开头几句描写了草原、美食、家庭生活等日常景象，中间几句又铺展到异国情调，最后几句哲思味浓。全诗行云流水，意境空灵。</p>
 <h2 id="第二首斜塔下的风与漂泊的雕像">第二首：斜塔下的风与漂泊的雕像</h2>
 <p>潘帕斯国王转衬衣改变主意<br>
 公牛角上悬挂任它慢慢晾干<br>
@@ -327,7 +330,8 @@
 <p>船底他的雕像随着水流轻漂<br>
 啃椒盐脆饼不耽误学术研讨<br>
 也被西语挑逗在钟声喑哑时分</p>
-<p><strong>Claude 3-Sonnet</strong>：这首诗场景变换跌宕，从国王到土著、从比萨到泰晤士河、从古希腊到现代旅途，跨度之大堪称杰作。作者巧妙地将高雅与生活、哲理与趣味融为一体，读来引人入胜。尤其是最后几句，给人以无限遐想。</p>
+<p><strong>Claude
+3-Sonnet</strong>：这首诗场景变换跌宕，从国王到土著、从比萨到泰晤士河、从古希腊到现代旅途，跨度之大堪称杰作。作者巧妙地将高雅与生活、哲理与趣味融为一体，读来引人入胜。尤其是最后几句，给人以无限遐想。</p>
 <h2 id="第三首灰原惊异与风中的私语">第三首：灰原惊异与风中的私语</h2>
 <p>布列塔尼水手抓起烟草一丝<br>
 他略附庸风雅却又气度天然<br>
@@ -343,7 +347,8 @@
 <p>那些田间小屋如今让人懊恼<br>
 你比腹语大师更使我惊叫<br>
 博讷与基安蒂美酒可有区分</p>
-<p><strong>Claude 3-Sonnet</strong>：这首诗语言朴实无华，却意蕴深远。作者从日常小事着笔，联系到哲理命题，再引申到生人生百态，诗意盎然。</p>
+<p><strong>Claude
+3-Sonnet</strong>：这首诗语言朴实无华，却意蕴深远。作者从日常小事着笔，联系到哲理命题，再引申到生人生百态，诗意盎然。</p>
 <p align="right">
 初稿：24/03/17
 </p>

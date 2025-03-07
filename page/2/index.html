@@ -349,16 +349,11 @@ method</em>）了，图中的箭头现在是函数。</p>
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2024/12/04/ritz-method-in-wl/rmwl.png"></p>
+        <p><img src="/2024/12/04/ritz-method-in-wl/rmwl.png" alt></p>
 <p>我的研究方向是对微机电压电水听器进行建模，查阅相关文献时往往会遇到这个偏微分方程：</p>
-<p><span class="math display">\[
-D\nabla^{4}w+\rho_{h}w_{tt}=0
-\]</span></p>
-<p>先不管参数 <span class="math inline">\(D,\rho_{h}\)</span>，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在
-Wolfram
-的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
-<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用
-Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
+<script type="math/tex; mode=display">
+D\nabla^{4}w+\rho_{h}w_{tt}=0</script><p>先不管参数 $D,\rho_{h}$，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
+<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
         
       
     </div>
@@ -382,7 +377,7 @@ Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/Wolfram/">Wolfram</a>
+        <a href="/tags/Wolfram/">Wolfram</a><a href="/tags/GIthub/">GIthub</a>
     </span>
     
 
@@ -1226,7 +1221,7 @@ AI 的道德底线，只返回一句</p>
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":14},{"name":"尝试集","value":8},{"name":"现代生活","value":8},{"name":"读小说","value":5},{"name":"幸福观","value":3},{"name":"翻译","value":3},{"name":"小说","value":2},{"name":"Wolfram","value":2}],
+                            data: [{"name":"AI","value":14},{"name":"尝试集","value":8},{"name":"现代生活","value":8},{"name":"读小说","value":5},{"name":"GIthub","value":3},{"name":"幸福观","value":3},{"name":"翻译","value":3},{"name":"小说","value":2}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1240,7 +1235,7 @@ AI 的道德底线，只返回一句</p>
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":14},{"name":"尝试集","value":8},{"name":"现代生活","value":8},{"name":"读小说","value":5},{"name":"幸福观","value":3},{"name":"翻译","value":3},{"name":"小说","value":2},{"name":"Wolfram","value":2}].map(tag => tag.name),
+                            data: [{"name":"AI","value":14},{"name":"尝试集","value":8},{"name":"现代生活","value":8},{"name":"读小说","value":5},{"name":"GIthub","value":3},{"name":"幸福观","value":3},{"name":"翻译","value":3},{"name":"小说","value":2}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });

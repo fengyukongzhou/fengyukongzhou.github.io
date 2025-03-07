@@ -445,6 +445,10 @@ article table pre {
   width: 0;
   background: rgba(158,158,158,0.2);
 }
+.post-toc .post-toc-content ol li ol li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
 .post-toc .post-toc-content ol li ol li:before {
   content: "";
   font-size: 11px;
@@ -452,6 +456,7 @@ article table pre {
 .post-toc .post-toc-content ol li ol li ol {
   counter-reset: subsubsection;
   padding-left: 15px;
+  margin-top: 6px;
 }
 .post-toc .post-toc-content ol li ol li ol:before {
   content: "";
@@ -461,6 +466,10 @@ article table pre {
   bottom: 8px;
   width: 0;
   background: rgba(158,158,158,0.2);
+}
+.post-toc .post-toc-content ol li ol li ol li {
+  margin-bottom: 4px;
+  line-height: 1.4;
 }
 .post-toc .post-toc-content ol li ol li ol li:before {
   content: "";
@@ -514,6 +523,8 @@ article table pre {
 }
 .post-toc .post-toc-content ol > li {
   position: relative;
+  margin-bottom: 10px;
+  line-height: 1.7;
 }
 .post-toc .post-toc-content ol > li:before {
   content: none;
@@ -531,6 +542,10 @@ article table pre {
 .post-toc .post-toc-content ol > li ol > li .toc-link {
   font-size: 13px;
   opacity: 0.9;
+}
+.post-toc .post-toc-content ol > li ol > li ol > li .toc-link {
+  font-size: 12px;
+  opacity: 0.85;
 }
 @-moz-keyframes toc-slide-in {
   0% {

@@ -978,6 +978,10 @@ article table pre {
   width: 0;
   background: rgba(158,158,158,0.2);
 }
+.post-toc .post-toc-content ol li ol li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
 .post-toc .post-toc-content ol li ol li:before {
   content: "";
   font-size: 11px;
@@ -985,6 +989,7 @@ article table pre {
 .post-toc .post-toc-content ol li ol li ol {
   counter-reset: subsubsection;
   padding-left: 15px;
+  margin-top: 6px;
 }
 .post-toc .post-toc-content ol li ol li ol:before {
   content: "";
@@ -994,6 +999,10 @@ article table pre {
   bottom: 8px;
   width: 0;
   background: rgba(158,158,158,0.2);
+}
+.post-toc .post-toc-content ol li ol li ol li {
+  margin-bottom: 4px;
+  line-height: 1.4;
 }
 .post-toc .post-toc-content ol li ol li ol li:before {
   content: "";
@@ -1047,6 +1056,8 @@ article table pre {
 }
 .post-toc .post-toc-content ol > li {
   position: relative;
+  margin-bottom: 10px;
+  line-height: 1.7;
 }
 .post-toc .post-toc-content ol > li:before {
   content: none;
@@ -1064,6 +1075,10 @@ article table pre {
 .post-toc .post-toc-content ol > li ol > li .toc-link {
   font-size: 13px;
   opacity: 0.9;
+}
+.post-toc .post-toc-content ol > li ol > li ol > li .toc-link {
+  font-size: 12px;
+  opacity: 0.85;
 }
 @-moz-keyframes toc-slide-in {
   0% {
@@ -2483,15 +2498,17 @@ figure.highlight .mac-buttons span.green {
 }
 figure.highlight .lang-label {
   position: absolute;
-  top: 0.6em;
+  top: 0.4em;
   right: 3.2em;
-  font-size: 0.85em;
+  font-size: 0.95em;
   color: #666;
   font-family: inherit;
-  opacity: 0.7;
-  padding: 0.2em 0.5em;
-  border-radius: 3px;
-  background: rgba(0,0,0,0.05);
+  opacity: 0.8;
+  padding: 0.3em 0.8em;
+  background: transparent;
+  border-radius: 0 0 6px 6px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 figure.highlight .copy-button {
   position: absolute;
@@ -2505,6 +2522,7 @@ figure.highlight .copy-button {
   font-size: 0.9em;
   opacity: 0.7;
   transition: all 0.2s ease;
+  line-height: 1.2;
 }
 figure.highlight .copy-button:hover {
   opacity: 1;
@@ -2645,7 +2663,7 @@ code {
   }
   figure.highlight .lang-label {
     color: #888;
-    background: rgba(255,255,255,0.05);
+    background: transparent;
   }
   figure.highlight .copy-button {
     color: #888;

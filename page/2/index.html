@@ -349,11 +349,16 @@ method</em>）了，图中的箭头现在是函数。</p>
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2024/12/04/ritz-method-in-wl/rmwl.png" alt></p>
+        <p><img src="/2024/12/04/ritz-method-in-wl/rmwl.png"></p>
 <p>我的研究方向是对微机电压电水听器进行建模，查阅相关文献时往往会遇到这个偏微分方程：</p>
-<script type="math/tex; mode=display">
-D\nabla^{4}w+\rho_{h}w_{tt}=0</script><p>先不管参数 $D,\rho_{h}$，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在 Wolfram 的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
-<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用 Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
+<p><span class="math display">\[
+D\nabla^{4}w+\rho_{h}w_{tt}=0
+\]</span></p>
+<p>先不管参数 <span class="math inline">\(D,\rho_{h}\)</span>，让我们关注方程本身，把这个式子当作单纯的“计算对象”。我没能在
+Wolfram
+的帮助文档里找到“一键式”的数值求解方法，而解析解只能处理固定边圆板、简支边圆板和简支边方板等特殊情况，如果是蜂巢形的水听器单元呢？</p>
+<p>面对偏微分方程难解的问题，里兹法的思路大概是：<strong>先通过能量分析，把方程问题变成优化问题，再用基函数逼近真实解</strong>。在基函数设置时，就可以考虑薄板形状和边界条件的问题，从而得到一个比较通用的程序，利用
+Wolfram 语言的内置函数，还可以把这个程序写得更简单。</p>
         
       
     </div>
@@ -1312,7 +1317,7 @@ AI 的道德底线，只返回一句</p>
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"读书笔记","children":[],"count":8,"path":"读书笔记"},{"name":"计算笔记","children":[],"count":7,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":6,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

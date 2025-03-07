@@ -576,6 +576,9 @@ article blockquote {
   overflow: hidden;
   transition: all 0.3s ease;
 }
+article blockquote + blockquote {
+  margin-top: 3rem;
+}
 article blockquote:before {
   content: '"';
   position: absolute;
@@ -958,12 +961,7 @@ article table pre {
   transition: all 0.2s ease-in-out;
 }
 .post-toc .post-toc-content ol li:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  color: var(--text-color);
-  font-size: 12px;
-  top: 2px;
+  content: none;
 }
 .post-toc .post-toc-content ol li ol {
   counter-reset: subsection;
@@ -1045,37 +1043,27 @@ article table pre {
   animation: toc-pulse 2s infinite;
 }
 .post-toc .post-toc-content .toc-link.active:before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 16px;
-  background: #f03838;
-  border-radius: 2px;
+  content: none;
 }
 .post-toc .post-toc-content ol > li {
   position: relative;
 }
 .post-toc .post-toc-content ol > li:before {
-  content: "";
-  position: absolute;
-  left: -4px;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(240,56,56,0.6);
-  opacity: 0;
-  transition: all 0.2s ease;
+  content: none;
 }
-.post-toc .post-toc-content ol > li:hover:before {
-  opacity: 1;
+.post-toc .post-toc-content ol > li .toc-link {
+  padding-left: 12px;
+  border-left: 2px solid transparent;
 }
-.post-toc .post-toc-content ol > li.active:before {
-  opacity: 1;
-  background: #f03838;
+.post-toc .post-toc-content ol > li .toc-link:hover {
+  border-left-color: rgba(240,56,56,0.4);
+}
+.post-toc .post-toc-content ol > li .toc-link.active {
+  border-left-color: #f03838;
+}
+.post-toc .post-toc-content ol > li ol > li .toc-link {
+  font-size: 13px;
+  opacity: 0.9;
 }
 @-moz-keyframes toc-slide-in {
   0% {

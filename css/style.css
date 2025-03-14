@@ -2453,7 +2453,7 @@ figure.highlight {
   margin: 1.5em 0;
   padding: 2em 0 0;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: var(--code-bg, #f6f6f6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   font-family: 'Fira Code', 'Source Code Pro', Consolas, Monaco, 'Andale Mono', monospace;
   line-height: 1.5;
@@ -2555,22 +2555,31 @@ figure.highlight table {
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  background: var(--code-bg, #f6f6f6);
 }
 figure.highlight .gutter {
   padding: 0.5em 0.8em;
   border-right: 1px solid #ebedef;
-  background: rgba(0,0,0,0.02);
+  background-color: transparent;
 }
 figure.highlight .gutter pre {
   margin: 0;
   color: #9e9e9e;
-  font-size: 0.85em;
+  font-size: 0.95em;
   text-align: right;
   user-select: none;
+  line-height: 0.8em;
+}
+figure.highlight .gutter .line {
+  height: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 figure.highlight .code {
   padding: 0.5em 1em;
   width: 100%;
+  background-color: transparent;
 }
 figure.highlight .code pre {
   margin: 0;
@@ -2578,6 +2587,13 @@ figure.highlight .code pre {
   font-size: 0.95em;
   white-space: pre;
   overflow: visible;
+  line-height: 0.8em;
+}
+figure.highlight .code .line {
+  height: 0.8em;
+  min-height: 0.8em;
+  display: flex;
+  align-items: center;
 }
 figure.highlight .marked {
   background: rgba(0,0,0,0.05);
@@ -2649,7 +2665,7 @@ code {
 }
 @media (prefers-color-scheme: dark) {
   figure.highlight {
-    background: #282c34;
+    background: var(--code-bg, #2d2d2d);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   }
   figure.highlight::before {
@@ -2671,12 +2687,18 @@ code {
   figure.highlight .copy-button:hover {
     color: #f03838;
   }
+  figure.highlight table {
+    background: var(--code-bg, #2d2d2d);
+  }
   figure.highlight .gutter {
     border-right-color: #3e4451;
-    background: rgba(0,0,0,0.2);
+    background-color: transparent;
   }
   figure.highlight .gutter pre {
     color: #636d83;
+  }
+  figure.highlight .code {
+    background-color: transparent;
   }
   figure.highlight .code pre {
     color: #abb2bf;
@@ -2737,6 +2759,48 @@ code {
     background: rgba(255,255,255,0.1);
     color: #e06c75;
   }
+}
+[data-theme="dark"] figure.highlight {
+  background: var(--code-bg, #2d2d2d);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+[data-theme="dark"] figure.highlight::before {
+  border-bottom-color: #3e4451;
+}
+[data-theme="dark"] figure.highlight .mac-buttons span {
+  opacity: 0.8;
+}
+[data-theme="dark"] figure.highlight .mac-buttons span:hover {
+  opacity: 1;
+}
+[data-theme="dark"] figure.highlight .lang-label {
+  color: #888;
+  background: transparent;
+}
+[data-theme="dark"] figure.highlight .copy-button {
+  color: #888;
+}
+[data-theme="dark"] figure.highlight .copy-button:hover {
+  color: #f03838;
+}
+[data-theme="dark"] figure.highlight table {
+  background: var(--code-bg, #2d2d2d);
+}
+[data-theme="dark"] figure.highlight .gutter {
+  border-right-color: #3e4451;
+  background-color: transparent;
+}
+[data-theme="dark"] figure.highlight .gutter pre {
+  color: #636d83;
+}
+[data-theme="dark"] figure.highlight .code {
+  background-color: transparent;
+}
+[data-theme="dark"] figure.highlight .code pre {
+  color: #abb2bf;
+}
+[data-theme="dark"] figure.highlight .marked {
+  background: rgba(255,255,255,0.05);
 }
 @media (min-width: 768px) {
   article {

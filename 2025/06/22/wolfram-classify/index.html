@@ -386,12 +386,12 @@ Which Author Wrote a Text</a>。</p>
 </ol>
 <p>同样，我们用上一部分骆以军《明朝》“机器人上吊”的片段，来测试第二个分类器：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">singleTestText</span> <span class="operator">=</span> <span class="variable">testText</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">probabilities</span> <span class="operator">=</span> <span class="variable">bookClassifier</span><span class="punctuation">[</span><span class="variable">singleTestText</span><span class="operator">,</span> <span class="string">&quot;Probabilities&quot;</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">BarChart</span><span class="punctuation">[</span><span class="variable">probabilities</span><span class="operator">,</span> <span class="built_in">ChartLabels</span> <span class="operator">-&gt;</span> <span class="built_in">Keys</span><span class="punctuation">[</span><span class="variable">probabilities</span><span class="punctuation">]</span><span class="operator">,</span> </span><br><span class="line"> <span class="built_in">ChartStyle</span> <span class="operator">-&gt;</span> <span class="string">&quot;DarkRainbow&quot;</span><span class="operator">,</span> <span class="built_in">PlotLabel</span> <span class="operator">-&gt;</span> <span class="string">&quot;单一样本预测概率&quot;</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&lt;|&quot;女儿&quot; -&gt; 0.421276, &quot;匡超人&quot; -&gt; 0.567787, &quot;遣悲怀&quot; -&gt; 0.0000478184, &quot;月球姓氏&quot; -&gt; 3.76191*10^-7, &quot;西夏旅馆&quot; -&gt; 0.0108887|&gt;*)</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2025/06/22/wolfram-classify/wc-3.png"></p>
+<p><img src="/2025/06/22/wolfram-classify/wc-4.png"></p>
 <p>分类器认为这段来自《女儿》或者《匡超人》。我猜测这是因为这两本小说同样提及了“AI
 机器人”这个话题。</p>
 <h2 id="可视化文体空间">可视化文体空间</h2>
 <p>为了更直观地理解模型是如何“看见”这些细微差异和困惑的，我们需要一种方法来绘制一幅“文体地图”。<strong>特征空间降维可视化</strong>正是为此而生的强大工具，<strong>读取每个文本片段的“文风特征”，然后将文风相似的片段放在地图上相近的位置</strong>。</p>
-<p><img src="/2025/06/22/wolfram-classify/wc-4.png"></p>
+<p><img src="/2025/06/22/wolfram-classify/wc-3.png"></p>
 <p>第一眼看去，这幅地图似乎有些“混乱”，所有颜色的点都均匀地混合在一起。这本身就是一个非常有价值的视觉呈现，它直观地告诉我们：<strong>骆以军的个人文体风格非常统一</strong>，以至于在
 1000 个字符的微观尺度上，他的不同作品几乎“你中有我，我中有你”。</p>
 <p>我们能否从这片“混沌”中找到隐藏的结构？我们引入 K-Means

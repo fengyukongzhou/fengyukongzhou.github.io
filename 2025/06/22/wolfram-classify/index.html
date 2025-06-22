@@ -1,0 +1,1181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我们能「看见」文体的形状吗？ | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="在这篇笔记中，我们（指我和
+Gemini）开启了一场有趣的探索：传统机器学习能否像读者一样，感知到不同作者的文字风格？我们不仅将使用
+Wolfram 语言内置函数 Classify
+构建一个分类模型，更希望通过一系列可视化，直观地“看见”文字背后的风格印记。">
+  
+
+  
+  
+  <meta name="keywords" content="读小说,骆以军,AI,Wolfram">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="我们能「看见」文体的形状吗？"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    // 回到顶部功能
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // 控制回到顶部按钮的显示和隐藏
+    function toggleScrollTopButton() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleScrollTopButton);
+    });
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #f03838);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #theme-toggle {
+      right: 20px;
+    }
+    
+    #scroll-top {
+      right: 70px; /* 位于夜间模式按钮旁边 */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+    
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button id="theme-toggle" class="floating-btn" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<button id="scroll-top" class="floating-btn" onclick="scrollToTop()" aria-label="回到顶部">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>我们能「看见」文体的形状吗？</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/06/22/wolfram-classify/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-06-21T16:00:00.000Z">
+          2025-06-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2025/06/22/wolfram-classify/wc-0.png"></p>
+<p>在这篇笔记中，我们（<em>指我和
+Gemini</em>）开启了一场有趣的探索：传统机器学习能否像读者一样，感知到不同作者的文字风格？我们不仅将使用
+Wolfram 语言内置函数 <code>Classify</code>
+构建一个分类模型，更希望通过一系列可视化，直观地“看见”文字背后的风格印记。</p>
+<span id="more"></span>
+<p>灵感来源于 Wolfram 的官方示例：<a target="_blank" rel="noopener" href="https://resources.wolframcloud.com/ExampleRepository/resources/Find-Which-Author-Wrote-a-Text/">Find
+Which Author Wrote a Text</a>。</p>
+<h2 id="完整文件结构">完整文件结构</h2>
+<p>为了让项目清晰有序，我们采用以下文件结构。所有代码和数据都围绕这个结构展开。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">中文作家识别项目/</span><br><span class="line">│</span><br><span class="line">├── AuthorClassify.nb            # Wolfram Notebook 主文件</span><br><span class="line">│</span><br><span class="line">└── Dataset/                     # 存放所有原始文本数据的文件夹</span><br><span class="line">    │</span><br><span class="line">    ├── 骆以军/</span><br><span class="line">    │   ├── 匡超人.txt</span><br><span class="line">    │   ├── 女儿.txt</span><br><span class="line">    │   ├── 遣悲怀.txt</span><br><span class="line">    │   ├── 西夏旅馆.txt</span><br><span class="line">    │   └── 月球姓氏.txt</span><br><span class="line">    │</span><br><span class="line">    └── 阎连科/</span><br><span class="line">        ├── 丁庄梦.txt</span><br><span class="line">        ├── 日光流年.txt</span><br><span class="line">        ├── 受活.txt</span><br><span class="line">        ├── 心经.txt</span><br><span class="line">        └── 炸裂志.txt</span><br></pre></td></tr></table></figure>
+<h2 id="区分不同作者">区分不同作者</h2>
+<p>不妨从一个经典的二分类开始，作为文体分析的“热身运动”：区分两位风格鲜明的作家——骆以军和阎连科。</p>
+<h3 id="数据集构建">1. 数据集构建</h3>
+<p>我们选取了两位作家的各五部作品，并使用 <a target="_blank" rel="noopener" href="https://calibre-ebook.com/">Calibre</a> 软件将它们统一转换为
+<code>.txt</code> 纯文本格式，存放在上述 <code>Dataset</code>
+文件夹中。</p>
+<p>接下来，我们使用 Wolfram Language 来加载和处理这些数据。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* --- 1. 定义数据集目录 --- *)</span></span><br><span class="line"><span class="variable">dataDir</span> <span class="operator">=</span> <span class="built_in">FileNameJoin</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">NotebookDirectory</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="string">&quot;Dataset&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* --- 2. 获取两位作者的目录路径 --- *)</span></span><br><span class="line"><span class="variable">authorDirs</span> <span class="operator">=</span> <span class="built_in">FileNames</span><span class="punctuation">[</span><span class="string">&quot;*&quot;</span><span class="operator">,</span> <span class="variable">dataDir</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<h3 id="构建训练与测试集">2. 构建训练与测试集</h3>
+<p>机器学习模型需要大量的“学习材料”。我们的策略是将每位作者的所有文本合并，然后切分成固定长度（这里设定为
+1000
+个字符）的文本片段。每个片段都是一个独立的<strong>样本</strong>，用于训练和测试。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 定义每个文本片段（样本）的目标字符数 *)</span></span><br><span class="line"><span class="variable">chunkSize</span> <span class="operator">=</span> <span class="number">1000</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 核心处理逻辑：为每位作者创建一个包含其所有文本片段的列表 *)</span></span><br><span class="line"><span class="variable">trainingData</span> <span class="operator">=</span> <span class="built_in">Association</span><span class="operator">@</span><span class="built_in">Table</span><span class="punctuation">[</span></span><br><span class="line">    <span class="variable">authorName</span> <span class="operator">=</span> <span class="built_in">FileNameTake</span><span class="punctuation">[</span><span class="variable">dir</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">allContent</span> <span class="operator">=</span> <span class="built_in">StringJoin</span><span class="punctuation">[</span><span class="built_in">Import</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="string">&quot;Text&quot;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="built_in">FileNames</span><span class="punctuation">[</span><span class="string">&quot;*.txt&quot;</span><span class="operator">,</span> <span class="variable">dir</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">chunks</span> <span class="operator">=</span> <span class="built_in">StringPartition</span><span class="punctuation">[</span><span class="variable">allContent</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="variable">chunkSize</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">authorName</span> <span class="operator">-&gt;</span> <span class="variable">chunks</span><span class="operator">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="variable">dir</span><span class="operator">,</span> <span class="variable">authorDirs</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
+<p>数据准备好后，我们将其按 80/20
+的比例分割成<strong>训练集</strong>（用于训练模型）和<strong>测试集</strong>（用于评估模型性能）。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 将每个作者的数据随机打乱 *)</span></span><br><span class="line"><span class="variable">shuffledData</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">RandomSample</span><span class="operator">,</span> <span class="variable">trainingData</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 分割数据集：80% 作为训练集，20% 作为测试集 *)</span></span><br><span class="line"><span class="variable">trainingSet</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">Take</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="built_in">Floor</span><span class="punctuation">[</span><span class="built_in">Length</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.8</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;,</span> <span class="variable">shuffledData</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">testSet</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">Drop</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="built_in">Floor</span><span class="punctuation">[</span><span class="built_in">Length</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.8</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;,</span> <span class="variable">shuffledData</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="训练分类器并验证结果">3. 训练分类器并验证结果</h3>
+<p>一切准备就绪，我们开始训练分类器。Wolfram Language 内置的
+<code>Classify</code> 函数会自动为我们处理好复杂的模型选择。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">authorClassifier</span> <span class="operator">=</span> <span class="built_in">Classify</span><span class="punctuation">[</span><span class="variable">trainingSet</span><span class="punctuation">]</span><span class="operator">;</span></span><br></pre></td></tr></table></figure>
+<p>模型训练完成后，我们用之前留出的测试集来检验它的表现。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">cm</span> <span class="operator">=</span> <span class="built_in">ClassifierMeasurements</span><span class="punctuation">[</span><span class="variable">authorClassifier</span><span class="operator">,</span> <span class="variable">testSet</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2025/06/22/wolfram-classify/wc-1.png"></p>
+<p>模型给出的成绩单非常亮眼，<strong>准确率达到了
+99.81%</strong>！混淆矩阵（Confusion Matrix）也清晰地显示，在 515
+次测试中，模型几乎“百发百中”。这直观地告诉我们，骆以军和阎连科的文体风格差异巨大，模型可以轻松地将他们区分开。</p>
+<p>另外，模型没能区分开的这一段（<code>cm["WorstClassifiedExamples" -&gt; 1]</code>）其实比较特殊，并非小说正文，而是阎连科的一篇创作谈。</p>
+<h3 id="在全新文本上测试">4. 在全新文本上测试</h3>
+<p>为了进一步感受模型的“实战”能力，我们找来了两段全新的文本，分别来自骆以军的《<a href="https://fengyukongzhou.github.io/2025/05/25/ming-dynasty/">明朝</a>》和阎连科的《中国故事》，让模型进行预测。模型自信地给出了正确答案
+<code>&#123;"骆以军", "阎连科"&#125;</code>，展现了其强大的泛化能力。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">testText</span> <span class="operator">=</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="string">&quot;但当我站起,走到客厅,却发现我的机器人,用一条跳绳绑一个绳结,把自己吊在沙发前面一点的位置。原来机器人上吊和真的活人上吊,那模样如此相像(除了没有长长的舌头吐出),但头部的怪异角度被勒死在绳圈上方,身体部位的手和双脚,都像鱼鳍那样垂下,摇晃。&quot;</span><span class="operator">,</span></span><br><span class="line">    <span class="string">&quot;太阳被我这一骂和一吐,弹跳一下突然蹿高了,一如一个球在弹簧上跳了一下样。日光的味道也是白石灰的味。那味道落在脸上,有针尖刺扎那感觉。我家南邻的新宅邻居家,主人是老师,在中学教语文。教语文时他总是爱背爱讲唐诗和宋词,结果我也能背很多唐诗宋词了。现在老师夹着课本迎着日光去学校,见了我语文老师笑着立下来.&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">predictedAuthor</span> <span class="operator">=</span> <span class="variable">authorClassifier</span> <span class="operator">/@</span> <span class="variable">testText</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;&quot;骆以军&quot;, &quot;阎连科&quot;&#125;*)</span></span><br><span class="line"></span><br><span class="line"><span class="variable">authorProbabilities</span> <span class="operator">=</span> </span><br><span class="line"> <span class="variable">authorClassifier</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="string">&quot;Probabilities&quot;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">testText</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;&lt;|&quot;阎连科&quot; -&gt; 1.88435*10^-51, &quot;骆以军&quot; -&gt; 1.|&gt;, &lt;|&quot;阎连科&quot; -&gt; 1., &quot;骆以军&quot; -&gt; 3.63687*10^-23|&gt;&#125;*)</span></span><br></pre></td></tr></table></figure>
+<p>但对于阎连科的《速求共眠》，分类器遇到了障碍，可见此书在阎连科创作谱系中占据了独特位置。不过，也可能只是因为所选文段中使用括号来补充说明，这有点像是骆以军的风格了。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">suqiugongmian</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="string">&quot;知道吗，今日中国电影票房正呈井喷之势。有人预计今年电影票房是二百亿，而明年全国票房最低二百六十亿，后年为三百亿。请你算一下，如果今年拍摄，明年上映，凭你我之努力，顾长卫之号召力，我们在中国电影票房中的二百六十亿中取百分之一就是二亿六千万，百分之二就是五亿二千万，百分之三就是七个亿\[Ellipsis]\[Ellipsis]如此以保守为计，你觉得我们做一部电影没有三个亿的票房可能吗？而我们的这部电影投资小，场景集中，故事好看，人物丰满，在中国上映之前先到国外各大电影节上参展和参评，倘若（是肯定）撞了一个国际奖，那会是一种什么结果呢？仅仅是每人分上一千万、两千万的意义吗？&quot;</span><span class="operator">,</span><span class="string">&quot;在那些取材于人民币的局部异变的巨幅现代摄影作品下，我先是有些夸张、惊讶地站着看一会儿，及至顾从楼上下来后，待他谦逊、微笑地带导着我从一楼到三楼参观他的数十幅这样的作品时，那样夸张的惊讶从我脸上消失了，留下的唯一一个念头是，他能从导演的道上暂时撤回身，做一个独一无二的现代摄影艺术家（我舍不得把&quot;</span>伟大<span class="string">&quot;二字作为礼物送给他，因为他也从未把&quot;</span>伟大<span class="string">&quot;作为礼物送给我），难道我就不能从写作那样清寂、孤寒中抽身出来，做一个伟大（狂妄和疯癫！）的导演和演员，摇身一变，使自己从作家变成艺术家？&quot;</span><span class="punctuation">&#125;</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">authorClassifier</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="string">&quot;Probabilities&quot;</span><span class="punctuation">]</span> <span class="operator">&amp;</span> <span class="operator">/@</span> <span class="variable">suqiugongmian</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&#123;&lt;|&quot;阎连科&quot; -&gt; 2.15563*10^-34, &quot;骆以军&quot; -&gt; 1.|&gt;, &lt;|&quot;阎连科&quot; -&gt; 2.84952*10^-50, &quot;骆以军&quot; -&gt; 1.|&gt;&#125;*)</span></span><br></pre></td></tr></table></figure>
+<h2 id="区分同一作者的不同小说">区分同一作者的不同小说</h2>
+<p>既然区分不同作者如此轻松，一个更有趣的问题浮现了：<strong>模型能否感知到同一位作者在不同作品中细微的风格变化？</strong></p>
+<p>我们选择数据集中骆以军的五部小说，来开启这场更具挑战性的探索。</p>
+<h3 id="数据准备">1. 数据准备</h3>
+<p>这次，我们的分析单元变成了“书名”。数据处理的逻辑与之前类似，但这次我们是按<strong>单个文件</strong>（即单本书）来创建标签和数据集。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">bookFiles</span> <span class="operator">=</span> <span class="built_in">FileNames</span><span class="punctuation">[</span><span class="string">&quot;*.txt&quot;</span><span class="operator">,</span> <span class="built_in">FileNameJoin</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">NotebookDirectory</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="operator">,</span> <span class="string">&quot;Dataset/骆以军&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">chunkSize</span> <span class="operator">=</span> <span class="number">1000</span><span class="operator">;</span> <span class="comment">(* 文本块大小保持不变 *)</span></span><br><span class="line"></span><br><span class="line"><span class="variable">trainingDataByBook</span> <span class="operator">=</span> <span class="built_in">Association</span><span class="operator">@</span><span class="built_in">Table</span><span class="punctuation">[</span></span><br><span class="line">    <span class="variable">bookName</span> <span class="operator">=</span> <span class="built_in">FileBaseName</span><span class="punctuation">[</span><span class="variable">file</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">bookContent</span> <span class="operator">=</span> <span class="built_in">Import</span><span class="punctuation">[</span><span class="variable">file</span><span class="operator">,</span> <span class="string">&quot;Text&quot;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">chunks</span> <span class="operator">=</span> <span class="built_in">StringPartition</span><span class="punctuation">[</span><span class="variable">bookContent</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="variable">chunkSize</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line">    <span class="variable">bookName</span> <span class="operator">-&gt;</span> <span class="variable">chunks</span><span class="operator">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="variable">file</span><span class="operator">,</span> <span class="variable">bookFiles</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Keys</span><span class="punctuation">[</span><span class="variable">trainingDataByBook</span><span class="punctuation">]</span></span><br><span class="line"><span class="comment">(*&#123;&quot;月球姓氏&quot;, &quot;西夏旅馆&quot;, &quot;匡超人&quot;, &quot;遣悲怀&quot;, &quot;女儿&quot;&#125;*)</span></span><br></pre></td></tr></table></figure>
+<h3 id="训练与评估">2. 训练与评估</h3>
+<p>我们重复之前的步骤，对这五本书的数据进行分割、训练和评估。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 将每本书的数据随机打乱并分割数据集 *)</span></span><br><span class="line"><span class="variable">shuffledDataByBook</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">RandomSample</span><span class="operator">,</span> <span class="variable">trainingDataByBook</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">trainingSetByBook</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">Take</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="built_in">Floor</span><span class="punctuation">[</span><span class="built_in">Length</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.8</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;,</span> <span class="variable">shuffledDataByBook</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">testSetByBook</span> <span class="operator">=</span> <span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">Drop</span><span class="punctuation">[</span><span class="type">#</span><span class="operator">,</span> <span class="built_in">UpTo</span><span class="punctuation">[</span><span class="built_in">Floor</span><span class="punctuation">[</span><span class="built_in">Length</span><span class="punctuation">[</span><span class="type">#</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="number">0.8</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="operator">&amp;,</span> <span class="variable">shuffledDataByBook</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 训练一个新的分类器 *)</span></span><br><span class="line"><span class="variable">bookClassifier</span> <span class="operator">=</span> <span class="built_in">Classify</span><span class="punctuation">[</span><span class="variable">trainingSetByBook</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* 验证训练结果 *)</span></span><br><span class="line"><span class="variable">cmBook</span> <span class="operator">=</span> <span class="built_in">ClassifierMeasurements</span><span class="punctuation">[</span><span class="variable">bookClassifier</span><span class="operator">,</span> <span class="variable">testSetByBook</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2025/06/22/wolfram-classify/wc-2.png"></p>
+<p>这次，模型的准确率约为
+<strong>84.8%</strong>。混淆矩阵显示，模型大部分时候都能做出正确判断，但也出现了不少混淆。这揭示了一个有趣的现象：</p>
+<ol type="1">
+<li>骆以军的不同作品之间确实存在<strong>可以被量化的风格差异</strong>。</li>
+<li>但这些差异非常细微，导致模型<strong>时常会感到困惑</strong>，尤其当不同作品探讨相似主题时，它们的微观文风可能会趋同。</li>
+</ol>
+<p>同样，我们用上一部分骆以军《明朝》“机器人上吊”的片段，来测试第二个分类器：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">singleTestText</span> <span class="operator">=</span> <span class="variable">testText</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">probabilities</span> <span class="operator">=</span> <span class="variable">bookClassifier</span><span class="punctuation">[</span><span class="variable">singleTestText</span><span class="operator">,</span> <span class="string">&quot;Probabilities&quot;</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">BarChart</span><span class="punctuation">[</span><span class="variable">probabilities</span><span class="operator">,</span> <span class="built_in">ChartLabels</span> <span class="operator">-&gt;</span> <span class="built_in">Keys</span><span class="punctuation">[</span><span class="variable">probabilities</span><span class="punctuation">]</span><span class="operator">,</span> </span><br><span class="line"> <span class="built_in">ChartStyle</span> <span class="operator">-&gt;</span> <span class="string">&quot;DarkRainbow&quot;</span><span class="operator">,</span> <span class="built_in">PlotLabel</span> <span class="operator">-&gt;</span> <span class="string">&quot;单一样本预测概率&quot;</span><span class="punctuation">]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*&lt;|&quot;女儿&quot; -&gt; 0.421276, &quot;匡超人&quot; -&gt; 0.567787, &quot;遣悲怀&quot; -&gt; 0.0000478184, &quot;月球姓氏&quot; -&gt; 3.76191*10^-7, &quot;西夏旅馆&quot; -&gt; 0.0108887|&gt;*)</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2025/06/22/wolfram-classify/wc-3.png"></p>
+<p>分类器认为这段来自《女儿》或者《匡超人》。我猜测这是因为这两本小说同样提及了“AI
+机器人”这个话题。</p>
+<h2 id="可视化文体空间">可视化文体空间</h2>
+<p>为了更直观地理解模型是如何“看见”这些细微差异和困惑的，我们需要一种方法来绘制一幅“文体地图”。<strong>特征空间降维可视化</strong>正是为此而生的强大工具，<strong>读取每个文本片段的“文风特征”，然后将文风相似的片段放在地图上相近的位置</strong>。</p>
+<p><img src="/2025/06/22/wolfram-classify/wc-4.png"></p>
+<p>第一眼看去，这幅地图似乎有些“混乱”，所有颜色的点都均匀地混合在一起。这本身就是一个非常有价值的视觉呈现，它直观地告诉我们：<strong>骆以军的个人文体风格非常统一</strong>，以至于在
+1000 个字符的微观尺度上，他的不同作品几乎“你中有我，我中有你”。</p>
+<p>我们能否从这片“混沌”中找到隐藏的结构？我们引入 K-Means
+聚类算法，让它在完全不知道书名的情况下，自动地在地图上寻找 5
+个“点最密集的社区”。</p>
+<p>这张最终的可视化地图，是本次探索之旅的核心发现。</p>
+<ul>
+<li><strong>每一个小圆点</strong>，代表一个长度为 1000
+个字符的文本片段。<strong>点的颜色</strong>代表它来自哪本书。</li>
+<li><strong>每一个背景色块</strong>，代表一个由算法自动发现的、“文体风格上高度相似”的文本片段社区。我们可以称之为一种“<strong>写作模式</strong>”或“<strong>风格集群</strong>”。</li>
+</ul>
+<p>每一个背景色块（风格集群）中，都包含了五颜六色的点（来自所有不同的书）。</p>
+<p>这幅图景生动地展示了：<strong>骆以军在创作任何一部小说时，都会反复运用（或陷入）他几种标志性的“写作模式”</strong>。例如，某个色块可能汇集了他所有作品中那些关于“家庭记忆和身体创伤”的片段，而另一个色块则可能聚集了那些“引用典故、进行哲学思辨”的片段。</p>
+<p>如有雷同，纯属巧合。</p>
+<p>可视化代码如下：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* --- 1. 数据准备与降维 --- *)</span></span><br><span class="line"><span class="variable">allTestSamples</span> <span class="operator">=</span> <span class="built_in">Flatten</span><span class="punctuation">[</span><span class="built_in">Values</span><span class="punctuation">[</span><span class="variable">testSetByBook</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">allTestLabels</span> <span class="operator">=</span> <span class="built_in">Flatten</span><span class="punctuation">[</span><span class="built_in">ConstantArray</span> <span class="operator">@@@</span> <span class="built_in">Normal</span><span class="punctuation">[</span><span class="built_in">Map</span><span class="punctuation">[</span><span class="built_in">Length</span><span class="operator">,</span> <span class="variable">testSetByBook</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">featureExtractor</span> <span class="operator">=</span> <span class="variable">bookClassifier</span><span class="punctuation">[</span><span class="string">&quot;FeatureExtractor&quot;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">featureVectors</span> <span class="operator">=</span> <span class="variable">featureExtractor</span> <span class="operator">/@</span> <span class="variable">allTestSamples</span><span class="operator">;</span></span><br><span class="line"><span class="variable">reducedVectors</span> <span class="operator">=</span> <span class="built_in">DimensionReduce</span><span class="punctuation">[</span><span class="variable">featureVectors</span><span class="operator">,</span> <span class="number">2</span><span class="operator">,</span> <span class="built_in">Method</span> <span class="operator">-&gt;</span> <span class="string">&quot;TSNE&quot;</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* --- 2. 创建散点图数据 --- *)</span></span><br><span class="line"><span class="variable">dataByBook</span> <span class="operator">=</span> <span class="built_in">GroupBy</span><span class="punctuation">[</span><span class="built_in">Transpose</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="variable">reducedVectors</span><span class="operator">,</span> <span class="variable">allTestLabels</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Last</span> <span class="operator">-&gt;</span> <span class="built_in">First</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(* --- 3. K-Means 聚类与最终可视化 --- *)</span></span><br><span class="line"><span class="variable">k</span> <span class="operator">=</span> <span class="number">5</span><span class="operator">;</span></span><br><span class="line"><span class="variable">clusters</span> <span class="operator">=</span> <span class="built_in">FindClusters</span><span class="punctuation">[</span><span class="variable">reducedVectors</span><span class="operator">,</span> <span class="variable">k</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="variable">backgroundPolygons</span> <span class="operator">=</span> <span class="built_in">MapIndexed</span><span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="built_in">Opacity</span><span class="punctuation">[</span><span class="number">0.2</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">ColorData</span><span class="punctuation">[</span><span class="number">97</span><span class="punctuation">]</span><span class="punctuation">[</span><span class="type">#2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="operator">,</span> </span><br><span class="line">     <span class="built_in">EdgeForm</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="built_in">Thick</span><span class="operator">,</span> <span class="built_in">ColorData</span><span class="punctuation">[</span><span class="number">97</span><span class="punctuation">]</span><span class="punctuation">[</span><span class="type">#2</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="operator">,</span> </span><br><span class="line">     <span class="built_in">ConvexHullMesh</span><span class="punctuation">[</span><span class="type">#1</span><span class="punctuation">]</span><span class="punctuation">&#125;</span><span class="operator">&amp;,</span></span><br><span class="line">    <span class="variable">clusters</span></span><br><span class="line"><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"><span class="built_in">Show</span><span class="punctuation">[</span></span><br><span class="line">    <span class="built_in">Graphics</span><span class="punctuation">[</span><span class="variable">backgroundPolygons</span><span class="punctuation">]</span><span class="operator">,</span></span><br><span class="line">    <span class="built_in">ListPlot</span><span class="punctuation">[</span></span><br><span class="line">        <span class="built_in">Values</span><span class="punctuation">[</span><span class="variable">dataByBook</span><span class="punctuation">]</span><span class="operator">,</span></span><br><span class="line">        <span class="built_in">PlotLegends</span> <span class="operator">-&gt;</span> <span class="built_in">Keys</span><span class="punctuation">[</span><span class="variable">dataByBook</span><span class="punctuation">]</span><span class="operator">,</span></span><br><span class="line">        <span class="built_in">PlotLabel</span> <span class="operator">-&gt;</span> <span class="string">&quot;t-SNE 降维与 K-Means 聚类 (k=&quot;</span> <span class="operator">&lt;&gt;</span> <span class="built_in">ToString</span><span class="punctuation">[</span><span class="variable">k</span><span class="punctuation">]</span> <span class="operator">&lt;&gt;</span> <span class="string">&quot;)&quot;</span><span class="operator">,</span></span><br><span class="line">        <span class="built_in">AspectRatio</span> <span class="operator">-&gt;</span> <span class="number">1</span><span class="operator">,</span></span><br><span class="line">        <span class="built_in">ImageSize</span> <span class="operator">-&gt;</span> <span class="built_in">Large</span><span class="operator">,</span></span><br><span class="line">        <span class="built_in">PlotStyle</span> <span class="operator">-&gt;</span> <span class="built_in">PointSize</span><span class="punctuation">[</span><span class="built_in">Medium</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p align="right">
+25/06/22
+</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/">计算笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/%E8%AF%BB%E5%B0%8F%E8%AF%B4/">读小说</a><a href="/tags/%E9%AA%86%E4%BB%A5%E5%86%9B/">骆以军</a><a href="/tags/AI/">AI</a><a href="/tags/Wolfram/">Wolfram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="wolfram-classify"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2025/06/22/wolfram-classify/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">完整文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%86%E4%B8%8D%E5%90%8C%E4%BD%9C%E8%80%85"><span class="toc-text">区分不同作者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA"><span class="toc-text">1. 数据集构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="toc-text">2. 构建训练与测试集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E5%88%86%E7%B1%BB%E5%99%A8%E5%B9%B6%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C"><span class="toc-text">3. 训练分类器并验证结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%85%A8%E6%96%B0%E6%96%87%E6%9C%AC%E4%B8%8A%E6%B5%8B%E8%AF%95"><span class="toc-text">4. 在全新文本上测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%86%E5%90%8C%E4%B8%80%E4%BD%9C%E8%80%85%E7%9A%84%E4%B8%8D%E5%90%8C%E5%B0%8F%E8%AF%B4"><span class="toc-text">区分同一作者的不同小说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-text">1. 数据准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%8E%E8%AF%84%E4%BC%B0"><span class="toc-text">2. 训练与评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E6%96%87%E4%BD%93%E7%A9%BA%E9%97%B4"><span class="toc-text">可视化文体空间</span></a></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+    
+    
+    
+    <script src="/js/lang-detector.js"></script>
+    
+    
+    <script src="/js/footnote-popup.js"></script>
+    
+
+    <!-- Mermaid.js CDN 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      // 初始化 mermaid
+      mermaid.initialize({ startOnLoad: true });
+      document.addEventListener('DOMContentLoaded', function() {
+        // 查找所有 mermaid 代码块
+        document.querySelectorAll('pre code.language-mermaid, pre code.mermaid').forEach(function(block) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          block.parentNode.parentNode.replaceWith(div);
+        });
+        // 重新初始化 mermaid
+        if (window.mermaid) {
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+      });
+    </script>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heatmapChartDom = document.getElementById('heatmapChart');
+                if(heatmapChartDom){
+                    const heatmapChart = echarts.init(heatmapChartDom, 'light');
+                    const cellSize = [18, 18];
+                    
+                    const groupByYear = (data) => {
+                        const result = {};
+                        data.forEach(([date, value]) => {
+                            const [year] = date.split('-').map(Number);
+                            if (!result[year]) {
+                                result[year] = [];
+                            }
+                            result[year].push([date, value]);
+                        });
+                        return result;
+                    };
+                    
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1]]);
+                    const years = Object.keys(groupedData).reverse();
+                    
+                    var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
+                    const minYear = years[years.length - 1];
+                    const maxYear = years[0];
+                    if (initYear < minYear || initYear > maxYear) {
+                        initYear = maxYear;
+                    }
+                    console.log('[hexo-graph]generateHeatmapChart|initYear:', initYear, 'minYear:', minYear, 'maxYear:', maxYear);
+                    
+                    heatmapChart.setOption({
+                        grid: {},
+                        tooltip: { 
+                            position: 'top', 
+                            formatter: params => `${params.value[0]}: ${params.value[1]} Articles` 
+                        },
+                        calendar: { 
+                            top: '10%',
+                            left: 'left', 
+                            right: '8%',
+                            range: initYear,
+                            cellSize: cellSize, 
+                            splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } }, 
+                            itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' }, 
+                            dayLabel: { show: false },
+                            monthLabel: { show: true },
+                            yearLabel: { show: false },
+                        },
+                        visualMap: { 
+                            show: true,
+                            right: '8%',
+                            bottom: '5%',
+                            type: 'piecewise',
+                            orient: 'horizontal',
+                            text: ['More', 'Less'],
+                            min: 0,
+                            max: Math.max(...groupedData[initYear].map(item => item[1])),
+                            inRange: { color: ["#ACE7AE","#69C16D","#549F57"] }
+                        },
+                        legend: {
+                            type: 'scroll',
+                            icon: 'none',
+                            data: years,
+                            orient: 'vertical',
+                            top: '5%',
+                            right: 'right',
+                            itemWidth: 20,
+                            itemHeight: 20,
+                            itemGap: 10,
+                            pageIconSize: 10,
+                            pageTextStyle: { fontSize: 14 },
+                            selectedMode: 'single',
+                        },
+                        series: years.map(year => ({
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: groupedData[year],
+                            name: year,
+                            emphasis: {
+                                disabled: true,
+                            },
+                            silent: year !== initYear,
+                        })),
+                    });
+                    
+                    // init selected year
+                    heatmapChart.dispatchAction({
+                        type: 'legendSelect',
+                        name: initYear,
+                    });
+                    
+                    heatmapChart.on('legendselectchanged', function(params) {
+                        console.log('[hexo-graph]generateHeatmapChart|legendselectchanged:', params);
+                        const selectedYear = Object.keys(params.selected).find(key => params.selected[key]);
+                        if (selectedYear && groupedData[selectedYear]) {
+                            heatmapChart.setOption({
+                                calendar: {
+                                    range: selectedYear,
+                                },
+                                visualMap: {
+                                    max: Math.max(...groupedData[selectedYear].map(item => item[1])),
+                                },
+                                series: years.map(year => ({
+                                    type: 'heatmap',
+                                    coordinateSystem: 'calendar',
+                                    data: groupedData[year],
+                                    name: year,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: year !== selectedYear,
+                                })),
+                            });
+                        }
+                    });
+                    
+                    heatmapChart.on('click', function (params) {
+                        if (params.componentType === 'series') {
+                            const [year, month] = params.value[0].split('-');
+                            window.location.href = '/archives/' + year + '/' + month;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const monthlyChartDom = document.getElementById('monthlyChart');
+                if(monthlyChartDom){
+                    const monthlyChart = echarts.init(monthlyChartDom, 'light');
+                    monthlyChart.setOption({
+                        xAxis: { 
+                            type: 'category', 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06"], 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        series: [{
+                            name: 'Articles',
+                            type: 'line',
+                            data: [2,6,1,4,1,1,3,6,2,3,1,3],
+                            smooth: true,
+                            lineStyle: { color: '#5470C6', width: 2 },
+                            itemStyle: { color: '#5470C6' },
+                            areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                            symbolSize: 10,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            }
+                        }]
+                    });
+
+                    monthlyChart.on('click', function (params) {
+                        const [year, month] = params.name.split('-');
+                        window.location.href = '/archives/' + year + '/' + month;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tagsChartDom = document.getElementById('tagsChart');
+                if(tagsChartDom){
+                    const tagsChart = echarts.init(tagsChartDom, 'light');
+                    tagsChart.setOption({
+                        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                        series: [{
+                            type: 'pie',
+                            radius: '60%',
+                            data: [{"name":"AI","value":17},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"骆以军","value":3},{"name":"Wolfram","value":3},{"name":"写作方法","value":3},{"name":"GIthub","value":3}],
+                            label: {
+                                position: 'outside',
+                                formatter: '{b} {c} ({d}%)',
+                                fontSize: 14,
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            color: ["#5470C6","#91CC75","#FAC858","#EE6666","#73C0DE","#3BA272","#FC8452","#9A60B4"],
+                            labelLine: { show: true }
+                        }],
+                        legend: {
+                            bottom: '0',
+                            left: 'center',
+                            data: [{"name":"AI","value":17},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"骆以军","value":3},{"name":"Wolfram","value":3},{"name":"写作方法","value":3},{"name":"GIthub","value":3}].map(tag => tag.name),
+                            textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        }
+                    });
+
+                    tagsChart.on('click', function (params) {
+                        window.location.href = '/tags/' + params.name;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesChartDom = document.getElementById('categoriesChart');
+                if(categoriesChartDom){
+                    const categoriesChart = echarts.init(categoriesChartDom, 'light');
+                    categoriesChart.setOption({
+                        xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        yAxis: { 
+                            type: 'category', 
+                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":8},{"name":"咫闻周刊","value":7},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        series: [{
+                            name: 'Category Count',
+                            type: 'bar',
+                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":8},{"name":"咫闻周刊","value":7},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    { offset: 0, color: '#91CC75' },
+                                    { offset: 1, color: '#73C0DE' }
+                                ])
+                            }
+                        }]
+                    });
+
+                    categoriesChart.on('click', function (params) {
+                        window.location.href = '/categories/' + params.name;
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesTreeChartDom = document.getElementById('categoriesTreeChart');
+                if(categoriesTreeChartDom){
+                    const treeChart = echarts.init(categoriesTreeChartDom, 'light');
+                    treeChart.setOption({
+                        title: {
+                            text: '操作提示：单击展开分类，双击进入具体分类页面',
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#999',
+                                fontWeight: 'normal'
+                            },
+                            bottom: 0,
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        series: [{
+                            type: 'tree',
+                            data: [{"name":"Categories","children":[{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"计算笔记","children":[],"count":8,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":7,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            initialTreeDepth: -1,
+                            top: '5%',
+                            bottom: '10%',
+                            left: '0%',
+                            right: '0%',
+                            symbolSize: 15,
+                            layout: 'orthogonal',
+                            orient: 'TB',
+                            itemStyle: {
+                                color: '#91CC75',
+                                borderColor: '#73C0DE'
+                            },
+                            label: {
+                                position: 'bottom',
+                                verticalAlign: 'middle',
+                                align: 'center',
+                                fontSize: 14,
+                                distance: 28,
+                                formatter: function(params) {
+                                    return params.data.name + (params.data.count ? ' (' + params.data.count + ')' : '');
+                                }
+                            },
+                            leaves: {
+                                label: {
+                                    position: 'top',
+                                    verticalAlign: 'middle',
+                                    align: 'center'
+                                }
+                            },
+                            emphasis: {
+                                focus: 'descendant'
+                            },
+                            expandAndCollapse: true
+                        }]
+                    });
+
+                    treeChart.on('dblclick', function (params) {
+                        if (params.data && params.data.path) {
+                            window.location.href = '/categories/' + params.data.path;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+    </body>
+</html>

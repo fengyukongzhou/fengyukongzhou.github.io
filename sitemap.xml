@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://fengyukongzhou.github.io/2025/07/27/zhiwen-weekly-vol009/</loc>
+    
+    <lastmod>2025-07-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://fengyukongzhou.github.io/2025/06/16/notetaking-2025/</loc>
     
     <lastmod>2025-07-27</lastmod>
@@ -344,20 +353,6 @@
 
   
   <url>
-    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%9D%E8%AF%95%E9%9B%86/</loc>
-    <lastmod>2025-07-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%8F%E8%AF%B4/</loc>
-    <lastmod>2025-07-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://fengyukongzhou.github.io/tags/%E8%AF%BB%E5%B0%8F%E8%AF%B4/</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -366,6 +361,20 @@
   
   <url>
     <loc>https://fengyukongzhou.github.io/tags/%E9%AA%86%E4%BB%A5%E5%86%9B/</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%9D%E8%AF%95%E9%9B%86/</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%8F%E8%AF%B4/</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -448,17 +457,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://fengyukongzhou.github.io/tags/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2025-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://fengyukongzhou.github.io/categories/%E8%AF%99%E8%B0%90%E8%A3%85%E7%BD%AE/</loc>
+    <loc>https://fengyukongzhou.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://fengyukongzhou.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://fengyukongzhou.github.io/categories/%E8%AF%99%E8%B0%90%E8%A3%85%E7%BD%AE/</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

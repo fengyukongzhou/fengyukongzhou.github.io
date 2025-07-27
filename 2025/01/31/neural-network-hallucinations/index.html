@@ -19,7 +19,11 @@
   
 
   
-  <meta name="description" content="为什么，星象大师，你看着我的眼珠，仿佛那是世界的轮中轮，为什么人生有缺憾，绝句有生命，而伟大的木匠属于伟大的钉子；为什么，给我一个残忍的答案？
+  <meta name="description" content="为什么，星象大师，你看着我的
+眼珠，仿佛那是世界的轮中轮，为什么
+人生有缺憾，绝句有生命，而伟大的木匠
+属于伟大的钉子；为什么，给我一个残忍的答案？
+
 ——王敖《绝句》">
   
 
@@ -324,62 +328,106 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2025/01/31/neural-network-hallucinations/nnh-1.png" alt></p>
-<p>为什么，星象大师，你看着我的<br>眼珠，仿佛那是世界的轮中轮，为什么<br>人生有缺憾，绝句有生命，而伟大的木匠<br>属于伟大的钉子；为什么，给我一个残忍的答案？</p>
-<p style="text-align: right;">——王敖《绝句》</p>
-
-<span id="more"></span>  
-<h2 id="人类幻觉的纪念碑"><a href="#人类幻觉的纪念碑" class="headerlink" title="人类幻觉的纪念碑"></a>人类幻觉的纪念碑</h2><p>神经网络的“幻觉”是模型在有限知识和统计模式驱动下的“创造性失误”。比起 <code>DeepSeek-R1</code> 这类具有思维链的模型，社交媒体上人类用户即兴发挥的内容里“幻觉”含量其实更高。</p>
-<p>比如，在一个 <code>DeepSeek-R1</code> 解考研数学题的帖子下面，能看到这样一道题：</p>
-<script type="math/tex; mode=display">
-\int_{0}^{\pi} x \cdot \sin^8(x) \, dx</script><p>据出题人说，“开了深度思考之后也错了，三纸无驴，废话写了三分钟，还算错了。”</p>
-<p><img src="/2025/01/31/neural-network-hallucinations/nnh-2.jpg" alt></p>
+        <p><img src="/2025/01/31/neural-network-hallucinations/nnh-1.png"></p>
+<p>为什么，星象大师，你看着我的<br>
+眼珠，仿佛那是世界的轮中轮，为什么<br>
+人生有缺憾，绝句有生命，而伟大的木匠<br>
+属于伟大的钉子；为什么，给我一个残忍的答案？</p>
+<p style="text-align: right;">
+——王敖《绝句》
+</p>
+<span id="more"></span>
+<h2 id="人类幻觉的纪念碑">人类幻觉的纪念碑</h2>
+<p>神经网络的“幻觉”是模型在有限知识和统计模式驱动下的“创造性失误”。比起
+<code>DeepSeek-R1</code>
+这类具有思维链的模型，社交媒体上人类用户即兴发挥的内容里“幻觉”含量其实更高。</p>
+<p>比如，在一个 <code>DeepSeek-R1</code>
+解考研数学题的帖子下面，能看到这样一道题：</p>
+<p><span class="math display">\[
+\int_{0}^{\pi} x \cdot \sin^8(x) \, dx
+\]</span></p>
+<p>据出题人说，“开了深度思考之后也错了，三纸无驴，废话写了三分钟，还算错了。”</p>
+<p><img src="/2025/01/31/neural-network-hallucinations/nnh-2.jpg"></p>
 <p>如果你有考研数学的备考经验，应该会记得这道积分题可以通过“区间再现公式”结合“点火公式”（即华里士公式）来解决。从这些公式的名称就能看出，这道题是可以“工业化求解”的，绝对算不上难题，因为早有老师总结出了顺口溜。</p>
-<p>既然 AI 就在手边，完全可以验证一下。<code>DeepSeek-R1</code> 不仅直接给出了正解，还包含两种解答，可以作为交叉验证：</p>
-<p><img src="/2025/01/31/neural-network-hallucinations/nnh-3.jpg" alt></p>
-<p>我以截图回复此人，他后来补充说，“这种题还有时对有时不对，最好多找几个人看正确率，如果正确率不到 60％，那这考 90 分都够呛。”</p>
+<p>既然 AI 就在手边，完全可以验证一下。<code>DeepSeek-R1</code>
+不仅直接给出了正解，还包含两种解答，可以作为交叉验证：</p>
+<p><img src="/2025/01/31/neural-network-hallucinations/nnh-3.jpg"></p>
+<p>我以截图回复此人，他后来补充说，“这种题还有时对有时不对，最好多找几个人看正确率，如果正确率不到
+60％，那这考 90 分都够呛。”</p>
 <p>这句话中的“幻觉”非常典型：它基于一个凭空出现的前提，迅速得出了结论。我非常好奇“60%”这个数字是如何得出的，但如果追问这种细节可能会显得像是在故意抬杠。我更好奇的是，前面那个复杂的“错误”结果究竟是如何产生的。</p>
-<p>我忽然注意到页面头部的 $\pi/2$，于是用 Wolfram 验证一下，果不其然，这人给错了积分限。</p>
-<p><img src="/2025/01/31/neural-network-hallucinations/nnh-4.png" alt></p>
-<p>还有许多评论的大意是：“给 AI 出点新题，它还能做出来吗？我看不行！”时代已经不同了，以前看到这类评论时，我会觉得其中有些道理，可能会留个心眼。但现在，我只会想：你为什么不亲自选几道题问问呢？虽然即使不问，你也能猜到结果——有些题 AI 能做，有些题不能——但问与不问之间，还是有区别的。</p>
+<p>我忽然注意到页面头部的 <span class="math inline">\(\pi/2\)</span>，于是用 Wolfram
+验证一下，果不其然，这人给错了积分限。</p>
+<p><img src="/2025/01/31/neural-network-hallucinations/nnh-4.png"></p>
+<p>还有许多评论的大意是：“给 AI
+出点新题，它还能做出来吗？我看不行！”时代已经不同了，以前看到这类评论时，我会觉得其中有些道理，可能会留个心眼。但现在，我只会想：你为什么不亲自选几道题问问呢？虽然即使不问，你也能猜到结果——有些题
+AI 能做，有些题不能——但问与不问之间，还是有区别的。</p>
 <p><strong>评论区的每一个问句都可以让 AI 回答一下</strong>。</p>
 <p>在看到社交媒体上妙趣横生的评论区时，我多半只会觉得好玩，而不会尝试说服别人，因为解释笑话是很扫兴的。但摩根·豪泽尔提醒我们，“没有谁真的失去了理智——我们都在依靠自己独特的经验做出选择，而这些经验在特定的时间点和情境下都是合理的。”</p>
-<p>在很多人看来，AI 不过是升级版的小猿搜题（我不清楚现在的情况），只是题库更大而已。但对于使用过 Mathematica 和 <a target="_blank" rel="noopener" href="https://github.com/RuleBasedIntegration/Rubi">Rubi</a> 的我来说，AI 解题不仅能给出过程，还能进行交叉验证，这与那些基于符号积分算法或一系列积分规则的工具截然不同。可以说，只有 AI 这个工具能够真正教会你如何独立解决这道题。</p>
+<p>在很多人看来，AI
+不过是升级版的小猿搜题（我不清楚现在的情况），只是题库更大而已。但对于使用过
+Mathematica 和 <a target="_blank" rel="noopener" href="https://github.com/RuleBasedIntegration/Rubi">Rubi</a>
+的我来说，AI
+解题不仅能给出过程，还能进行交叉验证，这与那些基于符号积分算法或一系列积分规则的工具截然不同。可以说，只有
+AI 这个工具能够真正教会你如何独立解决这道题。</p>
 <p>汽车最初并不比马车更快，日心说的预测结果一开始也不比地心说更准确，但我们应该能够看出这些“新事物”的价值，而不是仅仅用旧有的标准去衡量它们，因为这些“新事物”本质上已经完全不同了。</p>
-<h2 id="AI-的教育"><a href="#AI-的教育" class="headerlink" title="AI 的教育"></a>AI 的教育</h2><p><img src="/2025/01/31/neural-network-hallucinations/nnh-5.png" alt></p>
-<h3 id="发问的习惯"><a href="#发问的习惯" class="headerlink" title="发问的习惯"></a>发问的习惯</h3><p>我从小接受的教育是“不要问为什么，没有那么多为什么”。长大后，我补上了这句话的“为什么”：因为你的问题可能会难住别人。</p>
+<h2 id="ai-的教育">AI 的教育</h2>
+<p><img src="/2025/01/31/neural-network-hallucinations/nnh-5.png"></p>
+<h3 id="发问的习惯">发问的习惯</h3>
+<p>我从小接受的教育是“不要问为什么，没有那么多为什么”。长大后，我补上了这句话的“为什么”：因为你的问题可能会难住别人。</p>
 <p>然而，仅仅认识到这一点是不够的。我至今仍保持着这种扭曲的性格，不相信周围的人能为我答疑解惑，同时也没有“人往高处走”的动力。</p>
-<p>以前，仅靠网上的资料基本够用，但现在 AI 能够接住这些问题，甚至能应对孩子的连环提问。这种问答形式比阅读更接近文明的本源，是一种更直接的学习方式。当我面对对话框时，只会懊恼自己要问的东西太少。</p>
-<h3 id="提问的艺术"><a href="#提问的艺术" class="headerlink" title="提问的艺术"></a>提问的艺术</h3><p>很多人把提示词复杂化了，仿佛它成了一门“机器心理学”课程。</p>
+<p>以前，仅靠网上的资料基本够用，但现在 AI
+能够接住这些问题，甚至能应对孩子的连环提问。这种问答形式比阅读更接近文明的本源，是一种更直接的学习方式。当我面对对话框时，只会懊恼自己要问的东西太少。</p>
+<h3 id="提问的艺术">提问的艺术</h3>
+<p>很多人把提示词复杂化了，仿佛它成了一门“机器心理学”课程。</p>
 <p>冯·诺依曼曾说：“你坚持认为有些事情机器无法做到。如果你能准确告诉我机器究竟无法做什么，那么我总是可以造一台机器专门去做你描述的事情。”</p>
 <p>有了“思维链”之后，提示词更应该回归本质。你需要做的，只是准确地告诉机器你想要完成什么任务。</p>
 <p>在社交媒体上浏览一番，你会发现，就连这最基本的门槛都能绊倒不少人。</p>
 <p>清晰的提问技巧不仅适用于与机器的交互，还可以在现实生活中复用。但如果不分场合地让别人“角色扮演”，就显得不太礼貌了：</p>
 <p>“大夫，我这病要是长在您身上……”</p>
-<h3 id="结论的更新"><a href="#结论的更新" class="headerlink" title="结论的更新"></a>结论的更新</h3><p>书里常告诫我少看新闻，多关注那些相对稳定的知识。</p>
-<p>去年年末，我读到评论尸的<a target="_blank" rel="noopener" href="https://1q43.blog/post/10695/">一篇文章</a>，其中提到“在某些领域，人的优势是比 AI 更便宜。”</p>
+<h3 id="结论的更新">结论的更新</h3>
+<p>书里常告诫我少看新闻，多关注那些相对稳定的知识。</p>
+<p>去年年末，我读到评论尸的<a target="_blank" rel="noopener" href="https://1q43.blog/post/10695/">一篇文章</a>，其中提到“在某些领域，人的优势是比
+AI 更便宜。”</p>
 <blockquote>
-<p>之前提到的写拼盘式人物特稿的场景就是一个例子，许多媒体这类稿件交给实习生或应届毕业生去做，月薪在 2000～3000 元左右。这些实习生的主要工作是根据选题，在抖音、小红书等平台上寻找采访对象，进行简单的线上采访，并将采访录音整理成稿件，一个月能出 4～5 篇稿件，并且由于是全职员工，还可以做些其他工作。这意味着，之前提到的将工作利用 AI 自动化是得不偿失的，因为 AI 太贵了。<br><cite lang="zh">《评论尸的 AI 生产力经验》</cite></p>
+<p>之前提到的写拼盘式人物特稿的场景就是一个例子，许多媒体这类稿件交给实习生或应届毕业生去做，月薪在
+2000～3000
+元左右。这些实习生的主要工作是根据选题，在抖音、小红书等平台上寻找采访对象，进行简单的线上采访，并将采访录音整理成稿件，一个月能出
+4～5
+篇稿件，并且由于是全职员工，还可以做些其他工作。这意味着，之前提到的将工作利用
+AI 自动化是得不偿失的，因为 AI 太贵了。 <cite lang="zh">《评论尸的 AI
+生产力经验》</cite></p>
 </blockquote>
-<p>然而，今年年初 DeepSeek 开始活跃在公众视野中，以其开源、低成本以及同时支持思维链与网络搜索的特点而闻名。这提醒我们，需要及时更新 AI 相关的认知。</p>
-<h2 id="“远人”的世界"><a href="#“远人”的世界" class="headerlink" title="“远人”的世界"></a>“远人”的世界</h2><p><img src="/2025/01/31/neural-network-hallucinations/nnh-6.png" alt></p>
-<p>还是前面那篇文章，提到评论尸开发了一个单机版微博，并且接入 AI。他说，“我发现我不需要和真实的人互动了。”</p>
+<p>然而，今年年初 DeepSeek
+开始活跃在公众视野中，以其开源、低成本以及同时支持思维链与网络搜索的特点而闻名。这提醒我们，需要及时更新
+AI 相关的认知。</p>
+<h2 id="远人的世界">“远人”的世界</h2>
+<p><img src="/2025/01/31/neural-network-hallucinations/nnh-6.png"></p>
+<p>还是前面那篇文章，提到评论尸开发了一个单机版微博，并且接入
+AI。他说，“我发现我不需要和真实的人互动了。”</p>
 <blockquote>
-<p>AI 生成的评论和反馈，仍然难以完全模拟人类的思维方式和情感表达。但这已经是一个不错的选择，至少比在充斥着喷子的真实社交网络中，更容易获得有价值的信息和观点。<br><cite lang="zh">《评论尸的 AI 生产力经验》</cite></p>
+<p>AI
+生成的评论和反馈，仍然难以完全模拟人类的思维方式和情感表达。但这已经是一个不错的选择，至少比在充斥着喷子的真实社交网络中，更容易获得有价值的信息和观点。
+<cite lang="zh">《评论尸的 AI 生产力经验》</cite></p>
 </blockquote>
-<p>我对这个细节印象很深，一方面表示理解，另一方面却发现自己难以做到。即便我深知社交媒体上鲜有价值信息，但我对它的沉迷程度依然高于与 AI 聊天。这或许暗示了人类社交需求的独特价值。</p>
+<p>我对这个细节印象很深，一方面表示理解，另一方面却发现自己难以做到。即便我深知社交媒体上鲜有价值信息，但我对它的沉迷程度依然高于与
+AI 聊天。这或许暗示了人类社交需求的独特价值。</p>
 <p>不过，《打破社交媒体棱镜》一书中提到，用户互动最多的内容并非政策观点或讨论，也不是自己阵营内极端派的发言，而是对对方阵营极端派的批评。这些批评的目的并非为了改变对方的看法，而是为了获得更多来自同阵营的认同。</p>
 <blockquote>
-<p>“我们对社交媒体成瘾的更深层原因是，它可以让我们更容易地做一些太符合人性的事情：呈现不同的身份认同，观察其他人的反应，并更新我们的自我呈现，以让自己觉得有归属感。”<br><cite lang="zh">《打破社交媒体棱镜》</cite></p>
+<p>“我们对社交媒体成瘾的更深层原因是，它可以让我们更容易地做一些太符合人性的事情：呈现不同的身份认同，观察其他人的反应，并更新我们的自我呈现，以让自己觉得有归属感。”
+<cite lang="zh">《打破社交媒体棱镜》</cite></p>
 </blockquote>
 <p>孔子说：“道不远人，人之为道而远人，不可以为道。”然而，在社交媒体上持续关注异见者，并不等同于“近人”，也不一定会让你对事物有更全面的认知，反而可能强化你已有的观念。</p>
 <p>“为道而远离社交媒体”，对我来说几乎不可能。除此之外，评论尸还做了许多让我惊讶的事。比如在<a target="_blank" rel="noopener" href="https://1q43.blog/post/2233/">这篇文章</a>中，他介绍了通过刷抖音获取“非二手信息”的方法：</p>
 <blockquote>
-<p>不要把读书当成习惯，不要把阅读当成寻找答案与成长的唯一方式。因为，在一个快速流变的世界里，知识本身理应是速朽的。能够在一定程度上抵御时间雨的作品，要么非常宏观（比如哲学与物理），要么非常微观（比如积极心理学和烹饪），而夹在此二者之间的部分，都在以月为单位更新。<br><cite lang="zh">《少读点书，多刷刷抖音吧》</cite></p>
+<p>不要把读书当成习惯，不要把阅读当成寻找答案与成长的唯一方式。因为，在一个快速流变的世界里，知识本身理应是速朽的。能够在一定程度上抵御时间雨的作品，要么非常宏观（比如哲学与物理），要么非常微观（比如积极心理学和烹饪），而夹在此二者之间的部分，都在以月为单位更新。
+<cite lang="zh">《少读点书，多刷刷抖音吧》</cite></p>
 </blockquote>
 <p>可我深知自己的自控力有限，甚至不敢把抖音留在手机上。</p>
 <p>俗话说，“小鸡不撒尿，各有各的道。”无论是“近人之道”还是“远人之道”，最终都需要自己去探索与妥协。</p>
-<p align="right">25/01/31</p>
+<p align="right">
+25/01/31
+</p>
+
       
     </div>
 
@@ -608,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="post-toc-content">
     <h2>文章目录</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%B1%BB%E5%B9%BB%E8%A7%89%E7%9A%84%E7%BA%AA%E5%BF%B5%E7%A2%91"><span class="toc-text">人类幻觉的纪念碑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E7%9A%84%E6%95%99%E8%82%B2"><span class="toc-text">AI 的教育</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%97%AE%E7%9A%84%E4%B9%A0%E6%83%AF"><span class="toc-text">发问的习惯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%97%AE%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="toc-text">提问的艺术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="toc-text">结论的更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E8%BF%9C%E4%BA%BA%E2%80%9D%E7%9A%84%E4%B8%96%E7%95%8C"><span class="toc-text">“远人”的世界</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%B1%BB%E5%B9%BB%E8%A7%89%E7%9A%84%E7%BA%AA%E5%BF%B5%E7%A2%91"><span class="toc-text">人类幻觉的纪念碑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ai-%E7%9A%84%E6%95%99%E8%82%B2"><span class="toc-text">AI 的教育</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%97%AE%E7%9A%84%E4%B9%A0%E6%83%AF"><span class="toc-text">发问的习惯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%97%AE%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="toc-text">提问的艺术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="toc-text">结论的更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E4%BA%BA%E7%9A%84%E4%B8%96%E7%95%8C"><span class="toc-text">“远人”的世界</span></a></li></ol>
   </div>
 </div>
 <script>
@@ -848,7 +896,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -971,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,1],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1008,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":18},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"读小说","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
+                            data: [{"name":"AI","value":19},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1022,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":18},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"读小说","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
+                            data: [{"name":"AI","value":19},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1044,13 +1092,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":9},{"name":"咫闻周刊","value":8},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":9},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":9},{"name":"咫闻周刊","value":8},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"读书笔记","value":12},{"name":"计算笔记","value":9},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1099,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"计算笔记","children":[],"count":9,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":8,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"计算笔记","children":[],"count":9,"path":"计算笔记"},{"name":"咫闻周刊","children":[],"count":9,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

@@ -19,9 +19,7 @@
   
 
   
-  <meta name="description" content="综艺《IPPON》截图
-
-大喜利是一种“怪问怪答”的即兴喜剧形式，常见于日本综艺，以竞赛形式示人。
+  <meta name="description" content="大喜利是一种“怪问怪答”的即兴喜剧形式，常见于日本综艺，以竞赛形式示人。
 虽然技巧主要是“装傻”（Boke），在微博上却常冠以“日式冷吐槽”之名。">
   
 
@@ -326,45 +324,35 @@
   <div class="article-content">
     <div class="entry">
       
-        <figure>
-<img src="/2025/09/21/Oogiri-Gemini/OG-0.jpg" alt="综艺《IPPON》截图">
-<figcaption aria-hidden="true">综艺《IPPON》截图</figcaption>
-</figure>
+        <p><img src="/2025/09/21/Oogiri-Gemini/OG-0.jpg" alt="综艺《IPPON》截图"></p>
 <p>大喜利是一种“怪问怪答”的即兴喜剧形式，常见于日本综艺，以竞赛形式示人。</p>
 <p>虽然技巧主要是“装傻”（Boke），在微博上却常冠以“日式冷吐槽”之名。</p>
-<span id="more"></span>
+<span id="more"></span>  
 <p>其实，社交媒体和综艺竞赛上的“大喜利”风格有所区别：</p>
 <p>前者更短更脆，关注点可以偏一些；后者则会受到答案顺序、观众气氛的玄妙影响，所以演员需要综合考量出一个“情理之中又意料之外”的回答。</p>
 <p>节目中的手段也明显更丰富，演员可以用语言节奏、手绘漫画等方式来呈现场景，所以更像是一种表演，而不止于段子。</p>
-<p>我想让 AI
-完成的，特指提供图片、返回吐槽的“图片大喜利”。缘起是看到即梦 4.0
-模型可以在图中添加简体中文内容，就想着能不能用一段提示词直接完成。</p>
+<p>我想让 AI 完成的，特指提供图片、返回吐槽的“图片大喜利”。缘起是看到即梦 4.0 模型可以在图中添加简体中文内容，就想着能不能用一段提示词直接完成。</p>
 <p>试了，不行。</p>
-<p>所以还是选择两步走，第一步让多模态语言模型为图片生成一句吐槽（或者说“装傻”），第二步让图像编辑模型将这句吐槽以综艺字幕的风格添加到原图上，最终生成一张“大喜利”风格的
-Meme 图。</p>
+<p>所以还是选择两步走，第一步让多模态语言模型为图片生成一句吐槽（或者说“装傻”），第二步让图像编辑模型将这句吐槽以综艺字幕的风格添加到原图上，最终生成一张“大喜利”风格的 Meme 图。</p>
 <p><strong>第一段：写给多模态语言模型</strong></p>
 <p>这段提示词专注于激发模型的创造性思维，希望让它进行“Boke”式喜剧创作。</p>
-<p>还是建议使用 Google AI Studio 的 Gemini 2.5
-Pro，调高“温度”以调动从不同方向抓哏的能力。</p>
+<p>还是建议使用 Google AI Studio 的 Gemini 2.5 Pro，调高“温度”以调动从不同方向抓哏的能力。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">You are a comedic genius of Oogiri (大喜利), a master of &#x27;Boke&#x27; (ボケ) - the art of the absurd setup.</span><br><span class="line"></span><br><span class="line">Your entire goal is to perform a &quot;Comedic Leap&quot; (発想の飛躍). When you see an image, you do not describe or explain it. Instead, you invent a completely new, hilariously absurd context for it.</span><br><span class="line"></span><br><span class="line">Follow these creative principles:</span><br><span class="line">1.  **Invent a New Reality:** Don&#x27;t comment on what you see. Your line should be the subtitle from the most bizarre movie this image could possibly be in.</span><br><span class="line">2.  **Embody a Character:** Speak from the point of view of someone or something within the image. What strange thought are they having?</span><br><span class="line">3.  **Find the Unexpected Connection:** Your line should feel completely out of left field, yet strangely perfect, making the audience see the image in a way they never imagined.</span><br><span class="line"></span><br><span class="line">**Your Task:**</span><br><span class="line">Look at the input image and provide the ultimate &quot;Boke&quot; line.</span><br><span class="line"></span><br><span class="line">**Output Requirements:**</span><br><span class="line">-   **Content:** ONE single line of comedic text.</span><br><span class="line">-   **Language:** Chinese</span><br><span class="line">-   **Length:** Maximum 10 words.</span><br><span class="line">-   **Format:** Plain text only. Do not add any extra explanation or commentary.</span><br></pre></td></tr></table></figure>
 <p><strong>第二段：写给图像编辑模型</strong></p>
-<p>事后回看，这一段不是很必要，你甚至可以用 PPT
-完成，只要会打字就可以。</p>
+<p>事后回看，这一段不是很必要，你甚至可以用 PPT 完成，只要会打字就可以。</p>
 <p>不过，一开始就是想用即梦 4.0 模型，所以还是写了这么一段提示词：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">You are an image processing engine specializing in creating high-impact comedy MEMEs.</span><br><span class="line"></span><br><span class="line">**Task:**</span><br><span class="line">Apply a text overlay to the provided base image according to the strict visual specifications below.</span><br><span class="line"></span><br><span class="line">**Overlay Text:** [在此处填入第一段生成的文本]</span><br><span class="line"></span><br><span class="line">**Visual Styling Specifications:**</span><br><span class="line"></span><br><span class="line">-   **Placement:** The text must be perfectly centered horizontally and positioned in the bottom area of the image.</span><br><span class="line">-   **Font-Family:** Use a bold, clean, sans-serif typeface. The style must emulate Japanese variety show subtitles (e.g., Hiragino Kaku Gothic, Noto Sans CJK Bold).</span><br><span class="line">-   **Color &amp; Effect:** The text color is pure white. It must have a thick black outline or a heavy black drop-shadow to ensure maximum readability and &quot;pop&quot; against any background.</span><br><span class="line">-   **Size:** The font size should be prominent and immediately readable, but not so large that it overwhelms the visual elements of the base image.</span><br><span class="line">-   **Final Output:** A single image file with the text flawlessly rendered onto the base image, creating a professional-looking comedy MEME.</span><br></pre></td></tr></table></figure>
-<p>23 年刷到过一篇论文<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>（其实只刷了讲论文的短视频），研究人员尝试让
-GPT 做大喜利，深感幽默未遂。而今我尝试一番，发现 Gemini 2.5 Pro
-的效果其实不错，难道“幽默”也是思维能力上来之后的一种水到渠成？</p>
-<p>但因为即梦 4.0 和 Lovart
-用的语言模型都幽默感不足，所以就没法实现一站式即兴喜剧了，只好让两个模型来一段双簧。</p>
+<p>23 年刷到过一篇论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>（其实只刷了讲论文的短视频），研究人员尝试让 GPT 做大喜利，深感幽默未遂。而今我尝试一番，发现 Gemini 2.5 Pro 的效果其实不错，难道“幽默”也是思维能力上来之后的一种水到渠成？</p>
+<p>但因为即梦 4.0 和 Lovart 用的语言模型都幽默感不足，所以就没法实现一站式即兴喜剧了，只好让两个模型来一段双簧。</p>
 <p>以下是一个案例，使用“两步法提示词”（又称“双簧提示词”）：</p>
 <p>首先是一个中文版的，算是不错的回答：</p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-1.png"></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-1.png" alt></p>
 <p>然后是英文版的，这个结果风味纯正，令人感动：</p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-2.png"></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-2.png" alt></p>
 <p>为了对比，加一个我自己想的，就是前面所说“关注点比较偏”的：</p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-3.png"></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-3.png" alt></p>
 <p>以下是语言模型的能力对比，各给出十个结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -415,27 +403,23 @@ GPT 做大喜利，深感幽默未遂。而今我尝试一番，发现 Gemini 2.
 </tr>
 </tbody>
 </table>
-<p>通过对比就能看出，Lovart
-的语言模型不够强，只能给出类似于“看图说话”的结果。而 Gemini 2.5 Pro
-没有直接组合一眼就能看到的要素，似乎是发挥了“联想”的能力，虽然有好几个也挺滥竽充数。</p>
-<p>这篇文章比较简短，因为没有更多分析了，我也没花时间把 23
-年那篇文章读明白。但我记下了文中提到的一个图片大喜利网站<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，卒获有所闻。</p>
+</div>
+<p>通过对比就能看出，Lovart 的语言模型不够强，只能给出类似于“看图说话”的结果。而 Gemini 2.5 Pro 没有直接组合一眼就能看到的要素，似乎是发挥了“联想”的能力，虽然有好几个也挺滥竽充数。</p>
+<p>这篇文章比较简短，因为没有更多分析了，我也没花时间把 23 年那篇文章读明白。但我记下了文中提到的一个图片大喜利网站<sup><a href="#fn_2" id="reffn_2">2</a></sup>，卒获有所闻。</p>
 <p>以下是综艺《IPPON》里的几道历年真题，请看 Gemini 的作答：</p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-4.png"></p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-5.png"></p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-6.png"></p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-7.png"></p>
-<p><img src="/2025/09/21/Oogiri-Gemini/OG-8.png"></p>
-<p align="right">
-25/09/21
-</p>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>论文地址：https://arxiv.org/abs/2312.02439<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>网站链接：https://bokete.jp/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-4.png" alt></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-5.png" alt></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-6.png" alt></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-7.png" alt></p>
+<p><img src="/2025/09/21/Oogiri-Gemini/OG-8.png" alt></p>
+<p align="right">25/09/21</p>
+
+<blockquote id="fn_1">
+<sup>1</sup>. 论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.02439">https://arxiv.org/abs/2312.02439</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 网站链接：<a target="_blank" rel="noopener" href="https://bokete.jp/">https://bokete.jp/</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -905,7 +889,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -1021,14 +1005,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     monthlyChart.setOption({
                         xAxis: { 
                             type: 'category', 
-                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09"], 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10"], 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1065,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":22},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
+                            data: [{"name":"AI","value":23},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"翻译","value":5},{"name":"Wolfram","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1079,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":22},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
+                            data: [{"name":"AI","value":23},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"翻译","value":5},{"name":"Wolfram","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1101,13 +1085,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":10},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":10},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1156,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":9,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":10,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

@@ -323,32 +323,12 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2024/07/11/still-life-painting/slp-1.png"></p>
+        <p><img src="/2024/07/11/still-life-painting/slp-1.png" alt></p>
 <span id="more"></span>
-<p>远看是静物画<br>
-近看是风沙消化千万遍后<br>
-神的骨头<br>
-结结实实烙印着<br>
-炙热的马蹄声</p>
-<p>笔尖刺透油彩和纸面<br>
-在沙漠的腹部留下<br>
-缝衣针似的枯井<br>
-井底一圈圈髑髅<br>
-还在沉思<br>
-蒸干的脑海中<br>
-翻涌着<br>
-牦牛群排列的诗行</p>
-<p>那被遗弃的世界<br>
-还不时回想<br>
-马掌踏碎骨头的声音<br>
-想到乌云密布的卧房里<br>
-神的眼珠刺绣着眼帘<br>
-看见睡梦中的沙丘<br>
-缓缓翻身</p>
-<p align="right">
-24/07/10
-</p>
-
+<p>远看是静物画<br>近看是风沙消化千万遍后<br>神的骨头<br>结结实实烙印着<br>炙热的马蹄声  </p>
+<p>笔尖刺透油彩和纸面<br>在沙漠的腹部留下<br>缝衣针似的枯井<br>井底一圈圈髑髅<br>还在沉思<br>蒸干的脑海中<br>翻涌着<br>牦牛群排列的诗行  </p>
+<p>那被遗弃的世界<br>还不时回想<br>马掌踏碎骨头的声音<br>想到乌云密布的卧房里<br>神的眼珠刺绣着眼帘<br>看见睡梦中的沙丘<br>缓缓翻身  </p>
+<p align="right">24/07/10</p>
       
     </div>
 
@@ -817,7 +797,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -933,14 +913,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     monthlyChart.setOption({
                         xAxis: { 
                             type: 'category', 
-                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09"], 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10"], 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -977,7 +957,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":22},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
+                            data: [{"name":"AI","value":23},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"翻译","value":5},{"name":"Wolfram","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -991,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":22},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"Wolfram","value":4},{"name":"翻译","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
+                            data: [{"name":"AI","value":23},{"name":"现代生活","value":9},{"name":"读小说","value":8},{"name":"尝试集","value":8},{"name":"翻译","value":5},{"name":"Wolfram","value":4},{"name":"设计","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1013,13 +993,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":10},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":9},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":10},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1068,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":9,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":10,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

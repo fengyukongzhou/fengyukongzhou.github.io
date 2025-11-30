@@ -19,11 +19,7 @@
   
 
   
-  <meta name="description" content="这是我用白板软件 Excalidraw
-绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（Gram-Schmidt
-orthogonalization），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（Wiener
-filter），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（Galerkin
-method）了，图中的箭头现在是函数。">
+  <meta name="description" content="这是我用白板软件 Excalidraw 绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（Gram-Schmidt orthogonalization），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（Wiener filter），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（Galerkin method）了，图中的箭头现在是函数。">
   
 
   
@@ -327,121 +323,54 @@ method）了，图中的箭头现在是函数。">
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2024/12/26/galerkin-method/gm1.png"></p>
-<p>这是我用白板软件 Excalidraw
-绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（<em>Gram-Schmidt
-orthogonalization</em>），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（<em>Wiener
-filter</em>），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（<em>Galerkin
-method</em>）了，图中的箭头现在是函数。</p>
-<span id="more"></span>
-<h2 id="还是处理这个方程">还是处理这个方程</h2>
-<p><span class="math display">\[
-D\nabla^{4}w+\rho_{h}w_{tt}=0
-\]</span></p>
-<p><a href="https://fengyukongzhou.github.io/2024/12/04/ritz-method-in-wl/">上一篇文章</a>里提到“最小物理知识”，其实相比里兹法的能量泛函，伽辽金法涉及的物理知识还要更少一些。</p>
-<p>先分离变量，把上面的方程变得只与空间中的变量 <span class="math inline">\(x,y\)</span> 有关：</p>
-<p><span class="math display">\[
-\nabla^{4}w-k^{4}w=0
-\]</span></p>
-<p>和里兹法一样，把近似解写成基函数加权求和的形式：</p>
-<p><span class="math display">\[
-\hat w(x,y)=\sum_{j}c_ {j}\psi_{j}(x,y)
-\]</span></p>
-<p>回想文章的题图，伽辽金法找近似解思路是：<strong>当近似解 <span class="math inline">\(\hat w\)</span> 最接近真实解 <span class="math inline">\(w\)</span> 时，每个基函数 <span class="math inline">\(\psi_{i}\)</span> 与根据方程得到的残差 <span class="math inline">\(\nabla^{4}\hat w-k^{4}\hat w\)</span>
-正交</strong>。</p>
+        <p><img src="/2024/12/26/galerkin-method/gm1.png" alt></p>
+<p>这是我用白板软件 Excalidraw 绘制的，这幅图在我粗疏的学习过程中反复得见。第一次见可能是格拉姆-施密特正交化（<em>Gram-Schmidt orthogonalization</em>），图中的箭头都是正常的向量。第二次见可能是维纳滤波器（<em>Wiener filter</em>），细节已经忘光了，图中的箭头好像是随机过程。第三次见就是伽辽金法（<em>Galerkin method</em>）了，图中的箭头现在是函数。</p>
+<span id="more"></span>  
+<h2 id="还是处理这个方程"><a href="#还是处理这个方程" class="headerlink" title="还是处理这个方程"></a>还是处理这个方程</h2><script type="math/tex; mode=display">
+D\nabla^{4}w+\rho_{h}w_{tt}=0</script><p><a href="https://fengyukongzhou.github.io/2024/12/04/ritz-method-in-wl/">上一篇文章</a>里提到“最小物理知识”，其实相比里兹法的能量泛函，伽辽金法涉及的物理知识还要更少一些。</p>
+<p>先分离变量，把上面的方程变得只与空间中的变量 $x,y$ 有关：</p>
+<script type="math/tex; mode=display">
+\nabla^{4}w-k^{4}w=0</script><p>和里兹法一样，把近似解写成基函数加权求和的形式：</p>
+<script type="math/tex; mode=display">
+\hat w(x,y)=\sum_{j}c_ {j}\psi_{j}(x,y)</script><p>回想文章的题图，伽辽金法找近似解思路是：<strong>当近似解 $\hat w$ 最接近真实解 $w$ 时，每个基函数 $\psi_{i}$ 与根据方程得到的残差 $\nabla^{4}\hat w-k^{4}\hat w$ 正交</strong>。</p>
 <p>先定义一个内积形式：函数相乘后在板区域内积分</p>
-<p><span class="math display">\[
-\langle f,g\rangle=\iint_{A}f(x,y)g(x,y)\mathrm{d}x\mathrm{d}y
-\]</span></p>
-<p><strong>逼近目标</strong>可以写作：</p>
-<p><span class="math display">\[
-\iint_{A}\psi_{j}(\nabla^{4}\hat w-k^{4}\hat w)\mathrm{d}x\mathrm{d}y=0
-\]</span></p>
-<p>可以展开为下式：</p>
-<p><span class="math display">\[
-\sum\limits_{j}c_{j}\iint_{A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}\sum\limits_{j}c_{j}\iint_{A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0
-\]</span></p>
-<p>为了获得与里兹法一致的结果，对这两个积分作尺度变换，得到：</p>
-<p><span class="math display">\[
-\sum\limits_{j}c_{j}\iint_{\bar
-A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}a^{4}\sum\limits_{j}c_{j}\iint_{\bar
-A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0
-\]</span></p>
-<p>至此，可以把上式写成<strong>矩阵特征值问题</strong>：</p>
-<p><span class="math display">\[
-(\boldsymbol{K}-\lambda^{4}\boldsymbol{M})\boldsymbol{c}=\boldsymbol{0}
-\]</span></p>
-<p>其中，质量矩阵 <span class="math inline">\(\boldsymbol{M}\)</span>
-和刚度矩阵 <span class="math inline">\(\boldsymbol{K}\)</span>
-的元素表达式分别为</p>
-<p><span class="math display">\[
+<script type="math/tex; mode=display">
+\langle f,g\rangle=\iint_{A}f(x,y)g(x,y)\mathrm{d}x\mathrm{d}y</script><p><strong>逼近目标</strong>可以写作：</p>
+<script type="math/tex; mode=display">
+\iint_{A}\psi_{j}(\nabla^{4}\hat w-k^{4}\hat w)\mathrm{d}x\mathrm{d}y=0</script><p>可以展开为下式：</p>
+<script type="math/tex; mode=display">
+\sum\limits_{j}c_{j}\iint_{A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}\sum\limits_{j}c_{j}\iint_{A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0</script><p>为了获得与里兹法一致的结果，对这两个积分作尺度变换，得到：</p>
+<script type="math/tex; mode=display">
+\sum\limits_{j}c_{j}\iint_{\bar A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y-k^{4}a^{4}\sum\limits_{j}c_{j}\iint_{\bar A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y=0</script><p>至此，可以把上式写成<strong>矩阵特征值问题</strong>：</p>
+<script type="math/tex; mode=display">
+(\boldsymbol{K}-\lambda^{4}\boldsymbol{M})\boldsymbol{c}=\boldsymbol{0}</script><p>其中，质量矩阵 $\boldsymbol{M}$ 和刚度矩阵 $\boldsymbol{K}$ 的元素表达式分别为</p>
+<script type="math/tex; mode=display">
 \begin{align*}
-m_{ij}&amp;=\iint_{\bar A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y\\
-k_{ij}&amp;=\iint_{\bar
-A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y
-\end{align*}
-\]</span></p>
-<h2 id="自伴随算子">自伴随算子</h2>
-<p>相比能量泛函得到的 <span class="math inline">\(k_{ij}\)</span>（固定边界条件），这次得到的式子看似有些不同。</p>
-<p><span class="math display">\[
+m_{ij}&=\iint_{\bar A}\psi_{i}\psi_{j}\mathrm{d}x\mathrm{d}y\\
+k_{ij}&=\iint_{\bar A}\psi_{i}\nabla^{4}\psi_{j}\mathrm{d}x\mathrm{d}y
+\end{align*}</script><h2 id="自伴随算子"><a href="#自伴随算子" class="headerlink" title="自伴随算子"></a>自伴随算子</h2><p>相比能量泛函得到的 $k_{ij}$（固定边界条件），这次得到的式子看似有些不同。</p>
+<script type="math/tex; mode=display">
 k_{ij}=\iint_{\bar A}\nabla^{2}\psi_{i}\cdot\nabla^{2}\psi_{j} \
-\mathrm{d}x\mathrm{d}y
-\]</span></p>
-<p>为了找到关联，先要补充一个条件。利用上面定义的内积形式，根据<strong>格林第二定理</strong>：</p>
-<p><span class="math display">\[
-\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2}
-g\rangle+\oint_{\partial A} \left(g(x,y) \frac{\partial
-f(x,y)}{\partial\boldsymbol{n}}- f(x,y)\frac{\partial
-g(x,y)}{\partial\boldsymbol{n}}\right)\mathrm{d}s
-\]</span></p>
-<p><span class="math inline">\(\partial A\)</span> 为板区域 <span class="math inline">\(A\)</span> 的边界，如果 <span class="math inline">\(f,g\)</span>
-是满足固定边界条件或简支边界条件的模态振型函数，那么在边界上就有 <span class="math inline">\(f=g\equiv0\)</span>，于是上式就可以大幅化简为</p>
-<p><span class="math display">\[
-\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2} g\rangle
-\]</span></p>
-<p>对于这个情况，称拉普拉斯算子 <span class="math inline">\(\nabla^{2}\)</span>
-为<strong>自伴随算子</strong>。按照上面的规则，可以找到两种 <span class="math inline">\(k_{ij}\)</span> 之间的关系：</p>
-<p><span class="math display">\[
-k_{ij}=\langle\psi_{i},\nabla^{2}\nabla^{2}\psi_{j}\rangle=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle
-\]</span></p>
-<h2 id="或许存在悖论">或许存在“悖论”</h2>
-<p>总结一下：对于固定边界条件，里兹法和伽辽金的结果都是 <span class="math inline">\(k_{ij}=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle\)</span>。但对于简支边界条件，里兹法给出的
-<span class="math inline">\(k_{ij}\)</span>
-显然更为复杂（复杂到上篇文章里都没有直接写出来）：</p>
-<p><span class="math display">\[
+\mathrm{d}x\mathrm{d}y</script><p>为了找到关联，先要补充一个条件。利用上面定义的内积形式，根据<strong>格林第二定理</strong>：</p>
+<script type="math/tex; mode=display">
+\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2} g\rangle+\oint_{\partial A} \left(g(x,y) \frac{\partial f(x,y)}{\partial\boldsymbol{n}}- f(x,y)\frac{\partial g(x,y)}{\partial\boldsymbol{n}}\right)\mathrm{d}s</script><p>$\partial A$ 为板区域 $A$ 的边界，如果 $f,g$ 是满足固定边界条件或简支边界条件的模态振型函数，那么在边界上就有 $f=g\equiv0$，于是上式就可以大幅化简为</p>
+<script type="math/tex; mode=display">
+\langle\nabla^{2} f,g\rangle=\langle f,\nabla^{2} g\rangle</script><p>对于这个情况，称拉普拉斯算子 $\nabla^{2}$ 为<strong>自伴随算子</strong>。按照上面的规则，可以找到两种 $k_{ij}$ 之间的关系：</p>
+<script type="math/tex; mode=display">
+k_{ij}=\langle\psi_{i},\nabla^{2}\nabla^{2}\psi_{j}\rangle=\langle\nabla^{2}\psi_{i},\nabla^{2}\psi_{j}\rangle</script><h2 id="或许存在“悖论”"><a href="#或许存在“悖论”" class="headerlink" title="或许存在“悖论”"></a>或许存在“悖论”</h2><p>总结一下：对于固定边界条件，里兹法和伽辽金的结果都是 $k<em>{ij}=\langle\nabla^{2}\psi</em>{i},\nabla^{2}\psi<em>{j}\rangle$。但对于简支边界条件，里兹法给出的 $k</em>{ij}$ 显然更为复杂（复杂到上篇文章里都没有直接写出来）：</p>
+<script type="math/tex; mode=display">
 \begin{align}
-    k_{ij}&amp;=\iint_{\bar
-A}\left[\nabla^{2}\psi_{i}\nabla^{2}\psi_{j}\right.\\&amp;\quad\left.-(1-\nu)\left(\frac{\partial^{2}\psi_{i}}{\partial
-x^{2}}\frac{\partial^{2}\psi_{j}}{\partial
-y^{2}}+\frac{\partial^{2}\psi_{j}}{\partial
-x^{2}}\frac{\partial^{2}\psi_{i}}{\partial
-y^{2}}\right)\right.\\&amp;\left.\quad+2(1-\nu)\frac{\partial^{2}\psi_{i}}{\partial
-x\partial y}\frac{\partial^{2}\psi_{j}}{\partial x\partial
-y}\right]\mathrm{d}x\mathrm{d}y
-\end{align}
-\]</span></p>
-<p>式中 <span class="math inline">\(\nu\)</span>
-为泊松比，伽辽金法的推导过程全然没有涉及。</p>
-<p>用 <a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/ritz-method-wl">RitzSolver</a>
-试算一下（与上篇文章相比，对程序包作了一点不重要的改动），可见简支方板和正六边形板的第一特征值
-<span class="math inline">\(\lambda_{1}\)</span>
-随泊松比的变化保持恒定（形状看 <code>PlotMarkers</code>），而简支圆板的
-<span class="math inline">\(\lambda_{1}\)</span>
-随泊松比的增大而单调递增。</p>
-<p><img src="/2024/12/26/galerkin-method/gm2.png"></p>
-<p>简支边界的圆板与泊松比有关，而多边形板与泊松比无关。考古之后发现这一现象被称为“<strong>polygon-circle
-paradox</strong>”，也就是说，你可能会预期随着多边形的边数不断增加，趋近于圆形时，多边形板的解会与圆形板的解趋于一致，但实际上并非如此。</p>
-<p>画一下取泊松比 <span class="math inline">\(\nu=1\)</span>
-时简支边界的多边形薄板模态振型，分别是六边形、十边形、十五边形和二十边形：</p>
-<p><img src="/2024/12/26/galerkin-method/gm3.png"></p>
-<p>可以看出随着多边形边数的增加，边界的“约束”也越来越大。对比 <span class="math inline">\(\nu=1\)</span>
-时的简支边界圆板和固定边界圆板，可见简支边界二十边形薄板的“约束”甚至大于固定边界的圆板：</p>
-<p><img src="/2024/12/26/galerkin-method/gm4.png"></p>
+    k_{ij}&=\iint_{\bar A}\left[\nabla^{2}\psi_{i}\nabla^{2}\psi_{j}\right.\\&\quad\left.-(1-\nu)\left(\frac{\partial^{2}\psi_{i}}{\partial x^{2}}\frac{\partial^{2}\psi_{j}}{\partial y^{2}}+\frac{\partial^{2}\psi_{j}}{\partial x^{2}}\frac{\partial^{2}\psi_{i}}{\partial y^{2}}\right)\right.\\&\left.\quad+2(1-\nu)\frac{\partial^{2}\psi_{i}}{\partial x\partial y}\frac{\partial^{2}\psi_{j}}{\partial x\partial y}\right]\mathrm{d}x\mathrm{d}y
+\end{align}</script><p>式中 $\nu$ 为泊松比，伽辽金法的推导过程全然没有涉及。</p>
+<p>用 <a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/ritz-method-wl">RitzSolver</a> 试算一下（与上篇文章相比，对程序包作了一点不重要的改动），可见简支方板和正六边形板的第一特征值 $\lambda<em>{1}$ 随泊松比的变化保持恒定（形状看 <code>PlotMarkers</code>），而简支圆板的 $\lambda</em>{1}$ 随泊松比的增大而单调递增。</p>
+<p><img src="/2024/12/26/galerkin-method/gm2.png" alt></p>
+<p>简支边界的圆板与泊松比有关，而多边形板与泊松比无关。考古之后发现这一现象被称为“<strong>polygon-circle paradox</strong>”，也就是说，你可能会预期随着多边形的边数不断增加，趋近于圆形时，多边形板的解会与圆形板的解趋于一致，但实际上并非如此。</p>
+<p>画一下取泊松比 $\nu=1$ 时简支边界的多边形薄板模态振型，分别是六边形、十边形、十五边形和二十边形：</p>
+<p><img src="/2024/12/26/galerkin-method/gm3.png" alt></p>
+<p>可以看出随着多边形边数的增加，边界的“约束”也越来越大。对比 $\nu=1$ 时的简支边界圆板和固定边界圆板，可见简支边界二十边形薄板的“约束”甚至大于固定边界的圆板：</p>
+<p><img src="/2024/12/26/galerkin-method/gm4.png" alt></p>
 <p>这个悖论的关键好像在于边界的曲直，但我没有真正看穿它。实际上我连“简支边界条件”都不是特别理解。这篇文章只是把我算出来的和查到的东西总结起来，然后放在这里。</p>
-<p align="right">
-24/12/27
-</p>
-
+<p align="right">24/12/27</p>
       
     </div>
 
@@ -670,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="post-toc-content">
     <h2>文章目录</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%98%E6%98%AF%E5%A4%84%E7%90%86%E8%BF%99%E4%B8%AA%E6%96%B9%E7%A8%8B"><span class="toc-text">还是处理这个方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E4%BC%B4%E9%9A%8F%E7%AE%97%E5%AD%90"><span class="toc-text">自伴随算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%96%E8%AE%B8%E5%AD%98%E5%9C%A8%E6%82%96%E8%AE%BA"><span class="toc-text">或许存在“悖论”</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%98%E6%98%AF%E5%A4%84%E7%90%86%E8%BF%99%E4%B8%AA%E6%96%B9%E7%A8%8B"><span class="toc-text">还是处理这个方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E4%BC%B4%E9%9A%8F%E7%AE%97%E5%AD%90"><span class="toc-text">自伴随算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%96%E8%AE%B8%E5%AD%98%E5%9C%A8%E2%80%9C%E6%82%96%E8%AE%BA%E2%80%9D"><span class="toc-text">或许存在“悖论”</span></a></li></ol>
   </div>
 </div>
 <script>
@@ -910,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -1033,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,2],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1070,7 +999,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":24},{"name":"读小说","value":9},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"骆以军","value":3}],
+                            data: [{"name":"AI","value":24},{"name":"现代生活","value":10},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1084,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":24},{"name":"读小说","value":9},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
+                            data: [{"name":"AI","value":24},{"name":"现代生活","value":10},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1106,13 +1035,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"读书笔记","value":13},{"name":"计算笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"读书笔记","value":13},{"name":"计算笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1161,7 +1090,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":12,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":12,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

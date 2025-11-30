@@ -323,96 +323,59 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2025/09/07/OCR-Gemini/OCR-0.png"></p>
+        <p><img src="/2025/09/07/OCR-Gemini/OCR-0.png" alt></p>
 <p>既然有多模态功能，如何用 Gemini 识别并转换一整本扫描版 PDF？</p>
-<span id="more"></span>
-<h2 id="低效能人士的七个习惯">低效能人士的七个习惯</h2>
-<p>我读书读得很凶的那段时间，买过一个 APP
-的会员，不是月度的，一直用到现在。APP 叫“白描”，拍照识别文字内容（又称
-OCR，“光学字符识别”），方便用来做书摘。</p>
+<span id="more"></span>  
+<h2 id="低效能人士的七个习惯"><a href="#低效能人士的七个习惯" class="headerlink" title="低效能人士的七个习惯"></a>低效能人士的七个习惯</h2><p>我读书读得很凶的那段时间，买过一个 APP 的会员，不是月度的，一直用到现在。APP 叫“白描”，拍照识别文字内容（又称 OCR，“光学字符识别”），方便用来做书摘。</p>
 <p>你能感觉技术日臻成熟，软件也更好用了。</p>
 <p>但还是有瑕疵。</p>
 <p>——标点识别出来会有些问题，比如省略号经常识别成独立的几个点，还往往不是六个。</p>
 <p>——断句很奇怪，不是按照图中的分段来的，要么勤得像现代诗人，要么懒得像萨拉马戈。</p>
 <p>这些都是小问题，后来有些需求就无法满足了。</p>
-<p>——有些电子书很难找到，只有扫描版的 PDF 文件（就算不错了），如果要放进
-6 寸阅读器，字就会很小，这该怎么办呢？</p>
-<p>正解是换一个大一些的电子书，但我的解法比较经济，是找了裁切 PDF
-的工具，但在阅读器上看还是很别扭，如果要做笔记也没法直接划线，还是要用“白描”。</p>
+<p>——有些电子书很难找到，只有扫描版的 PDF 文件（就算不错了），如果要放进 6 寸阅读器，字就会很小，这该怎么办呢？</p>
+<p>正解是换一个大一些的电子书，但我的解法比较经济，是找了裁切 PDF 的工具，但在阅读器上看还是很别扭，如果要做笔记也没法直接划线，还是要用“白描”。</p>
 <p>怪不得一直用到现在。</p>
-<p>后来白描有了网页版，可以导入
-PDF，之后就变成面板中的一张张图片，可以批量识别。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-1.png"></p>
+<p>后来白描有了网页版，可以导入 PDF，之后就变成面板中的一张张图片，可以批量识别。</p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-1.png" alt></p>
 <p>看上去很美，用起来很是麻烦。</p>
-<p>一是一次最多转换 50 页，你需要用 Acrobat 之类的 PDF
-编辑软件预处理一番。二是不能像书摘一样单独选择识别范围，所以识别出来的内容往往包含页眉页脚，分页处也自然被截成了两段，你需要比照着
-PDF 文件，用肉眼做一些后处理……那为什么不直接读 PDF 呢？</p>
-<h2 id="等待一个什么">等待一个什么</h2>
-<p>说来也怪，我没有找其他更好用的 OCR
-软件。不是没有，只是没有去找。一直等到多模态大模型成熟，等到人们习以为常，我才想起那些
-PDF 来。</p>
-<p>前些日子看到一段 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_DYvIdANiWrPEnSiW1x4Vw">“元提示词”</a>，沟通几轮、实操几轮之后，添加了繁转简、统一标点和识别公式等功能。最终得到了这样的
-OCR 任务提示词：</p>
+<p>一是一次最多转换 50 页，你需要用 Acrobat 之类的 PDF 编辑软件预处理一番。二是不能像书摘一样单独选择识别范围，所以识别出来的内容往往包含页眉页脚，分页处也自然被截成了两段，你需要比照着 PDF 文件，用肉眼做一些后处理……那为什么不直接读 PDF 呢？</p>
+<h2 id="等待一个什么"><a href="#等待一个什么" class="headerlink" title="等待一个什么"></a>等待一个什么</h2><p>说来也怪，我没有找其他更好用的 OCR 软件。不是没有，只是没有去找。一直等到多模态大模型成熟，等到人们习以为常，我才想起那些 PDF 来。</p>
+<p>前些日子看到一段 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_DYvIdANiWrPEnSiW1x4Vw">“元提示词”</a>，沟通几轮、实操几轮之后，添加了繁转简、统一标点和识别公式等功能。最终得到了这样的 OCR 任务提示词：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">请处理我上传的PDF文件，本次任务只专注于 **[在此处填写章节名称或编号]** 的内容，并将其精确地转换为Markdown格式。</span><br><span class="line"></span><br><span class="line">在转换过程中，必须严格遵守以下规则：</span><br><span class="line"></span><br><span class="line">1.  **范围限定：** 仅提取并转换指定章节的内容。忽略文件中的其他所有部分。</span><br><span class="line">2.  **内容忠实：** 除了执行必要的繁简与标点转换外，绝不概括、增加或删除原文的任何句子或段落。</span><br><span class="line">3.  **繁体转简体：** 智能判断原文语种。如果原文是繁体中文，请在转换格式的同时，将所有文字内容平滑地转换为简体中文。</span><br><span class="line">4.  **统一中文标点：** 如果文本主要是中文，请将所有英文标点符号转换为对应的中文全角标点符号（此规则不适用于代码块和公式）。</span><br><span class="line">5.  **清理页面元素：** 删除所有页码、页眉和页脚。</span><br><span class="line">6.  **合并断裂段落：** 将因分页符而断开的句子和段落连接起来。</span><br><span class="line">7.  **精确格式化：** 将原文的所有格式（如标题、列表、粗体、斜体、引用、脚注、数学公式等）准确转换为标准的GitHub Flavored Markdown。**特别注意**：任何数学对象必须转换为LaTeX格式（行内用`$...$`，块级用`$$...$$`），并确保代码块和表格被正确格式化。</span><br><span class="line">8. **保留诗歌格式：** 如果原文中包含诗歌，请在转换时保持其特有的断句和格式不变。</span><br><span class="line"></span><br><span class="line">请开始处理指定的章节。</span><br></pre></td></tr></table></figure>
 <p>是的，我因为输出长度的关系放弃了“一镜到底”，转而选择按照书中的章节输出。一般情况下，大模型可以完整输出一章的文字。事实上有些书从头到尾就是一段，不过我还没碰上，就没考虑这些极端案例。</p>
-<p>还要注意，我是在 Google AI Studio 用的 Gemini 2.5 Pro
-模型，把模型温度设为 <span class="math inline">\(0.2\)</span>（机械性任务的温度应该设置得低一些），然后关闭联网，不让摸鱼。</p>
+<p>还要注意，我是在 Google AI Studio 用的 Gemini 2.5 Pro 模型，把模型温度设为 $0.2$（机械性任务的温度应该设置得低一些），然后关闭联网，不让摸鱼。</p>
 <p>以下是几个案例：</p>
 <p>1️⃣ 扫描比较清楚的简体书：经过浏览我没有看出需要编辑的地方。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-2.png"></p>
-<p>2️⃣
-扫描比较清楚的竖排繁体书：截图内容里，大模型做了两次“同义替换”。其实这是一个缺点，你很难看出大模型改动了哪里，像一些译者所做的事。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-3.png"></p>
-<p>3️⃣
-扫描不太清楚的繁体书：找到了大模型的能力边界——如果是“老派扫描”，模型看不清就是看不清，提示词再好也白搭。另外，前面提到的缺点变得更明显了，就像高明的厨师能做得你尝不出老鼠屎来。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-4.png"></p>
-<p>4️⃣
-公式很多的书：你能看到公式的细节有些变化，我同样标红了。另外，公式多的书往往也有很多插图，今天讲到的方法对此完全无效。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-5.png"></p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-2.png" alt></p>
+<p>2️⃣ 扫描比较清楚的竖排繁体书：截图内容里，大模型做了两次“同义替换”。其实这是一个缺点，你很难看出大模型改动了哪里，像一些译者所做的事。</p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-3.png" alt></p>
+<p>3️⃣ 扫描不太清楚的繁体书：找到了大模型的能力边界——如果是“老派扫描”，模型看不清就是看不清，提示词再好也白搭。另外，前面提到的缺点变得更明显了，就像高明的厨师能做得你尝不出老鼠屎来。</p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-4.png" alt></p>
+<p>4️⃣ 公式很多的书：你能看到公式的细节有些变化，我同样标红了。另外，公式多的书往往也有很多插图，今天讲到的方法对此完全无效。</p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-5.png" alt></p>
 <p>5️⃣ “闪灵”问题。</p>
-<figure>
-<img src="/2025/09/07/OCR-Gemini/OCR-6.png" alt="电影《闪灵》截图">
-<figcaption aria-hidden="true">电影《闪灵》截图</figcaption>
-</figure>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-6.png" alt="电影《闪灵》截图"></p>
 <p>实验中几次出现了“结巴”，根据我的臆测，一种是由于上文内容太多，此时新开窗口可以解决。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-7.png"></p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-7.png" alt></p>
 <p>另一种则是文本本身的问题，比较接近“贯口”，比如董启章的《繁胜录》（作者在后记里说“用顿号写成的小说”），有的章节开新窗口也不管用。</p>
 <p>这说明，不练贯口就上台容易结巴。</p>
-<p><img src="/2025/09/07/OCR-Gemini/OCR-8.png"></p>
-<h2 id="立等不可取">立等不可取</h2>
-<p>为了解决顿号密集的那一章内容，我突发奇想用 Gemini CLI
-尝试，结果一次就完成了转换。具体原理不清楚，但应该说明窗口式 AI 和 Agent
-智能体 AI 的处理逻辑有所不同。</p>
-<p>其实，用上 Agent
-之后很多操作是可以简化的。我不需要自己在对话窗口中复制粘贴，直接让 Agent
-写入文件就可以。我也不用在章节转换之间，说一句承上启下的“请继续下一章”，让
-Agent 先自己列一个“待办清单”不就行了吗？</p>
-<p>于是，我新建了一个文件夹 <code>OCRWorkShop</code>，里面包含待转换的
-PDF 文件 <code>BOOK.pdf</code> 和提示词文件 <code>GEMINI.md</code>：</p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-8.png" alt></p>
+<h2 id="立等不可取"><a href="#立等不可取" class="headerlink" title="立等不可取"></a>立等不可取</h2><p>为了解决顿号密集的那一章内容，我突发奇想用 Gemini CLI 尝试，结果一次就完成了转换。具体原理不清楚，但应该说明窗口式 AI 和 Agent 智能体 AI 的处理逻辑有所不同。</p>
+<p>其实，用上 Agent 之后很多操作是可以简化的。我不需要自己在对话窗口中复制粘贴，直接让 Agent 写入文件就可以。我也不用在章节转换之间，说一句承上启下的“请继续下一章”，让 Agent 先自己列一个“待办清单”不就行了吗？</p>
+<p>于是，我新建了一个文件夹 <code>OCRWorkShop</code>，里面包含待转换的 PDF 文件 <code>BOOK.pdf</code> 和提示词文件 <code>GEMINI.md</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OCRWorkShop/</span><br><span class="line">├── BOOK.pdf</span><br><span class="line">└── GEMINI.md</span><br></pre></td></tr></table></figure>
 <p>提示词是这样写的：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">## 待办清单</span><br><span class="line"></span><br><span class="line">- [ ] 请在此更新待办清单</span><br><span class="line"></span><br><span class="line">## 全书分章操作</span><br><span class="line"></span><br><span class="line">请处理我上传的PDF文件：</span><br><span class="line"></span><br><span class="line">1. 将PDF的目录列写为markdown格式的 `待办清单`；</span><br><span class="line">2. 按照清单顺序，执行 `章节具体操作`；</span><br><span class="line">3. 执行完成后，在 `待办清单` 中进行标记，并顺序执行下一章节，不需要用户提醒；</span><br><span class="line">4. 根据清单顺序，使用shell的 `copy` 命令将各章markdown文件合并成一个，例如 `copy 文件1.md + 文件2.md + 文件3.md 合并文件.md`。</span><br><span class="line"></span><br><span class="line">格式示例：</span><br><span class="line"></span><br><span class="line">- [x] 第一章 酒樓之城</span><br><span class="line">- [x] 第二章 小食之城</span><br><span class="line">- [ ] 第三章 傀儡之城</span><br><span class="line"></span><br><span class="line">## 章节具体处理</span><br><span class="line"></span><br><span class="line">请处理我上传的PDF文件，每次任务只专注于指定章节的内容，并将其精确地转换为markdown格式。注意：每章内容存入独立的markdown文件中。</span><br><span class="line"></span><br><span class="line">在转换过程中，必须严格遵守以下规则：</span><br><span class="line"></span><br><span class="line">1. **范围限定：** 仅提取并转换指定章节的内容。忽略文件中的其他所有部分。</span><br><span class="line">2. **内容忠实：** 除了执行必要的繁简与标点转换外，绝不概括、增加或删除原文的任何句子或段落。</span><br><span class="line">3. **繁体转简体：** 智能判断原文语种。如果原文是繁体中文，请在转换格式的同时，将所有文字内容平滑地转换为简体中文。</span><br><span class="line">4. **统一中文标点：** 如果文本主要是中文，请将所有英文标点符号转换为对应的中文全角标点符号（此规则不适用于代码块和公式）。</span><br><span class="line">5. **清理页面元素：** 删除所有页码、页眉和页脚。</span><br><span class="line">6. **合并断裂段落：** 将因分页符而断开的句子和段落连接起来。</span><br><span class="line">7. **精确格式化：** 将原文的所有格式（如标题、列表、粗体、斜体、引用、数学公式等）准确转换为标准的GitHub Flavored markdown。**特别注意**：任何数学对象必须转换为LaTeX格式（行内用$...$，块级用$...$），并确保代码块和表格被正确格式化。</span><br><span class="line">8. **保留诗歌格式：** 如果原文中包含诗歌，请在转换时保持其特有的断句和格式不变。</span><br><span class="line"></span><br><span class="line">请开始处理指定的章节。</span><br></pre></td></tr></table></figure>
-<p>待办清单，实现任务自动化。各章节独立文件，防止 Agent
-把“写入”变成“替换”（真的会发生）。还能怎么提升效率，多 Agents
-并行运算？</p>
+<p>待办清单，实现任务自动化。各章节独立文件，防止 Agent 把“写入”变成“替换”（真的会发生）。还能怎么提升效率，多 Agents 并行运算？</p>
 <p>不管了，做午饭的工夫，全自动完成了一本书的转换。</p>
-<figure>
-<img src="/2025/09/07/OCR-Gemini/OCR-9.png" alt="开始的时候">
-<figcaption aria-hidden="true">开始的时候</figcaption>
-</figure>
-<figure>
-<img src="/2025/09/07/OCR-Gemini/OCR-10.png" alt="结束的时候">
-<figcaption aria-hidden="true">结束的时候</figcaption>
-</figure>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-9.png" alt="开始的时候"></p>
+<p><img src="/2025/09/07/OCR-Gemini/OCR-10.png" alt="结束的时候"></p>
 <p>很满意……我也是后来发现有漏转换章节，才没那么满意的。</p>
-<p>Agent
-确实吸引人，既全自动又不需要自己编程。但问题也很突出，有一种智力是不可再生资源，但在任务中却始终均等挥霍的感觉，眼瞅着越来越傻，简直是衰老的隐喻。</p>
+<p>Agent 确实吸引人，既全自动又不需要自己编程。但问题也很突出，有一种智力是不可再生资源，但在任务中却始终均等挥霍的感觉，眼瞅着越来越傻，简直是衰老的隐喻。</p>
 <p>另一个问题是慢。怎么能和我做饭一样慢呢？</p>
-<p>前面说的窗口式
-AI，你虽然腾不出手来，但完成任务能快上不少，哪怕同样使用思考模型。</p>
+<p>前面说的窗口式 AI，你虽然腾不出手来，但完成任务能快上不少，哪怕同样使用思考模型。</p>
 <p>也许是我等得还不够，Agent 还得再等等。</p>
-<h2 id="小结">小结</h2>
-<p>模型配置：</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>模型配置：</p>
 <ul>
 <li>网站：Google AI Studio</li>
 <li>型号：Gemini 2.5 Pro</li>
@@ -422,10 +385,7 @@ AI，你虽然腾不出手来，但完成任务能快上不少，哪怕同样使
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">请处理我上传的PDF文件，本次任务只专注于 **[在此处填写章节名称或编号]** 的内容，并将其精确地转换为Markdown格式。</span><br><span class="line"></span><br><span class="line">在转换过程中，必须严格遵守以下规则：</span><br><span class="line"></span><br><span class="line">1.  **范围限定：** 仅提取并转换指定章节的内容。忽略文件中的其他所有部分。</span><br><span class="line">2.  **内容忠实：** 除了执行必要的繁简与标点转换外，绝不概括、增加或删除原文的任何句子或段落。</span><br><span class="line">3.  **繁体转简体：** 智能判断原文语种。如果原文是繁体中文，请在转换格式的同时，将所有文字内容平滑地转换为简体中文。</span><br><span class="line">4.  **统一中文标点：** 如果文本主要是中文，请将所有英文标点符号转换为对应的中文全角标点符号（此规则不适用于代码块和公式）。</span><br><span class="line">5.  **清理页面元素：** 删除所有页码、页眉和页脚。</span><br><span class="line">6.  **合并断裂段落：** 将因分页符而断开的句子和段落连接起来。</span><br><span class="line">7.  **精确格式化：** 将原文的所有格式（如标题、列表、粗体、斜体、引用、脚注、数学公式等）准确转换为标准的GitHub Flavored Markdown。**特别注意**：任何数学对象必须转换为LaTeX格式（行内用`$...$`，块级用`$$...$$`），并确保代码块和表格被正确格式化。</span><br><span class="line">8. **保留诗歌格式：** 如果原文中包含诗歌，请在转换时保持其特有的断句和格式不变。</span><br><span class="line"></span><br><span class="line">请开始处理指定的章节。</span><br></pre></td></tr></table></figure>
 <p>或者直接使用 GeminiCLI，<code>GEMINI.md</code> 文件内容如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">## 待办清单</span><br><span class="line"></span><br><span class="line">- [ ] 请在此更新待办清单</span><br><span class="line"></span><br><span class="line">## 全书分章操作</span><br><span class="line"></span><br><span class="line">请处理我上传的PDF文件：</span><br><span class="line"></span><br><span class="line">1. 将PDF的目录列写为markdown格式的 `待办清单`；</span><br><span class="line">2. 按照清单顺序，执行 `章节具体操作`；</span><br><span class="line">3. 执行完成后，在 `待办清单` 中进行标记，并顺序执行下一章节，不需要用户提醒；</span><br><span class="line">4. 根据清单顺序，使用shell的 `copy` 命令将各章markdown文件合并成一个，例如 `copy 文件1.md + 文件2.md + 文件3.md 合并文件.md`。</span><br><span class="line"></span><br><span class="line">格式示例：</span><br><span class="line"></span><br><span class="line">- [x] 第一章 酒樓之城</span><br><span class="line">- [x] 第二章 小食之城</span><br><span class="line">- [ ] 第三章 傀儡之城</span><br><span class="line"></span><br><span class="line">## 章节具体处理</span><br><span class="line"></span><br><span class="line">请处理我上传的PDF文件，每次任务只专注于指定章节的内容，并将其精确地转换为markdown格式。注意：每章内容存入独立的markdown文件中。</span><br><span class="line"></span><br><span class="line">在转换过程中，必须严格遵守以下规则：</span><br><span class="line"></span><br><span class="line">1. **范围限定：** 仅提取并转换指定章节的内容。忽略文件中的其他所有部分。</span><br><span class="line">2. **内容忠实：** 除了执行必要的繁简与标点转换外，绝不概括、增加或删除原文的任何句子或段落。</span><br><span class="line">3. **繁体转简体：** 智能判断原文语种。如果原文是繁体中文，请在转换格式的同时，将所有文字内容平滑地转换为简体中文。</span><br><span class="line">4. **统一中文标点：** 如果文本主要是中文，请将所有英文标点符号转换为对应的中文全角标点符号（此规则不适用于代码块和公式）。</span><br><span class="line">5. **清理页面元素：** 删除所有页码、页眉和页脚。</span><br><span class="line">6. **合并断裂段落：** 将因分页符而断开的句子和段落连接起来。</span><br><span class="line">7. **精确格式化：** 将原文的所有格式（如标题、列表、粗体、斜体、引用、数学公式等）准确转换为标准的GitHub Flavored markdown。**特别注意**：任何数学对象必须转换为LaTeX格式（行内用$...$，块级用$...$），并确保代码块和表格被正确格式化。</span><br><span class="line">8. **保留诗歌格式：** 如果原文中包含诗歌，请在转换时保持其特有的断句和格式不变。</span><br><span class="line"></span><br><span class="line">请开始处理指定的章节。</span><br></pre></td></tr></table></figure>
-<p align="right">
-25/09/07
-</p>
-
+<p align="right">25/09/07</p>
       
     </div>
 
@@ -894,7 +854,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -1017,7 +977,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,2],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1054,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":24},{"name":"读小说","value":9},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"骆以军","value":3}],
+                            data: [{"name":"AI","value":24},{"name":"现代生活","value":10},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1068,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":24},{"name":"读小说","value":9},{"name":"现代生活","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"骆以军","value":3}].map(tag => tag.name),
+                            data: [{"name":"AI","value":24},{"name":"现代生活","value":10},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1090,13 +1050,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"读书笔记","value":13},{"name":"计算笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"计算笔记","value":12},{"name":"读书笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"读书笔记","value":13},{"name":"计算笔记","value":12},{"name":"咫闻周刊","value":12},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1145,7 +1105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":12,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":12,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

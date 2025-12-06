@@ -1,0 +1,1192 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>归档：2025/12 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  <meta name="google-site-verification" content="ehFJkJqT3xVRt9rE7EgLeLJA4RhG2WKXLUvPc5oDd_w" />
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    // 回到顶部功能
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // 控制回到顶部按钮的显示和隐藏
+    function toggleScrollTopButton() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleScrollTopButton);
+    });
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #f03838);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #theme-toggle {
+      right: 20px;
+    }
+    
+    #scroll-top {
+      right: 70px; /* 位于夜间模式按钮旁边 */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+    
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button id="theme-toggle" class="floating-btn" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<button id="scroll-top" class="floating-btn" onclick="scrollToTop()" aria-label="回到顶部">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      
+
+<article>
+  <h2 class="article-title ">2025/12</h2>
+
+  <!-- 热力图容器 -->
+  <div class="heatmap-container" style="margin: 30px 0;">
+    <div id="heatmapChart" style="width: 100%; height: 200px; overflow-x: auto; overflow-y: hidden;"></div>
+  </div>
+
+  <div class="archive">
+    
+    <div class="archive-group">
+      <h3 class="group-title">
+        <i class="icon-calendar"></i>
+        2025
+        <small>(26)</small>
+      </h3>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-12-05T16:00:00.000Z">
+              <a href="/2025/12/06/zhiwen-weekly-vol013/">2025-12-06</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/12/06/zhiwen-weekly-vol013/"><span>Vol.013 记忆外包</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-11-29T16:00:00.000Z">
+              <a href="/2025/11/30/zi-wo-zhen-duan/">2025-11-30</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/11/30/zi-wo-zhen-duan/"><span>自我诊断：从&#34;电波系艺术&#34;聊到&#34;叙事的危机&#34;</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-11-21T16:00:00.000Z">
+              <a href="/2025/11/22/zhiwen-weekly-vol012/">2025-11-22</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/11/22/zhiwen-weekly-vol012/"><span>Vol.012 如果遍地是黄金</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-11-01T16:00:00.000Z">
+              <a href="/2025/11/02/zhiwen-weekly-vol011/">2025-11-02</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/11/02/zhiwen-weekly-vol011/"><span>Vol.011 向我伸出橄榄球的人</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-10-03T16:00:00.000Z">
+              <a href="/2025/10/04/zhiwen-weekly-vol010/">2025-10-04</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/10/04/zhiwen-weekly-vol010/"><span>Vol.010 在你手心上写的字</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-09-20T16:00:00.000Z">
+              <a href="/2025/09/21/Oogiri-Gemini/">2025-09-21</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/09/21/Oogiri-Gemini/"><span>一句正经没有：Gemini和Seedream的大喜利双簧组合</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-09-06T16:00:00.000Z">
+              <a href="/2025/09/07/OCR-Gemini/">2025-09-07</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/09/07/OCR-Gemini/"><span>光学字符识别？也学点新的</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-08-30T16:00:00.000Z">
+              <a href="/2025/08/31/nano-banana/">2025-08-31</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/08/31/nano-banana/"><span>Nano Banana：最新换装小游戏</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-07-26T16:00:00.000Z">
+              <a href="/2025/07/27/zhiwen-weekly-vol009/">2025-07-27</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/07/27/zhiwen-weekly-vol009/"><span>Vol.009 刺杀了将军的形象</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-07-11T16:00:00.000Z">
+              <a href="/2025/07/12/wolfram-thousand-li/">2025-07-12</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/07/12/wolfram-thousand-li/"><span>零基础「千里江山图」入门</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-06-25T16:00:00.000Z">
+              <a href="/2025/06/26/zhiwen-weekly-vol008/">2025-06-26</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/06/26/zhiwen-weekly-vol008/"><span>Vol.008 为掩饰顺拐而双手插兜</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-06-21T16:00:00.000Z">
+              <a href="/2025/06/22/wolfram-classify/">2025-06-22</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/06/22/wolfram-classify/"><span>我们能「看见」文体的形状吗？</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-06-15T16:00:00.000Z">
+              <a href="/2025/06/16/notetaking-2025/">2025-06-16</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/06/16/notetaking-2025/"><span>当前笔记管理方法切片</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-06-12T16:00:00.000Z">
+              <a href="/2025/06/13/the-silent-storm/">2025-06-13</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/06/13/the-silent-storm/"><span>寂静的风暴</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-05-24T16:00:00.000Z">
+              <a href="/2025/05/25/ming-dynasty/">2025-05-25</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/05/25/ming-dynasty/"><span>一艘驶向黯淡寂灭的忒修斯之船</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-03-14T16:00:00.000Z">
+              <a href="/2025/03/15/zhiwen-weekly-vol007/">2025-03-15</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/03/15/zhiwen-weekly-vol007/"><span>Vol.007 要像自然一样运作</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-03-12T16:00:00.000Z">
+              <a href="/2025/03/13/the-burnout-society/">2025-03-13</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/03/13/the-burnout-society/"><span>过于积极的倦怠</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-03-01T16:00:00.000Z">
+              <a href="/2025/03/02/zhiwen-weekly-vol006/">2025-03-02</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/03/02/zhiwen-weekly-vol006/"><span>Vol.006 AI Did IT</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-02-20T16:00:00.000Z">
+              <a href="/2025/02/21/zhiwen-weekly-vol005/">2025-02-21</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/02/21/zhiwen-weekly-vol005/"><span>Vol.005 背百家姓长大的</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-02-06T16:00:00.000Z">
+              <a href="/2025/02/07/zhiwen-weekly-vol004/">2025-02-07</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/02/07/zhiwen-weekly-vol004/"><span>Vol.004 不逛公园不觉得AI歌奇怪</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-30T16:00:00.000Z">
+              <a href="/2025/01/31/neural-network-hallucinations/">2025-01-31</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/31/neural-network-hallucinations/"><span>远人之道：神经网络幻觉</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-23T16:00:00.000Z">
+              <a href="/2025/01/24/zhiwen-weekly-vol003/">2025-01-24</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/24/zhiwen-weekly-vol003/"><span>Vol.003 把你的枕头翻过来</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-21T16:00:00.000Z">
+              <a href="/2025/01/22/molten-writing/">2025-01-22</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/22/molten-writing/"><span>烧写：DeepSeek-R1 模型实现诗的泛化</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-19T16:00:00.000Z">
+              <a href="/2025/01/20/power-of-ignorance/">2025-01-20</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/20/power-of-ignorance/"><span>无知的力量：AI 编程实现 Hexo 博客样式优化</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-10T16:00:00.000Z">
+              <a href="/2025/01/11/zhiwen-weekly-vol002/">2025-01-11</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/11/zhiwen-weekly-vol002/"><span>Vol.002 没有人能同时踏入两河流域</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2025-01-03T16:00:00.000Z">
+              <a href="/2025/01/04/zhiwen-weekly-vol001/">2025-01-04</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2025/01/04/zhiwen-weekly-vol001/"><span>Vol.001 礼花爆炸之后</span></a></h4>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+    <div class="archive-group">
+      <h3 class="group-title">
+        <i class="icon-calendar"></i>
+        2024
+        <small>(18)</small>
+      </h3>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-12-26T16:00:00.000Z">
+              <a href="/2024/12/27/what-you-can-do-for-ai/">2024-12-27</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/12/27/what-you-can-do-for-ai/"><span>你能为人工智能做什么</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-12-25T16:00:00.000Z">
+              <a href="/2024/12/26/galerkin-method/">2024-12-26</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/12/26/galerkin-method/"><span>伽辽金法求解薄板振动方程</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-12-03T16:00:00.000Z">
+              <a href="/2024/12/04/ritz-method-in-wl/">2024-12-04</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/12/04/ritz-method-in-wl/"><span>里兹法求解薄板振动方程</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-11-04T16:00:00.000Z">
+              <a href="/2024/11/05/rediscover-travel/">2024-11-05</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/11/05/rediscover-travel/"><span>还翻自己的相册吗，还读别人的游记吗？</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-10-11T16:00:00.000Z">
+              <a href="/2024/10/12/next-us/">2024-10-12</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/10/12/next-us/"><span>新的故事，新的现实</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-09-23T16:00:00.000Z">
+              <a href="/2024/09/24/faces-and-palmprints/">2024-09-24</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/09/24/faces-and-palmprints/"><span>面孔与掌纹</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-09-20T16:00:00.000Z">
+              <a href="/2024/09/21/flux-style-exercise/">2024-09-21</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/09/21/flux-style-exercise/"><span>风格的幻觉与被存在的模特</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-09-11T16:00:00.000Z">
+              <a href="/2024/09/12/stubbornly-love-poetry/">2024-09-12</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/09/12/stubbornly-love-poetry/"><span>庸众顽固不化只爱华丽诗篇</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-09-01T16:00:00.000Z">
+              <a href="/2024/09/02/inner-art/">2024-09-02</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/09/02/inner-art/"><span>朱岳的内在艺术</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-08-18T16:00:00.000Z">
+              <a href="/2024/08/19/card-note-novel/">2024-08-19</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/08/19/card-note-novel/"><span>卡片笔记小说或者五十万字长诗</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-13T16:00:00.000Z">
+              <a href="/2024/07/14/card-tricks/">2024-07-14</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/14/card-tricks/"><span>纸牌魔术</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-10T16:00:00.000Z">
+              <a href="/2024/07/11/still-life-painting/">2024-07-11</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/11/still-life-painting/"><span>静物画</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-05T16:00:00.000Z">
+              <a href="/2024/07/06/language-inventor/">2024-07-06</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/06/language-inventor/"><span>发明语言的人</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-05T16:00:00.000Z">
+              <a href="/2024/07/06/simple-love/">2024-07-06</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/06/simple-love/"><span>朴素的爱</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-03T16:00:00.000Z">
+              <a href="/2024/07/04/memory-sketching/">2024-07-04</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/04/memory-sketching/"><span>回忆写生</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-07-02T16:00:00.000Z">
+              <a href="/2024/07/03/humorous-device/">2024-07-03</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/07/03/humorous-device/"><span>诙谐装置</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-06-29T16:00:00.000Z">
+              <a href="/2024/06/30/wind-up-bird/">2024-06-30</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/06/30/wind-up-bird/"><span>残酷剧场</span></a></h4>
+            
+          </div>
+        </div>
+      
+        <div class="archive-item">
+          <div class="archive-post">
+            <time datetime="2024-06-22T16:00:00.000Z">
+              <a href="/2024/06/23/rewriting-happiness/">2024-06-23</a>
+            </time>
+            
+              <h4 class="archive-title"><a href="/2024/06/23/rewriting-happiness/"><span>谁拿生活换生活</span></a></h4>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  </div>
+</article>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+    
+    
+    
+    <script src="/js/lang-detector.js"></script>
+    
+    
+
+    <!-- Mermaid.js CDN 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      // 初始化 mermaid
+      mermaid.initialize({ startOnLoad: true });
+      document.addEventListener('DOMContentLoaded', function() {
+        // 查找所有 mermaid 代码块
+        document.querySelectorAll('pre code.language-mermaid, pre code.mermaid').forEach(function(block) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          block.parentNode.parentNode.replaceWith(div);
+        });
+        // 重新初始化 mermaid
+        if (window.mermaid) {
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+      });
+    </script>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heatmapChartDom = document.getElementById('heatmapChart');
+                if(heatmapChartDom){
+                    const heatmapChart = echarts.init(heatmapChartDom, 'light');
+                    const cellSize = [18, 18];
+                    
+                    const groupByYear = (data) => {
+                        const result = {};
+                        data.forEach(([date, value]) => {
+                            const [year] = date.split('-').map(Number);
+                            if (!result[year]) {
+                                result[year] = [];
+                            }
+                            result[year].push([date, value]);
+                        });
+                        return result;
+                    };
+                    
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1]]);
+                    const years = Object.keys(groupedData).reverse();
+                    
+                    var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
+                    const minYear = years[years.length - 1];
+                    const maxYear = years[0];
+                    if (initYear < minYear || initYear > maxYear) {
+                        initYear = maxYear;
+                    }
+                    console.log('[hexo-graph]generateHeatmapChart|initYear:', initYear, 'minYear:', minYear, 'maxYear:', maxYear);
+                    
+                    heatmapChart.setOption({
+                        grid: {},
+                        tooltip: { 
+                            position: 'top', 
+                            formatter: params => `${params.value[0]}: ${params.value[1]} Articles` 
+                        },
+                        calendar: { 
+                            top: '10%',
+                            left: 'left', 
+                            right: '8%',
+                            range: initYear,
+                            cellSize: cellSize, 
+                            splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } }, 
+                            itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' }, 
+                            dayLabel: { show: false },
+                            monthLabel: { show: true },
+                            yearLabel: { show: false },
+                        },
+                        visualMap: { 
+                            show: true,
+                            right: '8%',
+                            bottom: '5%',
+                            type: 'piecewise',
+                            orient: 'horizontal',
+                            text: ['More', 'Less'],
+                            min: 0,
+                            max: Math.max(...groupedData[initYear].map(item => item[1])),
+                            inRange: { color: ["#ACE7AE","#69C16D","#549F57"] }
+                        },
+                        legend: {
+                            type: 'scroll',
+                            icon: 'none',
+                            data: years,
+                            orient: 'vertical',
+                            top: '5%',
+                            right: 'right',
+                            itemWidth: 20,
+                            itemHeight: 20,
+                            itemGap: 10,
+                            pageIconSize: 10,
+                            pageTextStyle: { fontSize: 14 },
+                            selectedMode: 'single',
+                        },
+                        series: years.map(year => ({
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: groupedData[year],
+                            name: year,
+                            emphasis: {
+                                disabled: true,
+                            },
+                            silent: year !== initYear,
+                        })),
+                    });
+                    
+                    // init selected year
+                    heatmapChart.dispatchAction({
+                        type: 'legendSelect',
+                        name: initYear,
+                    });
+                    
+                    heatmapChart.on('legendselectchanged', function(params) {
+                        console.log('[hexo-graph]generateHeatmapChart|legendselectchanged:', params);
+                        const selectedYear = Object.keys(params.selected).find(key => params.selected[key]);
+                        if (selectedYear && groupedData[selectedYear]) {
+                            heatmapChart.setOption({
+                                calendar: {
+                                    range: selectedYear,
+                                },
+                                visualMap: {
+                                    max: Math.max(...groupedData[selectedYear].map(item => item[1])),
+                                },
+                                series: years.map(year => ({
+                                    type: 'heatmap',
+                                    coordinateSystem: 'calendar',
+                                    data: groupedData[year],
+                                    name: year,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: year !== selectedYear,
+                                })),
+                            });
+                        }
+                    });
+                    
+                    heatmapChart.on('click', function (params) {
+                        if (params.componentType === 'series') {
+                            const [year, month] = params.value[0].split('-');
+                            window.location.href = '/archives/' + year + '/' + month;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const monthlyChartDom = document.getElementById('monthlyChart');
+                if(monthlyChartDom){
+                    const monthlyChart = echarts.init(monthlyChartDom, 'light');
+                    monthlyChart.setOption({
+                        xAxis: { 
+                            type: 'category', 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12"], 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        series: [{
+                            name: 'Articles',
+                            type: 'line',
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,1],
+                            smooth: true,
+                            lineStyle: { color: '#5470C6', width: 2 },
+                            itemStyle: { color: '#5470C6' },
+                            areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                            symbolSize: 10,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            }
+                        }]
+                    });
+
+                    monthlyChart.on('click', function (params) {
+                        const [year, month] = params.name.split('-');
+                        window.location.href = '/archives/' + year + '/' + month;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tagsChartDom = document.getElementById('tagsChart');
+                if(tagsChartDom){
+                    const tagsChart = echarts.init(tagsChartDom, 'light');
+                    tagsChart.setOption({
+                        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                        series: [{
+                            type: 'pie',
+                            radius: '60%',
+                            data: [{"name":"AI","value":25},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"Github","value":4}],
+                            label: {
+                                position: 'outside',
+                                formatter: '{b} {c} ({d}%)',
+                                fontSize: 14,
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            color: ["#5470C6","#91CC75","#FAC858","#EE6666","#73C0DE","#3BA272","#FC8452","#9A60B4"],
+                            labelLine: { show: true }
+                        }],
+                        legend: {
+                            bottom: '0',
+                            left: 'center',
+                            data: [{"name":"AI","value":25},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"翻译","value":6},{"name":"设计","value":5},{"name":"Wolfram","value":4},{"name":"Github","value":4}].map(tag => tag.name),
+                            textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        }
+                    });
+
+                    tagsChart.on('click', function (params) {
+                        window.location.href = '/tags/' + params.name;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesChartDom = document.getElementById('categoriesChart');
+                if(categoriesChartDom){
+                    const categoriesChart = echarts.init(categoriesChartDom, 'light');
+                    categoriesChart.setOption({
+                        xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        yAxis: { 
+                            type: 'category', 
+                            data: [{"name":"读书笔记","value":13},{"name":"咫闻周刊","value":13},{"name":"计算笔记","value":12},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        series: [{
+                            name: 'Category Count',
+                            type: 'bar',
+                            data: [{"name":"读书笔记","value":13},{"name":"咫闻周刊","value":13},{"name":"计算笔记","value":12},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    { offset: 0, color: '#91CC75' },
+                                    { offset: 1, color: '#73C0DE' }
+                                ])
+                            }
+                        }]
+                    });
+
+                    categoriesChart.on('click', function (params) {
+                        window.location.href = '/categories/' + params.name;
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesTreeChartDom = document.getElementById('categoriesTreeChart');
+                if(categoriesTreeChartDom){
+                    const treeChart = echarts.init(categoriesTreeChartDom, 'light');
+                    treeChart.setOption({
+                        title: {
+                            text: '操作提示：单击展开分类，双击进入具体分类页面',
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#999',
+                                fontWeight: 'normal'
+                            },
+                            bottom: 0,
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        series: [{
+                            type: 'tree',
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":12,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":13,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            initialTreeDepth: -1,
+                            top: '5%',
+                            bottom: '10%',
+                            left: '0%',
+                            right: '0%',
+                            symbolSize: 15,
+                            layout: 'orthogonal',
+                            orient: 'TB',
+                            itemStyle: {
+                                color: '#91CC75',
+                                borderColor: '#73C0DE'
+                            },
+                            label: {
+                                position: 'bottom',
+                                verticalAlign: 'middle',
+                                align: 'center',
+                                fontSize: 14,
+                                distance: 28,
+                                formatter: function(params) {
+                                    return params.data.name + (params.data.count ? ' (' + params.data.count + ')' : '');
+                                }
+                            },
+                            leaves: {
+                                label: {
+                                    position: 'top',
+                                    verticalAlign: 'middle',
+                                    align: 'center'
+                                }
+                            },
+                            emphasis: {
+                                focus: 'descendant'
+                            },
+                            expandAndCollapse: true
+                        }]
+                    });
+
+                    treeChart.on('dblclick', function (params) {
+                        if (params.data && params.data.path) {
+                            window.location.href = '/categories/' + params.data.path;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+    </body>
+</html>

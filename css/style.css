@@ -2592,8 +2592,8 @@ figure.highlight .code pre {
 figure.highlight .code .line {
   height: 0.8em;
   min-height: 0.8em;
-  display: flex;
-  align-items: center;
+  display: block;
+  white-space: pre;
 }
 figure.highlight .marked {
   background: rgba(0,0,0,0.05);

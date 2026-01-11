@@ -17,7 +17,10 @@
   
 
   
-  <meta name="description" content="我浅学过一些编程语言，大概是能复制网上代码修改到完成课程作业的水平，但对于前端知识茫然无知，并且苦于网络信息的时效性，许多想法没能实现，只好搁置。至于 AI 编程，之前只是在对话框里向 AI 讨要过代码，没奢望过什么别的。这一回是在社交媒体的熏陶之下知道了 Cursor，恰巧又有点时间，所以试上一试。">
+  <meta name="description" content="我浅学过一些编程语言，大概是能复制网上代码修改到完成课程作业的水平，但对于前端知识茫然无知，并且苦于网络信息的时效性，许多想法没能实现，只好搁置。至于
+AI 编程，之前只是在对话框里向 AI
+讨要过代码，没奢望过什么别的。这一回是在社交媒体的熏陶之下知道了
+Cursor，恰巧又有点时间，所以试上一试。">
   
 
   
@@ -321,35 +324,62 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2025/01/20/power-of-ignorance/poi-0.png" alt></p>
-<p>我浅学过一些编程语言，大概是能复制网上代码修改到完成课程作业的水平，但对于前端知识茫然无知，并且苦于网络信息的时效性，许多想法没能实现，只好搁置。至于 AI 编程，之前只是在对话框里向 AI 讨要过代码，没奢望过什么别的。这一回是在社交媒体的熏陶之下知道了 Cursor，恰巧又有点时间，所以试上一试。</p>
-<span id="more"></span>  
-<p>上次听说 Cursor 还是号称可以免费用 GPT-4，现在则是配合 <code>Claude-3.5-Sonnet</code> 做自然语言编程。我试着给博客加了两个小部件，一个是目录，一个是点赞。</p>
-<p>想起之前为了渲染 $\LaTeX$ 公式而折腾的经历，主题不配合就算了，网上的教程版本多半也都对不上，好在最后找到一篇合适的<a target="_blank" rel="noopener" href="https://blog.xiangfa.org/2020/09/let-hexo-support-latex-formulas/">文章</a>解决了问题。</p>
+        <p><img src="/2025/01/20/power-of-ignorance/poi-0.png"></p>
+<p>我浅学过一些编程语言，大概是能复制网上代码修改到完成课程作业的水平，但对于前端知识茫然无知，并且苦于网络信息的时效性，许多想法没能实现，只好搁置。至于
+AI 编程，之前只是在对话框里向 AI
+讨要过代码，没奢望过什么别的。这一回是在社交媒体的熏陶之下知道了
+Cursor，恰巧又有点时间，所以试上一试。</p>
+<span id="more"></span>
+<p>上次听说 Cursor 还是号称可以免费用 GPT-4，现在则是配合
+<code>Claude-3.5-Sonnet</code>
+做自然语言编程。我试着给博客加了两个小部件，一个是目录，一个是点赞。</p>
+<p>想起之前为了渲染 <span class="math inline">\(\LaTeX\)</span>
+公式而折腾的经历，主题不配合就算了，网上的教程版本多半也都对不上，好在最后找到一篇合适的<a target="_blank" rel="noopener" href="https://blog.xiangfa.org/2020/09/let-hexo-support-latex-formulas/">文章</a>解决了问题。</p>
 <p>这种经历多了，人确实会丧失折腾的欲望——有这时间还不如干点正事。</p>
-<p>今天有比较完整的时间，就下载 Cursor 试试。界面和 VSCode 基本一致，左边栏是文件夹、扩展插件之类的，右边栏是 AI 功能：Chat、Composer 和 Bug Finder。体验下来主要用到前两个，其中 Chat 是聊天启发思路用的，Composer 就是用来写代码的。为了节约限量次数，我把 Chat 模型设为 <code>GPT-4o-mini</code>，Composer 模型还是 <code>Claude-3.5-Sonnet</code>，能保证代码质量。</p>
-<p><img src="/2025/01/20/power-of-ignorance/poi-1.png" alt></p>
-<p>我打开之前的主题文件夹”Hacker”，把 Composer 的模式从 Normal 改为 Agent，然后就是详细提需求，一轮轮修改的过程：</p>
-<ol>
-<li>Composer 给出代码，我先保存一下（好像默认也会保存），然后在命令行敲 <code>hexo s</code>，用浏览器看看效果；</li>
+<p>今天有比较完整的时间，就下载 Cursor 试试。界面和 VSCode
+基本一致，左边栏是文件夹、扩展插件之类的，右边栏是 AI
+功能：Chat、Composer 和 Bug Finder。体验下来主要用到前两个，其中 Chat
+是聊天启发思路用的，Composer 就是用来写代码的。为了节约限量次数，我把
+Chat 模型设为 <code>GPT-4o-mini</code>，Composer 模型还是
+<code>Claude-3.5-Sonnet</code>，能保证代码质量。</p>
+<p><img src="/2025/01/20/power-of-ignorance/poi-1.png"></p>
+<p>我打开之前的主题文件夹"Hacker"，把 Composer 的模式从 Normal 改为
+Agent，然后就是详细提需求，一轮轮修改的过程：</p>
+<ol type="1">
+<li>Composer 给出代码，我先保存一下（好像默认也会保存），然后在命令行敲
+<code>hexo s</code>，用浏览器看看效果；</li>
 <li>满意就选 Accept all；</li>
 <li>不满意就选 Reject all，继续描述需求，循环往复。</li>
 </ol>
-<p>可能是第一次用，感觉没省时间。因为一旦开始折腾，想法和要求就会越来越多，之前“算了再说”的问题，现在有希望一并解决了。还会遇到之前压根没想过的细节问题：鼠标和手指是不一样的，PC 端的设计放在手机上就很怪。比如，手机端收起的目录白边影响视野，点赞后按钮颜色不能立即变化，得先点击别处才行。</p>
-<p>为了方便实时预览修改效果，在 Chrome 浏览器按 <code>F12</code> 再按 <code>Shift+Ctrl+M</code> 可以切换 PC 和移动端界面。解决问题之后，退出 Cursor 解除文件占用，命令行输入 <code>hexo clean</code>，再 <code>hexo g -d</code>，稍等一会儿就改好了。</p>
-<p>确实是”黑盒”，而且写博客的代码我是真不懂，也不知道该写什么了，就看下效果吧：</p>
-<p><img src="/2025/01/20/power-of-ignorance/poi-2.gif" alt></p>
-<p><img src="/2025/01/20/power-of-ignorance/poi-3.gif" alt></p>
+<p>可能是第一次用，感觉没省时间。因为一旦开始折腾，想法和要求就会越来越多，之前“算了再说”的问题，现在有希望一并解决了。还会遇到之前压根没想过的细节问题：鼠标和手指是不一样的，PC
+端的设计放在手机上就很怪。比如，手机端收起的目录白边影响视野，点赞后按钮颜色不能立即变化，得先点击别处才行。</p>
+<p>为了方便实时预览修改效果，在 Chrome 浏览器按 <code>F12</code> 再按
+<code>Shift+Ctrl+M</code> 可以切换 PC 和移动端界面。解决问题之后，退出
+Cursor 解除文件占用，命令行输入 <code>hexo clean</code>，再
+<code>hexo g -d</code>，稍等一会儿就改好了。</p>
+<p>确实是"黑盒"，而且写博客的代码我是真不懂，也不知道该写什么了，就看下效果吧：</p>
+<p><img src="/2025/01/20/power-of-ignorance/poi-2.gif"></p>
+<p><img src="/2025/01/20/power-of-ignorance/poi-3.gif"></p>
 <p>总之，自然语言编程在现阶段给我最大的启发，一是把话讲清楚，二是不妨先试试。</p>
-<p align="right">25/01/16</p>
-
+<p align="right">
+25/01/16
+</p>
 <hr>
 <p>几天之后，补充一下阶段性成果，我把项目发到 <a target="_blank" rel="noopener" href="https://github.com/fengyukongzhou/Hacker">Github</a> 上了：</p>
-<p><img src="/2025/01/20/power-of-ignorance/poi-4.png" alt="图片仅供参考"></p>
-<p>除了目录和点赞之外，比较明显的修改是代码块样式和移动端的夜间模式，不太明显的有对各页面的微调和对 Cursor 改坏了但我没及时发现的部分的补救。作为 Cursor 编程新手且对相关代码无基本概念，我确实要直面“因果轮回”。</p>
-<p>另外，对于多次修改仍无满意结果的部分，应该提醒 AI 重新思考、彻底思考，在我的经验范畴内，简单加上这么一句“温馨提示”居然是有效的。</p>
+<figure>
+<img src="/2025/01/20/power-of-ignorance/poi-4.png" alt="图片仅供参考">
+<figcaption aria-hidden="true">图片仅供参考</figcaption>
+</figure>
+<p>除了目录和点赞之外，比较明显的修改是代码块样式和移动端的夜间模式，不太明显的有对各页面的微调和对
+Cursor 改坏了但我没及时发现的部分的补救。作为 Cursor
+编程新手且对相关代码无基本概念，我确实要直面“因果轮回”。</p>
+<p>另外，对于多次修改仍无满意结果的部分，应该提醒 AI
+重新思考、彻底思考，在我的经验范畴内，简单加上这么一句“温馨提示”居然是有效的。</p>
 <p>总而言之，自然语言编程的效果是“可以理解的好”，而这已经使我足够满意了。</p>
-<p align="right">25/01/20</p>
+<p align="right">
+25/01/20
+</p>
+
       
     </div>
 
@@ -743,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function() {
     Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
     </br>
     
-    &copy; 2025 Fengyukongzhou
+    &copy; 2026 Fengyukongzhou
     
   </p>
 </footer>
@@ -818,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -934,14 +964,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     monthlyChart.setOption({
                         xAxis: { 
                             type: 'category', 
-                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12"], 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01"], 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,1],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -978,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":27},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"设计","value":6},{"name":"翻译","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
+                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -992,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":27},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"设计","value":6},{"name":"翻译","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1014,13 +1044,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":14},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":14},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1069,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":14,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":15,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

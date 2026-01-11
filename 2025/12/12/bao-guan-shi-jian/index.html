@@ -321,50 +321,76 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-001.png" alt></p>
+        <p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-001.png"></p>
 <blockquote>
 <p>在所有打发时间的方式里，看电影无疑是最不划算的一种。同样的钱，拿来买书能读上一个礼拜，买酒也够喝上一整晚了。一张电影票却只能消磨一两个小时，而且是身处一间黑屋子、困坐在一张小椅子上的一两个小时。——《悲悼》</p>
 </blockquote>
-<span id="more"></span>  
+<span id="more"></span>
 <p>电影，我看得不多。</p>
-<p>但现在还能想起来，儿时的我会把去影院看过的电影名字记录在一个 Word 文档里，用一些花哨的艺术字。</p>
-<p>回想起来，电影也不是什么好电影，但是把片名列在一起的那个 <code>.doc</code> 文件，确实带给我一种莫名的安全感，像是给刚刚支付出去的一两个小时开了张收据。</p>
+<p>但现在还能想起来，儿时的我会把去影院看过的电影名字记录在一个 Word
+文档里，用一些花哨的艺术字。</p>
+<p>回想起来，电影也不是什么好电影，但是把片名列在一起的那个
+<code>.doc</code>
+文件，确实带给我一种莫名的安全感，像是给刚刚支付出去的一两个小时开了张收据。</p>
 <p>虽然，这个文档已经不见了……新版 Word 的艺术字也内敛了许多。</p>
-<h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-002.png" alt></p>
-<p>前段时间领取了一个月的 Gemini Enterprise，可以比较任性地使用 Nano Banana Pro。我确实找到了不少提示词，试一试、改一改、再试一试。固然有趣，但像是一种消耗精力的娱乐，不断冲洗大脑皮层。</p>
+<h2 id="简单实现">简单实现</h2>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-002.png"></p>
+<p>前段时间领取了一个月的 Gemini Enterprise，可以比较任性地使用 Nano
+Banana
+Pro。我确实找到了不少提示词，试一试、改一改、再试一试。固然有趣，但像是一种消耗精力的娱乐，不断冲洗大脑皮层。</p>
 <p>于是，我尝试做点小东西。</p>
-<p>正好下午刚看了场电影，于是我灵机一动（<em>和 AI 聊了不下十轮并让它</em>）写下了这段提示词：</p>
+<p>正好下午刚看了场电影，于是我灵机一动（<em>和 AI
+聊了不下十轮并让它</em>）写下了这段提示词：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;system_directive&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Senior Visual Designer&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;task&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Generative_Ticket_Design&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Style_Transfer_and_Layout&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;global_config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;aspect_ratio&quot;</span><span class="punctuation">:</span> <span class="string">&quot;9:16&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;render_quality&quot;</span><span class="punctuation">:</span> <span class="string">&quot;High Fidelity, Vector Style&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;input_payload&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;source_reference&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;UPLOAD_POSTER_IMAGE&gt;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;text_data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;movie_en&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Resurrection&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;movie_cn&quot;</span><span class="punctuation">:</span> <span class="string">&quot;狂野时代&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;time_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2025.12.07 12:10&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;location_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;VIP厅, 红星电影世界（天津之眼店）&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;price_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;¥34.90&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;visual_processing_rules&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;art_direction&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;style_preset&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Swiss International Style (Grid-based, Minimalist)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;image_treatment&quot;</span><span class="punctuation">:</span> <span class="string">&quot;RE-RENDER logic: Do NOT copy-paste the source. Analyze the source poster&#x27;s composition and color, then re-draw it as a clean, flat Vector Illustration or Stylized Digital Art to fit the ticket aesthetic.&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;canvas_logic&quot;</span><span class="punctuation">:</span> <span class="string">&quot;The Output Image IS the ticket. Full bleed. No background borders.&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;layout_engine&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;structure&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Vertical Split based on &#123;aspect_ratio&#125;. Top 60% = Artwork. Bottom 40% = White Info Panel.&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;info_panel_hierarchy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1. Movie Title (Top of white area). 2. Data Grid (Bottom of white area). 3. Barcode (Bottom edge).&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;decoration&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Vertical BARCODE strip in the corner.&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;typography_logic&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;font_family&quot;</span><span class="punctuation">:</span> <span class="string">&quot;DIN 1451 or Helvetica Neue (Bold)&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title_handling&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;primary_visual&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Render &#123;movie_en&#125; in LARGE, UPPERCASE, BOLD typography. This is the main design anchor.&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;secondary_visual&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Render &#123;movie_cn&#125; in a smaller, readable font size, placed elegantly next to or below the English title.&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;data_mapping&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;location_field&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Render &#123;location_val&#125;. Auto-wrap text if too long.&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;time_field&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Render &#123;time_val&#125; clearly.&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;price_field&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Render &#123;price_val&#125;.&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;output_constraint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Single graphic file. Flat 2D view. Strict split layout. No gibberish text.&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<p><code>&quot;text_data&quot;</code> 这部分可以自行填写，然后把填充好的提示词，以及凭自己喜好选的一张海报，一起丢给 Nano Banana Pro，会得到类似于这样的效果：</p>
-<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-003.png" alt></p>
+<p><code>"text_data"</code>
+这部分可以自行填写，然后把填充好的提示词，以及凭自己喜好选的一张海报，一起丢给
+Nano Banana Pro，会得到类似于这样的效果：</p>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-003.png"></p>
 <p>你可以尝试多次，最终得到一个满意的样式。</p>
 <p>作为系列设计，当然需要复用同样的版式。所以在生产后续图像时，可以把第一张满意的结果作为第二张参考图片。</p>
 <p>微调上面的提示词：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;input_payload&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;source_reference&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Figure 1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;layout_reference&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Figure 2&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;text_data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;movie_en&quot;</span><span class="punctuation">:</span> <span class="string">&quot;The Stage&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;movie_cn&quot;</span><span class="punctuation">:</span> <span class="string">&quot;戏台&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;time_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2025.07.20 16:40&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;location_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1号厅, 中和影城（南开劝业场店）&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;price_val&quot;</span><span class="punctuation">:</span> <span class="string">&quot;¥30.30&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-<p>这时，把电影海报作为图 1，把第一张票根作为图 2，连同调整后的提示词，一起丢给 Nano Banana Pro，会得到这样的效果：</p>
-<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-004.png" alt></p>
+<p>这时，把电影海报作为图 1，把第一张票根作为图
+2，连同调整后的提示词，一起丢给 Nano Banana Pro，会得到这样的效果：</p>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-004.png"></p>
 <p>基本令人满意。</p>
-<h2 id="稳固实现"><a href="#稳固实现" class="headerlink" title="稳固实现"></a>稳固实现</h2><p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-005.png" alt></p>
+<h2 id="稳固实现">稳固实现</h2>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-005.png"></p>
 <p>那就是还不满意。</p>
-<p>回看前面 JSON 格式的提示词，总让人感觉是一段程序，貌似是可以稳定产出成品的。但事与愿违，生图模型还是会自行发挥。</p>
+<p>回看前面 JSON
+格式的提示词，总让人感觉是一段程序，貌似是可以稳定产出成品的。但事与愿违，生图模型还是会自行发挥。</p>
 <p>虽然你可以反过来想，如果生图模型每次都可以给出你钟意的刻板结果，那它的审美可见——一般。</p>
-<p>总之，我希望文字部分是固定的，而图片部分可以“创意”一些。很自然能想到 Google AI Studio 的 Build 模式，一来可以用 Gemini 3.0 Pro 写代码，二来可以让所写的程序调用图片编辑模型（是 Nano Banana，而非 Pro 模型，但因为不涉及汉字的生成，还是够用的）。</p>
+<p>总之，我希望文字部分是固定的，而图片部分可以“创意”一些。很自然能想到
+Google AI Studio 的 Build 模式，一来可以用 Gemini 3.0 Pro
+写代码，二来可以让所写的程序调用图片编辑模型（是 Nano Banana，而非 Pro
+模型，但因为不涉及汉字的生成，还是够用的）。</p>
 <p>大体思路如下：</p>
-<ol>
-<li>把上一节的 JSON 提示词发给 AI，告诉它我需要一个网页，用户要填写哪些信息，并且上传海报，调用图像编辑模型完成转绘，转绘后的图像比例固定为 1:1，防止遮挡；</li>
-<li>上传满意的文字信息样式，让 AI 进行复刻（如果你死抠细节的话，还是需要多轮修改才行，我就调节了很久条形码的样式，虽然这部分只是随机数生成的结果）；</li>
-<li>小功能的实现，比如：剪贴板上传图片、直接从 HTML 生成图片（注意要先等所有字体文件下载完毕）、文本框换行，以及模式切换（影院观影和居家观影）。</li>
+<ol type="1">
+<li>把上一节的 JSON 提示词发给
+AI，告诉它我需要一个网页，用户要填写哪些信息，并且上传海报，调用图像编辑模型完成转绘，转绘后的图像比例固定为
+1:1，防止遮挡；</li>
+<li>上传满意的文字信息样式，让 AI
+进行复刻（如果你死抠细节的话，还是需要多轮修改才行，我就调节了很久条形码的样式，虽然这部分只是随机数生成的结果）；</li>
+<li>小功能的实现，比如：剪贴板上传图片、直接从 HTML
+生成图片（注意要先等所有字体文件下载完毕）、文本框换行，以及模式切换（影院观影和居家观影）。</li>
 </ol>
-<p>项目地址为 <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1vnBFXRj8PIAxnJQAGIq-Gcv0e-Hlf0BP">SwissStyle Ticket Generator</a>，因为需要调用 Nano Banana，所以还是直接在 AI Studio 这里用比较方便。</p>
+<p>项目地址为 <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1vnBFXRj8PIAxnJQAGIq-Gcv0e-Hlf0BP">SwissStyle
+Ticket Generator</a>，因为需要调用 Nano Banana，所以还是直接在 AI Studio
+这里用比较方便。</p>
 <p>使用方法如下：</p>
-<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-006.png" alt></p>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-006.png"></p>
 <p>效果如下：</p>
-<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-007.png" alt></p>
-<p>图像转绘的提示词是 Gemini 自己写的，我同样附在下面了，如果你有更好的想法也可以自己定制。</p>
+<p><img src="/2025/12/12/bao-guan-shi-jian/bgsj1212-007.png"></p>
+<p>图像转绘的提示词是 Gemini
+自己写的，我同样附在下面了，如果你有更好的想法也可以自己定制。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SYSTEM ROLE: Senior Visual Designer</span><br><span class="line">TASK: Style Transfer &amp; Re-rendering</span><br><span class="line">    </span><br><span class="line">INSTRUCTION: </span><br><span class="line">Take the provided source image (poster) and re-draw it completely in the style of &quot;Swiss International Style&quot; (International Typographic Style).</span><br><span class="line">    </span><br><span class="line">VISUAL RULES:</span><br><span class="line">1. STYLE: Flat Vector Illustration, Minimalist, Grid-based layout.</span><br><span class="line">2. COLORS: High contrast, bold, solid colors.</span><br><span class="line">3. COMPOSITION: Keep the main subject from the source image but simplify it into geometric shapes and clean lines.</span><br><span class="line">4. NO TEXT: The output must be PURE ARTWORK. Do NOT include the movie title, credits, actors&#x27; names, or any text from the original poster. The text will be added later programmatically.</span><br><span class="line">5. ASPECT RATIO: 1:1 (Square). The artwork must be perfectly square.</span><br><span class="line">    </span><br><span class="line">SUBJECT: The movie is &quot;$&#123;movieTitle&#125;&quot;.</span><br><span class="line">    </span><br><span class="line">OUTPUT: A single, high-quality image file of the artwork only.</span><br></pre></td></tr></table></figure>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>甚至，“网页使用方法”也是用 Nano Banana Pro 生成的，提示词如下：</p>
+<h2 id="附录">附录</h2>
+<p>甚至，“网页使用方法”也是用 Nano Banana Pro 生成的，提示词如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一张网页截图，该网页的功能是用户上传海报，然后让AI重绘得到自制电影票根，你需要用Excalidraw工具加上**触控板手写**中文批注、涂鸦，说明网页使用方法，还可以加点小剪贴画。图像为4K清晰度。</span><br></pre></td></tr></table></figure>
-<p align="right">25/12/12</p>
+<p align="right">
+25/12/12
+</p>
+
       
     </div>
 
@@ -758,7 +784,7 @@ document.addEventListener('DOMContentLoaded', function() {
     Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
     </br>
     
-    &copy; 2025 Fengyukongzhou
+    &copy; 2026 Fengyukongzhou
     
   </p>
 </footer>
@@ -833,7 +859,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -949,14 +975,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     monthlyChart.setOption({
                         xAxis: { 
                             type: 'category', 
-                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12"], 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01"], 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,1],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -993,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":27},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"设计","value":6},{"name":"翻译","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
+                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1007,7 +1033,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":27},{"name":"现代生活","value":11},{"name":"读小说","value":9},{"name":"尝试集","value":8},{"name":"设计","value":6},{"name":"翻译","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1029,13 +1055,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":14},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":14},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1084,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":14,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":15,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

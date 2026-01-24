@@ -879,7 +879,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1]]);
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1],["2026-01-24",1]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -1002,7 +1002,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,1],
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,2],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1039,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
+                            data: [{"name":"AI","value":29},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1053,7 +1053,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":28},{"name":"现代生活","value":11},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":29},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"翻译","value":7},{"name":"设计","value":6},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1075,13 +1075,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":16},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":15},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":16},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1130,7 +1130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":15,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":16,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

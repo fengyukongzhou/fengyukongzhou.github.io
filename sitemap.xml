@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://fengyukongzhou.github.io/2026/01/24/zhiwen-weekly-vol016/</loc>
+    <loc>https://fengyukongzhou.github.io/2025/01/04/zhiwen-weekly-vol001/</loc>
     
     <lastmod>2026-01-24</lastmod>
     
@@ -13,7 +13,16 @@
   <url>
     <loc>https://fengyukongzhou.github.io/2026/01/11/zhiwen-weekly-vol015/</loc>
     
-    <lastmod>2026-01-23</lastmod>
+    <lastmod>2026-01-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/2026/01/24/zhiwen-weekly-vol016/</loc>
+    
+    <lastmod>2026-01-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -381,15 +390,6 @@
   
   <url>
     <loc>https://fengyukongzhou.github.io/2024/06/23/rewriting-happiness/</loc>
-    
-    <lastmod>2025-01-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/2025/01/04/zhiwen-weekly-vol001/</loc>
     
     <lastmod>2025-01-11</lastmod>
     

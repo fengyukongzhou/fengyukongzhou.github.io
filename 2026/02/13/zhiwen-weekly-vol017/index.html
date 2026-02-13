@@ -1,0 +1,1235 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vol.017 恍恍惚惚过大年 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="“我买的静音车厢。对，过山车。”">
+  
+
+  
+  
+  <meta name="keywords" content="AI,设计">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Vol.017 恍恍惚惚过大年"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    // 回到顶部功能
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // 控制回到顶部按钮的显示和隐藏
+    function toggleScrollTopButton() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleScrollTopButton);
+    });
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #f03838);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #theme-toggle {
+      right: 20px;
+    }
+    
+    #scroll-top {
+      right: 70px; /* 位于夜间模式按钮旁边 */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+    
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button id="theme-toggle" class="floating-btn" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<button id="scroll-top" class="floating-btn" onclick="scrollToTop()" aria-label="回到顶部">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>Vol.017 恍恍惚惚过大年</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2026/02/13/zhiwen-weekly-vol017/" rel="bookmark">
+        <time class="entry-date published" datetime="2026-02-12T16:00:00.000Z">
+          2026-02-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-0.png"></p>
+<p>“我买的静音车厢。对，过山车。”</p>
+<span id="more"></span>
+<h2 id="跑马场">🐎 跑马场</h2>
+<h3 id="节日">🧧 节日</h3>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-1.png"></p>
+<p>春节作为一家人团聚的时刻，具有超越性和公共性。它不仅仅是家庭成员的聚集，而且指向整个家族的延续。春节作为一种聚集与祭祀紧密相关。大家会去祭祖，全家人在一起分享食物、故事、辛酸和喜悦，这一切都在祖先之灵的照看下展开。因此，这里有真正的分享，它指向了神圣的连接。</p>
+<p align="right">
+——王小伟《日常的深处》
+</p>
+<p>你我组成的伟大庆典，遍布天空。你我的歌声令天宇震颤，一切时代都在你我的嬉戏中消逝了。</p>
+<p align="right">
+——泰戈尔《吉檀迦利》
+</p>
+<p>信是两次节日间的漫长等待，信是悦耳哨声中换气般的休止，信是理智的一次象征性晕眩。</p>
+<p align="right">
+——孙甘露《信使之函》
+</p>
+<p>如今的节日仅仅是一次事件、一场热闹的活动。事件 (event) 来自拉丁语的
+eventus，表示“突然出现、发生”。它的时间属性是偶发性。偶发性全然不同于神圣时间的必然性。前者正是当下社会的写照，一切约束和关联都消失了。</p>
+<p>……如今，由于工作时间的绝对化，神圣时间已消失殆尽。即便是工作中的间歇时刻也是紧张的。休息的目的在于，使我们从疲劳中复原，以便我们继续正常工作。</p>
+<p align="right">
+——韩炳哲《倦怠社会》
+</p>
+<h3 id="欲望">🔥 欲望</h3>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-2.jpg"></p>
+<p><strong>按照科耶夫的说法，人类拥有欲望，而动物只有需求</strong>。
+“需求”是指满足与特足对象之间关系的单纯渴望。例如，饥饿的动物只要吃了食物就能感到完全满足。匮乏—满足这种回路便是需求的特征，人类生活也大多是由这种需求所驱动的。不过，人类还有另一种渴望，那就是“欲望”。欲望与需求不同，即使得到了渴望的对象，匮乏得到填充，也不会消失。</p>
+<p align="right">
+——东浩纪《动物化的后现代》
+</p>
+<p>多巴胺不是奖励的信号，而是强化的信号。为了让强化学习起作用，强化和奖励必须解耦。<strong>为了解决时间信用分配问题，大脑必须根据预测的未来奖励的变化来强化行为</strong>，而不是实际的奖励。</p>
+<p>也就是说，大脑不是等到最后球进了才进行一次性的强化，而是利用多巴胺的
+RPE
+机制，<strong>在行为的每一步都评估“对未来奖励的预期是否有所提升”</strong>。</p>
+<p align="right">
+——麦克斯·班尼特《智能简史》
+</p>
+<p>人类学女王米德夫人指出来，人类只会描绘地狱，而且非常会，有全部身体的感官记忆支援，地狱和人身紧紧相连，不同文化、国度、社群的地狱都是生动的、琳琅的、具体的，光只听或只看文字都让人如唤醒记忆也似的剧痛临身，因为身体是相同的、没空间时间隔阂的；而天堂的描述则几无例外是空洞的、虚浮的，<strong>天堂的共同点是没事，没人有事可做</strong>，一如我们不知道进一步快乐，更快乐，在苦痛消失后仍一直持续驻留地快乐个不停，是什么的景况以及如何可能。</p>
+<p align="right">
+——唐诺《求剑》
+</p>
+<p>逐渐地，人只剩下他自己，人进入到人类历史上未曾有过的最孤独处境。但这里，我们要说的还不是“无助”，而是“无事”。如今个人主义（带点误解误用的）已彻底到、真实到很难真的有事发生如坟场，好像说，一整个世界的偌大空间里只剩下你自己一颗粒子，产生不了碰撞，没有触发和启示，也没有其他的发动；<strong>人只能用自己一个人的经历和视角面对世界，空悠悠的，而这种“只发生一次”、无人可比对可证实的经历（只经不验，经历不成其为经验了）</strong>，如风吹过如水流过，稍后就变得透明、极不真实，只依稀仿佛像做了个梦，也跟做梦醒来很快就忘了、散掉了一样——彻底的一人独处最终连记忆都极不容易留住，<strong>会是一种失忆的、失声的、梦境化的无事</strong>。</p>
+<p align="right">
+——唐诺《求剑》
+</p>
+<h3 id="年纪">⏳ 年纪</h3>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-3.jpg"></p>
+<p>重新阅读桑塔格这本日记中被画线的段落，在若干年后再次感受其文字的力量，在某些句子，尤其是关于婚姻冥想的句子下重新画线：此时，我发现自己正阅读的所有内容，竟写于
+1957 或 1958
+年。我掰着指头算了算。桑塔格当时只有二十四岁，比我现在还小九岁。我突然感到十分尴尬，感觉就像是笑话没等包袱抖出来但我先笑了出来，或是听音乐会时在乐章间鼓掌。</p>
+<p align="right">
+——瓦莱里娅·路易塞利《失踪孩子档案》
+</p>
+<p>我十几年前编了套给高中学生看的“人类最伟大的声音”的小册子模样丛书，其中一本是《共产党宣言》，当时我在书前的介绍文字已打预防针似的指出来，请务必注意写此宣言时马克思才三十一岁、恩格斯二十九岁，恰恰好就是我儿子现在的年纪，所以说，在赞叹不已之余，我们要不要就此相信这是一份先知的文件，是一则穿透了总结了人类全部所知所能、再不留一丝历史奥秘阴影、揭示人类全体无可遁逃命运、而且一字一句都不容改动不许怀疑也就不用多想的最后神谕？还是说，这毋宁更像写一首诗呢？带着年轻人的满满激情、以及年轻时日很难避免的虚张声势和巴洛克风？</p>
+<p align="right">
+——唐诺《求剑》
+</p>
+<p>我以为这会生出某种理解和宽容（宽容最好不要只是命令，宽容要留住、要成为人自身的一部分，需要真的有所理解来支援它），人的困难和其折腾其实很容易忘，一如生理性的痛觉一消失就变得很不真实。我尽可能记得它们，包括各种笨法的昔日年轻自己，来路蓝缕，也许这样我在读一本一本各种年龄书写者（比方太宰治）的作品时可以更当真、更耐心、更如身历其境。</p>
+<p align="right">
+——唐诺《求剑》
+</p>
+<p><strong>更多时候，阅读止于书写者较惊动世界（大声讲话）、也较虚张声势的那部作品，但往往也是他尚未抵达自己书写巅峰时日的作品</strong>。像托尔斯泰，当然是《战争与和平》而不是更好的、好得如此明显的《安娜·卡列尼娜》，同理，昆德拉止于《不能承受的生命之轻》、卡尔维诺止于《看不见的城市》、福楼拜止于《包法利夫人》云云。诗人艾略特则好像年轻时一鸣惊人写了《荒原》就心满意足停笔了甚至天妒英才死掉了；至于海明威的《丧钟为谁而鸣》和马克·吐温的《汤姆·索亚历险记》则几乎就是他们各自最差的那本书，还好如今《老人与海》逐渐取代了《丧钟为谁而鸣》，只是我合理地怀疑这仅仅是《老人与海》比较薄的缘故。严肃正统的学院世界稍微好一些，不至于真不知道《安娜·卡列尼娜》是更高出一截的作品，但也仅止于稍微好一点复杂一点而已，接近于把书写者的存在多延长个五年十年左右。</p>
+<p align="right">
+——唐诺《求剑》
+</p>
+<h2 id="操作台">🛠️ 操作台</h2>
+<h3 id="obsidian-gemini-cli">🤖 Obsidian + Gemini CLI</h3>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-4.jpg"></p>
+<p>我居然是去年 7 月份开始用 Gemini CLI，也是在那时就与 Obsidian
+笔记库连用了（<a target="_blank" rel="noopener" href="https://joffoo.pages.dev/2025/07/27/zhiwen-weekly-vol009/">Vol.009
+刺杀了将军的形象</a>）。一般会配合插件 <a target="_blank" rel="noopener" href="https://github.com/polyipseity/obsidian-terminal">Terminal</a>
+使用——这个插件并不关键，只是方便我快一步在当前目录打开命令行。</p>
+<p>新版的 Gemini CLI 终于开始支持 Skill。</p>
+<p>Skill
+相当于把各种指令“原子化”了，并且在提示词文件开头写了“摘要”。比起之前的
+<code>GEMINI.md</code> 提示词，Agent
+可以根据任务自主选择工作流，先浏览再细读，这一机制被称为“<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jUylk813LYbKw0sLiIttTQ">渐进式披露</a>”。</p>
+<p>除了指令之外，Skill 还可以包括代码之类的资源文件，比如之前的 OCR
+和翻译工作流都可以写成 Skill——事实上，我尝试写了 OCR PDF 文件的
+Skill，但因为 Gemini CLI 限制了上下文窗口，导致切分后的 PDF
+都无法读取，只好作罢。至于翻译工作流，既然已经彻底程序化（<a target="_blank" rel="noopener" href="https://joffoo.pages.dev/2026/01/11/zhiwen-weekly-vol015/">Vol.015
+个人的体验</a>），也就不必写成 Skill 引入“不稳定因素”了。</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-5.png"></p>
+<p>既然是用 Agent 工具控制 Obsidian，有一些现成的 Skills
+可以直接拿来使用，比如 <a target="_blank" rel="noopener" href="https://github.com/kepano/obsidian-skills">obsidian-skills</a> 和
+<a target="_blank" rel="noopener" href="https://github.com/axtonliu/axton-obsidian-visual-skills">axton-obsidian-visual-skills</a>。后者是可视化相关的
+Skills 合集，可以绘制 Excalidraw、Canvas 和 Mermaid。</p>
+<p>对比一下 Gemini CLI（使用模型为 Gemini 3.0 Pro）和 OpenCode（安装
+oh-my-opencode 插件，使用模型为 GLM 4.7）使用同样 Skill 的效果。</p>
+<p>这是 Excalidraw：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-6.png"></p>
+<p>这是 Canvas：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-7.png"></p>
+<p>可以看出，生成 Excalidraw 要更难一些，但因为模型能力强，Gemini CLI
+的完成效果还是不错的。</p>
+<h3 id="封面设计续">🎨 封面设计（续）</h3>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-8.jpg"></p>
+<p>上次写“封面设计”已经是将近一年以前（<a target="_blank" rel="noopener" href="https://joffoo.pages.dev/2025/03/02/zhiwen-weekly-vol006/">Vol.006
+AI Did IT</a>），看了奇普·基德的设计建议后，用 Recraft
+生图（转绘）完成。</p>
+<p>刚刚我福至心灵，用 Google AI Studio 写了一个自动化执行的版本—— <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1QUaP_JHLB863vKDXUsjZ9ldXX26LNZOI">CoverGen
+AI</a>，接下来让我们连线一线工作人员，让 TA 讲解一下具体的实现流程：</p>
+<ol type="1">
+<li><p><strong>参数输入</strong><br>
+用户在前端输入书名、作者名，并从预设列表中选择一种视觉风格（如“电影感写实”或“极简大字排版”）以及目标宽高比（如
+2:3 书封标准）。</p></li>
+<li><p><strong>搜索与推理 (Gemini 3.0 Pro)</strong><br>
+应用调用 <code>gemini-3-flash-preview</code> 模型，利用 Google Search
+工具联网搜索该书籍的剧情、背景及核心元素。模型并非直接生图，而是根据搜索结果和用户选定的风格，生成
+3
+组差异化的英文生图提示词（分别侧重：关键物体隐喻、场景氛围、人物/情绪），并以
+JSON 格式返回。</p></li>
+<li><p><strong>人工决策与修正</strong><br>
+前端解析 JSON 数据，向用户展示这 3
+组方案的设计思路（中文）和原始提示词（英文）。用户点击选择其中一组，或在此基础上进行手动修改，确认最终用于生图的指令。</p></li>
+<li><p><strong>图像生成 (Gemini 2.5 Flash)</strong><br>
+应用调用 <code>gemini-2.5-flash-image</code> 模型。</p>
+<ul>
+<li><strong>比例映射逻辑</strong>：由于模型原生不支持 2:3
+比例，如果用户选择了 2:3，代码会自动将其转换为 API 支持的 3:4
+比例进行请求，并并在提示词中加入“全出血（Full
+Bleed）、无边框”的构图指令，确保主体位于中心安全区。</li>
+</ul></li>
+<li><p><strong>客户端后处理</strong><br>
+浏览器接收模型生成的 Base 64 图像数据。</p>
+<ul>
+<li><strong>自动裁切逻辑</strong>：如果目标比例是 2:3，前端会使用 HTML 5
+Canvas 对返回的 3:4
+图像进行计算，切除左右边缘多余像素，将其无损转换为严格的 2:3
+比例；其他比例（如 1:1）则直接输出原图。</li>
+</ul></li>
+</ol>
+<p>作为用户，第一步是输入书名和作者名，因为调用 <code>gemini-2.5-flash-image</code> 模型生图，所以还是只能生成英文的封面。此外，有两个选项，一是封面的尺寸，二是设计风格。</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-9.png"></p>
+<p>之后，AI
+将提供三个版本的设计方案供你选择，如果都不满意，也可以写自己的提示词：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-10.png"></p>
+<p>最后点一下，静待出图：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-11.png"></p>
+<p>这是成品：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-12.png"></p>
+<p>以下是之前生成的封面中几个比较满意、且没有发布过的，这几张并没有使用新做的一站式应用：</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-13.png"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/%E5%92%AB%E9%97%BB%E5%91%A8%E5%88%8A/">咫闻周刊</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/AI/">AI</a><a href="/tags/%E8%AE%BE%E8%AE%A1/">设计</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="zhiwen-weekly-vol017"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2026/02/13/zhiwen-weekly-vol017/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%91%E9%A9%AC%E5%9C%BA"><span class="toc-text">🐎 跑马场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%97%A5"><span class="toc-text">🧧 节日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%B2%E6%9C%9B"><span class="toc-text">🔥 欲望</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B4%E7%BA%AA"><span class="toc-text">⏳ 年纪</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%8F%B0"><span class="toc-text">🛠️ 操作台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#obsidian-gemini-cli"><span class="toc-text">🤖 Obsidian + Gemini CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E9%9D%A2%E8%AE%BE%E8%AE%A1%E7%BB%AD"><span class="toc-text">🎨 封面设计（续）</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2026 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+    
+    
+    
+    <script src="/js/lang-detector.js"></script>
+    
+    
+    <script src="/js/footnote-popup.js"></script>
+    
+
+    <!-- Mermaid.js CDN 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      // 初始化 mermaid
+      mermaid.initialize({ startOnLoad: true });
+      document.addEventListener('DOMContentLoaded', function() {
+        // 查找所有 mermaid 代码块
+        document.querySelectorAll('pre code.language-mermaid, pre code.mermaid').forEach(function(block) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          block.parentNode.parentNode.replaceWith(div);
+        });
+        // 重新初始化 mermaid
+        if (window.mermaid) {
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+      });
+    </script>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heatmapChartDom = document.getElementById('heatmapChart');
+                if(heatmapChartDom){
+                    const heatmapChart = echarts.init(heatmapChartDom, 'light');
+                    const cellSize = [18, 18];
+                    
+                    const groupByYear = (data) => {
+                        const result = {};
+                        data.forEach(([date, value]) => {
+                            const [year] = date.split('-').map(Number);
+                            if (!result[year]) {
+                                result[year] = [];
+                            }
+                            result[year].push([date, value]);
+                        });
+                        return result;
+                    };
+                    
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1],["2026-01-24",1],["2026-02-13",1]]);
+                    const years = Object.keys(groupedData).reverse();
+                    
+                    var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
+                    const minYear = years[years.length - 1];
+                    const maxYear = years[0];
+                    if (initYear < minYear || initYear > maxYear) {
+                        initYear = maxYear;
+                    }
+                    console.log('[hexo-graph]generateHeatmapChart|initYear:', initYear, 'minYear:', minYear, 'maxYear:', maxYear);
+                    
+                    heatmapChart.setOption({
+                        grid: {},
+                        tooltip: { 
+                            position: 'top', 
+                            formatter: params => `${params.value[0]}: ${params.value[1]} Articles` 
+                        },
+                        calendar: { 
+                            top: '10%',
+                            left: 'left', 
+                            right: '8%',
+                            range: initYear,
+                            cellSize: cellSize, 
+                            splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } }, 
+                            itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' }, 
+                            dayLabel: { show: false },
+                            monthLabel: { show: true },
+                            yearLabel: { show: false },
+                        },
+                        visualMap: { 
+                            show: true,
+                            right: '8%',
+                            bottom: '5%',
+                            type: 'piecewise',
+                            orient: 'horizontal',
+                            text: ['More', 'Less'],
+                            min: 0,
+                            max: Math.max(...groupedData[initYear].map(item => item[1])),
+                            inRange: { color: ["#ACE7AE","#69C16D","#549F57"] }
+                        },
+                        legend: {
+                            type: 'scroll',
+                            icon: 'none',
+                            data: years,
+                            orient: 'vertical',
+                            top: '5%',
+                            right: 'right',
+                            itemWidth: 20,
+                            itemHeight: 20,
+                            itemGap: 10,
+                            pageIconSize: 10,
+                            pageTextStyle: { fontSize: 14 },
+                            selectedMode: 'single',
+                        },
+                        series: years.map(year => ({
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: groupedData[year],
+                            name: year,
+                            emphasis: {
+                                disabled: true,
+                            },
+                            silent: year !== initYear,
+                        })),
+                    });
+                    
+                    // init selected year
+                    heatmapChart.dispatchAction({
+                        type: 'legendSelect',
+                        name: initYear,
+                    });
+                    
+                    heatmapChart.on('legendselectchanged', function(params) {
+                        console.log('[hexo-graph]generateHeatmapChart|legendselectchanged:', params);
+                        const selectedYear = Object.keys(params.selected).find(key => params.selected[key]);
+                        if (selectedYear && groupedData[selectedYear]) {
+                            heatmapChart.setOption({
+                                calendar: {
+                                    range: selectedYear,
+                                },
+                                visualMap: {
+                                    max: Math.max(...groupedData[selectedYear].map(item => item[1])),
+                                },
+                                series: years.map(year => ({
+                                    type: 'heatmap',
+                                    coordinateSystem: 'calendar',
+                                    data: groupedData[year],
+                                    name: year,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: year !== selectedYear,
+                                })),
+                            });
+                        }
+                    });
+                    
+                    heatmapChart.on('click', function (params) {
+                        if (params.componentType === 'series') {
+                            const [year, month] = params.value[0].split('-');
+                            window.location.href = '/archives/' + year + '/' + month;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const monthlyChartDom = document.getElementById('monthlyChart');
+                if(monthlyChartDom){
+                    const monthlyChart = echarts.init(monthlyChartDom, 'light');
+                    monthlyChart.setOption({
+                        xAxis: { 
+                            type: 'category', 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02"], 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        series: [{
+                            name: 'Articles',
+                            type: 'line',
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,2,1],
+                            smooth: true,
+                            lineStyle: { color: '#5470C6', width: 2 },
+                            itemStyle: { color: '#5470C6' },
+                            areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                            symbolSize: 10,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            }
+                        }]
+                    });
+
+                    monthlyChart.on('click', function (params) {
+                        const [year, month] = params.name.split('-');
+                        window.location.href = '/archives/' + year + '/' + month;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tagsChartDom = document.getElementById('tagsChart');
+                if(tagsChartDom){
+                    const tagsChart = echarts.init(tagsChartDom, 'light');
+                    tagsChart.setOption({
+                        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                        series: [{
+                            type: 'pie',
+                            radius: '60%',
+                            data: [{"name":"AI","value":30},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"设计","value":7},{"name":"翻译","value":7},{"name":"Github","value":5},{"name":"Wolfram","value":4}],
+                            label: {
+                                position: 'outside',
+                                formatter: '{b} {c} ({d}%)',
+                                fontSize: 14,
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            color: ["#5470C6","#91CC75","#FAC858","#EE6666","#73C0DE","#3BA272","#FC8452","#9A60B4"],
+                            labelLine: { show: true }
+                        }],
+                        legend: {
+                            bottom: '0',
+                            left: 'center',
+                            data: [{"name":"AI","value":30},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"尝试集","value":8},{"name":"设计","value":7},{"name":"翻译","value":7},{"name":"Github","value":5},{"name":"Wolfram","value":4}].map(tag => tag.name),
+                            textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        }
+                    });
+
+                    tagsChart.on('click', function (params) {
+                        window.location.href = '/tags/' + params.name;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesChartDom = document.getElementById('categoriesChart');
+                if(categoriesChartDom){
+                    const categoriesChart = echarts.init(categoriesChartDom, 'light');
+                    categoriesChart.setOption({
+                        xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        yAxis: { 
+                            type: 'category', 
+                            data: [{"name":"咫闻周刊","value":17},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        series: [{
+                            name: 'Category Count',
+                            type: 'bar',
+                            data: [{"name":"咫闻周刊","value":17},{"name":"计算笔记","value":13},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    { offset: 0, color: '#91CC75' },
+                                    { offset: 1, color: '#73C0DE' }
+                                ])
+                            }
+                        }]
+                    });
+
+                    categoriesChart.on('click', function (params) {
+                        window.location.href = '/categories/' + params.name;
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesTreeChartDom = document.getElementById('categoriesTreeChart');
+                if(categoriesTreeChartDom){
+                    const treeChart = echarts.init(categoriesTreeChartDom, 'light');
+                    treeChart.setOption({
+                        title: {
+                            text: '操作提示：单击展开分类，双击进入具体分类页面',
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#999',
+                                fontWeight: 'normal'
+                            },
+                            bottom: 0,
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        series: [{
+                            type: 'tree',
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":17,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            initialTreeDepth: -1,
+                            top: '5%',
+                            bottom: '10%',
+                            left: '0%',
+                            right: '0%',
+                            symbolSize: 15,
+                            layout: 'orthogonal',
+                            orient: 'TB',
+                            itemStyle: {
+                                color: '#91CC75',
+                                borderColor: '#73C0DE'
+                            },
+                            label: {
+                                position: 'bottom',
+                                verticalAlign: 'middle',
+                                align: 'center',
+                                fontSize: 14,
+                                distance: 28,
+                                formatter: function(params) {
+                                    return params.data.name + (params.data.count ? ' (' + params.data.count + ')' : '');
+                                }
+                            },
+                            leaves: {
+                                label: {
+                                    position: 'top',
+                                    verticalAlign: 'middle',
+                                    align: 'center'
+                                }
+                            },
+                            emphasis: {
+                                focus: 'descendant'
+                            },
+                            expandAndCollapse: true
+                        }]
+                    });
+
+                    treeChart.on('dblclick', function (params) {
+                        if (params.data && params.data.path) {
+                            window.location.href = '/categories/' + params.data.path;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+    </body>
+</html>

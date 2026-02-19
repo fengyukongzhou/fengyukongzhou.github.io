@@ -17,8 +17,7 @@
   
 
   
-  <meta name="description" content="突发奇想，问了 NotebookLM 一个问题：有什么研究用 AI
-回答“大喜利”的新文章吗？">
+  <meta name="description" content="突发奇想，问了 NotebookLM 一个问题：有什么研究用 AI 回答“大喜利”的新文章吗？">
   
 
   
@@ -322,91 +321,55 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/2026/02/19/Oogiri-Agent/OA0219-001.png"></p>
-<p>突发奇想，问了 NotebookLM 一个问题：有什么研究用 AI
-回答“大喜利”的新文章吗？</p>
-<span id="more"></span>
-<h2 id="笑点的要点">笑点的要点</h2>
-<p>在搜到许多来源之后，NotebookLM 总结出了这样几个要点——</p>
-<h3 id="温度配置">温度配置</h3>
-<p>模型的“温度”是控制其创造性和随机性的重要参数。在 AI
-大喜利工作流中，我们采取了“温度解耦”的策略：</p>
+        <p><img src="/2026/02/19/Oogiri-Agent/OA0219-001.png" alt></p>
+<p>突发奇想，问了 NotebookLM 一个问题：有什么研究用 AI 回答“大喜利”的新文章吗？</p>
+<span id="more"></span>  
+<h2 id="笑点的要点"><a href="#笑点的要点" class="headerlink" title="笑点的要点"></a>笑点的要点</h2><p>在搜到许多来源之后，NotebookLM 总结出了这样几个要点——</p>
+<h3 id="温度配置"><a href="#温度配置" class="headerlink" title="温度配置"></a>温度配置</h3><p>模型的“温度”是控制其创造性和随机性的重要参数。在 AI 大喜利工作流中，我们采取了“温度解耦”的策略：</p>
 <ul>
 <li><strong>分析与评估阶段</strong>：在提取视觉事实或进行“笑果”评估时，使用极低温度，以确保模型输出的逻辑一致性和可重复性，避免不必要的“幻觉”。</li>
 <li><strong>生成阶段</strong>：为了实现幽默所需的“思维飞跃”（LoT），生成阶段需要调高温度，以最大化模型的创造力和发散性。</li>
 </ul>
-<h3 id="技巧增强">技巧增强</h3>
-<p>仅靠“发烧”是不够的。</p>
-<p>根据 <em>Oogiri-Master</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
-的研究，在提示词中显式加入对 <strong>简洁度（Brevity）</strong> 和
-<strong>视角转换（Perspective Shift）</strong>
-的要求，能显著提升幽默评分。</p>
-<p>然而，为避免模型过于僵化，我们建议采用“<strong>仅在不确定时参考（Uncertain
-style）</strong>”的指令方式，允许模型直觉优先。</p>
-<h3 id="共鸣提炼">共鸣提炼</h3>
-<p>因为没有生命体验，所以 AI
-生成的幽默，往往“新颖”有余，但“共鸣”不足。</p>
-<p>为了弥补这一缺陷，<em>HumorSkills</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
-的思路是：不要只盯着图片题目本身，而是要将场景类比到现代生活的典型冲突，例如“周一早八”、“小组作业”、“职场内卷”或“恋爱压力”等话题，这样能让
-AI 产出的幽默更容易引起年轻人的共鸣。</p>
+<h3 id="技巧增强"><a href="#技巧增强" class="headerlink" title="技巧增强"></a>技巧增强</h3><p>仅靠“发烧”是不够的。</p>
+<p>根据 <em>Oogiri-Master</em><sup><a href="#fn_1" id="reffn_1">1</a></sup> 的研究，在提示词中显式加入对 <strong>简洁度（Brevity）</strong> 和 <strong>视角转换（Perspective Shift）</strong> 的要求，能显著提升幽默评分。</p>
+<p>然而，为避免模型过于僵化，我们建议采用“<strong>仅在不确定时参考（Uncertain style）</strong>”的指令方式，允许模型直觉优先。</p>
+<h3 id="共鸣提炼"><a href="#共鸣提炼" class="headerlink" title="共鸣提炼"></a>共鸣提炼</h3><p>因为没有生命体验，所以 AI 生成的幽默，往往“新颖”有余，但“共鸣”不足。</p>
+<p>为了弥补这一缺陷，<em>HumorSkills</em><sup><a href="#fn_2" id="reffn_2">2</a></sup> 的思路是：不要只盯着图片题目本身，而是要将场景类比到现代生活的典型冲突，例如“周一早八”、“小组作业”、“职场内卷”或“恋爱压力”等话题，这样能让 AI 产出的幽默更容易引起年轻人的共鸣。</p>
 <p>当然了，这一点是为了增强传播效果，我个人则偏好那些更古怪的回答。</p>
-<h2 id="编剧团队流水线">编剧团队流水线</h2>
-<p>在用 NotebookLM 总结之后，我用 Google AI Studio
-编写了新版大喜利应用——<strong>OOGIRI. OS</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。该应用通过串行执行 5 个独立的 AI
-Agent 来完成从图像识别到“大喜利”生成与筛选的全过程。</p>
-<p>为了在保证高质量输出的同时控制运行成本，我们在不同阶段采用了不同的模型：生成答案时优先使用功能更强大的
-Gemini 3.0 Pro 模型（<em>如果用量已尽，就自动改用 Gemini 2.5
-Pro</em>），而其余识别、评估过程则主要依赖于更高效的 Gemini 3.0 Flash
-模型。</p>
-<p><img src="/2026/02/19/Oogiri-Agent/OA0219-002.png"></p>
-<h3 id="stage-1视觉分析">Stage 1：视觉分析</h3>
-<p>此阶段由一个“叙事事实提取器” Agent
-负责。其核心职责是从输入图像中，客观地提取所有具有潜在叙事功能的视觉元素。我们严格限制此
-Agent 进行任何幽默创作，仅输出纯粹的事实。</p>
+<h2 id="编剧团队流水线"><a href="#编剧团队流水线" class="headerlink" title="编剧团队流水线"></a>编剧团队流水线</h2><p>在用 NotebookLM 总结之后，我用 Google AI Studio 编写了新版大喜利应用——<strong>OOGIRI. OS</strong><sup><a href="#fn_3" id="reffn_3">3</a></sup>。该应用通过串行执行 5 个独立的 AI Agent 来完成从图像识别到“大喜利”生成与筛选的全过程。</p>
+<p>为了在保证高质量输出的同时控制运行成本，我们在不同阶段采用了不同的模型：生成答案时优先使用功能更强大的 Gemini 3.0 Pro 模型（<em>如果用量已尽，就自动改用 Gemini 2.5 Pro</em>），而其余识别、评估过程则主要依赖于更高效的 Gemini 3.0 Flash 模型。</p>
+<p><img src="/2026/02/19/Oogiri-Agent/OA0219-002.png" alt></p>
+<h3 id="Stage-1：视觉分析"><a href="#Stage-1：视觉分析" class="headerlink" title="Stage 1：视觉分析"></a>Stage 1：视觉分析</h3><p>此阶段由一个“叙事事实提取器” Agent 负责。其核心职责是从输入图像中，客观地提取所有具有潜在叙事功能的视觉元素。我们严格限制此 Agent 进行任何幽默创作，仅输出纯粹的事实。</p>
 <ul>
 <li><strong>配置</strong>：Gemini 3.0 Flash，温度 0.2</li>
-<li><strong>核心维度</strong>：该 Agent
-关注主体行为、对象关联、环境反差、面部微辞等关键信息。</li>
+<li><strong>核心维度</strong>：该 Agent 关注主体行为、对象关联、环境反差、面部微辞等关键信息。</li>
 </ul>
-<h3 id="stage-2策略制定">Stage 2：策略制定</h3>
-<p>在视觉事实提取之后，“双向幽默策略师” Agent
-会基于这些事实，制定两条截然不同的幽默路径：<strong>“嘲笑（Tsukkomi）”与“装傻（Boke）”</strong>。</p>
+<h3 id="Stage-2：策略制定"><a href="#Stage-2：策略制定" class="headerlink" title="Stage 2：策略制定"></a>Stage 2：策略制定</h3><p>在视觉事实提取之后，“双向幽默策略师” Agent 会基于这些事实，制定两条截然不同的幽默路径：<strong>“嘲笑（Tsukkomi）”与“装傻（Boke）”</strong>。</p>
 <ul>
 <li><strong>配置</strong>：Gemini 3.0 Flash，温度 0.1</li>
-<li><strong>输出</strong>：此阶段的输出并非直接的幽默段子，而是为下一个
-Agent (Agent C) 提供具体的切入点，指明幽默创作的方向。</li>
+<li><strong>输出</strong>：此阶段的输出并非直接的幽默段子，而是为下一个 Agent (Agent C) 提供具体的切入点，指明幽默创作的方向。</li>
 </ul>
-<h3 id="stage-3创意发散">Stage 3：创意发散</h3>
-<p>作为工作流的核心创意引擎，“Z 世代幽默博主” Agent
-结合视觉信息和策略建议，生成 10 个候选回答。此阶段采用“直觉优先 +
-理论兜底”的创作流，以平衡自由联想与策略指导。</p>
+<h3 id="Stage-3：创意发散"><a href="#Stage-3：创意发散" class="headerlink" title="Stage 3：创意发散"></a>Stage 3：创意发散</h3><p>作为工作流的核心创意引擎，“Z 世代幽默博主” Agent 结合视觉信息和策略建议，生成 10 个候选回答。此阶段采用“直觉优先 + 理论兜底”的创作流，以平衡自由联想与策略指导。</p>
 <ul>
-<li><strong>配置</strong>：Gemini 3.0 Pro（或 Gemini 2.5 Pro），温度
-1.0</li>
+<li><strong>配置</strong>：Gemini 3.0 Pro（或 Gemini 2.5 Pro），温度 1.0</li>
 <li><strong>核心禁令</strong>：<strong>严禁笑点解压缩</strong>。信任读者的智商，禁止模型添加任何解释性后缀（例如，当比喻“这板子跟我年底的余额一样”已足够巧妙时，不应画蛇添足地解释“干净得令人心碎”），力求戛然而止，把包袱及时抛向观众。</li>
 </ul>
-<h3 id="stage-4笑果评估">Stage 4：笑果评估</h3>
-<p>为了对生成的幽默进行量化评估，“幽默逻辑批评家” Agent 会对 10
-条候选回答进行 0-4 分的量化打分。</p>
+<h3 id="Stage-4：笑果评估"><a href="#Stage-4：笑果评估" class="headerlink" title="Stage 4：笑果评估"></a>Stage 4：笑果评估</h3><p>为了对生成的幽默进行量化评估，“幽默逻辑批评家” Agent 会对 10 条候选回答进行 0-4 分的量化打分。</p>
 <ul>
 <li><strong>配置</strong>：Gemini 3.0 Flash，温度 0.1</li>
 <li><strong>评分维度</strong>：包括原创性（Novelty）、共鸣感（Empathy）、简洁度（Brevity）、关联距离（Distance）、智力感（Intelligence）和不一致解决（Incongruity）等六个关键维度。</li>
 </ul>
-<h3 id="stage-5最终决选">Stage 5：最终决选</h3>
-<p>在所有评估完成之后，“社交媒体总编辑” Agent
-进行裁决，力求最终产出的幽默回答能够覆盖不同的受众偏好。</p>
+<h3 id="Stage-5：最终决选"><a href="#Stage-5：最终决选" class="headerlink" title="Stage 5：最终决选"></a>Stage 5：最终决选</h3><p>在所有评估完成之后，“社交媒体总编辑” Agent 进行裁决，力求最终产出的幽默回答能够覆盖不同的受众偏好。</p>
 <ul>
 <li><strong>配置</strong>：Gemini 3.0 Flash，温度 0.3</li>
-<li><strong>核心功能</strong>：基于多维审计报告，选出三个赛道的冠军回答：【最共鸣（The
-Relatable）】、【最荒谬（The Absurd）】和【最毒舌（The Snark）】。</li>
+<li><strong>核心功能</strong>：基于多维审计报告，选出三个赛道的冠军回答：【最共鸣（The Relatable）】、【最荒谬（The Absurd）】和【最毒舌（The Snark）】。</li>
 </ul>
-<p><img src="/2026/02/19/Oogiri-Agent/OA0219-003.png"></p>
-<h2 id="孰幽孰默">孰幽孰默</h2>
-<p>这一节里，我用了三个示例展示 OOGIRI. OS 的生成质量。</p>
-<p>为了对比，每个示例的答案中包含了直接使用 Gemini 2.5 Pro 和 Gemini 3.0
-Pro 两个模型和之前简单提示词（参考<a href="一句正经没有：Gemini和Seedream的大喜利双簧组合.md">一句正经没有：Gemini和Seedream的大喜利双簧组合</a>）的结果。</p>
+<p><img src="/2026/02/19/Oogiri-Agent/OA0219-003.png" alt></p>
+<h2 id="孰幽孰默"><a href="#孰幽孰默" class="headerlink" title="孰幽孰默"></a>孰幽孰默</h2><p>这一节里，我用了三个示例展示 OOGIRI. OS 的生成质量。</p>
+<p>为了对比，每个示例的答案中包含了直接使用 Gemini 2.5 Pro 和 Gemini 3.0 Pro 两个模型和之前简单提示词（参考<a target="_blank" rel="noopener" href="https://joffoo.pages.dev/2025/09/21/Oogiri-Gemini/">一句正经没有：Gemini和Seedream的大喜利双簧组合</a>）的结果。</p>
 <p>因为幽默极其主观，所以孰幽孰默还是交由读者评说吧。</p>
-<p><img src="/2026/02/19/Oogiri-Agent/OA0219-004.png"></p>
+<p><img src="/2026/02/19/Oogiri-Agent/OA0219-004.png" alt></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -437,7 +400,9 @@ Pro 两个模型和之前简单提示词（参考<a href="一句正经没有：G
 </tr>
 </tbody>
 </table>
-<p><img src="/2026/02/19/Oogiri-Agent/OA0219-005.png"></p>
+</div>
+<p><img src="/2026/02/19/Oogiri-Agent/OA0219-005.png" alt></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -468,7 +433,9 @@ Pro 两个模型和之前简单提示词（参考<a href="一句正经没有：G
 </tr>
 </tbody>
 </table>
-<p><img src="/2026/02/19/Oogiri-Agent/OA0219-006.png"></p>
+</div>
+<p><img src="/2026/02/19/Oogiri-Agent/OA0219-006.png" alt></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -499,20 +466,19 @@ Pro 两个模型和之前简单提示词（参考<a href="一句正经没有：G
 </tr>
 </tbody>
 </table>
-<p>该应用还可以一键导出日志文件，包括全部 Agent 的中间输出。尤其是 Agent
-B
-的思路分析，非常值得广大的大喜利从业者（<em>值得怀疑</em>）下载学习。</p>
-<p align="right">
-2026-02-19
-</p>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Oogiri-Master: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2512.21494">https://arxiv.org/abs/2512.21494</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>HumorSkills: <a target="_blank" rel="noopener" href="https://arxiv.org/html/2502.07981v1">https://arxiv.org/html/2502.07981v1</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>OOGIRI. OS: <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1u7is3f4_RKQEFKpwBJHC4hKaoSnRrzL">https://ai.studio/apps/drive/1u7is3f4_RKQEFKpwBJHC4hXkaoSnRrzL</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+</div>
+<p>该应用还可以一键导出日志文件，包括全部 Agent 的中间输出。尤其是 Agent B 的思路分析，非常值得广大的大喜利从业者（<em>值得怀疑</em>）下载学习。</p>
+<p align="right">2026-02-19</p>
+
+<blockquote id="fn_1">
+<sup>1</sup>. Oogiri-Master: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2512.21494">https://arxiv.org/abs/2512.21494</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. HumorSkills: <a target="_blank" rel="noopener" href="https://arxiv.org/html/2502.07981v1">https://arxiv.org/html/2502.07981v1</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. OOGIRI. OS: <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1u7is3f4_RKQEFKpwBJHC4hKaoSnRrzL">https://ai.studio/apps/drive/1u7is3f4_RKQEFKpwBJHC4hXkaoSnRrzL</a><a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -742,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="post-toc-content">
     <h2>文章目录</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%91%E7%82%B9%E7%9A%84%E8%A6%81%E7%82%B9"><span class="toc-text">笑点的要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6%E9%85%8D%E7%BD%AE"><span class="toc-text">温度配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E5%B7%A7%E5%A2%9E%E5%BC%BA"><span class="toc-text">技巧增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E9%B8%A3%E6%8F%90%E7%82%BC"><span class="toc-text">共鸣提炼</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%89%A7%E5%9B%A2%E9%98%9F%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">编剧团队流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stage-1%E8%A7%86%E8%A7%89%E5%88%86%E6%9E%90"><span class="toc-text">Stage 1：视觉分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stage-2%E7%AD%96%E7%95%A5%E5%88%B6%E5%AE%9A"><span class="toc-text">Stage 2：策略制定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stage-3%E5%88%9B%E6%84%8F%E5%8F%91%E6%95%A3"><span class="toc-text">Stage 3：创意发散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stage-4%E7%AC%91%E6%9E%9C%E8%AF%84%E4%BC%B0"><span class="toc-text">Stage 4：笑果评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stage-5%E6%9C%80%E7%BB%88%E5%86%B3%E9%80%89"><span class="toc-text">Stage 5：最终决选</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%B0%E5%B9%BD%E5%AD%B0%E9%BB%98"><span class="toc-text">孰幽孰默</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%91%E7%82%B9%E7%9A%84%E8%A6%81%E7%82%B9"><span class="toc-text">笑点的要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E5%BA%A6%E9%85%8D%E7%BD%AE"><span class="toc-text">温度配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E5%B7%A7%E5%A2%9E%E5%BC%BA"><span class="toc-text">技巧增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E9%B8%A3%E6%8F%90%E7%82%BC"><span class="toc-text">共鸣提炼</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%89%A7%E5%9B%A2%E9%98%9F%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">编剧团队流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-1%EF%BC%9A%E8%A7%86%E8%A7%89%E5%88%86%E6%9E%90"><span class="toc-text">Stage 1：视觉分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-2%EF%BC%9A%E7%AD%96%E7%95%A5%E5%88%B6%E5%AE%9A"><span class="toc-text">Stage 2：策略制定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-3%EF%BC%9A%E5%88%9B%E6%84%8F%E5%8F%91%E6%95%A3"><span class="toc-text">Stage 3：创意发散</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-4%EF%BC%9A%E7%AC%91%E6%9E%9C%E8%AF%84%E4%BC%B0"><span class="toc-text">Stage 4：笑果评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-5%EF%BC%9A%E6%9C%80%E7%BB%88%E5%86%B3%E9%80%89"><span class="toc-text">Stage 5：最终决选</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%B0%E5%B9%BD%E5%AD%B0%E9%BB%98"><span class="toc-text">孰幽孰默</span></a></li></ol>
   </div>
 </div>
 <script>

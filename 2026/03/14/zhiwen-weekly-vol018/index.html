@@ -1005,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":28},{"name":"现代生活","value":12},{"name":"读小说","value":9},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
+                            data: [{"name":"AI","value":30},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1019,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":28},{"name":"现代生活","value":12},{"name":"读小说","value":9},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":30},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1041,13 +1041,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":18},{"name":"计算笔记","value":13},{"name":"读书笔记","value":11}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":19},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":18},{"name":"计算笔记","value":13},{"name":"读书笔记","value":11}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":19},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1096,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":11,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":18,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":19,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

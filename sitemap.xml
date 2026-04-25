@@ -2,7 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://fengyukongzhou.github.io/2026/04/25/zhiwen-weekly-vol020/</loc>
+    <loc>https://fengyukongzhou.github.io/2025/01/22/molten-writing/</loc>
+    
+    <lastmod>2026-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/2024/07/06/language-inventor/</loc>
+    
+    <lastmod>2026-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/2024/11/05/rediscover-travel/</loc>
+    
+    <lastmod>2026-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/2025/01/24/zhiwen-weekly-vol003/</loc>
     
     <lastmod>2026-04-25</lastmod>
     
@@ -12,6 +39,15 @@
   
   <url>
     <loc>https://fengyukongzhou.github.io/2026/04/11/zhiwen-weekly-vol019/</loc>
+    
+    <lastmod>2026-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fengyukongzhou.github.io/2026/04/25/zhiwen-weekly-vol020/</loc>
     
     <lastmod>2026-04-25</lastmod>
     
@@ -146,15 +182,6 @@
   </url>
   
   <url>
-    <loc>https://fengyukongzhou.github.io/2025/01/24/zhiwen-weekly-vol003/</loc>
-    
-    <lastmod>2026-04-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://fengyukongzhou.github.io/2025/01/11/zhiwen-weekly-vol002/</loc>
     
     <lastmod>2026-04-25</lastmod>
@@ -245,15 +272,6 @@
   </url>
   
   <url>
-    <loc>https://fengyukongzhou.github.io/2024/11/05/rediscover-travel/</loc>
-    
-    <lastmod>2026-04-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://fengyukongzhou.github.io/2025/01/20/power-of-ignorance/</loc>
     
     <lastmod>2026-04-25</lastmod>
@@ -326,25 +344,7 @@
   </url>
   
   <url>
-    <loc>https://fengyukongzhou.github.io/2025/01/22/molten-writing/</loc>
-    
-    <lastmod>2026-04-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://fengyukongzhou.github.io/2025/05/25/ming-dynasty/</loc>
-    
-    <lastmod>2026-04-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/2024/07/06/language-inventor/</loc>
     
     <lastmod>2026-04-25</lastmod>
     
@@ -463,27 +463,6 @@
   
   <url>
     <loc>https://fengyukongzhou.github.io/tags/Wolfram/</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/tags/object-Object/</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%9D%E8%AF%95%EF%BF%BD-%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://fengyukongzhou.github.io/tags/%E5%B0%9D%E8%AF%95%EF%BF%BD-AI/</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

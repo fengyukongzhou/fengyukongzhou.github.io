@@ -1,0 +1,1155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vol.020 辞典排版吃垃圾 | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="（封面由 GPT-Image-2 设计制作）">
+  
+
+  
+  
+  <meta name="keywords" content="阅读,扣子,AI音乐,排版">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Vol.020 辞典排版吃垃圾"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    // 回到顶部功能
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // 控制回到顶部按钮的显示和隐藏
+    function toggleScrollTopButton() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleScrollTopButton);
+    });
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #f03838);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #theme-toggle {
+      right: 20px;
+    }
+    
+    #scroll-top {
+      right: 70px; /* 位于夜间模式按钮旁边 */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+    
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button id="theme-toggle" class="floating-btn" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<button id="scroll-top" class="floating-btn" onclick="scrollToTop()" aria-label="回到顶部">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>Vol.020 辞典排版吃垃圾</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2026/04/24/zhiwen-weekly-vol020/" rel="bookmark">
+        <time class="entry-date published" datetime="2026-04-23T16:00:00.000Z">
+          2026-04-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/images/zw20-01.png" alt></p>
+<p>（封面由 GPT-Image-2 设计制作）</p>
+<span id="more"></span>
+<h2 id="🐎-跑马场"><a href="#🐎-跑马场" class="headerlink" title="🐎 跑马场"></a>🐎 跑马场</h2><p><img src="/images/zw20-02.png" alt></p>
+<h3 id="📖-哈扎尔辞典"><a href="#📖-哈扎尔辞典" class="headerlink" title="📖 哈扎尔辞典"></a>📖 哈扎尔辞典</h3><p>1921 年，国际奥林匹克委员会首次以书面形式确定了各参赛国的入场规则。”该章程提道：”参赛的各国代表团在入场时，必须在队首展示带有国家名称的标牌以及国旗。”同时还有一条附注：”（参赛各国按照字母顺序入场）”。直到 1949 年，为了进一步彰显奥运会的世界性理念，人们对相关章程稍做调整，并一直沿用至今。修订后的章程规定，<strong>主办国有权按照主办国语言的字母顺序组织开幕式的入场式</strong>。这次修订表明，国际奥委会用实际行动让这一国际盛会的规则变得相对化，从而实现了一种普遍化。</p>
+<p align="right">——墨磊宁《中文打字机》</p>
+
+<p>比如，<strong>《哈扎尔辞典》是”一部十万个词语的辞典小说”，而且根据不同语言的字母顺序，这部小说会有不同的结尾</strong>。《哈扎尔辞典》的原始版本是用西里尔字母印制的，其结尾是一句拉丁文引语：”sed venit ut illa impleam et confirmem, Mattheus.” 我这部辞典小说的希腊语译本的结尾是这样一句：”我立刻发现在我心里有三种恐惧，而不是只有一种。”这部辞典小说的英语、希伯来语、西班牙语和丹麦语版本的结尾则是这样的：”于是，当那名朗读者返回时，整个过程正好相反，蒂蓬根据朗读者行走时发音的印象，开始修改他的译文。”而用拉丁字母排的塞尔维亚语版、在德国北弗里西亚的诺斯泰德自治市印刷的瑞典语版，还有荷兰语、捷克语和德语版，它们都是以如下句子作结尾的：”那目光将合罕的名字铭刻在空气中，点燃了灯芯，照亮了她回家的路。”《哈扎尔辞典》的匈牙利语版结尾句子是：”他只是想要你注意到你真正的本性。”意大利语版和加泰罗尼亚语版则是这样结尾的：”事实上，尽管哈扎尔瓦罐消失已久，但它依然在起作用。”在日本出版的日文版结尾则是这样一句话：”那个年轻女人生下了一个电闪光影般的女儿——她自己的死亡；死亡中，她的美貌变成乳清和凝结的乳液，然后又渐渐分解，露出一张吸住了白芦竹的嘴。”</p>
+<p align="right">——米洛拉德·帕维奇《阅读的开始与结束／小说的开头与结尾》</p>
+
+<p>据一份史料说，公主的这部集子名叫《字欲论》，《哈扎尔辞典》就是在《字欲论》的土壤上如发酵般迅速地生长出来的。如果此说属实，那么阿捷赫公主便是这部辞典最早的作者，是开山鼻祖。不过这个用哈扎尔语写成的祖本还不是三卷本，总共只一卷，只一种语言。<strong>祖本演变成现在的版本的地方非常少，这就好比一只狗的忧伤无法通过孩子们的模仿传递到另一只狗身上</strong>。</p>
+<p align="right">——米洛拉德·帕维奇《哈扎尔辞典》</p>
+
+<p>按照最宽松的标准，有脚注或交叉引用（cross-reference）的文本就可算超文本——前者是页面底部的注释，后者也叫相互参照，作用是告诉读者同一份资料的另一位置有更多相关信息。按此标准，超文本的雏形可以一路追溯至文明早期，最常见的例子是犹太教经典《塔木德》（The Talmud）。<strong>几个世纪以来，人们对它的正文进行评注，然后对评注进行评注，这些内容相互嵌套，形成错综复杂的注释和交叉引用</strong>。</p>
+<p align="right">——李恪《超文本和超链接》</p>
+
+<p>从这个角度说，《哈扎尔辞典》是一部出现在互联网之前，却最适合在互联网上进行阅读的书籍。</p>
+<p align="right">——郭建龙《盗梦哈扎尔》</p>
+
+<h2 id="🔧-操作台"><a href="#🔧-操作台" class="headerlink" title="🔧 操作台"></a>🔧 操作台</h2><p><img src="/images/zw20-03.png" alt></p>
+<h3 id="🎫-EverStub"><a href="#🎫-EverStub" class="headerlink" title="🎫 EverStub"></a>🎫 EverStub</h3><p>之前用 Google AI Studio 写过生成电影票根的小应用（详见《<a href="/2026/04/06/bao-guan-shi-jian/">保管时间：Google AI Studio 自制电影票根</a>》），这次迁移到了”扣子”上。</p>
+<p>先是让 Gemini 给一个尽可能完整的提示词，一次性丢给”扣子”这边，后续根据报错修改细节。能明显感觉两边模型能力的差别，阻抗不匹配，我作为”超声凝胶”沟通双方，很多时候需要让 Gemini 把实现方式甚至具体代码告诉我，由我转达。</p>
+<p>成品效果如下，也可以打开链接亲自体验：<a target="_blank" rel="noopener" href="https://4vx7zpfvkd.coze.site/">EverStub</a>。</p>
+<p><img src="/images/zw20-04.png" alt></p>
+<h3 id="📱-微信公众号排版"><a href="#📱-微信公众号排版" class="headerlink" title="📱 微信公众号排版"></a>📱 微信公众号排版</h3><p>为了发公众号，我需要把 Markdown 格式的文章转化为可以一键粘贴到编辑器的工具。</p>
+<p>之前用过一些网页工具，但可能是因为年久失修，一个个失效了。没失效的日子里，还会费一些时间处理图片，因为我写笔记的时候用的是本地图片 + Wiki 链接，并不是能直接预览的标准格式。</p>
+<p>后来寻觅到最简单的方法（算上我自定义的方法也是最简单的），就是使用 Obsidian 插件：<a target="_blank" rel="noopener" href="https://github.com/Yeban8090/mp-preview">MP Preview</a>，可以实时预览，一键复制。</p>
+<p><img src="/images/zw20-05.png" alt></p>
+<p>但还是有一些自定义的功能实现不好，比如说，如果是外部链接，贴到公众号就会消失。为此，我希望直接转化为脚注样式。</p>
+<p>于是，我写了这样一段提示词：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Role</span></span><br><span class="line">你是一位资深的&quot;微信公众号排版专家&quot;兼&quot;前端开发工程师&quot;。你精通微信公众平台富文本编辑器的底层限制（仅支持纯内联样式、对部分 CSS 属性有严格过滤），并且拥有极高的设计审美品味。</span><br><span class="line"></span><br><span class="line"><span class="section"># Task</span></span><br><span class="line">请将我提供的 Obsidian 格式 Markdown 文本转化为一段可以直接复制粘贴到微信公众号后台的高质量 HTML 代码，且全部使用纯内联样式（Inline CSS）。</span><br><span class="line"></span><br><span class="line"><span class="section"># 核心处理规则</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 1. 样式与设计（参考文章内容）</span></span><br><span class="line"><span class="bullet">-</span> 仔细阅读提供的 Markdown 文本，提取其核心基调（如：科技、文艺、学术、商务等）。</span><br><span class="line"><span class="bullet">-</span> 根据提取的基调，自动设计一套优雅的色彩搭配和排版规范。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**全局参数建议**</span>：字体大小推荐 15px 或 16px，字色 <span class="code">`#333333`</span> 或 <span class="code">`#3f3f3f`</span>，行高设定为 <span class="code">`1.75`</span> 到 <span class="code">`2.0`</span> 之间，段落间距留白充足。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**注意**</span>：</span><br><span class="line"><span class="bullet">    1.</span> 绝对不能使用 <span class="code">`&lt;style&gt;`</span> 标签或外部样式表，所有样式必须写在标签的 <span class="code">`style=&quot;...&quot;`</span> 属性中。</span><br><span class="line"><span class="bullet">    2.</span> 为便于手机端阅读，不需要添加首行缩进。</span><br><span class="line"></span><br><span class="line"><span class="section">## 2. 链接与 Obsidian 语法处理（严格执行）</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**微信系链接**</span>：如果链接 URL 中包含 <span class="code">`mp.weixin.qq.com`</span>，请保留其 <span class="code">`&lt;a&gt;`</span> 标签，并为其添加适合的内联高亮样式（如主题色和下划线）。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**外部非微信链接**</span>：由于微信限制，请去除 <span class="code">`&lt;a&gt;`</span> 标签，将原本的链接文本保留并加上上标引用数字（如：<span class="code">`&lt;sup style=&quot;color: #888;&quot;&gt;[1]&lt;/sup&gt;`</span>）。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**生成脚注**</span>：在整篇文章的末尾，自动生成一个&quot;参考资料&quot;或&quot;扩展阅读&quot;区块，将上述所有非微信系外部链接按数字顺序 <span class="code">`[1]`</span>, <span class="code">`[2]`</span> 罗列出来，包含原文本和 URL。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**Wiki链接处理**</span>：直接删除 Obsidian 特有的双链结构（如 <span class="code">`[[一条笔记]]`</span>），仅保留其内部的纯文本，不附带任何链接样式。</span><br><span class="line"></span><br><span class="line"><span class="section">## 3. 图片与动态链接处理规则</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**识别 Obsidian 图片语法**</span>：准确识别标准的 Markdown 图片 <span class="code">`![alt](url)`</span> 以及 Obsidian 特有的图片语法 <span class="code">`![[图片名.后缀]]`</span>。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**动态替换图片路径**</span>：根据用户提供的【参考图片网络链接】，提取其基础路径（Base URL）。例如，提供 <span class="code">`https://xxx.com/path/cover.png`</span>，其基准路径为 <span class="code">`https://xxx.com/path/`</span>。</span><br><span class="line"><span class="bullet">-</span> 请将 Markdown 文本中所有图片的本地路径替换为该基础路径，并拼接上原文中的图片文件名（或根据参考链接的命名规律自动推演递增）。</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**图片样式要求**</span>：必须为生成的 <span class="code">`&lt;img&gt;`</span> 标签添加 <span class="code">`style=&quot;max-width: 100%; height: auto; display: block; margin: 16px auto; border-radius: 8px;&quot;`</span>，确保在移动端完美适配。</span><br><span class="line"></span><br><span class="line"><span class="section"># Output Format</span></span><br><span class="line">请直接输出处理完成的 HTML 代码，将其包裹在 <span class="code">` `</span><span class="code">``html `</span> 代码块中，不要有多余的解释说明。</span><br><span class="line"></span><br><span class="line"><span class="section"># Input Data</span></span><br><span class="line">【Obsidian Markdown 文本】：</span><br><span class="line">[粘贴你的 Markdown 内容]</span><br><span class="line"></span><br><span class="line">【参考图片网络链接】：</span><br><span class="line">[粘贴你的单张图片网络链接]</span><br></pre></td></tr></table></figure>
+<p>其实这个工作流是非常个人化的，因为我会先上传博客，然后再上传公众号，所以自然会产生图片的网址。否则，要想通过窗口的 AI 实现，就只好使用图床了。</p>
+<p>工作流如下：</p>
+<ul>
+<li>发布博客</li>
+<li>上述提示词 + Markdown 文本 + 一张图片网址发给大模型</li>
+<li><strong>点击 HTML 预览后，全选、复制</strong>，直接粘贴到微信公众平台编辑器</li>
+</ul>
+<p>给一个示例，上一份周刊《<a href="/2026/04/11/zhiwen-weekly-vol019/">Vol.019 中文屋的日与夜</a>》的样式就是 AI 直接生成的。</p>
+<p>参考价值不大，但也是一份心意。</p>
+<h3 id="🎵-AI-音乐"><a href="#🎵-AI-音乐" class="headerlink" title="🎵 AI 音乐"></a>🎵 AI 音乐</h3><p><img src="/images/zw20-06.png" alt></p>
+<p>有一天收到短信，说是 <a target="_blank" rel="noopener" href="https://minimaxi.com/audio/music">MiniMax Music</a> 模型使用还剩三天，哪怕不是很有兴趣，也算试了一试。</p>
+<p>参考之前 <a target="_blank" rel="noopener" href="https://x.com/op7418/status/1978856557279653999?s=20">“归藏”的提示词</a>，以及 <a target="_blank" rel="noopener" href="https://vrfi1sk8a0.feishu.cn/wiki/LLjuwJhoMiUGwdkO8k1cB0mFnNc">MiniMax Music 使用指南</a>，让 AI 写了个简易版本的提示词：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Role: 资深 AI 音乐提示词工程师</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Profile</span></span><br><span class="line">你是一名专业的 AI 音乐提示词工程师。你的任务是根据用户提供的【歌手名称】和【歌词内容】，为 Suno、MiniMax Music 等模型创建精准的提示词。你深谙如何通过&quot;全局风格&quot;定义听感，并通过&quot;标准结构标签&quot;组织歌词。</span><br><span class="line"></span><br><span class="line"><span class="section">## 核心任务逻辑</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 第一部分：全局风格提示词 (Global Style Prompt)</span></span><br><span class="line">这是定义音乐灵魂的核心部分。请用一段<span class="strong">**纯英文**</span>描述，严禁主观词汇，包含以下维度：</span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**Core Genre:**</span> 核心流派 (如 &quot;Neo-Soul&quot;, &quot;Mandopop Ballad&quot;)。</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**Signature Instrumentation:**</span> 标志性乐器及音色。</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**Vocal Timbre &amp; Technique:**</span> 歌手的音色特征与演唱技巧。</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**Production Feel:**</span> 制作风格、节奏律动与空间感。</span><br><span class="line"></span><br><span class="line"><span class="section">### 第二部分：分段指令 + 歌词 (Lyrics with Sectional Tags)</span></span><br><span class="line">这一部分必须保持极端简洁。<span class="strong">**严禁在方括号内添加任何乐器描述或情绪形容词。**</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**1. 必须且仅能使用的 14 种结构标签：**</span></span><br><span class="line">[Intro], [Verse], [Pre-chorus], [Chorus], [Hook], [Drop], [Bridge], [Solo], [Build-up], [Instrumental], [Breakdown], [Break], [Interlude], [Outro]</span><br><span class="line"></span><br><span class="line"><span class="strong">**2. 格式要求：**</span></span><br><span class="line"><span class="bullet">-</span> 每一个歌词段落上方，仅放置一个对应的标签（如 <span class="code">`[Chorus]`</span>）。</span><br><span class="line"><span class="bullet">-</span> 标签必须独立成行。</span><br><span class="line"><span class="bullet">-</span> 严禁出现类似 <span class="code">`[Verse, soft piano]`</span> 这种描述，只能是 <span class="code">`[Verse]`</span>。</span><br><span class="line"></span><br><span class="line"><span class="strong">**3. 人声哼唱/吟唱引导 (Vocalizations):**</span></span><br><span class="line"><span class="bullet">-</span> 根据歌曲氛围，在适当位置（如 [Intro] 之后或歌词句尾）直接插入发音音节作为歌词的一部分：</span><br><span class="line"><span class="bullet">  -</span> &quot;ah, ah, ah...&quot;</span><br><span class="line"><span class="bullet">  -</span> &quot;la, la, la...&quot;</span><br><span class="line"><span class="bullet">  -</span> &quot;mmm, mmm...&quot;</span><br><span class="line"><span class="bullet">  -</span> &quot;ooh, ooh...&quot;</span><br><span class="line"><span class="bullet">  -</span> &quot;hum, hum...&quot;</span><br><span class="line"></span><br><span class="line"><span class="section">## 输出示例</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**全局风格提示词 (Global Style Prompt):**</span></span><br><span class="line">JJ Lin-style Mandopop, blending Pop-Rock with R&amp;B. Piano-driven foundation with lush string arrangements. High tenor vocal, emotive vibrato, clear and powerful control. Polished cinematic production.</span><br><span class="line"></span><br><span class="line"><span class="strong">**分段指令 + 歌词 (Lyrics with Sectional Prompts):**</span></span><br><span class="line">[Intro]</span><br><span class="line">mmm, mmm, mmm...</span><br><span class="line"></span><br><span class="line">[Verse]</span><br><span class="line">圈圈圆圆圈圈</span><br><span class="line">天天年年天天的我</span><br><span class="line">深深看你的脸</span><br><span class="line"></span><br><span class="line">[Chorus]</span><br><span class="line">不懂爱恨情愁煎熬的我们</span><br><span class="line">都以为相爱就像风云的善变</span><br><span class="line"></span><br><span class="line">[Outro]</span><br><span class="line">ah, ah, ah...</span><br><span class="line"></span><br><span class="line"><span class="section">## 操作流程</span></span><br><span class="line"><span class="bullet">1.</span> 告知用户已就绪。</span><br><span class="line"><span class="bullet">2.</span> 要求用户提供【歌手名称】和【歌词内容】。</span><br><span class="line"><span class="bullet">3.</span> 严格按照上述&quot;全局风格描述+纯标签歌词结构&quot;生成内容。</span><br></pre></td></tr></table></figure>
+<p>用的素材来自于董启章的《体育时期》，模仿学生写的歌词：</p>
+<blockquote>
+<p>诗与垃圾 I<br>曲/词/声: 不是苹果</p>
+<p>最讨厌那些精美的诗篇<br>机智的比喻 巧妙的通感<br>动人的节奏<br>如果都只是虚拟的人格<br>给我吃垃圾好过</p>
+<p>最讨厌那些阴暗的小说<br>不外乎是遗憾背叛和欲望<br>霉雨的屋角<br>如果影印自己的扭曲就是伟大<br>给我吃垃圾好过</p>
+<p>至少垃圾光明正大<br>至少垃圾实实在在</p>
+<p>我爱你以我的一切<br>我爱你以我的遗骸<br>我爱你以我的残余<br>我把自己像垃圾一样抛给你<br>请你好好吃它<br>因为垃圾是我的一切</p>
+<p>至少垃圾光明正大<br>至少垃圾实实在在</p>
+</blockquote>
+<p>因为替董启章先生感到母语羞耻，就让大模型转写成日语——确保我听不懂——的歌曲提示词，比如（使用 GPT 5.4）：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**Global Style Prompt:**</span>  </span><br><span class="line">Japanese alternative art-pop with theatrical chanson and dark rock elements. Piano, brushed drums, upright bass, tremolo guitar, and chamber strings. Female vocal with a low-to-mid register, tight phrasing, spoken-sung transitions, rolled consonants, and controlled vibrato. Close-miked verses, wider choruses, dynamic contrast, and a dry-to-reverberant production flow.</span><br><span class="line"></span><br><span class="line"><span class="strong">**Lyrics with Sectional Tags:**</span></span><br><span class="line"></span><br><span class="line">[Intro]  </span><br><span class="line">mmm, mmm, mmm...</span><br><span class="line"></span><br><span class="line">[Verse]  </span><br><span class="line">いちばん嫌い　あんな綺麗な詩篇  </span><br><span class="line">機知に富んだ比喩　巧妙な共感覚  </span><br><span class="line">心を揺らすリズム  </span><br><span class="line">それがただの仮初めの人格なら  </span><br><span class="line">ゴミを喰らうほうがまだまし</span><br><span class="line"></span><br><span class="line">[Verse]  </span><br><span class="line">いちばん嫌い　あんな陰気な小説  </span><br><span class="line">所詮は未練　裏切り　欲望ばかり  </span><br><span class="line">黴雨に濡れた部屋の隅  </span><br><span class="line">己の歪みを複写するだけで偉大なら  </span><br><span class="line">ゴミを喰らうほうがまだまし</span><br><span class="line"></span><br><span class="line">[Pre-chorus]  </span><br><span class="line">少なくともゴミは正々堂々  </span><br><span class="line">少なくともゴミはたしかに在る</span><br><span class="line"></span><br><span class="line">[Chorus]  </span><br><span class="line">あなたを愛してる　この身のすべてで  </span><br><span class="line">あなたを愛してる　この亡骸で  </span><br><span class="line">あなたを愛してる　この残り滓で  </span><br><span class="line">あたしをゴミみたいにあなたへ投げる  </span><br><span class="line">どうかちゃんと喰べて  </span><br><span class="line">だってゴミこそ　あたしのすべて</span><br><span class="line"></span><br><span class="line">[Hook]  </span><br><span class="line">少なくともゴミは正々堂々  </span><br><span class="line">少なくともゴミはたしかに在る</span><br><span class="line"></span><br><span class="line">[Outro]  </span><br><span class="line">ah, ah, ah...  </span><br><span class="line">ゴミこそ　あたしのすべて</span><br></pre></td></tr></table></figure>
+<p>分别填到”歌词”和”风格”就可以了：</p>
+<p><img src="/images/zw20-07.png" alt></p>
+<p>以下是<a target="_blank" rel="noopener" href="https://www.minimaxi.com/audio/music/share/AN9K8YJNWP">示例歌曲 - 詩と塵芥</a></p>
+<p><img src="/images/zw20-08.mp3" alt></p>
+<p>为了克服母语羞耻，写了一个疯狂洗脑的版本，以供各位知音品鉴，适合高雅人士用作手机彩铃：<a target="_blank" rel="noopener" href="https://www.minimaxi.com/audio/music/share/VGoxdxawWz">示例歌曲 - 吃垃圾</a></p>
+<p><img src="/images/zw20-09.mp3" alt></p>
+<p>以下是提示词：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**全局风格提示词 (Global Style Prompt):**</span></span><br><span class="line">Gabber, Hardcore Techno, Psytrance. Heavy distorted kick drum, aggressive acid synth bassline, industrial screeching leads. Piercing distorted vocal chops, shouting repetitive rhythmic chanting. 165 BPM, relentless driving hypnotic pulse, extreme compression, raw underground warehouse rave sound.</span><br><span class="line"></span><br><span class="line"><span class="strong">**分段指令 + 歌词 (Lyrics with Sectional Prompts):**</span></span><br><span class="line"></span><br><span class="line">[Intro]</span><br><span class="line">la, la, la, la...</span><br><span class="line"></span><br><span class="line">[Verse]</span><br><span class="line">诗篇 垃圾</span><br><span class="line">小说 垃圾</span><br><span class="line">给我 垃圾</span><br><span class="line">吃 垃圾</span><br><span class="line"></span><br><span class="line">[Pre-chorus]</span><br><span class="line">光明正大</span><br><span class="line">实实在在</span><br><span class="line">光明正大</span><br><span class="line">实实在在</span><br><span class="line"></span><br><span class="line">[Build-up]</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line">垃圾！垃圾！垃圾！垃圾！</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line"></span><br><span class="line">[Drop]</span><br><span class="line">ah, ah, ah, ah...</span><br><span class="line"></span><br><span class="line">[Hook]</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">给我吃垃圾！</span><br><span class="line"></span><br><span class="line">[Verse]</span><br><span class="line">遗骸 垃圾</span><br><span class="line">残余 垃圾</span><br><span class="line">抛给你 垃圾</span><br><span class="line">吃 垃圾</span><br><span class="line"></span><br><span class="line">[Build-up]</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line">垃圾！垃圾！垃圾！垃圾！</span><br><span class="line">吃！吃！吃！吃！</span><br><span class="line"></span><br><span class="line">[Drop]</span><br><span class="line">ooh, ooh, ooh, ooh...</span><br><span class="line"></span><br><span class="line">[Hook]</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">垃圾！吃垃圾！</span><br><span class="line">给我吃垃圾！</span><br><span class="line"></span><br><span class="line">[Outro]</span><br><span class="line">垃圾 垃圾 垃圾</span><br><span class="line">mmm, mmm, mmm...</span><br></pre></td></tr></table></figure>
+<p>为什么该模型唱的”垃圾”无一例外都是”乐色”呢？</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/%E5%92%AB%E9%97%BB%E5%91%A8%E5%88%8A/">咫闻周刊</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/%E9%98%85%E8%AF%BB/">阅读</a><a href="/tags/%E6%89%A3%E5%AD%90/">扣子</a><a href="/tags/AI%E9%9F%B3%E4%B9%90/">AI音乐</a><a href="/tags/%E6%8E%92%E7%89%88/">排版</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="zhiwen-weekly-vol020"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2026/04/24/zhiwen-weekly-vol020/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%8E-%E8%B7%91%E9%A9%AC%E5%9C%BA"><span class="toc-text">🐎 跑马场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%96-%E5%93%88%E6%89%8E%E5%B0%94%E8%BE%9E%E5%85%B8"><span class="toc-text">📖 哈扎尔辞典</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E6%93%8D%E4%BD%9C%E5%8F%B0"><span class="toc-text">🔧 操作台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AB-EverStub"><span class="toc-text">🎫 EverStub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%B1-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%92%E7%89%88"><span class="toc-text">📱 微信公众号排版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%B5-AI-%E9%9F%B3%E4%B9%90"><span class="toc-text">🎵 AI 音乐</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2026 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+    
+    
+    
+    <script src="/js/lang-detector.js"></script>
+    
+    
+    <script src="/js/footnote-popup.js"></script>
+    
+
+    <!-- Mermaid.js CDN 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      // 初始化 mermaid
+      mermaid.initialize({ startOnLoad: true });
+      document.addEventListener('DOMContentLoaded', function() {
+        // 查找所有 mermaid 代码块
+        document.querySelectorAll('pre code.language-mermaid, pre code.mermaid').forEach(function(block) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          block.parentNode.parentNode.replaceWith(div);
+        });
+        // 重新初始化 mermaid
+        if (window.mermaid) {
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+      });
+    </script>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heatmapChartDom = document.getElementById('heatmapChart');
+                if(heatmapChartDom){
+                    const heatmapChart = echarts.init(heatmapChartDom, 'light');
+                    const cellSize = [18, 18];
+                    
+                    const groupByYear = (data) => {
+                        const result = {};
+                        data.forEach(([date, value]) => {
+                            const [year] = date.split('-').map(Number);
+                            if (!result[year]) {
+                                result[year] = [];
+                            }
+                            result[year].push([date, value]);
+                        });
+                        return result;
+                    };
+                    
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-03",1],["2024-07-04",1],["2024-07-06",2],["2024-07-11",1],["2024-07-14",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-21",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2024-12-27",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-13",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1],["2026-01-24",1],["2026-02-13",1],["2026-02-19",1],["2026-03-14",1],["2026-04-11",1],["2026-04-24",1]]);
+                    const years = Object.keys(groupedData).reverse();
+                    
+                    var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
+                    const minYear = years[years.length - 1];
+                    const maxYear = years[0];
+                    if (initYear < minYear || initYear > maxYear) {
+                        initYear = maxYear;
+                    }
+                    console.log('[hexo-graph]generateHeatmapChart|initYear:', initYear, 'minYear:', minYear, 'maxYear:', maxYear);
+                    
+                    heatmapChart.setOption({
+                        grid: {},
+                        tooltip: { 
+                            position: 'top', 
+                            formatter: params => `${params.value[0]}: ${params.value[1]} Articles` 
+                        },
+                        calendar: { 
+                            top: '10%',
+                            left: 'left', 
+                            right: '8%',
+                            range: initYear,
+                            cellSize: cellSize, 
+                            splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } }, 
+                            itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' }, 
+                            dayLabel: { show: false },
+                            monthLabel: { show: true },
+                            yearLabel: { show: false },
+                        },
+                        visualMap: { 
+                            show: true,
+                            right: '8%',
+                            bottom: '5%',
+                            type: 'piecewise',
+                            orient: 'horizontal',
+                            text: ['More', 'Less'],
+                            min: 0,
+                            max: Math.max(...groupedData[initYear].map(item => item[1])),
+                            inRange: { color: ["#ACE7AE","#69C16D","#549F57"] }
+                        },
+                        legend: {
+                            type: 'scroll',
+                            icon: 'none',
+                            data: years,
+                            orient: 'vertical',
+                            top: '5%',
+                            right: 'right',
+                            itemWidth: 20,
+                            itemHeight: 20,
+                            itemGap: 10,
+                            pageIconSize: 10,
+                            pageTextStyle: { fontSize: 14 },
+                            selectedMode: 'single',
+                        },
+                        series: years.map(year => ({
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: groupedData[year],
+                            name: year,
+                            emphasis: {
+                                disabled: true,
+                            },
+                            silent: year !== initYear,
+                        })),
+                    });
+                    
+                    // init selected year
+                    heatmapChart.dispatchAction({
+                        type: 'legendSelect',
+                        name: initYear,
+                    });
+                    
+                    heatmapChart.on('legendselectchanged', function(params) {
+                        console.log('[hexo-graph]generateHeatmapChart|legendselectchanged:', params);
+                        const selectedYear = Object.keys(params.selected).find(key => params.selected[key]);
+                        if (selectedYear && groupedData[selectedYear]) {
+                            heatmapChart.setOption({
+                                calendar: {
+                                    range: selectedYear,
+                                },
+                                visualMap: {
+                                    max: Math.max(...groupedData[selectedYear].map(item => item[1])),
+                                },
+                                series: years.map(year => ({
+                                    type: 'heatmap',
+                                    coordinateSystem: 'calendar',
+                                    data: groupedData[year],
+                                    name: year,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: year !== selectedYear,
+                                })),
+                            });
+                        }
+                    });
+                    
+                    heatmapChart.on('click', function (params) {
+                        if (params.componentType === 'series') {
+                            const [year, month] = params.value[0].split('-');
+                            window.location.href = '/archives/' + year + '/' + month;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const monthlyChartDom = document.getElementById('monthlyChart');
+                if(monthlyChartDom){
+                    const monthlyChart = echarts.init(monthlyChartDom, 'light');
+                    monthlyChart.setOption({
+                        xAxis: { 
+                            type: 'category', 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04"], 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        series: [{
+                            name: 'Articles',
+                            type: 'line',
+                            data: [2,6,1,4,1,1,3,6,2,3,1,4,2,1,2,1,3,3,2,2,1,2],
+                            smooth: true,
+                            lineStyle: { color: '#5470C6', width: 2 },
+                            itemStyle: { color: '#5470C6' },
+                            areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                            symbolSize: 10,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            }
+                        }]
+                    });
+
+                    monthlyChart.on('click', function (params) {
+                        const [year, month] = params.name.split('-');
+                        window.location.href = '/archives/' + year + '/' + month;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tagsChartDom = document.getElementById('tagsChart');
+                if(tagsChartDom){
+                    const tagsChart = echarts.init(tagsChartDom, 'light');
+                    tagsChart.setOption({
+                        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                        series: [{
+                            type: 'pie',
+                            radius: '60%',
+                            data: [{"name":"AI","value":32},{"name":"现代生活","value":13},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"尝试集","value":8},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4}],
+                            label: {
+                                position: 'outside',
+                                formatter: '{b} {c} ({d}%)',
+                                fontSize: 14,
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            color: ["#5470C6","#91CC75","#FAC858","#EE6666","#73C0DE","#3BA272","#FC8452","#9A60B4"],
+                            labelLine: { show: true }
+                        }],
+                        legend: {
+                            bottom: '0',
+                            left: 'center',
+                            data: [{"name":"AI","value":32},{"name":"现代生活","value":13},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"尝试集","value":8},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4}].map(tag => tag.name),
+                            textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        }
+                    });
+
+                    tagsChart.on('click', function (params) {
+                        window.location.href = '/tags/' + params.name;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesChartDom = document.getElementById('categoriesChart');
+                if(categoriesChartDom){
+                    const categoriesChart = echarts.init(categoriesChartDom, 'light');
+                    categoriesChart.setOption({
+                        xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        yAxis: { 
+                            type: 'category', 
+                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":14},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.name).reverse(), 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        series: [{
+                            name: 'Category Count',
+                            type: 'bar',
+                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":14},{"name":"读书笔记","value":13},{"name":"诙谐装置","value":6}].map(category => category.value).reverse(),
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    { offset: 0, color: '#91CC75' },
+                                    { offset: 1, color: '#73C0DE' }
+                                ])
+                            }
+                        }]
+                    });
+
+                    categoriesChart.on('click', function (params) {
+                        window.location.href = '/categories/' + params.name;
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesTreeChartDom = document.getElementById('categoriesTreeChart');
+                if(categoriesTreeChartDom){
+                    const treeChart = echarts.init(categoriesTreeChartDom, 'light');
+                    treeChart.setOption({
+                        title: {
+                            text: '操作提示：单击展开分类，双击进入具体分类页面',
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#999',
+                                fontWeight: 'normal'
+                            },
+                            bottom: 0,
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        series: [{
+                            type: 'tree',
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":14,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"诙谐装置","children":[],"count":6,"path":"诙谐装置"},{"name":"咫闻周刊","children":[],"count":20,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            initialTreeDepth: -1,
+                            top: '5%',
+                            bottom: '10%',
+                            left: '0%',
+                            right: '0%',
+                            symbolSize: 15,
+                            layout: 'orthogonal',
+                            orient: 'TB',
+                            itemStyle: {
+                                color: '#91CC75',
+                                borderColor: '#73C0DE'
+                            },
+                            label: {
+                                position: 'bottom',
+                                verticalAlign: 'middle',
+                                align: 'center',
+                                fontSize: 14,
+                                distance: 28,
+                                formatter: function(params) {
+                                    return params.data.name + (params.data.count ? ' (' + params.data.count + ')' : '');
+                                }
+                            },
+                            leaves: {
+                                label: {
+                                    position: 'top',
+                                    verticalAlign: 'middle',
+                                    align: 'center'
+                                }
+                            },
+                            emphasis: {
+                                focus: 'descendant'
+                            },
+                            expandAndCollapse: true
+                        }]
+                    });
+
+                    treeChart.on('dblclick', function (params) {
+                        if (params.data && params.data.path) {
+                            window.location.href = '/categories/' + params.data.path;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+    </body>
+</html>

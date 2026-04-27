@@ -420,7 +420,7 @@
 <hr>
 <p>可乐麦炫酷（雪顶可乐）喝到最后像是一杯脏雪。</p>
 <h2 id="🛠️-操作台"><a href="#🛠️-操作台" class="headerlink" title="🛠️ 操作台"></a>🛠️ 操作台</h2><h3 id="🔍-OCR（续）"><a href="#🔍-OCR（续）" class="headerlink" title="🔍 OCR（续）"></a>🔍 OCR（续）</h3><p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-005.png" alt></p>
-<p>[[OCR繁体竖排PDF]]</p>
+<p>OCR繁体竖排PDF</p>
 <p>早就听说过 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/paddleocr">PaddleOCR</a>，不过此前多为本地部署。这次看到它推出了在线版，便试用了一下。</p>
 <p>工作流和之前 <a target="_blank" rel="noopener" href="https://mineru.net/OpenSourceTools/Extractor">MinerUOCR</a> 大致相同，可以总结如下：</p>
 <ol>
@@ -441,7 +441,7 @@
 <p>效果如下（PaddleOCR 的结果经过 Gemini 3.0 Flash 校对），都达到了我的可读标准。</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-006.png" alt></p>
 <h3 id="🤖-AI-翻译（续）"><a href="#🤖-AI-翻译（续）" class="headerlink" title="🤖 AI 翻译（续）"></a>🤖 AI 翻译（续）</h3><p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-007.png" alt></p>
-<p>现在可以更新一下之前 [[Vol.010 在你手心上写的字]] 的 AI 翻译工作流：</p>
+<p>现在可以更新一下之前 Vol.010 在你手心上写的字 的 AI 翻译工作流：</p>
 <p><strong>第一阶段：准备工作</strong></p>
 <ol>
 <li>在 Google AI Studio 中选用 Gemini 3.0 Pro / 3.0 Flash 模型</li>
@@ -466,7 +466,6 @@
 <li>使用 AI CLI 调用 Pandoc 工具：合并所有 Markdown 文件，转换为新的 Epub 文件</li>
 </ol>
 <p>用 Google AI Studio 的 Build 模式写了一版（<a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1fet85vtv0GbwJ7T7fazNVCzTw4u5L6Fp">Gemini EPUB Translator</a>），可以调用 Gemini 3.0 Flash，一键实现上述工作流：</p>
-<p>[[Drawing 2026-01-05 21.22.54.excalidraw]]</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-008.png" alt></p>
 <p>EPUB 效果：</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-009.png" alt></p>
@@ -480,7 +479,6 @@
 <p>后续，我复制了这个项目，改成一个可以自定义调用 API 的版本：<a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1jtBovzliEfh0KWvlb37ZiakHIvVcVTJd">AI EPUB Translator</a>，这样就可以下载后用 npm 运行了。</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-010.png" alt></p>
 <p>下面是几个模型的效果对比，分别是 <code>minimaxai/minimax-m2.1</code>、<code>qwen/qwen3-next-80b-a3b-instruct</code> 和 Gemini 3.0 Flash：</p>
-<p>[[Drawing 2026-01-11 00.35.12.excalidraw]]</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-011.png" alt></p>
 <blockquote>
 <p>谈论心理健康从禁忌变成常态的速度可谓前所未有。就在几十年前，承认自己与抑郁症、焦虑症、强迫症或其他心理健康问题作斗争，还会构成严重的社会负担。寻求治疗的人可能被贴上”疯狂”或”精神病”的标签；他们可能被认为脑子有问题，甚至可能被认为具有危险性。然而如今，公开谈论心理健康困境被视为真诚和个人力量的象征。—— <code>minimaxai/minimax-m2.1</code></p>
@@ -488,8 +486,8 @@
 <p>心理健康话题从讳莫如深转变为家常便饭，其速度之快，前所未有。就在几十年前，承认自己正与抑郁、焦虑、强迫症（OCD）或其他心理问题作斗争，还是一件足以产生严重社交负面影响的事。那时，寻求心理咨询的人冒着被贴上“疯子”或“精神病”标签的风险，被视为“脑子有问题”，甚至可能被认为具有危险性。然而在今天，公开谈论心理挣扎被视为真实自我的体现，也是内心强大的象征。—— Gemini 3.0 Flash</p>
 </blockquote>
 <h3 id="📧-邮件沟通提示词（续）"><a href="#📧-邮件沟通提示词（续）" class="headerlink" title="📧 邮件沟通提示词（续）"></a>📧 邮件沟通提示词（续）</h3><p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-012.png" alt></p>
-<p>[[Prompt - 办公邮件助手]]</p>
-<p>这个小更新我已经用了很长时间，就是给之前的提示词（[[Vol.009 刺杀了将军的形象]]）加上下面这一小段内容来限制输出格式：</p>
+<p>Prompt - 办公邮件助手</p>
+<p>这个小更新我已经用了很长时间，就是给之前的提示词（Vol.009 刺杀了将军的形象）加上下面这一小段内容来限制输出格式：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 输出格式</span></span><br><span class="line">在代码块上方单独一行先写出邮件标题</span><br><span class="line">在代码块内只包含邮件正文，方便一键复制：</span><br><span class="line"><span class="bullet">-</span> 从称呼（Dear XXX）到结束语（Best regards）</span><br><span class="line"><span class="bullet">-</span> 纯文本格式，不要添加任何 Markdown 标记</span><br><span class="line"><span class="bullet">-</span> 不包含署名，我会自己添加</span><br></pre></td></tr></table></figure>
 <p>为什么要把正文内容写入代码块呢，因为 Google AI Studio 的代码块可以一键复制，一切为了方便。</p>
 <p><img src="/2026/01/11/zhiwen-weekly-vol015/zw0150111-013.png" alt></p>

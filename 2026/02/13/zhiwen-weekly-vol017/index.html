@@ -366,20 +366,20 @@
 <p align="right">——唐诺《求剑》</p>
 
 <h2 id="🛠️-操作台"><a href="#🛠️-操作台" class="headerlink" title="🛠️ 操作台"></a>🛠️ 操作台</h2><h3 id="🤖-Obsidian-Gemini-CLI"><a href="#🤖-Obsidian-Gemini-CLI" class="headerlink" title="🤖 Obsidian + Gemini CLI"></a>🤖 Obsidian + Gemini CLI</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-4.jpg" alt></p>
-<p>我居然是去年 7 月份开始用 Gemini CLI，也是在那时就与 Obsidian 笔记库连用了（[[Vol.009 刺杀了将军的形象#🛠️ Gemini Cli]]）。一般会配合插件 <a target="_blank" rel="noopener" href="https://github.com/polyipseity/obsidian-terminal">Terminal</a> 使用——这个插件并不关键，只是方便我快一步在当前目录打开命令行。</p>
+<p>我居然是去年 7 月份开始用 Gemini CLI，也是在那时就与 Obsidian 笔记库连用了（Vol.009 刺杀了将军的形象）。一般会配合插件 <a target="_blank" rel="noopener" href="https://github.com/polyipseity/obsidian-terminal">Terminal</a> 使用——这个插件并不关键，只是方便我快一步在当前目录打开命令行。</p>
 <p>新版的 Gemini CLI 终于开始支持 Skill。</p>
 <p>Skill 相当于把各种指令“原子化”了，并且在提示词文件开头写了“摘要”。比起之前的 <code>GEMINI.md</code> 提示词，Agent 可以根据任务自主选择工作流，先浏览再细读，这一机制被称为“<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jUylk813LYbKw0sLiIttTQ">渐进式披露</a>”。</p>
-<p>除了指令之外，Skill 还可以包括代码之类的资源文件，比如之前的 OCR 和翻译工作流都可以写成 Skill——事实上，我尝试写了 OCR PDF 文件的 Skill，但因为 Gemini CLI 限制了上下文窗口，导致切分后的 PDF 都无法读取，只好作罢。至于翻译工作流，既然已经彻底程序化（[[Vol.015 个人的体验#🤖 AI 翻译（续）]]），也就不必写成 Skill 引入“不稳定因素”了。</p>
+<p>除了指令之外，Skill 还可以包括代码之类的资源文件，比如之前的 OCR 和翻译工作流都可以写成 Skill——事实上，我尝试写了 OCR PDF 文件的 Skill，但因为 Gemini CLI 限制了上下文窗口，导致切分后的 PDF 都无法读取，只好作罢。至于翻译工作流，既然已经彻底程序化（Vol.015 个人的体验），也就不必写成 Skill 引入“不稳定因素”了。</p>
 <p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-5.png" alt></p>
 <p>既然是用 Agent 工具控制 Obsidian，有一些现成的 Skills 可以直接拿来使用，比如 <a target="_blank" rel="noopener" href="https://github.com/kepano/obsidian-skills">obsidian-skills</a> 和 <a target="_blank" rel="noopener" href="https://github.com/axtonliu/axton-obsidian-visual-skills">axton-obsidian-visual-skills</a>。后者是可视化相关的 Skills 合集，可以绘制 Excalidraw、Canvas 和 Mermaid。</p>
 <p>对比一下 Gemini CLI（使用模型为 Gemini 3.0 Pro）和 OpenCode（安装 oh-my-opencode 插件，使用模型为 GLM 4.7）使用同样 Skill 的效果。</p>
 <p>这是 Excalidraw：</p>
-<p>[[Drawing 2026-01-31 11.43.16_0.excalidraw]]<br><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-6.png" alt></p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-6.png" alt></p>
 <p>这是 Canvas：</p>
-<p>[[Drawing 2026-01-31 11.43.16.excalidraw]]<br><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-7.png" alt></p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-7.png" alt></p>
 <p>可以看出，生成 Excalidraw 要更难一些，但因为模型能力强，Gemini CLI 的完成效果还是不错的。</p>
 <h3 id="🎨-封面设计（续）"><a href="#🎨-封面设计（续）" class="headerlink" title="🎨 封面设计（续）"></a>🎨 封面设计（续）</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017/zw017-8.jpg" alt></p>
-<p>上次写“封面设计”已经是将近一年以前（[[Vol.006 AI Did IT#🎨 封面设计（续）]]），看了奇普·基德的设计建议后，用 Recraft 生图（转绘）完成。</p>
+<p>上次写“封面设计”已经是将近一年以前（Vol.006 AI Did IT 封面设计），看了奇普·基德的设计建议后，用 Recraft 生图（转绘）完成。</p>
 <p>刚刚我福至心灵，用 Google AI Studio 写了一个自动化执行的版本—— <a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1QUaP_JHLB863vKDXUsjZ9ldXX26LNZOI">CoverGen AI</a>，接下来让我们连线一线工作人员，让 TA 讲解一下具体的实现流程：</p>
 <ol>
 <li><p><strong>参数输入</strong><br> 用户在前端输入书名、作者名，并从预设列表中选择一种视觉风格（如“电影感写实”或“极简大字排版”）以及目标宽高比（如 2:3 书封标准）。</p>

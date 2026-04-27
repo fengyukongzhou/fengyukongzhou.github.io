@@ -362,12 +362,12 @@
 <p><img src="/2025/11/22/zhiwen-weekly-vol012/zw012-6.png" alt></p>
 <p>说到宏村，我还想起之前看到的一张素描，很神奇，和我手机里拍下的（经过裁切后的）几乎一模一样。</p>
 <p><img src="/2025/11/22/zhiwen-weekly-vol012/zw012-7.png" alt></p>
-<h3 id="😄-大喜利"><a href="#😄-大喜利" class="headerlink" title="😄 大喜利"></a>😄 大喜利</h3><p>前情提要：[[一句正经没有：Gemini和Seedream的大喜利双簧组合]]</p>
+<h3 id="😄-大喜利"><a href="#😄-大喜利" class="headerlink" title="😄 大喜利"></a>😄 大喜利</h3><p>前情提要：《一句正经没有：Gemini和Seedream的大喜利双簧组合》</p>
 <p>因为 Nano Banana 模型无法在图片中添加中文内容，所以我之前用 <code>gemini-2.5-pro</code> 和 <code>seedream-4</code> 接力完成“图片大喜利”任务。</p>
 <p>看到 Nano Banana Pro 天然支持思维链和中文绘制，我就用初版提示词（[[Prompt - 图片大喜利#v 1.0]]）做了尝试。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">【角色定义】 你是一位日本大喜利大师，擅长观察图片中的荒诞、矛盾和搞笑元素，用犀利的吐槽和机智的文字游戏创造&quot;文字版大喜利&quot;效果。</span><br><span class="line"></span><br><span class="line">【大喜利风格核心】</span><br><span class="line"></span><br><span class="line">ツッコミ(Tsukkomi)式吐槽：直指问题核心的犀利点评</span><br><span class="line"></span><br><span class="line">ダジャレ(Dajare)文字游戏：谐音、双关、语义转换</span><br><span class="line"></span><br><span class="line">矛盾发现：找出图片中不合常理、荒诞或尴尬的元素</span><br><span class="line"></span><br><span class="line">日常生活关联：将观察与普遍的人生经验连接</span><br><span class="line"></span><br><span class="line">反差幽默：平静叙述与突发转折的结合</span><br><span class="line"></span><br><span class="line">【输出格式】 原图片 + 文字吐槽，文字以日式幽默风格呈现，可以包含：</span><br><span class="line"></span><br><span class="line">直接吐槽图片中的荒诞点</span><br><span class="line"></span><br><span class="line">用谐音或双关语进行幽默加工</span><br><span class="line"></span><br><span class="line">模拟图片中人物/物品的内心OS</span><br><span class="line"></span><br><span class="line">将场景与日常生活尴尬瞬间对比</span><br><span class="line"></span><br><span class="line">【文字样式要求】</span><br><span class="line"></span><br><span class="line">位置：居中放置在图片底部</span><br><span class="line"></span><br><span class="line">字体：粗体无衬线字体，类似日本综艺节目字幕</span><br><span class="line"></span><br><span class="line">颜色：白色文字配黑色描边/阴影，确保在任何背景下都清晰可见</span><br><span class="line"></span><br><span class="line">大小：足够醒目但不喧宾夺主</span><br><span class="line"></span><br><span class="line">风格：模仿日本综艺节目的夸张字幕效果，具有强烈的视觉冲击力</span><br><span class="line"></span><br><span class="line">排版：简洁有力，可根据内容长度适当调整字号</span><br><span class="line"></span><br><span class="line">【任务】 请分析输入的图片，识别其中的幽默元素，用大喜利风格创造一段中文吐槽，要求：</span><br><span class="line"></span><br><span class="line">抓住图片最荒诞或最矛盾的瞬间</span><br><span class="line"></span><br><span class="line">使用文字游戏或谐音梗</span><br><span class="line"></span><br><span class="line">体现日式冷幽默的克制感</span><br><span class="line"></span><br><span class="line">文字简短有力，十字以内，适合社交媒体传播</span><br><span class="line"></span><br><span class="line">文字样式需符合上述【文字样式要求】，确保视觉效果与日本综艺节目吐槽风格一致</span><br></pre></td></tr></table></figure>
 <p>同一道题的装傻结果如下（大喜利也是一种智力问答节目）：</p>
-<p>![[OG-6.png]]</p>
+<p>!<img src="/2025/11/22/zhiwen-weekly-vol012/OG-6.png" alt></p>
 <p><img src="/2025/11/22/zhiwen-weekly-vol012/zw012-8.png" alt></p>
 <p>前一个是上次 <code>gemini-2.5-pro</code> 和 <code>seedream-4</code> 双簧的效果，后一个是 Nano Banana Pro 自己的创作。看上去只用 Nano Banana Pro 的话还是有些不明所以。</p>
 <p>所以我让 <code>gemini-3.0-pro</code> 和 Nano Banana Pro（<code>gemini-3.0-pro-image</code>）组成了新的双簧组合，效果如下：</p>
@@ -886,7 +886,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return result;
                     };
                     
-                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-06",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2025-01-04",1],["2025-01-11",1],["2025-01-20",1],["2025-01-22",1],["2025-01-24",1],["2025-01-31",1],["2025-02-07",1],["2025-02-21",1],["2025-03-02",1],["2025-03-15",1],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",1],["2025-07-12",1],["2025-07-27",1],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",1],["2025-11-02",1],["2025-11-22",1],["2025-11-30",1],["2025-12-06",1],["2025-12-12",1],["2025-12-20",1],["2026-01-11",1],["2026-01-24",1],["2026-02-13",1],["2026-02-19",1],["2026-03-14",1],["2026-04-11",1],["2026-04-24",1]]);
+                    const groupedData = groupByYear([["2024-06-23",2],["2024-06-30",2],["2024-07-06",2],["2024-08-19",2],["2024-09-02",2],["2024-09-12",2],["2024-09-24",2],["2024-10-12",2],["2024-11-05",2],["2024-12-04",2],["2024-12-26",2],["2025-01-04",2],["2025-01-11",2],["2025-01-20",2],["2025-01-22",2],["2025-01-24",2],["2025-01-31",2],["2025-02-07",2],["2025-02-21",2],["2025-03-02",2],["2025-03-15",2],["2025-05-25",2],["2025-06-13",2],["2025-06-16",2],["2025-06-22",2],["2025-06-26",2],["2025-07-12",2],["2025-07-27",2],["2025-08-31",2],["2025-09-07",2],["2025-09-21",2],["2025-10-04",2],["2025-11-02",2],["2025-11-22",2],["2025-11-30",2],["2025-12-06",2],["2025-12-12",2],["2025-12-20",2],["2026-01-11",2],["2026-01-24",2],["2026-02-13",2],["2026-02-19",2],["2026-03-14",2],["2026-04-11",2],["2026-04-24",2]]);
                     const years = Object.keys(groupedData).reverse();
                     
                     var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
@@ -1009,7 +1009,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             name: 'Articles',
                             type: 'line',
-                            data: [2,1,1,3,1,1,2,6,2,2,1,4,2,1,2,1,3,3,2,2,1,2],
+                            data: [4,2,2,6,2,2,4,12,4,4,2,8,4,2,4,2,6,6,4,4,2,4],
                             smooth: true,
                             lineStyle: { color: '#5470C6', width: 2 },
                             itemStyle: { color: '#5470C6' },
@@ -1046,7 +1046,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":31},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
+                            data: [{"name":"AI","value":62},{"name":"现代生活","value":24},{"name":"读小说","value":20},{"name":"翻译","value":18},{"name":"设计","value":14},{"name":"Github","value":14},{"name":"Wolfram","value":8},{"name":"心理","value":8}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1060,7 +1060,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":31},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":62},{"name":"现代生活","value":24},{"name":"读小说","value":20},{"name":"翻译","value":18},{"name":"设计","value":14},{"name":"Github","value":14},{"name":"Wolfram","value":8},{"name":"心理","value":8}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1082,13 +1082,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":40},{"name":"计算笔记","value":26},{"name":"读书笔记","value":24}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":40},{"name":"计算笔记","value":26},{"name":"读书笔记","value":24}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1137,7 +1137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":20,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":26,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":24,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":40,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

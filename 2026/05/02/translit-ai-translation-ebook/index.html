@@ -324,7 +324,7 @@
         <p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-0.png" alt></p>
 <p>TransLit 是我“歪波”（Vibe）出最为“实用”的一款工具。越是实用，越是常用，越容易发现问题，工具也就越发“锋利”。当前版本令到我满意，可以一写，相当于在船身刻上一道印记。</p>
 <span id="more"></span>  
-<h2 id="问题出现我再——"><a href="#问题出现我再——" class="headerlink" title="问题出现我再——"></a>问题出现我再——</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-1.png" alt></p>
+<h2 id="问题出现我再——"><a href="#问题出现我再——" class="headerlink" title="问题出现我再——"></a>问题出现我再——</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-1.png" alt></p>
 <p>之所以用 Google AI Studio 写一个新的翻译工具，而不用现成的“沉浸式翻译”、<a target="_blank" rel="noopener" href="https://github.com/NEKOparapa/AiNiee">AiNiee</a> 或者 <a target="_blank" rel="noopener" href="https://github.com/neavo/LinguaGacha">LinguaGacha</a>，主因是我用惯的 Gemini 不再提供足量 API。</p>
 <p>但 Google AI Studio 的原生网页应用，却可以相对充足地调用 Gemini 3.0 flash 模型。</p>
 <p>我之前的版本答案（详见 <a href="/2025/10/04/zhiwen-weekly-vol010/">Vol.010 在你手心上写的字</a>），是复制一页 HTML 原文，粘贴到 AI 窗口，然后翻译出 Markdown 格式译文。为了解放人力，我决定简单“歪波”一个 AI 翻译工作台：<strong>需要人工处理的部分放在最前面让用户设置，可以机械执行的部分用程序解决，剩下的纯粹翻译任务交给大模型</strong>。</p>
@@ -335,7 +335,7 @@
 <p>我最后用了另一种方法（同样写在提示词里）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">遇到需要加粗或斜体文本，请使用 HTML 标签 &lt;b&gt;加粗&lt;/b&gt; 和 &lt;i&gt;斜体&lt;/i&gt;，绝对不要使用 Markdown 的星号（* 或 **）</span><br></pre></td></tr></table></figure>
 <p>类似于这样的小问题，还有浏览器缓存（关闭窗口、关机后，下次可以继续翻译）、添加第三方接口配置（能用 API 接其他大模型）等等，但我只是给 AI 描述一番，之后问题就解决了，并不了解实现细节，就不在文中赘述了。</p>
-<h2 id="重新发现“术语表”"><a href="#重新发现“术语表”" class="headerlink" title="重新发现“术语表”"></a>重新发现“术语表”</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-2.png" alt></p>
+<h2 id="重新发现“术语表”"><a href="#重新发现“术语表”" class="headerlink" title="重新发现“术语表”"></a>重新发现“术语表”</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-2.png" alt></p>
 <p>在用 AiNiee 之类工具的时候，需要你自行配置“术语表”，之前我还写过让 AI 提取术语表的提示词。</p>
 <p>直到近期翻译一本日文小说，我才发现这条指令执行得并不好。若能完整保留日文中人名的汉字，效果应当不错，但翻译时却会冒出“罗马字”。</p>
 <p>提示词针对英译中这一特定场景，我猜想这可能是症结所在。于是，我添加了源语言选项，可以改变提示词中的相应内容（内容源自李继刚的英译中提示词，其实我在读思果的《翻译研究》和《翻译新究》，核心观点也是“翻译是重写”，或许我可以用更多书中原话重写一版“重写式翻译提示词”），比如：</p>
@@ -351,7 +351,7 @@
 <p>二是在每翻译十个分片之后，调用大模型判断有无不适合加入术语表的词汇。比如，有些术语的译法固定，前后文中几乎不可能有差别。</p>
 <p>以下是当前版本的术语表相关提示词，在写术语表的提示词里，我避免用“术语”这个词，这是我有意为之的。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">TRANSLATION_PROMPT_GLOSSARY</span> = <span class="string">`</span></span><br><span class="line"><span class="string">【对齐系统】</span></span><br><span class="line"><span class="string">1. **核心原则**：【宁缺毋滥】。</span></span><br><span class="line"><span class="string">    - 仅提取“虚构专有实体”（虚构人名/地名、特殊设定自造词）。</span></span><br><span class="line"><span class="string">    - **严禁包含**</span></span><br><span class="line"><span class="string">        - 译法固定的**专业术语**</span></span><br><span class="line"><span class="string">        - **常规多义词**</span></span><br><span class="line"><span class="string">        - **现实世界已存在**的实体/地名/人名。</span></span><br><span class="line"><span class="string">2. **过滤机制**： </span></span><br><span class="line"><span class="string">    - 提取前请自问：“这是一个只在这本小说里才有的特殊名词吗？”如果答案是“否”或“不确定”，**直接放弃提取**。 </span></span><br><span class="line"><span class="string">    - 提取前必须对比已知表格，如果已经存在，**直接忽略，不要重复输出**。</span></span><br><span class="line"><span class="string">3. **格式**：\`SOURCE: &#123;原文&#125; | TARGET: &#123;译文&#125;\`，仅在 &lt;glossary&gt; 标签内列出本段**新发现**且未在已知表中出现的上述高风险/专有条目。</span></span><br><span class="line"><span class="string">4. **一致性**：参考当前表格，确保全文核心译名与特殊词意绝对统一。</span></span><br><span class="line"><span class="string">5. **返回格式约束**：</span></span><br><span class="line"><span class="string">&lt;translation&gt;[Markdown 内容]</span></span><br><span class="line"><span class="string">&lt;/translation&gt;</span></span><br><span class="line"><span class="string">&lt;glossary&gt;</span></span><br><span class="line"><span class="string">SOURCE: [原文1] | TARGET:[译文1]</span></span><br><span class="line"><span class="string">&lt;/glossary&gt;`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">GLOSSARY_OPTIMIZER_PROMPT</span> = <span class="string">`</span></span><br><span class="line"><span class="string">你是一位专业的“术语表审查专家”。你的任务是清理并精简当前的术语表，使其更具参考价值并降低后续翻译成本。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">【严禁包含】</span></span><br><span class="line"><span class="string">1. **常识性词汇**：已有标准翻译的客观事物（如：啤酒杯、电击枪、手机）、无他译法的专业术语。</span></span><br><span class="line"><span class="string">2. **汉字重合词**：日中翻译中，汉字意义完全一致且无须转换的词。</span></span><br><span class="line"><span class="string">3. **冗余词条**：意思重复或过于碎片的词条。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">【执行任务】</span></span><br><span class="line"><span class="string">1. **降噪**：彻底删除所有不符合“必须包含”原则的词条。</span></span><br><span class="line"><span class="string">2. **去重与合并**：如果同一原文有多个译名，选择最符合文学语境或最专业的一个。</span></span><br><span class="line"><span class="string">3. **格式化**：每行一个词条，严格遵循 \`SOURCE: &#123;原文&#125; | TARGET: &#123;译文&#125;\`。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输出规范：</span></span><br><span class="line"><span class="string">- 仅输出清理后的术语列表。</span></span><br><span class="line"><span class="string">- 严禁输出任何解释、开场白、Markdown 围栏（\`\`\`）或总结。</span></span><br><span class="line"><span class="string">- 如果没有任何有效术语，请保持输出为空。</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="当前版本使用方法"><a href="#当前版本使用方法" class="headerlink" title="当前版本使用方法"></a>当前版本使用方法</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-3.png" alt></p>
+<h2 id="当前版本使用方法"><a href="#当前版本使用方法" class="headerlink" title="当前版本使用方法"></a>当前版本使用方法</h2><p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-3.png" alt></p>
 <p>Google AI Studio 访问链接：<a target="_blank" rel="noopener" href="https://ai.studio/apps/b184f80d-4fa5-4fce-a431-029da0140dce">TransLit</a>。</p>
 <p>可以配置第三方的 API，填好之后，点击下方“Verify API Status”，检查连接是否成功。</p>
 <p>当然，最好直接用 Gemini 3.0 Flash 模型，毕竟是我做这个应用的初衷。</p>
@@ -361,9 +361,9 @@
 <li>运行 <code>npm install</code></li>
 <li>运行 <code>npm run dev</code>（以后只需运行这句即可）</li>
 </ol>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-4.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-4.png" alt></p>
 <p>之后是翻译相关的设置：</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-5.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-5.png" alt></p>
 <ol>
 <li>选择<strong>源语言</strong>。当然，不选也可以翻译，但前面提到过，源语言与翻译提示词有联动，我还是强迫自己选一下。</li>
 <li><strong>AI Review</strong> 是 AI 校对，也就是翻译完再校对一遍。Gemini 3.0 模型不太会出现掺杂其他语言单词的情况，所以我一般不选这一项，基本没用过。</li>
@@ -372,19 +372,19 @@
 <li><strong>Lit Mode</strong> 是使用保存在后台的翻译提示词。不选此项，可在下方填写自定义提示词。</li>
 </ol>
 <p>把 EPUB 电子书拖入框中，即可进行翻译。</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-6.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-6.png" alt></p>
 <p>界面右侧，可以看到三个选项卡——</p>
 <p>先去<strong>CHAPTER 页面</strong>手动处理一下 EPUB 页面（并非小说的“章”）：</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-7.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-7.png" alt></p>
 <p>图中四个按钮分别是“预览”（方便用户判断）、“不译”（不翻译但保留原文）、“删除”（不翻译而且直接删除）和“重译”（一般是流程结束后，翻译不成功时使用）。</p>
 <p><strong>CONSOLE 页面</strong>用来展示翻译进度：</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-8.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-8.png" alt></p>
 <p><strong>GLOSSARY 页面</strong>用来记录当前术语表，可以自行编辑（<em>增删改</em>），注意修改后及时保存。</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-9.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-9.png" alt></p>
 <p>翻译结束后再次查看 <strong>CHAPTER 页面</strong>。如下图所示，橙色表示有片段翻译不成功，可以连接第三方 API 重试。</p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-10.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-10.png" alt></p>
 <p>翻译之后 EPUB 效果如下，这部分我一直没有升级过：  </p>
-<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-20260502-11.png" alt></p>
+<p><img src="/2026/05/02/translit-ai-translation-ebook/blog-260502-11.png" alt></p>
 
       
     </div>

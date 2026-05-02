@@ -329,13 +329,20 @@
     <div class="article-meta pull-left">
 
     
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/">计算笔记</a>
+    </span>
+    
 
     
     
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/%E9%A2%86%E5%9F%9F%2FAI%2F%E7%BF%BB%E8%AF%91/">领域/AI/翻译</a><a href="/tags/%E5%85%B4%E8%B6%A3%2F%E7%BC%96%E7%A8%8B%2FAI/">兴趣/编程/AI</a><a href="/tags/%E5%B7%A5%E5%85%B7%2FGoogleAIStudio/">工具/GoogleAIStudio</a>
+        <a href="/tags/AI/">AI</a><a href="/tags/%E7%BF%BB%E8%AF%91/">翻译</a>
     </span>
     
 
@@ -1257,7 +1264,7 @@
                         series: [{
                             type: 'pie',
                             radius: '60%',
-                            data: [{"name":"AI","value":31},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
+                            data: [{"name":"AI","value":32},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":10},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}],
                             label: {
                                 position: 'outside',
                                 formatter: '{b} {c} ({d}%)',
@@ -1271,7 +1278,7 @@
                         legend: {
                             bottom: '0',
                             left: 'center',
-                            data: [{"name":"AI","value":31},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":9},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
+                            data: [{"name":"AI","value":32},{"name":"现代生活","value":12},{"name":"读小说","value":10},{"name":"翻译","value":10},{"name":"设计","value":7},{"name":"Github","value":7},{"name":"Wolfram","value":4},{"name":"心理","value":4}].map(tag => tag.name),
                             textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         }
                     });
@@ -1293,13 +1300,13 @@
                         xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
                         yAxis: { 
                             type: 'category', 
-                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.name).reverse(), 
+                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":14},{"name":"读书笔记","value":12}].map(category => category.name).reverse(), 
                             axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
                         },
                         series: [{
                             name: 'Category Count',
                             type: 'bar',
-                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":13},{"name":"读书笔记","value":12}].map(category => category.value).reverse(),
+                            data: [{"name":"咫闻周刊","value":20},{"name":"计算笔记","value":14},{"name":"读书笔记","value":12}].map(category => category.value).reverse(),
                             label: {
                                 show: true,
                                 position: 'right',
@@ -1348,7 +1355,7 @@
                         },
                         series: [{
                             type: 'tree',
-                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":13,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":20,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":14,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":12,"path":"读书笔记"},{"name":"咫闻周刊","children":[],"count":20,"path":"咫闻周刊"}],"count":0,"path":""}],
                             initialTreeDepth: -1,
                             top: '5%',
                             bottom: '10%',

@@ -1,0 +1,1179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vol.017 New Year in a Trance | Joffoo&#39;s blog | The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</title>
+
+  
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  
+
+  
+  <meta name="author" content="Fengyukongzhou">
+  
+
+  
+  <meta name="description" content="“I bought a ticket for the quiet carriage. Yeah, on a rollercoaster.”">
+  
+
+  
+  
+  <meta name="keywords" content="AI,Design">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Vol.017 New Year in a Trance"/>
+
+  <meta property="og:site_name" content="Joffoo&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Joffoo&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+  <script>
+    // 主题切换功能
+    function initTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('darkMode');
+      const darkModeEnabled = savedTheme !== null ? savedTheme === 'true' : prefersDark;
+      document.documentElement.setAttribute('data-theme', darkModeEnabled ? 'dark' : 'light');
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.innerHTML = darkModeEnabled ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('darkMode', newTheme === 'dark');
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    // 回到顶部功能
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // 控制回到顶部按钮的显示和隐藏
+    function toggleScrollTopButton() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // 在页面加载时初始化主题
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleScrollTopButton);
+    });
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem('darkMode') === null) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = e.matches ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('figure.highlight').forEach(function(block) {
+        // 添加 MAC 风格按钮
+        const macButtons = document.createElement('div');
+        macButtons.className = 'mac-buttons';
+        macButtons.innerHTML = `
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        `;
+        block.appendChild(macButtons);
+        
+        // 获取代码语言
+        let language = '';
+        // 尝试从 class 获取语言
+        const classes = Array.from(block.classList);
+        const languageClass = classes.find(cls => cls !== 'highlight');
+        if (languageClass) {
+          language = languageClass;
+        }
+        // 尝试从 figcaption 获取语言
+        const figcaption = block.querySelector('figcaption');
+        if (!language && figcaption) {
+          language = figcaption.textContent.trim();
+        }
+        // 尝试从代码块的第一个元素获取语言
+        if (!language) {
+          const firstLine = block.querySelector('.code .line:first-child');
+          if (firstLine) {
+            const text = firstLine.textContent.trim();
+            if (text.startsWith('```')) {
+              language = text.replace('```', '').trim();
+            }
+          }
+        }
+        
+        // 添加语言标签
+        if (language) {
+          const langLabel = document.createElement('span');
+          langLabel.className = 'lang-label';
+          // 首字母大写
+          language = language.charAt(0).toUpperCase() + language.slice(1);
+          langLabel.textContent = language;
+          block.appendChild(langLabel);
+        }
+        
+        // 添加复制按钮
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+        block.appendChild(copyButton);
+
+        // 复制功能
+        copyButton.addEventListener('click', async function() {
+          try {
+            // 获取代码内容
+            let codeLines = [];
+            
+            // 获取所有代码行
+            if (block.querySelector('table')) {
+              // 如果是带行号的代码块，直接从 .line 元素获取内容
+              const rows = block.querySelectorAll('.code .line');
+              rows.forEach(row => {
+                // 移除每行开头的所有空白字符
+                const lineContent = row.textContent.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            } else {
+              // 如果是普通代码块
+              const codeBlock = block.querySelector('code');
+              const lines = codeBlock.textContent.split('\n');
+              lines.forEach(line => {
+                // 移除每行开头的所有空白字符
+                const lineContent = line.replace(/^\s+/, '');
+                if (lineContent) {
+                  codeLines.push(lineContent);
+                }
+              });
+            }
+            
+            // 组合处理后的代码
+            const processedCode = codeLines.join('\n').trim();
+            
+            // 使用 Clipboard API
+            await navigator.clipboard.writeText(processedCode);
+            
+            // 显示成功状态
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // 2秒后恢复
+            setTimeout(function() {
+              copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+          } catch (err) {
+            // 如果 Clipboard API 失败，使用传统方法
+            const textarea = document.createElement('textarea');
+            textarea.value = processedCode;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+              document.execCommand('copy');
+              copyButton.innerHTML = '<i class="fas fa-check"></i>';
+              setTimeout(function() {
+                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+            document.body.removeChild(textarea);
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--theme-color, #f03838);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    #theme-toggle {
+      right: 20px;
+    }
+    
+    #scroll-top {
+      right: 70px; /* 位于夜间模式按钮旁边 */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+    
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button id="theme-toggle" class="floating-btn" onclick="toggleTheme()" aria-label="切换主题">
+  <i class="fas fa-moon"></i>
+</button>
+<button id="scroll-top" class="floating-btn" onclick="scrollToTop()" aria-label="回到顶部">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<div class="blog">
+  <div class="content">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Joffoo&#39;s blog</a>
+    </h1>
+    <p class="site-description">The ethereal flight, oft rehearsed in the theater of one&#39;s dreams...</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+    
+    <main class="site-main posts-loop">
+      <article>
+
+  
+    
+    <h3 class="article-title"><span>Vol.017 New Year in a Trance</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2026/02/13/zhiwen-weekly-vol017.en/" rel="bookmark">
+        <time class="entry-date published" datetime="2026-02-12T16:00:00.000Z">
+          2026-02-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-0.png" alt></p>
+<p>“I bought a ticket for the quiet carriage. Yeah, on a rollercoaster.”</p>
+<span id="more"></span> 
+<h2 id="🐎-The-Hippodrome"><a href="#🐎-The-Hippodrome" class="headerlink" title="🐎 The Hippodrome"></a>🐎 The Hippodrome</h2><h3 id="🧧-Festivals"><a href="#🧧-Festivals" class="headerlink" title="🧧 Festivals"></a>🧧 Festivals</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-1.png" alt></p>
+<p>As a time for family reunions, the Spring Festival possesses both transcendence and public significance. It is not merely a gathering of family members; it points to the continuation of the entire lineage. As a form of gathering, the Spring Festival is intimately connected to sacrificial rites. People worship their ancestors, and the whole family comes together to share food, stories, hardships, and joys—all unfolding under the watchful eyes of ancestral spirits. Thus, true sharing occurs here, pointing toward a sacred connection.</p>
+<p align="right">— Wang Xiaowei, <i>The Depths of Everyday Life</i></p>
+
+<p>The magnificent festival woven by you and me spreads across the heavens. Your songs and mine make the celestial sphere tremble, and all eras vanish in our playful gambols.</p>
+<p align="right">— Rabindranath Tagore, <i>Gitanjali</i></p>
+
+<p>A letter is a long wait between two festivals; a letter is a breathless pause amidst a melodious whistle; a letter is a symbolic vertigo of reason.</p>
+<p align="right">— Sun Ganlu, <i>The Courier's Letter</i></p>
+
+<p>Today’s festivals are nothing more than events—lively, bustling activities. The word “event” comes from the Latin <em>eventus</em>, meaning “to appear suddenly, to happen.” Its temporal attribute is contingency. Contingency is entirely different from the necessity of sacred time. The former is a true reflection of contemporary society, where all constraints and connections have vanished.</p>
+<p>… Nowadays, because of the absolutization of working time, sacred time has been completely exhausted. Even pauses at work are tense. The purpose of resting is merely to recover from exhaustion so that we can continue to function normally.</p>
+<p align="right">— Byung-Chul Han, <i>The Burnout Society</i></p>
+
+<h3 id="🔥-Desire"><a href="#🔥-Desire" class="headerlink" title="🔥 Desire"></a>🔥 Desire</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-2.jpg" alt></p>
+<p><strong>According to Kojève, humans possess desire, while animals only have needs.</strong> “Need” refers to the simple craving in the relationship between a lack and the object that satisfies it. For example, a hungry animal feels completely satisfied once it has eaten. This lack-satisfaction loop characterizes needs, and human life is mostly driven by such needs. However, humans have another kind of craving: “desire.” Desire is different from need; even if the desired object is attained and the lack is filled, the desire does not disappear.</p>
+<p align="right">— Hiroki Azuma, <i>Otaku: Japan's Database Animals</i></p>
+
+<p>Dopamine is not a signal of reward, but a signal of reinforcement. For reinforcement learning to work, reinforcement and reward must be decoupled. <strong>To solve the temporal credit assignment problem, the brain must reinforce behaviors based on the predicted change in future rewards</strong>, rather than the actual reward itself.</p>
+<p>In other words, the brain does not wait until the final goal is scored to provide a one-time reinforcement; instead, it uses the dopamine RPE (Reward Prediction Error) mechanism to <strong>evaluate at every step of a behavior whether “the expectation of future reward has increased.”</strong></p>
+<p align="right">— Max Bennett, <i>A Brief History of Intelligence</i></p>
+
+<p>The queen of anthropology, Margaret Mead, pointed out that humanity is only capable of depicting hell, and very good at it, backed by the sensory memories of the entire body. Hell is inextricably linked to the human body; the hells of different cultures, nations, and communities are vivid, dazzling, and concrete. Merely hearing or reading about them can induce a sharp pain as if awakening a physical memory, because the body is universal, without spatial or temporal barriers. Conversely, descriptions of heaven are almost without exception hollow and superficial. <strong>The common thread of heaven is that nothing happens; no one has anything to do.</strong> Just as we do not know what it looks like or how it is possible to be happy, happier, and continuously, unceasingly happy after the disappearance of pain.</p>
+<p align="right">— Tang Nuo, <i>Seeking the Sword</i></p>
+
+<p>Gradually, a person is left only with himself, entering a state of solitude unprecedented in human history. But here, we are not talking about “helplessness,” but “nothingness.” Today, individualism (with a touch of misunderstanding and misuse) has become so absolute, so real, that it is hard for anything to truly happen. It is like a graveyard—as if in the vast expanse of a whole world, you are the only particle left. There are no collisions, no triggers, no revelations, and no other instigations. <strong>A person can only face the world with his own solitary experience and perspective, empty and echoing. And this kind of “happening only once,” an experience that cannot be compared or verified by anyone else (merely gone through, not truly experienced),</strong> passes like wind, flows like water, and soon becomes transparent and profoundly unreal. It faintly resembles a dream, and like waking from a dream, is quickly forgotten and dispersed—complete isolation ultimately makes even memories extremely hard to retain, <strong>resulting in an amnesiac, voiceless, dreamlike nothingness.</strong></p>
+<p align="right">— Tang Nuo, <i>Seeking the Sword</i></p>
+
+<h3 id="⏳-Age"><a href="#⏳-Age" class="headerlink" title="⏳ Age"></a>⏳ Age</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-3.jpg" alt></p>
+<p>Rereading the underlined passages in Sontag’s diaries, feeling the power of her words anew after several years, and underlining again certain sentences, especially those meditating on marriage: at this moment, I realized that everything I was reading had been written in 1957 or 1958. I counted on my fingers. Sontag was only twenty-four then, nine years younger than I am now. I suddenly felt intensely embarrassed, like laughing before the punchline of a joke had been delivered, or clapping between movements at a concert.</p>
+<p align="right">— Valeria Luiselli, <i>Lost Children Archive</i></p>
+
+<p>More than a decade ago, I edited a booklet-style series for high school students called “The Greatest Voices of Humanity.” One of them was <em>The Communist Manifesto</em>. In the introductory text, I gave a preventive shot, pointing out that when writing this manifesto, Marx was only thirty-one and Engels twenty-nine—exactly the age my son is now. So, amidst our endless admiration, should we thereby believe this is a prophetic document, a final oracle that pierces through and summarizes all of human knowledge and capability, leaving no shadow of historical mystery, revealing the inescapable destiny of all mankind, with not a single word to be altered or doubted, and thus requiring no further thought? Or is it rather more like writing a poem? Filled with the overflowing passion of youth, along with the bravado and baroque flair that are so hard to avoid in one’s younger days?</p>
+<p align="right">— Tang Nuo, <i>Seeking the Sword</i></p>
+
+<p>I thought this would give rise to some kind of understanding and tolerance (tolerance had better not just be a command; it needs to be retained, to become a part of oneself, supported by genuine understanding). Human difficulties and torments are easily forgotten, just as physiological pain becomes highly unreal once it vanishes. I try my best to remember them, including the various clumsy ways of my own younger self, the hardships of the journey. Perhaps in this way, when I read the works of writers of various ages (like Osamu Dazai), I can take them more seriously, be more patient, and feel more as if I am experiencing it myself.</p>
+<p align="right">— Tang Nuo, <i>Seeking the Sword</i></p>
+
+<p><strong>More often than not, reading stops at the work where the writer most shocked the world (spoke the loudest), and was most full of bravado, which is usually the work written before they reached the pinnacle of their writing.</strong> Like Tolstoy: of course it’s <em>War and Peace</em> and not the better, so obviously better <em>Anna Karenina</em>. Similarly, Kundera stops at <em>The Unbearable Lightness of Being</em>, Calvino at <em>Invisible Cities</em>, Flaubert at <em>Madame Bovary</em>, and so on. The poet T.S. Eliot seems to have stunned the world with <em>The Waste Land</em> in his youth, and then stopped writing out of satisfaction, or even died young from heaven’s envy of his talent. As for Hemingway’s <em>For Whom the Bell Tolls</em> and Mark Twain’s <em>The Adventures of Tom Sawyer</em>, they are almost their respective worst books. Fortunately, <em>The Old Man and the Sea</em> is gradually replacing <em>For Whom the Bell Tolls</em> nowadays, though I reasonably suspect this is simply because <em>The Old Man and the Sea</em> is thinner. The serious, orthodox academic world is slightly better off, not entirely ignorant that <em>Anna Karenina</em> is a cut above, but only slightly better and more complex, merely extending the writer’s existence for another five or ten years.</p>
+<p align="right">— Tang Nuo, <i>Seeking the Sword</i></p>
+
+<h2 id="🛠️-The-Console"><a href="#🛠️-The-Console" class="headerlink" title="🛠️ The Console"></a>🛠️ The Console</h2><h3 id="🤖-Obsidian-Gemini-CLI"><a href="#🤖-Obsidian-Gemini-CLI" class="headerlink" title="🤖 Obsidian + Gemini CLI"></a>🤖 Obsidian + Gemini CLI</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-4.jpg" alt></p>
+<p>To my surprise, I started using Gemini CLI as early as last July, which was also when I connected it to my Obsidian vault (Vol.009 Assassinating the Image of the General). Usually, I pair it with the <a target="_blank" rel="noopener" href="https://github.com/polyipseity/obsidian-terminal">Terminal</a> plugin—this plugin isn’t crucial, but it saves me a step by opening the command line directly in the current directory.</p>
+<p>The new version of Gemini CLI finally supports Skills.</p>
+<p>A Skill essentially “atomizes” various commands and includes a “summary” at the beginning of the prompt file. Compared to the previous <code>GEMINI.md</code> prompts, the Agent can now independently choose workflows based on the task, scanning first and reading closely later—a mechanism known as “<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jUylk813LYbKw0sLiIttTQ">progressive disclosure</a>“.</p>
+<p>Besides commands, Skills can also include resource files like code. For example, the previous OCR and translation workflows could both be written as Skills. In fact, I tried writing a Skill for OCRing PDF files, but because Gemini CLI limited the context window, the split PDFs couldn’t be read, so I had to give it up. As for the translation workflow, since it has already been completely programmatized (Vol.015 A Personal Experience), there’s no need to write it as a Skill and introduce “unstable factors.”</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-5.png" alt></p>
+<p>Since we are using Agent tools to control Obsidian, there are some ready-made Skills we can use directly, such as <a target="_blank" rel="noopener" href="https://github.com/kepano/obsidian-skills">obsidian-skills</a> and <a target="_blank" rel="noopener" href="https://github.com/axtonliu/axton-obsidian-visual-skills">axton-obsidian-visual-skills</a>. The latter is a collection of visualization-related Skills that can render Excalidraw, Canvas, and Mermaid.</p>
+<p>Let’s compare the effects of Gemini CLI (using the Gemini 3.0 Pro model) and OpenCode (with the oh-my-opencode plugin installed, using the GLM 4.7 model) using the same Skill.</p>
+<p>Here is Excalidraw:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-6.png" alt></p>
+<p>Here is Canvas:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-7.png" alt></p>
+<p>It is evident that generating Excalidraw is somewhat more difficult, but due to the strong capabilities of the model, Gemini CLI’s completion results are still quite good.</p>
+<h3 id="🎨-Cover-Design-Continued"><a href="#🎨-Cover-Design-Continued" class="headerlink" title="🎨 Cover Design (Continued)"></a>🎨 Cover Design (Continued)</h3><p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-8.jpg" alt></p>
+<p>It has been nearly a year since I last wrote about “Cover Design” (Vol.006 AI Did IT Cover Design). After reading Chip Kidd’s design advice, I completed it using Recraft for image generation (img2img).</p>
+<p>Just now, struck by inspiration, I wrote an automated execution version using Google AI Studio—<a target="_blank" rel="noopener" href="https://ai.studio/apps/drive/1QUaP_JHLB863vKDXUsjZ9ldXX26LNZOI">CoverGen AI</a>. Let’s connect with a frontline worker to explain the specific implementation process:</p>
+<ol>
+<li><p><strong>Parameter Input</strong><br> The user inputs the book title and author name on the frontend, selects a visual style from a preset list (e.g., “Cinematic Realism” or “Minimalist Typography”), and chooses a target aspect ratio (e.g., 2:3 standard book cover).</p>
+</li>
+<li><p><strong>Search and Reasoning (Gemini 3.0 Pro)</strong><br> The application calls the <code>gemini-3-flash-preview</code> model, utilizing the Google Search tool to browse the internet for the book’s plot, background, and core elements. The model doesn’t generate the image directly; instead, based on the search results and the user’s chosen style, it generates 3 sets of differentiated English image generation prompts (focusing respectively on: key object metaphors, scene atmosphere, and character/emotion), returning them in JSON format.</p>
+</li>
+<li><p><strong>Human Decision and Modification</strong><br> The frontend parses the JSON data, presenting the design concepts (in Chinese) and original prompts (in English) of these 3 proposals to the user. The user clicks to select one, or manually modifies it based on the proposal, confirming the final instruction used for image generation.</p>
+</li>
+<li><p><strong>Image Generation (Gemini 2.5 Flash)</strong><br> The application calls the <code>gemini-2.5-flash-image</code> model.</p>
+<ul>
+<li><strong>Proportional Mapping Logic</strong>: Since the model natively does not support a 2:3 ratio, if the user selects 2:3, the code automatically converts it to the API-supported 3:4 ratio for the request. It also adds compositional instructions like “Full Bleed” and “No Borders” to the prompt, ensuring the main subject remains in the center safe zone.</li>
+</ul>
+</li>
+<li><p><strong>Client-side Post-processing</strong><br> The browser receives the Base64 image data generated by the model.</p>
+<ul>
+<li><strong>Automatic Cropping Logic</strong>: If the target ratio is 2:3, the frontend uses HTML5 Canvas to calculate the returned 3:4 image, cropping out excess pixels on the left and right edges, losslessly converting it to a strict 2:3 ratio; other ratios (like 1:1) output the original image directly.</li>
+</ul>
+</li>
+</ol>
+<p>As a user, the first step is to input the book title and author name. Because it calls the <code>gemini-2.5-flash-image</code> model to generate images, it can still only generate English covers. Additionally, there are two options: the dimensions of the cover and the design style.</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-9.png" alt></p>
+<p>Afterward, the AI will provide three design options for you to choose from. If none of them are satisfactory, you can also write your own prompt:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-10.png" alt></p>
+<p>Finally, click once and wait quietly for the image to be generated:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-11.png" alt></p>
+<p>Here is the finished product:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-12.png" alt></p>
+<p>Below are a few of the more satisfactory covers generated previously that haven’t been published yet. These did not use the newly created one-stop application:</p>
+<p><img src="/2026/02/13/zhiwen-weekly-vol017.en/zw017-13.png" alt></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Zhiwen%20Weekly/">Zhiwen Weekly</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/AI/">AI</a><a href="/tags/Design/">Design</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+	<section id="comment" class="comment">
+		<div id="utterances">
+			<script
+					src="https://utteranc.es/client.js"
+					repo="fengyukongzhou/fengyukongzhou.github.io"
+					issue-term="zhiwen-weekly-vol017.en"
+					crossorigin="anonymous"
+					theme="preferred-color-scheme"
+					async
+			></script>
+		</div>
+	</section>
+
+
+
+
+
+
+<div class="like-button-container">
+  <button class="like-button" data-path="2026/02/13/zhiwen-weekly-vol017.en/">
+    <i class="fas fa-heart"></i>
+    <span class="like-count">0</span>
+  </button>
+  <div class="like-message">
+    <img src="/images/luoziwuhui.svg" alt="落子无悔" class="luoziwuhui-svg">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+<script>
+// 初始化 LeanCloud
+try {
+  
+  AV.init({
+    appId: "2wNgIGj8UmE5AAQRTtIBZ4Mn-gzGzoHsz",
+    appKey: "gMFzQ0eRohuOkA8QcewcUjGA",
+    serverURL: "https://2wngigj8.lc-cn-n1-shared.com"
+  });
+  console.log('LeanCloud 初始化成功');
+  
+} catch (error) {
+  console.error('LeanCloud 初始化失败:', error);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const likeButton = document.querySelector('.like-button');
+  const likeCount = document.querySelector('.like-count');
+  const path = likeButton.dataset.path;
+  
+  // 检查是否已经点赞过
+  function hasLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    return likedPosts.includes(path);
+  }
+  
+  // 标记文章已点赞
+  function markAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    likedPosts.push(path);
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    updateLikeButtonState(true);
+  }
+  
+  // 取消文章点赞标记
+  function unmarkAsLiked() {
+    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const index = likedPosts.indexOf(path);
+    if (index > -1) {
+      likedPosts.splice(index, 1);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    }
+    updateLikeButtonState(false);
+  }
+  
+  // 更新按钮状态
+  function updateLikeButtonState(isLiked) {
+    requestAnimationFrame(() => {
+      if (isLiked) {
+        likeButton.classList.add('liked');
+        likeButton.title = '点击取消点赞';
+      } else {
+        likeButton.classList.remove('liked');
+        likeButton.title = '点赞';
+      }
+    });
+  }
+  
+  // 查询当前文章的点赞数
+  async function getLikes() {
+    try {
+      const query = new AV.Query('Likes');
+      query.equalTo('path', path);
+      const result = await query.first();
+      console.log('查询结果:', result);
+      if (!result) {
+        const Like = AV.Object.extend('Likes');
+        const newLike = new Like();
+        newLike.set('path', path);
+        newLike.set('count', 0);
+        return newLike;
+      }
+      return result;
+    } catch (error) {
+      console.error('获取点赞数失败:', error);
+      return null;
+    }
+  }
+  
+  // 更新点赞显示
+  async function updateLikeCount() {
+    try {
+      const like = await getLikes();
+      if (like) {
+        const count = like.get('count') || 0;
+        console.log('当前点赞数:', count);
+        requestAnimationFrame(() => {
+          likeCount.textContent = count;
+        });
+      }
+    } catch (error) {
+      console.error('更新点赞显示失败:', error);
+    }
+  }
+  
+  // 处理点赞事件
+  async function handleLike(event) {
+    // 阻止默认行为和冒泡
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const isLiked = hasLiked();
+    console.log('当前点赞状态:', isLiked);
+    
+    try {
+      let like = await getLikes();
+      if (!like) {
+        console.error('无法获取点赞对象');
+        return;
+      }
+      
+      if (isLiked) {
+        // 取消点赞前检查当前点赞数
+        const currentCount = like.get('count');
+        if (currentCount > 0) {
+          like.increment('count', -1);
+          await like.save();
+          unmarkAsLiked();
+        } else {
+          console.warn('点赞数已经为0，无法继续减少');
+          unmarkAsLiked();
+          return;
+        }
+      } else {
+        // 添加点赞
+        like.increment('count');
+        await like.save();
+        markAsLiked();
+      }
+      
+      const newCount = like.get('count');
+      console.log('操作成功，新的点赞数:', newCount);
+      requestAnimationFrame(() => {
+        likeCount.textContent = newCount;
+      });
+      
+    } catch (error) {
+      console.error('操作失败:', error);
+    }
+  }
+  
+  // 绑定点击和触摸事件
+  likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('touchend', handleLike);
+  console.log('点赞按钮事件绑定成功');
+  
+  // 防止触摸滚动
+  likeButton.addEventListener('touchstart', (e) => e.preventDefault());
+  likeButton.addEventListener('touchmove', (e) => e.preventDefault());
+  
+  // 初始化
+  updateLikeCount();
+  updateLikeButtonState(hasLiked());
+});
+</script> 
+
+<div class="post-toc">
+  <div class="toc-toggle">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="post-toc-content">
+    <h2>文章目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%90%8E-The-Hippodrome"><span class="toc-text">🐎 The Hippodrome</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%A7-Festivals"><span class="toc-text">🧧 Festivals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%A5-Desire"><span class="toc-text">🔥 Desire</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%8F%B3-Age"><span class="toc-text">⏳ Age</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-The-Console"><span class="toc-text">🛠️ The Console</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A4%96-Obsidian-Gemini-CLI"><span class="toc-text">🤖 Obsidian + Gemini CLI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%A8-Cover-Design-Continued"><span class="toc-text">🎨 Cover Design (Continued)</span></a></li></ol></li></ol>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocToggle = document.querySelector('.toc-toggle');
+  const postToc = document.querySelector('.post-toc');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headers = document.querySelectorAll('article h1[id], article h2[id], article h3[id], article h4[id], article h5[id], article h6[id]');
+  let activeLink = null;
+  let isScrolling = false;
+  
+  // 检测是否是移动设备
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  
+  // 切换目录显示/隐藏
+  tocToggle.addEventListener('click', function() {
+    postToc.classList.toggle('toc-hidden');
+    tocToggle.classList.toggle('toc-toggle-hidden');
+    
+    // 在移动端，点击后立即应用样式
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        tocToggle.querySelector('i').style.color = postToc.classList.contains('toc-hidden') ? '#F03838' : '';
+      });
+    }
+  });
+
+  // 点击目录项平滑滚动
+  tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = decodeURIComponent(link.getAttribute('href')).slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        isScrolling = true;
+        const offset = 80; // 头部固定导航的高度
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // 更新激活状态
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        link.classList.add('active');
+        activeLink = link;
+
+        // 滚动结束后重置标志
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    });
+  });
+
+  // 滚动时高亮当前目录项
+  function updateActiveLink() {
+    if (isScrolling) return; // 如果是点击导航引起的滚动，不更新高亮
+
+    let currentSection = '';
+    let minDistance = Infinity;
+    const scrollPosition = window.scrollY + 100; // 考虑顶部偏移
+
+    headers.forEach(header => {
+      const distance = Math.abs(header.getBoundingClientRect().top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        currentSection = '#' + header.id;
+      }
+    });
+
+    if (activeLink) {
+      activeLink.classList.remove('active');
+    }
+    
+    tocLinks.forEach(link => {
+      if (decodeURIComponent(link.getAttribute('href')) === currentSection) {
+        link.classList.add('active');
+        activeLink = link;
+        
+        // 确保当前项在视图中
+        const tocContainer = document.querySelector('.post-toc');
+        const linkRect = link.getBoundingClientRect();
+        const containerRect = tocContainer.getBoundingClientRect();
+        
+        if (linkRect.bottom > containerRect.bottom || linkRect.top < containerRect.top) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }
+      }
+    });
+  }
+
+  // 使用 requestAnimationFrame 优化滚动事件
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // 初始化高亮
+  updateActiveLink();
+});
+</script>
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2026 Fengyukongzhou
+    
+  </p>
+</footer>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSFDFFL0HT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HSFDFFL0HT');
+</script>
+
+    
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "https://hm.baidu.com/hm.js?b6d2577512b94cef71ed3db1d1ae70e4";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+
+    
+    
+    
+    <script src="/js/lang-detector.js"></script>
+    
+    
+    <script src="/js/footnote-popup.js"></script>
+    
+
+    <!-- Mermaid.js CDN 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      // 初始化 mermaid
+      mermaid.initialize({ startOnLoad: true });
+      document.addEventListener('DOMContentLoaded', function() {
+        // 查找所有 mermaid 代码块
+        document.querySelectorAll('pre code.language-mermaid, pre code.mermaid').forEach(function(block) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          block.parentNode.parentNode.replaceWith(div);
+        });
+        // 重新初始化 mermaid
+        if (window.mermaid) {
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+      });
+    </script>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const heatmapChartDom = document.getElementById('heatmapChart');
+                if(heatmapChartDom){
+                    const heatmapChart = echarts.init(heatmapChartDom, 'light');
+                    const cellSize = [18, 18];
+                    
+                    const groupByYear = (data) => {
+                        const result = {};
+                        data.forEach(([date, value]) => {
+                            const [year] = date.split('-').map(Number);
+                            if (!result[year]) {
+                                result[year] = [];
+                            }
+                            result[year].push([date, value]);
+                        });
+                        return result;
+                    };
+                    
+                    const groupedData = groupByYear([["2024-06-23",1],["2024-06-30",1],["2024-07-06",1],["2024-08-19",1],["2024-09-02",1],["2024-09-12",1],["2024-09-24",1],["2024-10-12",1],["2024-11-05",1],["2024-12-04",1],["2024-12-26",1],["2025-01-04",2],["2025-01-11",2],["2025-01-20",1],["2025-01-22",1],["2025-01-24",2],["2025-01-31",1],["2025-02-07",2],["2025-02-21",2],["2025-03-02",2],["2025-03-15",2],["2025-05-25",1],["2025-06-13",1],["2025-06-16",1],["2025-06-22",1],["2025-06-26",2],["2025-07-12",1],["2025-07-27",2],["2025-08-31",1],["2025-09-07",1],["2025-09-21",1],["2025-10-04",2],["2025-11-02",2],["2025-11-22",2],["2025-11-30",1],["2025-12-06",2],["2025-12-12",1],["2025-12-20",2],["2026-01-11",2],["2026-01-24",2],["2026-02-13",2],["2026-02-19",1],["2026-03-14",2],["2026-04-11",2],["2026-04-24",2],["2026-05-02",1],["2026-05-10",1],["2026-05-15",2],["2026-05-17",1],["2026-05-27",1],["2026-05-29",2],["2026-06-27",2],["2026-07-11",1]]);
+                    const years = Object.keys(groupedData).reverse();
+                    
+                    var initYear = parseInt(heatmapChartDom.getAttribute('year')) || new Date().getFullYear();
+                    const minYear = years[years.length - 1];
+                    const maxYear = years[0];
+                    if (initYear < minYear || initYear > maxYear) {
+                        initYear = maxYear;
+                    }
+                    console.log('[hexo-graph]generateHeatmapChart|initYear:', initYear, 'minYear:', minYear, 'maxYear:', maxYear);
+                    
+                    heatmapChart.setOption({
+                        grid: {},
+                        tooltip: { 
+                            position: 'top', 
+                            formatter: params => `${params.value[0]}: ${params.value[1]} Articles` 
+                        },
+                        calendar: { 
+                            top: '10%',
+                            left: 'left', 
+                            right: '8%',
+                            range: initYear,
+                            cellSize: cellSize, 
+                            splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } }, 
+                            itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' }, 
+                            dayLabel: { show: false },
+                            monthLabel: { show: true },
+                            yearLabel: { show: false },
+                        },
+                        visualMap: { 
+                            show: true,
+                            right: '8%',
+                            bottom: '5%',
+                            type: 'piecewise',
+                            orient: 'horizontal',
+                            text: ['More', 'Less'],
+                            min: 0,
+                            max: Math.max(...groupedData[initYear].map(item => item[1])),
+                            inRange: { color: ["#ACE7AE","#69C16D","#549F57"] }
+                        },
+                        legend: {
+                            type: 'scroll',
+                            icon: 'none',
+                            data: years,
+                            orient: 'vertical',
+                            top: '5%',
+                            right: 'right',
+                            itemWidth: 20,
+                            itemHeight: 20,
+                            itemGap: 10,
+                            pageIconSize: 10,
+                            pageTextStyle: { fontSize: 14 },
+                            selectedMode: 'single',
+                        },
+                        series: years.map(year => ({
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: groupedData[year],
+                            name: year,
+                            emphasis: {
+                                disabled: true,
+                            },
+                            silent: year !== initYear,
+                        })),
+                    });
+                    
+                    // init selected year
+                    heatmapChart.dispatchAction({
+                        type: 'legendSelect',
+                        name: initYear,
+                    });
+                    
+                    heatmapChart.on('legendselectchanged', function(params) {
+                        console.log('[hexo-graph]generateHeatmapChart|legendselectchanged:', params);
+                        const selectedYear = Object.keys(params.selected).find(key => params.selected[key]);
+                        if (selectedYear && groupedData[selectedYear]) {
+                            heatmapChart.setOption({
+                                calendar: {
+                                    range: selectedYear,
+                                },
+                                visualMap: {
+                                    max: Math.max(...groupedData[selectedYear].map(item => item[1])),
+                                },
+                                series: years.map(year => ({
+                                    type: 'heatmap',
+                                    coordinateSystem: 'calendar',
+                                    data: groupedData[year],
+                                    name: year,
+                                    emphasis: {
+                                        disabled: true,
+                                    },
+                                    silent: year !== selectedYear,
+                                })),
+                            });
+                        }
+                    });
+                    
+                    heatmapChart.on('click', function (params) {
+                        if (params.componentType === 'series') {
+                            const [year, month] = params.value[0].split('-');
+                            window.location.href = '/archives/' + year + '/' + month;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const monthlyChartDom = document.getElementById('monthlyChart');
+                if(monthlyChartDom){
+                    const monthlyChart = echarts.init(monthlyChartDom, 'light');
+                    monthlyChart.setOption({
+                        xAxis: { 
+                            type: 'category', 
+                            data: ["2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07"], 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        series: [{
+                            name: 'Articles',
+                            type: 'line',
+                            data: [2,1,1,3,1,1,2,9,4,4,1,5,3,1,2,2,5,5,4,3,2,4,8,2,1],
+                            smooth: true,
+                            lineStyle: { color: '#5470C6', width: 2 },
+                            itemStyle: { color: '#5470C6' },
+                            areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                            symbolSize: 10,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            }
+                        }]
+                    });
+
+                    monthlyChart.on('click', function (params) {
+                        const [year, month] = params.name.split('-');
+                        window.location.href = '/archives/' + year + '/' + month;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const tagsChartDom = document.getElementById('tagsChart');
+                if(tagsChartDom){
+                    const tagsChart = echarts.init(tagsChartDom, 'light');
+                    tagsChart.setOption({
+                        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                        series: [{
+                            type: 'pie',
+                            radius: '60%',
+                            data: [{"name":"AI","value":59},{"name":"现代生活","value":12},{"name":"Github","value":12},{"name":"翻译","value":12},{"name":"读小说","value":10},{"name":"Translation","value":10},{"name":"设计","value":9},{"name":"Design","value":8}],
+                            label: {
+                                position: 'outside',
+                                formatter: '{b} {c} ({d}%)',
+                                fontSize: 14,
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            color: ["#5470C6","#91CC75","#FAC858","#EE6666","#73C0DE","#3BA272","#FC8452","#9A60B4"],
+                            labelLine: { show: true }
+                        }],
+                        legend: {
+                            bottom: '0',
+                            left: 'center',
+                            data: [{"name":"AI","value":59},{"name":"现代生活","value":12},{"name":"Github","value":12},{"name":"翻译","value":12},{"name":"读小说","value":10},{"name":"Translation","value":10},{"name":"设计","value":9},{"name":"Design","value":8}].map(tag => tag.name),
+                            textStyle: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        }
+                    });
+
+                    tagsChart.on('click', function (params) {
+                        window.location.href = '/tags/' + params.name;
+                    });
+                }
+            })
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesChartDom = document.getElementById('categoriesChart');
+                if(categoriesChartDom){
+                    const categoriesChart = echarts.init(categoriesChartDom, 'light');
+                    categoriesChart.setOption({
+                        xAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } } },
+                        yAxis: { 
+                            type: 'category', 
+                            data: [{"name":"咫闻周刊","value":24},{"name":"Zhiwen Weekly","value":23},{"name":"计算笔记","value":16},{"name":"读书笔记","value":13}].map(category => category.name).reverse(), 
+                            axisLabel: { fontSize: 14, fontWeight: 'bold', fontFamily: 'Microsoft YaHei, SimSun, serif' }
+                        },
+                        series: [{
+                            name: 'Category Count',
+                            type: 'bar',
+                            data: [{"name":"咫闻周刊","value":24},{"name":"Zhiwen Weekly","value":23},{"name":"计算笔记","value":16},{"name":"读书笔记","value":13}].map(category => category.value).reverse(),
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: params => params.value,
+                                fontSize: 14,
+                                color: '#000',
+                                fontWeight: 'bold',
+                                fontFamily: 'Microsoft YaHei, SimSun, serif'
+                            },
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    { offset: 0, color: '#91CC75' },
+                                    { offset: 1, color: '#73C0DE' }
+                                ])
+                            }
+                        }]
+                    });
+
+                    categoriesChart.on('click', function (params) {
+                        window.location.href = '/categories/' + params.name;
+                    });
+                }
+            });
+        </script>
+    
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const categoriesTreeChartDom = document.getElementById('categoriesTreeChart');
+                if(categoriesTreeChartDom){
+                    const treeChart = echarts.init(categoriesTreeChartDom, 'light');
+                    treeChart.setOption({
+                        title: {
+                            text: '操作提示：单击展开分类，双击进入具体分类页面',
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#999',
+                                fontWeight: 'normal'
+                            },
+                            bottom: 0,
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        series: [{
+                            type: 'tree',
+                            data: [{"name":"Categories","children":[{"name":"计算笔记","children":[],"count":16,"path":"计算笔记"},{"name":"读书笔记","children":[],"count":13,"path":"读书笔记"},{"name":"Zhiwen Weekly","children":[],"count":23,"path":"Zhiwen Weekly"},{"name":"咫闻周刊","children":[],"count":24,"path":"咫闻周刊"}],"count":0,"path":""}],
+                            initialTreeDepth: -1,
+                            top: '5%',
+                            bottom: '10%',
+                            left: '0%',
+                            right: '0%',
+                            symbolSize: 15,
+                            layout: 'orthogonal',
+                            orient: 'TB',
+                            itemStyle: {
+                                color: '#91CC75',
+                                borderColor: '#73C0DE'
+                            },
+                            label: {
+                                position: 'bottom',
+                                verticalAlign: 'middle',
+                                align: 'center',
+                                fontSize: 14,
+                                distance: 28,
+                                formatter: function(params) {
+                                    return params.data.name + (params.data.count ? ' (' + params.data.count + ')' : '');
+                                }
+                            },
+                            leaves: {
+                                label: {
+                                    position: 'top',
+                                    verticalAlign: 'middle',
+                                    align: 'center'
+                                }
+                            },
+                            emphasis: {
+                                focus: 'descendant'
+                            },
+                            expandAndCollapse: true
+                        }]
+                    });
+
+                    treeChart.on('dblclick', function (params) {
+                        if (params.data && params.data.path) {
+                            window.location.href = '/categories/' + params.data.path;
+                        }
+                    });
+                }
+            });
+        </script>
+    
+    </body>
+</html>
